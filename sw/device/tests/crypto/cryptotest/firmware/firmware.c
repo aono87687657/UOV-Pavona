@@ -1,0 +1,119 @@
+// Copyright lowRISC contributors (OpenTitan project).
+// Licensed under the Apache License, Version 2.0, see LICENSE for details.
+// SPDX-License-Identifier: Apache-2.0
+#include <stdbool.h>
+
+#include "sw/device/lib/base/status.h"
+#include "sw/device/lib/crypto/drivers/entropy.h"
+#include "sw/device/lib/testing/test_framework/check.h"
+#include "sw/device/lib/testing/test_framework/ottf_main.h"
+#include "sw/device/lib/testing/test_framework/ujson_ottf.h"
+#include "sw/device/lib/ujson/ujson.h"
+
+#include "hw/top_egret/sw/autogen/top_egret.h"
+
+// Include commands
+#include "sw/device/tests/crypto/cryptotest/json/aes_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/aes_gcm_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/aes_kwp_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/drbg_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/ecdh_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/ecdsa_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/ed25519_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/hash_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/hmac_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/kmac_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/mldsa_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/mlkem_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/rsa_commands.h"
+#include "sw/device/tests/crypto/cryptotest/json/sphincsplus_commands.h"
+
+// Include handlers
+#include "aes.h"
+#include "aes_gcm.h"
+#include "aes_kwp.h"
+#include "drbg.h"
+#include "ecdh.h"
+#include "ecdsa.h"
+#include "ed25519.h"
+#include "hash.h"
+#include "hmac.h"
+#include "kmac.h"
+#include "mldsa.h"
+#include "mlkem.h"
+#include "rsa.h"
+#include "sphincsplus.h"
+
+// Scratch buffers for crypto tests.
+static union {
+  hash_test_scratch_t hash;
+  mlkem_test_scratch_t mlkem;
+  mldsa_test_scratch_t mldsa;
+} cryptotest_scratch;
+
+OTTF_DEFINE_TEST_CONFIG(.console.type = kOttfConsoleSpiDevice,
+                        .console.base_addr = TOP_EGRET_SPI_DEVICE_BASE_ADDR,
+                        .console.test_may_clobber = false, );
+
+status_t process_cmd(ujson_t *uj) {
+  while (true) {
+    cryptotest_cmd_t cmd;
+    TRY(ujson_deserialize_cryptotest_cmd_t(uj, &cmd));
+    switch (cmd) {
+      case kCryptotestCommandAes:
+        RESP_ERR(uj, handle_aes(uj));
+        break;
+      case kCryptotestCommandAesGcm:
+        RESP_ERR(uj, handle_aes_gcm(uj));
+        break;
+      case kCryptotestCommandAesKwp:
+        RESP_ERR(uj, handle_aes_kwp(uj));
+        break;
+      case kCryptotestCommandDrbg:
+        RESP_ERR(uj, handle_drbg(uj));
+        break;
+      case kCryptotestCommandEcdsa:
+        RESP_ERR(uj, handle_ecdsa(uj));
+        break;
+      case kCryptotestCommandEcdh:
+        RESP_ERR(uj, handle_ecdh(uj));
+        break;
+      case kCryptotestCommandHash:
+        RESP_ERR(uj, handle_hash(uj, &cryptotest_scratch.hash));
+        break;
+      case kCryptotestCommandHmac:
+        RESP_ERR(uj, handle_hmac(uj));
+        break;
+      case kCryptotestCommandKmac:
+        RESP_ERR(uj, handle_kmac(uj));
+        break;
+      case kCryptotestCommandMldsa:
+        RESP_ERR(uj, handle_mldsa(uj, &cryptotest_scratch.mldsa));
+        break;
+      case kCryptotestCommandMlkem:
+        RESP_ERR(uj, handle_mlkem(uj, &cryptotest_scratch.mlkem));
+        break;
+      case kCryptotestCommandRsa:
+        RESP_ERR(uj, handle_rsa(uj));
+        break;
+      case kCryptotestCommandSphincsPlus:
+        RESP_ERR(uj, handle_sphincsplus(uj));
+        break;
+      case kCryptotestCommandEd25519:
+        RESP_ERR(uj, handle_ed25519(uj));
+        break;
+      default:
+        LOG_ERROR("Unrecognized command: %d", cmd);
+        RESP_ERR(uj, INVALID_ARGUMENT());
+    }
+  }
+
+  return OK_STATUS(0);
+}
+
+bool test_main(void) {
+  CHECK_STATUS_OK(entropy_complex_init());
+  ujson_t uj = ujson_ottf_console();
+  return status_ok(process_cmd(&uj));
+}

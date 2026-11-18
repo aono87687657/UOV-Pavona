@@ -1,0 +1,1368 @@
+# Copyright lowRISC contributors (OpenTitan project).
+# Copyright zeroRISC Inc.
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+
+load(
+    "@bazel_skylib//lib:dicts.bzl",
+    "dicts",
+)
+load("//rules:autogen.bzl", "autogen_cryptotest_header")
+load(
+    "//rules/pavona:defs.bzl",
+    "EGRET_SILICON_OWNER_ROM_EXT_ENVS",
+    "EGRET_TEST_ENVS",
+    "cw310_params",
+    "fpga_params",
+    "pavona_binary",
+    "pavona_test",
+    "qemu_params",
+    "silicon_params",
+    "verilator_params",
+)
+load(
+    "@bazel_skylib//lib:dicts.bzl",
+    "dicts",
+)
+load("@ot_python_deps//:requirements.bzl", "requirement")
+
+package(default_visibility = ["//visibility:public"])
+
+CRYPTOTEST_EXEC_ENVS = dicts.add(
+    EGRET_TEST_ENVS,
+    EGRET_SILICON_OWNER_ROM_EXT_ENVS,
+)
+
+cc_library(
+    name = "otcrypto_interface",
+    srcs = ["otcrypto_interface.c"],
+    hdrs = ["otcrypto_interface.h"],
+    deps = [
+        "//sw/device/lib/crypto:crypto_exported_for_test",
+    ],
+)
+
+pavona_binary(
+    name = "otcrypto_export_size",
+    testonly = True,
+    srcs = [
+        "otcrypto_export_size.c",
+        "//sw/device/silicon_owner/bare_metal:bare_metal_start",
+    ],
+    # Disable link-time optimization to preserve unused cryptolib functions.
+    copts = ["-fno-lto"],
+    exec_env = [
+        "//hw/top_egret:fpga_cw310_rom_ext",
+    ],
+    linker_script = "//sw/device/silicon_owner/bare_metal:ld_slot_a",
+    manifest = "//sw/device/silicon_owner/bare_metal:manifest",
+    deps = [
+        ":otcrypto_interface",
+        "//sw/device/lib/crt",
+        "//sw/device/silicon_creator/lib:manifest_def",
+    ],
+)
+
+pavona_test(
+    name = "aes_functest",
+    srcs = ["aes_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        ":aes_testvectors",
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "aes_kwp_kat_functest",
+    srcs = ["aes_kwp_kat_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl/aes_kwp",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "aes_kwp_functest",
+    srcs = ["aes_kwp_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:aes",
+        "//sw/device/lib/crypto/impl:key_transport",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "aes_kwp_sideload_functest",
+    srcs = ["aes_kwp_sideload_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    qemu = qemu_params(
+        globals = {
+            # Test uses rstmgr, keep running on fatal resets:
+            "ot-rstmgr.fatal_reset": 0,
+        },
+    ),
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:aes",
+        "//sw/device/lib/crypto/impl:key_transport",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:keymgr_testutils",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "aes_sideload_functest",
+    srcs = ["aes_sideload_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    qemu = qemu_params(
+        globals = {
+            # Test uses rstmgr, keep running on fatal resets:
+            "ot-rstmgr.fatal_reset": 0,
+        },
+    ),
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:aes",
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/drivers:keymgr",
+        "//sw/device/lib/crypto/impl:aes",
+        "//sw/device/lib/crypto/impl:key_transport",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:keymgr_testutils",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+cc_library(
+    name = "aes_testvectors",
+    srcs = ["aes_testvectors.h"],
+    deps = [
+        "//sw/device/lib/crypto/impl:aes",
+    ],
+)
+
+pavona_test(
+    name = "aes_gcm_functest",
+    srcs = ["aes_gcm_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        ":aes_gcm_testutils",
+        ":aes_gcm_testvectors",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+cc_library(
+    name = "aes_gcm_testutils",
+    srcs = ["aes_gcm_testutils.c"],
+    hdrs = ["aes_gcm_testutils.h"],
+    deps = [
+        "//sw/device/lib/crypto/impl:aes_gcm",
+        "//sw/device/lib/crypto/impl:integrity",
+        "//sw/device/lib/crypto/impl:keyblob",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:check",
+    ],
+)
+
+cc_library(
+    name = "aes_gcm_testvectors",
+    srcs = ["aes_gcm_testvectors.h"],
+    deps = [
+        ":aes_gcm_testutils",
+    ],
+)
+
+pavona_test(
+    name = "aes_gcm_timing_test",
+    srcs = ["aes_gcm_timing_test.c"],
+    exec_env = EGRET_TEST_ENVS,
+    fpga = fpga_params(
+        timeout = "long",
+        tags = [
+            "slow_test",
+        ],
+    ),
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        ":aes_gcm_testutils",
+        ":aes_gcm_testvectors",
+        "//sw/device/lib/crypto/impl/aes_gcm",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "drbg_functest",
+    srcs = ["drbg_functest.c"],
+    exec_env = EGRET_TEST_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:drbg",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:randomness_quality",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "sha256_functest",
+    srcs = ["sha256_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:hmac",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "sha384_functest",
+    srcs = ["sha384_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "sha512_functest",
+    srcs = ["sha512_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/crypto/impl:status",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+autogen_cryptotest_header(
+    name = "hmac_testvectors_random_header",
+    hjson = "//sw/device/tests/crypto/testvectors:hmac_testvectors_random",
+    template = ":hmac_testvectors.h.tpl",
+    tool = "//sw/device/tests/crypto:hmac_set_testvectors",
+)
+
+autogen_cryptotest_header(
+    name = "kmac_testvectors_hardcoded_header",
+    hjson = "//sw/device/tests/crypto/testvectors:kmac_testvectors_hardcoded",
+    template = ":kmac_testvectors.h.tpl",
+    tool = "//sw/device/tests/crypto:kmac_set_testvectors",
+)
+
+autogen_cryptotest_header(
+    name = "kdf_testvectors_random_header",
+    hjson = "//sw/device/tests/crypto/testvectors:kdf_testvectors_random",
+    template = ":kdf_testvectors.h.tpl",
+    tool = "//sw/device/tests/crypto:kdf_set_testvectors",
+)
+
+pavona_test(
+    name = "hmac_functest",
+    srcs = ["hmac_functest.c"],
+    exec_env = EGRET_TEST_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        ":hmac_testvectors_random_header",
+        "//sw/device/lib/base:macros",
+        "//sw/device/lib/crypto/impl:hmac",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "hmac_sha256_functest",
+    srcs = ["hmac_sha256_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:hmac",
+        "//sw/device/lib/crypto/impl:hmac",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "hmac_sha384_functest",
+    srcs = ["hmac_sha384_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:hmac",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "hmac_sha512_functest",
+    srcs = ["hmac_sha512_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:hmac",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "hkdf_functest",
+    srcs = ["hkdf_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:hkdf",
+        "//sw/device/lib/crypto/impl:keyblob",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "hmac_multistream_functest",
+    srcs = ["hmac_multistream_functest.c"],
+    exec_env = EGRET_TEST_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        ":hmac_testvectors_random_header",
+        "//sw/device/lib/base:macros",
+        "//sw/device/lib/crypto/impl:hmac",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/testing:rand_testutils",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "kmac_functest_hardcoded",
+    srcs = ["kmac_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        ":kmac_testvectors_hardcoded_header",
+        "//sw/device/lib/base:macros",
+        "//sw/device/lib/crypto/drivers:kmac",
+        "//sw/device/lib/crypto/impl:integrity",
+        "//sw/device/lib/crypto/impl:kmac",
+        "//sw/device/lib/crypto/impl:sha3",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "kmac_sideload_functest_hardcoded",
+    srcs = ["kmac_sideload_functest.c"],
+    exec_env = dicts.add(
+        EGRET_TEST_ENVS,
+    ),
+    qemu = qemu_params(
+        globals = {
+            # Test uses rstmgr, keep running on fatal resets:
+            "ot-rstmgr.fatal_reset": 0,
+        },
+    ),
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/base:macros",
+        "//sw/device/lib/crypto/drivers:kmac",
+        "//sw/device/lib/crypto/impl:integrity",
+        "//sw/device/lib/crypto/impl:kmac",
+        "//sw/device/lib/crypto/impl:sha3",
+        "//sw/device/lib/dif:keymgr",
+        "//sw/device/lib/dif:kmac",
+        "//sw/device/lib/testing:keymgr_testutils",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "kdf_hmac_ctr_functest",
+    srcs = ["kdf_hmac_ctr_functest.c"],
+    exec_env = EGRET_TEST_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:kdf_ctr",
+        "//sw/device/lib/crypto/impl:keyblob",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "kdf_kmac_functest",
+    srcs = ["kdf_kmac_functest.c"],
+    exec_env = EGRET_TEST_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        ":kdf_testvectors_random_header",
+        "//sw/device/lib/base:macros",
+        "//sw/device/lib/crypto/drivers:kmac",
+        "//sw/device/lib/crypto/impl:key_transport",
+        "//sw/device/lib/crypto/impl:kmac",
+        "//sw/device/lib/crypto/impl:kmac_kdf",
+        "//sw/device/lib/crypto/impl:sha3",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "kdf_kmac_sideload_functest_hardcoded",
+    srcs = ["kdf_kmac_sideload_functest.c"],
+    exec_env = dicts.add(
+        EGRET_TEST_ENVS,
+    ),
+    qemu = qemu_params(
+        globals = {
+            # Test uses rstmgr, keep running on fatal resets:
+            "ot-rstmgr.fatal_reset": 0,
+        },
+    ),
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/base:macros",
+        "//sw/device/lib/crypto/drivers:kmac",
+        "//sw/device/lib/crypto/impl:key_transport",
+        "//sw/device/lib/crypto/impl:kmac_kdf",
+        "//sw/device/lib/crypto/impl:sha3",
+        "//sw/device/lib/dif:keymgr",
+        "//sw/device/lib/dif:kmac",
+        "//sw/device/lib/testing:keymgr_testutils",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_2048_encryption_functest",
+    srcs = ["rsa_2048_encryption_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_3072_encryption_functest",
+    srcs = ["rsa_3072_encryption_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_4096_encryption_functest",
+    srcs = ["rsa_4096_encryption_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_2048_key_from_cofactor_functest",
+    srcs = ["rsa_2048_key_from_cofactor_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/crypto/impl/rsa:rsa_datatypes",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_3072_key_from_cofactor_functest",
+    srcs = ["rsa_3072_key_from_cofactor_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/crypto/impl/rsa:rsa_datatypes",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_4096_key_from_cofactor_functest",
+    srcs = ["rsa_4096_key_from_cofactor_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/crypto/impl/rsa:rsa_datatypes",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_2048_key_construct_functest",
+    srcs = ["rsa_2048_key_construct_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    fpga = fpga_params(
+        timeout = "short",
+    ),
+    verilator = verilator_params(
+        timeout = "short",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl/rsa:rsa_datatypes",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_3072_key_construct_functest",
+    srcs = ["rsa_3072_key_construct_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    fpga = fpga_params(
+        timeout = "short",
+    ),
+    verilator = verilator_params(
+        timeout = "short",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl/rsa:rsa_datatypes",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_4096_key_construct_functest",
+    srcs = ["rsa_4096_key_construct_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    fpga = fpga_params(
+        timeout = "short",
+    ),
+    verilator = verilator_params(
+        timeout = "short",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl/rsa:rsa_datatypes",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_2048_keygen_functest",
+    srcs = ["rsa_2048_keygen_functest.c"],
+    # This test is too slow for Verilator/DV, so target FPGA only.
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    fpga = fpga_params(
+        timeout = "long",
+        tags = ["slow_test"],
+    ),
+    verilator = verilator_params(
+        timeout = "eternal",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/crypto/impl/rsa:rsa_datatypes",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:entropy_testutils",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_2048_signature_functest",
+    srcs = ["rsa_2048_signature_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:integrity",
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_3072_keygen_functest",
+    srcs = ["rsa_3072_keygen_functest.c"],
+    # This test is too slow for Verilator/DV, so target FPGA only.
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    fpga = fpga_params(
+        timeout = "long",
+        tags = ["slow_test"],
+    ),
+    silicon = silicon_params(
+        timeout = "long",
+    ),
+    verilator = verilator_params(
+        timeout = "eternal",
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/crypto/impl/rsa:rsa_datatypes",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:entropy_testutils",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_3072_signature_functest",
+    srcs = ["rsa_3072_signature_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:integrity",
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_4096_keygen_functest",
+    srcs = ["rsa_4096_keygen_functest.c"],
+    # This test is too slow for Verilator/DV, so target FPGA only.
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    fpga = fpga_params(
+        timeout = "long",
+        tags = ["slow_test"],
+    ),
+    silicon = silicon_params(
+        timeout = "long",
+    ),
+    verilator = verilator_params(
+        timeout = "eternal",
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/crypto/impl/rsa:rsa_datatypes",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:entropy_testutils",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "rsa_4096_signature_functest",
+    srcs = ["rsa_4096_signature_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:integrity",
+        "//sw/device/lib/crypto/impl:rsa",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "ecc_p256_key_construct_functest",
+    srcs = ["ecc_p256_key_construct_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+    ),
+    deps = [
+        "//sw/device/lib/base:hardened",
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:ecc_p256",
+        "//sw/device/lib/crypto/impl:keyblob",
+        "//sw/device/lib/crypto/impl/ecc:p256",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "ecc_p384_key_construct_functest",
+    srcs = ["ecc_p384_key_construct_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+    ),
+    deps = [
+        "//sw/device/lib/base:hardened",
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:ecc_p384",
+        "//sw/device/lib/crypto/impl:keyblob",
+        "//sw/device/lib/crypto/impl/ecc:p384",
+        "//sw/device/lib/testing/test_framework:check",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "ecdh_p256_functest",
+    srcs = ["ecdh_p256_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:acc",
+        "//sw/device/lib/crypto/impl:ecc_p256",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:entropy_testutils",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "ecdh_p384_functest",
+    srcs = ["ecdh_p384_functest.c"],
+    exec_env = EGRET_TEST_ENVS,
+    verilator = verilator_params(
+        timeout = "eternal",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:acc",
+        "//sw/device/lib/crypto/impl:ecc_p384",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:entropy_testutils",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "ecdh_p256_sideload_functest",
+    srcs = ["ecdh_p256_sideload_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    qemu = qemu_params(
+        globals = {
+            # Test uses rstmgr, keep running on fatal resets:
+            "ot-rstmgr.fatal_reset": 0,
+        },
+    ),
+    verilator = verilator_params(
+        timeout = "eternal",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:acc",
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:ecc_p256",
+        "//sw/device/lib/crypto/impl:key_transport",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:entropy_testutils",
+        "//sw/device/lib/testing:keymgr_testutils",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "ecdh_p384_sideload_functest",
+    srcs = ["ecdh_p384_sideload_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    qemu = qemu_params(
+        globals = {
+            # Test uses rstmgr, keep running on fatal resets:
+            "ot-rstmgr.fatal_reset": 0,
+        },
+    ),
+    verilator = verilator_params(
+        timeout = "eternal",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:acc",
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:ecc_p384",
+        "//sw/device/lib/crypto/impl:key_transport",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:entropy_testutils",
+        "//sw/device/lib/testing:keymgr_testutils",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "ecdsa_p256_functest",
+    srcs = ["ecdsa_p256_functest.c"],
+    exec_env = dicts.add(
+        EGRET_SILICON_OWNER_ROM_EXT_ENVS,
+        {
+            # Test is too large for ROM, so excluding rom_with_fake_keys.
+            "//hw/top_egret:fpga_cw310_sival_rom_ext": None,
+            "//hw/top_egret:fpga_cw310_test_rom": None,
+            "//hw/top_egret:fpga_cw340_sival_rom_ext": None,
+            "//hw/top_egret:fpga_cw340_test_rom": None,
+            "//hw/top_egret:sim_dv": None,
+            "//hw/top_egret:sim_verilator": None,
+        },
+    ),
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:acc",
+        "//sw/device/lib/crypto/impl:ecc_p256",
+        "//sw/device/lib/crypto/impl:keyblob",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/crypto/include:datatypes",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:entropy_testutils",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "ecdsa_p384_functest",
+    srcs = ["ecdsa_p384_functest.c"],
+    exec_env = dicts.add(
+        EGRET_SILICON_OWNER_ROM_EXT_ENVS,
+        {
+            # Test is too large for ROM, so excluding rom_with_fake_keys.
+            "//hw/top_egret:fpga_cw310_sival_rom_ext": None,
+            "//hw/top_egret:fpga_cw310_test_rom": None,
+            "//hw/top_egret:fpga_cw340_sival_rom_ext": None,
+            "//hw/top_egret:fpga_cw340_test_rom": None,
+            "//hw/top_egret:sim_dv": None,
+            "//hw/top_egret:sim_verilator": None,
+        },
+    ),
+    verilator = verilator_params(
+        timeout = "long",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:acc",
+        "//sw/device/lib/crypto/impl:ecc_p384",
+        "//sw/device/lib/crypto/impl:keyblob",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/crypto/include:datatypes",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:entropy_testutils",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "ecdsa_p256_sideload_functest",
+    srcs = ["ecdsa_p256_sideload_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    qemu = qemu_params(
+        globals = {
+            # Test uses rstmgr, keep running on fatal resets:
+            "ot-rstmgr.fatal_reset": 0,
+        },
+    ),
+    verilator = verilator_params(
+        timeout = "eternal",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:acc",
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/drivers:keymgr",
+        "//sw/device/lib/crypto/impl:ecc_p256",
+        "//sw/device/lib/crypto/impl:key_transport",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:keymgr_testutils",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "ecdsa_p384_sideload_functest",
+    srcs = ["ecdsa_p384_sideload_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    qemu = qemu_params(
+        globals = {
+            # Test uses rstmgr, keep running on fatal resets:
+            "ot-rstmgr.fatal_reset": 0,
+        },
+    ),
+    verilator = verilator_params(
+        timeout = "eternal",
+        # This test can take > 60 minutes, so mark it manual as it shouldn't
+        # run in CI/nightlies.
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:acc",
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/drivers:keymgr",
+        "//sw/device/lib/crypto/impl:ecc_p384",
+        "//sw/device/lib/crypto/impl:key_transport",
+        "//sw/device/lib/crypto/impl:keyblob",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:keymgr_testutils",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "ecdsa_p256_verify_functest_hardcoded",
+    srcs = ["ecdsa_p256_verify_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        ":ecdsa_p256_verify_testvectors_hardcoded_header",
+        "//sw/device/lib/crypto/drivers:acc",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/crypto/impl/ecc:p256",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+autogen_cryptotest_header(
+    name = "ecdsa_p256_verify_testvectors_hardcoded_header",
+    hjson = "//sw/device/tests/crypto/testvectors:ecdsa_p256_verify_testvectors_hardcoded",
+    template = ":ecdsa_p256_verify_testvectors.h.tpl",
+    tool = "//sw/device/tests/crypto:ecdsa_p256_verify_set_testvectors",
+)
+
+pavona_test(
+    name = "ed25519_functest",
+    srcs = ["ed25519_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    verilator = verilator_params(
+        timeout = "long",
+    ),
+    deps = [
+        "//sw/device/lib/crypto/drivers:acc",
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:ed25519",
+        "//sw/device/lib/crypto/impl:integrity",
+        "//sw/device/lib/crypto/impl:sha2",
+        "//sw/device/lib/crypto/impl:status",
+        "//sw/device/lib/crypto/include:datatypes",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:entropy_testutils",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "mlkem_functest",
+    srcs = ["mlkem_functest.c"],
+    exec_env = dicts.add(
+        EGRET_TEST_ENVS,
+        EGRET_SILICON_OWNER_ROM_EXT_ENVS,
+        {
+            "//hw/top_egret:fpga_cw310_sival": None,
+            "//hw/top_egret:fpga_cw310_sival_rom_ext": None,
+            "//hw/top_egret:silicon_creator": None,
+        },
+    ),
+    verilator = verilator_params(timeout = "eternal"),
+    deps = [
+        "//hw/top_egret/sw/autogen:top_egret",
+        "//sw/device/lib/crypto/impl:integrity",
+        "//sw/device/lib/crypto/impl:keyblob",
+        "//sw/device/lib/crypto/impl:mlkem",
+        "//sw/device/lib/runtime:ibex",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:entropy_testutils",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "mldsa_functest",
+    srcs = ["mldsa_functest.c"],
+    exec_env = dicts.add(
+        EGRET_TEST_ENVS,
+        EGRET_SILICON_OWNER_ROM_EXT_ENVS,
+        {
+            "//hw/top_egret:fpga_cw310_sival": None,
+            "//hw/top_egret:fpga_cw310_sival_rom_ext": None,
+            "//hw/top_egret:silicon_creator": None,
+        },
+    ),
+    verilator = verilator_params(timeout = "eternal"),
+    deps = [
+        "//sw/device/lib/crypto/impl:mldsa",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "mldsa_benchmark",
+    srcs = ["mldsa_functest.c"],
+    copts = ["-DMLDSA_BENCHMARK_MODE"],
+    exec_env = dicts.add(
+        EGRET_TEST_ENVS,
+        EGRET_SILICON_OWNER_ROM_EXT_ENVS,
+        {
+            "//hw/top_egret:fpga_cw310_sival": None,
+            "//hw/top_egret:fpga_cw310_sival_rom_ext": None,
+            "//hw/top_egret:silicon_creator": None,
+        },
+    ),
+    verilator = verilator_params(
+        timeout = "eternal",
+        tags = ["manual"],
+    ),
+    deps = [
+        "//sw/device/lib/crypto/impl:mldsa",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:profile",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+py_binary(
+    name = "ecdsa_p256_verify_set_testvectors",
+    srcs = ["ecdsa_p256_verify_set_testvectors.py"],
+    imports = ["."],
+    deps = [
+        "//util/design/lib:common",
+        requirement("hjson"),
+        requirement("mako"),
+    ],
+)
+
+py_binary(
+    name = "kdf_set_testvectors",
+    srcs = ["kdf_set_testvectors.py"],
+    imports = ["."],
+    deps = [
+        "//util/design/lib:common",
+        requirement("hjson"),
+        requirement("mako"),
+    ],
+)
+
+py_binary(
+    name = "kmac_set_testvectors",
+    srcs = ["kmac_set_testvectors.py"],
+    imports = ["."],
+    deps = [
+        "//util/design/lib:common",
+        requirement("hjson"),
+        requirement("mako"),
+    ],
+)
+
+py_binary(
+    name = "hmac_set_testvectors",
+    srcs = ["hmac_set_testvectors.py"],
+    imports = ["."],
+    deps = [
+        "//util/design/lib:common",
+        requirement("hjson"),
+        requirement("mako"),
+    ],
+)
+
+pavona_test(
+    name = "symmetric_keygen_functest",
+    srcs = ["symmetric_keygen_functest.c"],
+    exec_env = CRYPTOTEST_EXEC_ENVS,
+    deps = [
+        "//sw/device/lib/crypto/drivers:entropy",
+        "//sw/device/lib/crypto/impl:drbg",
+        "//sw/device/lib/crypto/impl:key_transport",
+        "//sw/device/lib/crypto/impl:keyblob",
+        "//sw/device/lib/crypto/impl:status",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing:randomness_quality",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "otcrypto_hash_test",
+    srcs = ["otcrypto_hash_test.c"],
+    exec_env = dicts.add(
+        EGRET_SILICON_OWNER_ROM_EXT_ENVS,
+        {
+            "//hw/top_egret:fpga_cw310_rom_ext": None,
+            "//hw/top_egret:fpga_cw340_sival_rom_ext": None,
+        },
+    ),
+    deps = [
+        "//sw/device/lib/base:macros",
+        "//sw/device/lib/base:status",
+        "//sw/device/lib/crypto",
+        "//sw/device/lib/runtime:log",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+pavona_test(
+    name = "otcrypto_export_test",
+    srcs = ["otcrypto_export_test.c"],
+    exec_env = dicts.add(
+        EGRET_SILICON_OWNER_ROM_EXT_ENVS,
+        {
+            "//hw/top_egret:fpga_cw310_rom_ext": None,
+            "//hw/top_egret:fpga_cw340_sival_rom_ext": None,
+        },
+    ),
+    deps = [
+        "//sw/device/lib/crypto:crypto_exported_for_test",
+        "//sw/device/lib/testing/test_framework:ottf_main",
+    ],
+)
+
+filegroup(
+    name = "template_files",
+    srcs = [
+        "ecdsa_p256_verify_testvectors.h.tpl",
+    ],
+)
+
+test_suite(
+    name = "cryptolib_test_suite",
+    tests = [
+        ":aes_functest",
+        ":aes_gcm_functest",
+        ":aes_gcm_timing_test",
+        ":aes_kwp_functest",
+        ":aes_kwp_kat_functest",
+        ":aes_kwp_sideload_functest",
+        ":aes_sideload_functest",
+        ":drbg_functest",
+        ":ecc_p256_key_construct_functest",
+        ":ecc_p384_key_construct_functest",
+        ":ecdh_p256_functest",
+        ":ecdh_p256_sideload_functest",
+        ":ecdh_p384_functest",
+        ":ecdh_p384_sideload_functest",
+        ":ecdsa_p256_functest",
+        ":ecdsa_p256_sideload_functest",
+        ":ecdsa_p256_verify_functest_hardcoded",
+        ":ecdsa_p384_functest",
+        ":ecdsa_p384_sideload_functest",
+        ":ed25519_functest",
+        ":hkdf_functest",
+        ":hmac_functest",
+        ":hmac_multistream_functest",
+        ":hmac_sha256_functest",
+        ":hmac_sha384_functest",
+        ":hmac_sha512_functest",
+        ":kdf_hmac_ctr_functest",
+        ":kdf_kmac_functest",
+        ":kdf_kmac_sideload_functest_hardcoded",
+        ":kmac_functest_hardcoded",
+        ":kmac_sideload_functest_hardcoded",
+        ":mldsa_benchmark",
+        ":mldsa_functest",
+        ":mlkem_functest",
+        ":otcrypto_export_test",
+        ":otcrypto_hash_test",
+        ":rsa_2048_encryption_functest",
+        ":rsa_2048_key_construct_functest",
+        ":rsa_2048_key_from_cofactor_functest",
+        ":rsa_2048_keygen_functest",
+        ":rsa_2048_signature_functest",
+        ":rsa_3072_encryption_functest",
+        ":rsa_3072_key_construct_functest",
+        ":rsa_3072_key_from_cofactor_functest",
+        ":rsa_3072_keygen_functest",
+        ":rsa_3072_signature_functest",
+        ":rsa_4096_encryption_functest",
+        ":rsa_4096_key_construct_functest",
+        ":rsa_4096_key_from_cofactor_functest",
+        ":rsa_4096_keygen_functest",
+        ":rsa_4096_signature_functest",
+        ":sha256_functest",
+        ":sha384_functest",
+        ":sha512_functest",
+        ":symmetric_keygen_functest",
+    ],
+)

@@ -1,0 +1,432 @@
+// Copyright lowRISC contributors (OpenTitan project).
+// Copyright zeroRISC Inc.
+// Licensed under the Apache License, Version 2.0, see LICENSE for details.
+// SPDX-License-Identifier: Apache-2.0
+
+#include "sw/device/lib/crypto/impl/rsa/rsa_signature.h"
+
+#include "sw/device/lib/base/hardened.h"
+#include "sw/device/lib/base/hardened_memory.h"
+#include "sw/device/lib/base/math.h"
+#include "sw/device/lib/crypto/drivers/acc.h"
+#include "sw/device/lib/crypto/drivers/entropy.h"
+#include "sw/device/lib/crypto/impl/rsa/rsa_modexp.h"
+#include "sw/device/lib/crypto/impl/rsa/rsa_padding.h"
+
+// Module ID for status codes.
+#define MODULE_ID MAKE_MODULE_ID('r', 's', 'v')
+
+/**
+ * Ensure that the digest type matches the length and is supported.
+ *
+ * Accepts only SHA-2 and SHA-3 family hash functions (XOFs such as SHAKE are
+ * not currently supported for RSA). Returns an error if the digest type is
+ * unsupported or the digest buffer is the wrong length.
+ *
+ * @param digest Message digest to check.
+ * @return Result of the operation (OK or BAD_ARGS).
+ */
+OT_WARN_UNUSED_RESULT
+static status_t digest_check(const otcrypto_hash_digest_t digest) {
+  size_t num_words = 0;
+  switch (digest.mode) {
+    case kOtcryptoHashModeSha3_224:
+      num_words = 224 / 32;
+      break;
+    case kOtcryptoHashModeSha256:
+      OT_FALLTHROUGH_INTENDED;
+    case kOtcryptoHashModeSha3_256:
+      num_words = 256 / 32;
+      break;
+    case kOtcryptoHashModeSha384:
+      OT_FALLTHROUGH_INTENDED;
+    case kOtcryptoHashModeSha3_384:
+      num_words = 384 / 32;
+      break;
+    case kOtcryptoHashModeSha512:
+      OT_FALLTHROUGH_INTENDED;
+    case kOtcryptoHashModeSha3_512:
+      num_words = 512 / 32;
+      break;
+    default:
+      return OTCRYPTO_BAD_ARGS;
+  }
+  HARDENED_CHECK_GT(num_words, 0);
+
+  if (num_words != digest.len) {
+    return OTCRYPTO_BAD_ARGS;
+  }
+  return OTCRYPTO_OK;
+}
+
+/**
+ * Encode the message with the provided padding mode and hash function.
+ *
+ * @param message_digest Message digest to encode.
+ * @param padding_mode Signature padding mode.
+ * @param encoded_message_len Encoded message length in 32-bit words.
+ * @param[out] encoded_message Encoded message.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+static status_t message_encode(const otcrypto_hash_digest_t message_digest,
+                               const rsa_signature_padding_t padding_mode,
+                               size_t encoded_message_len,
+                               uint32_t *encoded_message) {
+  // Check that the digest length is OK.
+  HARDENED_TRY(digest_check(message_digest));
+
+  switch (launder32(padding_mode)) {
+    case kRsaSignaturePaddingPkcs1v15:
+      HARDENED_CHECK_EQ(padding_mode, kRsaSignaturePaddingPkcs1v15);
+      return rsa_padding_pkcs1v15_encode(message_digest, encoded_message_len,
+                                         encoded_message);
+    case kRsaSignaturePaddingPss: {
+      HARDENED_CHECK_EQ(padding_mode, kRsaSignaturePaddingPss);
+      // Generate a random salt value whose length matches the digest length.
+      uint32_t salt[message_digest.len];
+      HARDENED_TRY(entropy_complex_check());
+      HARDENED_TRY(entropy_csrng_uninstantiate());
+      HARDENED_TRY(entropy_csrng_instantiate(
+          /*disable_trng_input=*/kHardenedBoolFalse, &kEntropyEmptySeed));
+      HARDENED_TRY(entropy_csrng_generate(&kEntropyEmptySeed, salt,
+                                          ARRAYSIZE(salt),
+                                          /*fips_check=*/kHardenedBoolTrue));
+      HARDENED_TRY(entropy_csrng_uninstantiate());
+      return rsa_padding_pss_encode(message_digest, salt, ARRAYSIZE(salt),
+                                    encoded_message_len, encoded_message);
+    }
+    default:
+      // Unrecognized padding mode.
+      return OTCRYPTO_BAD_ARGS;
+  }
+
+  // Unreachable.
+  HARDENED_TRAP();
+  return OTCRYPTO_FATAL_ERR;
+}
+
+/**
+ * Check if the encoded message represents the message.
+ *
+ * If the encoded message does not match the message, this function will return
+ * an OK status and write `kHardenedBoolFalse` into the result buffer. The
+ * caller should not interpret an OK status as a match between the encoded and
+ * raw messages, since the status return value is reserved for operational or
+ * logical error codes.
+ *
+ * @param message_digest Message digest to verify.
+ * @param padding_mode Signature padding mode.
+ * @param encoded_message Encoded message.
+ * @param encoded_message_len Encoded message length in 32-bit words.
+ * @param[out] result True if the check passed.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+static status_t encoded_message_verify(
+    const otcrypto_hash_digest_t message_digest,
+    const rsa_signature_padding_t padding_mode, uint32_t *encoded_message,
+    const size_t encoded_message_len, hardened_bool_t *result) {
+  // Check that the digest length is OK.
+  HARDENED_TRY(digest_check(message_digest));
+
+  switch (launder32(padding_mode)) {
+    case kRsaSignaturePaddingPkcs1v15:
+      HARDENED_CHECK_EQ(padding_mode, kRsaSignaturePaddingPkcs1v15);
+      return rsa_padding_pkcs1v15_verify(message_digest, encoded_message,
+                                         encoded_message_len, result);
+    case kRsaSignaturePaddingPss:
+      HARDENED_CHECK_EQ(padding_mode, kRsaSignaturePaddingPss);
+      return rsa_padding_pss_verify(message_digest, encoded_message,
+                                    encoded_message_len, result);
+    default:
+      // Unrecognized padding mode.
+      return OTCRYPTO_BAD_ARGS;
+  }
+
+  // Unreachable.
+  HARDENED_TRAP();
+  return OTCRYPTO_FATAL_ERR;
+}
+
+status_t rsa_signature_generate_2048_start(
+    const rsa_2048_private_key_t *private_key,
+    const otcrypto_hash_digest_t message_digest,
+    const rsa_signature_padding_t padding_mode, uint32_t *session_token) {
+  // Encode the message.
+  rsa_2048_int_t encoded_message;
+  HARDENED_TRY(message_encode(message_digest, padding_mode,
+                              ARRAYSIZE(encoded_message.data),
+                              encoded_message.data));
+
+  // Start computing (encoded_message ^ d) mod n.
+  return rsa_modexp_consttime_crt_2048_start(
+      &encoded_message, &private_key->d_p, &private_key->d_q, &private_key->i_q,
+      &private_key->p, &private_key->q, session_token);
+}
+
+status_t rsa_signature_generate_2048_finalize(uint32_t session_token,
+                                              rsa_2048_int_t *signature) {
+  return rsa_modexp_consttime_crt_2048_finalize(session_token, signature);
+}
+
+/**
+ * Ensure that the provided RSA-2048 signature is reduced with respect to the
+ * provided RSA-2048 public key's modulus.
+ *
+ * @param public_key Public key to check against.
+ * @param signature Signature to check.
+ * @return Result of the operation (OK or BAD_ARGS).
+ */
+OT_WARN_UNUSED_RESULT
+static status_t rsa_signature_reduced_check_2048(
+    const rsa_2048_public_key_t *public_key, const rsa_2048_int_t *signature) {
+  hardened_bool_t borrow = kHardenedBoolTrue;
+  size_t i = 0;
+  for (; launder32(i) < kRsa2048NumWords; i++) {
+    uint32_t n_limb = public_key->n.data[i];
+    uint32_t sig_limb = signature->data[i];
+    if (launder32(borrow) == kHardenedBoolTrue) {
+      HARDENED_CHECK_EQ(borrow, kHardenedBoolTrue);
+      borrow = (n_limb <= sig_limb) ? kHardenedBoolTrue : kHardenedBoolFalse;
+    } else {
+      HARDENED_CHECK_EQ(borrow, kHardenedBoolFalse);
+      borrow = (n_limb < sig_limb) ? kHardenedBoolTrue : kHardenedBoolFalse;
+    }
+  }
+  HARDENED_CHECK_EQ(i, kRsa2048NumWords);
+
+  if (launder32(borrow) == kHardenedBoolTrue) {
+    return OTCRYPTO_BAD_ARGS;
+  }
+  HARDENED_CHECK_EQ(borrow, kHardenedBoolFalse);
+  return OTCRYPTO_OK;
+}
+
+status_t rsa_signature_verify_2048_start(
+    const rsa_2048_public_key_t *public_key, const rsa_2048_int_t *signature,
+    uint32_t *session_token) {
+  // Verify that the signature is reduced
+  HARDENED_TRY(rsa_signature_reduced_check_2048(public_key, signature));
+
+  // Start computing (sig ^ e) mod n with a variable-time exponentiation.
+  return rsa_modexp_vartime_2048_start(signature, public_key->e, &public_key->n,
+                                       session_token);
+}
+
+status_t rsa_signature_verify_2048_finalize(
+    const rsa_2048_public_key_t *public_key,
+    const otcrypto_hash_digest_t message_digest,
+    const rsa_signature_padding_t padding_mode, uint32_t session_token,
+    hardened_bool_t *verification_result) {
+  // Get the result size, failing if the ACC isn't done.
+  size_t num_words;
+  HARDENED_TRY(rsa_modexp_get_result_size(session_token, &num_words));
+
+  // Check that the inferred result size matches expectations.
+  if (num_words != kRsa2048NumWords) {
+    acc_dmem_sec_wipe_nofail();
+    return OTCRYPTO_FATAL_ERR;
+  }
+
+  // Call the appropriate `finalize()` operation to get the recovered encoded
+  // message.
+  rsa_2048_int_t recovered_message;
+  HARDENED_TRY(rsa_modexp_vartime_2048_finalize(session_token, public_key->e,
+                                                &recovered_message));
+  return encoded_message_verify(
+      message_digest, padding_mode, recovered_message.data,
+      ARRAYSIZE(recovered_message.data), verification_result);
+
+  // Should be unreachable.
+  HARDENED_TRAP();
+  return OTCRYPTO_FATAL_ERR;
+}
+
+status_t rsa_signature_verify_3072_finalize(
+    const rsa_3072_public_key_t *public_key,
+    const otcrypto_hash_digest_t message_digest,
+    const rsa_signature_padding_t padding_mode, uint32_t session_token,
+    hardened_bool_t *verification_result) {
+  // Get the result size, failing if the ACC isn't done.
+  size_t num_words;
+  HARDENED_TRY(rsa_modexp_get_result_size(session_token, &num_words));
+
+  // Check that the inferred result size matches expectations.
+  if (num_words != kRsa3072NumWords) {
+    acc_dmem_sec_wipe_nofail();
+    return OTCRYPTO_FATAL_ERR;
+  }
+
+  // Call the appropriate `finalize()` operation to get the recovered encoded
+  // message.
+  rsa_3072_int_t recovered_message;
+  HARDENED_TRY(rsa_modexp_vartime_3072_finalize(session_token, public_key->e,
+                                                &recovered_message));
+  return encoded_message_verify(
+      message_digest, padding_mode, recovered_message.data,
+      ARRAYSIZE(recovered_message.data), verification_result);
+
+  // Should be unreachable.
+  HARDENED_TRAP();
+  return OTCRYPTO_FATAL_ERR;
+}
+
+status_t rsa_signature_verify_4096_finalize(
+    const rsa_4096_public_key_t *public_key,
+    const otcrypto_hash_digest_t message_digest,
+    const rsa_signature_padding_t padding_mode, uint32_t session_token,
+    hardened_bool_t *verification_result) {
+  // Get the result size, failing if the ACC isn't done.
+  size_t num_words;
+  HARDENED_TRY(rsa_modexp_get_result_size(session_token, &num_words));
+
+  // Check that the inferred result size matches expectations.
+  if (num_words != kRsa4096NumWords) {
+    acc_dmem_sec_wipe_nofail();
+    return OTCRYPTO_FATAL_ERR;
+  }
+
+  // Call the appropriate `finalize()` operation to get the recovered encoded
+  // message.
+  rsa_4096_int_t recovered_message;
+  HARDENED_TRY(rsa_modexp_vartime_4096_finalize(session_token, public_key->e,
+                                                &recovered_message));
+  return encoded_message_verify(
+      message_digest, padding_mode, recovered_message.data,
+      ARRAYSIZE(recovered_message.data), verification_result);
+
+  // Should be unreachable.
+  HARDENED_TRAP();
+  return OTCRYPTO_FATAL_ERR;
+}
+
+status_t rsa_signature_generate_3072_start(
+    const rsa_3072_private_key_t *private_key,
+    const otcrypto_hash_digest_t message_digest,
+    const rsa_signature_padding_t padding_mode, uint32_t *session_token) {
+  // Encode the message.
+  rsa_3072_int_t encoded_message;
+  HARDENED_TRY(message_encode(message_digest, padding_mode,
+                              ARRAYSIZE(encoded_message.data),
+                              encoded_message.data));
+
+  // Start computing (encoded_message ^ d) mod n.
+  return rsa_modexp_consttime_crt_3072_start(
+      &encoded_message, &private_key->d_p, &private_key->d_q, &private_key->i_q,
+      &private_key->p, &private_key->q, session_token);
+}
+
+status_t rsa_signature_generate_3072_finalize(uint32_t session_token,
+                                              rsa_3072_int_t *signature) {
+  return rsa_modexp_consttime_crt_3072_finalize(session_token, signature);
+}
+
+/**
+ * Ensure that the provided RSA-3072 signature is reduced with respect to the
+ * provided RSA-3072 public key's modulus.
+ *
+ * @param public_key Public key to check against.
+ * @param signature Signature to check.
+ * @return Result of the operation (OK or BAD_ARGS).
+ */
+OT_WARN_UNUSED_RESULT
+static status_t rsa_signature_reduced_check_3072(
+    const rsa_3072_public_key_t *public_key, const rsa_3072_int_t *signature) {
+  hardened_bool_t borrow = kHardenedBoolTrue;
+  size_t i = 0;
+  for (; launder32(i) < kRsa3072NumWords; i++) {
+    uint32_t n_limb = public_key->n.data[i];
+    uint32_t sig_limb = signature->data[i];
+    if (launder32(borrow) == kHardenedBoolTrue) {
+      HARDENED_CHECK_EQ(borrow, kHardenedBoolTrue);
+      borrow = (n_limb <= sig_limb) ? kHardenedBoolTrue : kHardenedBoolFalse;
+    } else {
+      HARDENED_CHECK_EQ(borrow, kHardenedBoolFalse);
+      borrow = (n_limb < sig_limb) ? kHardenedBoolTrue : kHardenedBoolFalse;
+    }
+  }
+  HARDENED_CHECK_EQ(i, kRsa3072NumWords);
+
+  if (launder32(borrow) == kHardenedBoolTrue) {
+    return OTCRYPTO_BAD_ARGS;
+  }
+  HARDENED_CHECK_EQ(borrow, kHardenedBoolFalse);
+  return OTCRYPTO_OK;
+}
+
+status_t rsa_signature_verify_3072_start(
+    const rsa_3072_public_key_t *public_key, const rsa_3072_int_t *signature,
+    uint32_t *session_token) {
+  // Verify that the signature is reduced
+  HARDENED_TRY(rsa_signature_reduced_check_3072(public_key, signature));
+
+  // Start computing (sig ^ e) mod n with a variable-time exponentiation.
+  return rsa_modexp_vartime_3072_start(signature, public_key->e, &public_key->n,
+                                       session_token);
+}
+
+status_t rsa_signature_generate_4096_start(
+    const rsa_4096_private_key_t *private_key,
+    const otcrypto_hash_digest_t message_digest,
+    const rsa_signature_padding_t padding_mode, uint32_t *session_token) {
+  // Encode the message.
+  rsa_4096_int_t encoded_message;
+  HARDENED_TRY(message_encode(message_digest, padding_mode,
+                              ARRAYSIZE(encoded_message.data),
+                              encoded_message.data));
+
+  // Start computing (encoded_message ^ d) mod n.
+  return rsa_modexp_consttime_crt_4096_start(
+      &encoded_message, &private_key->d_p, &private_key->d_q, &private_key->i_q,
+      &private_key->p, &private_key->q, session_token);
+}
+
+status_t rsa_signature_generate_4096_finalize(uint32_t session_token,
+                                              rsa_4096_int_t *signature) {
+  return rsa_modexp_consttime_crt_4096_finalize(session_token, signature);
+}
+
+/**
+ * Ensure that the provided RSA-4096 signature is reduced with respect to the
+ * provided RSA-4096 public key's modulus.
+ *
+ * @param public_key Public key to check against.
+ * @param signature Signature to check.
+ * @return Result of the operation (OK or BAD_ARGS).
+ */
+OT_WARN_UNUSED_RESULT
+static status_t rsa_signature_reduced_check_4096(
+    const rsa_4096_public_key_t *public_key, const rsa_4096_int_t *signature) {
+  hardened_bool_t borrow = kHardenedBoolTrue;
+  size_t i = 0;
+  for (; launder32(i) < kRsa4096NumWords; i++) {
+    uint32_t n_limb = public_key->n.data[i];
+    uint32_t sig_limb = signature->data[i];
+    if (launder32(borrow) == kHardenedBoolTrue) {
+      HARDENED_CHECK_EQ(borrow, kHardenedBoolTrue);
+      borrow = (n_limb <= sig_limb) ? kHardenedBoolTrue : kHardenedBoolFalse;
+    } else {
+      HARDENED_CHECK_EQ(borrow, kHardenedBoolFalse);
+      borrow = (n_limb < sig_limb) ? kHardenedBoolTrue : kHardenedBoolFalse;
+    }
+  }
+  HARDENED_CHECK_EQ(i, kRsa4096NumWords);
+
+  if (launder32(borrow) == kHardenedBoolTrue) {
+    return OTCRYPTO_BAD_ARGS;
+  }
+  HARDENED_CHECK_EQ(borrow, kHardenedBoolFalse);
+  return OTCRYPTO_OK;
+}
+
+status_t rsa_signature_verify_4096_start(
+    const rsa_4096_public_key_t *public_key, const rsa_4096_int_t *signature,
+    uint32_t *session_token) {
+  // Verify that the signature is reduced
+  HARDENED_TRY(rsa_signature_reduced_check_4096(public_key, signature));
+
+  // Start computing (sig ^ e) mod n with a variable-time exponentiation.
+  return rsa_modexp_vartime_4096_start(signature, public_key->e, &public_key->n,
+                                       session_token);
+}

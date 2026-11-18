@@ -1,0 +1,65 @@
+// Copyright lowRISC contributors (OpenTitan project).
+// Licensed under the Apache License, Version 2.0, see LICENSE for details.
+// SPDX-License-Identifier: Apache-2.0
+
+`verilator_config
+
+lint_off -rule WIDTH -file "*/acc_top_sim.sv" -match "*'ImemStartAddr' generates 32 bits*"
+lint_off -rule WIDTH -file "*/acc_top_sim.sv" -match "*'stack_wr_ptr_q' generates 4 bits*"
+lint_off -rule WIDTH -file "*/prim_count.sv" -match "*'PossibleActions'*"
+lint_off -rule WIDTH -file "*/prim_diff_decode.sv" -match "*'skew_cnt_q'*"
+
+// VARHIDDEN: Local FSM enum values legitimately shadow package-level names
+lint_off -rule VARHIDDEN -file "*/kmac_core.sv" -match "*StTerminalError*"
+lint_off -rule VARHIDDEN -file "*/kmac_errchk.sv" -match "*StIdle*"
+lint_off -rule VARHIDDEN -file "*/kmac_errchk.sv" -match "*StTerminalError*"
+lint_off -rule VARHIDDEN -file "*/kmac_entropy.sv" -match "*StTerminalError*"
+
+// UNOPTFLAT: Combinational loops in KMAC due to struct assignments
+lint_off -rule UNOPTFLAT -file "*/prim_arbiter_fixed.sv"
+lint_off -rule UNOPTFLAT -file "*/kmac_app.sv"
+lint_off -rule UNOPTFLAT -file "*/kmac_errchk.sv"
+lint_off -rule UNOPTFLAT -file "*/kmac.sv"
+
+lint_off -rule UNOPTFLAT -file "*/kmac_entropy.sv"
+lint_off -rule UNOPTFLAT -file "*/sha3pad.sv"
+lint_off -rule UNOPTFLAT -file "*/prim_trivium.sv"
+lint_off -rule UNOPTFLAT -file "*/prim_sync_reqack.sv"
+
+// UNDRIVEN: Read-only WSRs in ACC are not tracked in ispr_write/ispr_read because
+// they are tracked by WDR writes
+lint_off -rule UNDRIVEN -file "*/acc_trace_if.sv" -match "*'ispr_read'*"
+lint_off -rule UNDRIVEN -file "*/acc_trace_if.sv" -match "*'ispr_write'*"
+
+// UNUSED: Signals driven for visibility but not consumed in testbench
+lint_off -rule UNUSED -file "*/acc_top_sim.sv" -match "*'acc_kmac_iface_err'*"
+lint_off -rule UNUSED -file "*/acc_top_sim.sv" -match "*'kmac_intr_kmac_done'*"
+lint_off -rule UNUSED -file "*/acc_top_sim.sv" -match "*'kmac_intr_fifo_empty'*"
+lint_off -rule UNUSED -file "*/acc_top_sim.sv" -match "*'kmac_intr_kmac_err'*"
+lint_off -rule UNUSED -file "*/acc_top_sim.sv" -match "*'kmac_idle'*"
+lint_off -rule UNUSED -file "*/acc_top_sim.sv" -match "*'kmac_en_masking'*"
+lint_off -rule UNUSED -file "*/kmac_entropy.sv" -match "*'perm_test'*"
+lint_off -rule UNUSED -file "*/sha3pad.sv" -match "*'start_valid'*"
+lint_off -rule UNUSED -file "*/sha3pad.sv" -match "*'process_valid'*"
+lint_off -rule UNUSED -file "*/sha3pad.sv" -match "*'absorb_valid'*"
+lint_off -rule UNUSED -file "*/sha3pad.sv" -match "*'done_valid'*"
+
+// Mark some signals in the loop controller as public. These are used
+// by the AccTopApplyLoopWarp() function in acc_top_sim.cc
+public -module "acc_loop_controller" -var "insn_addr_i"
+public -module "acc_loop_controller" -var "loop_start_req_i"
+public -module "acc_loop_controller" -var "loop_start_commit_i"
+public -module "acc_loop_controller" -var "loop_iterations_i"
+public -module "acc_loop_controller" -var "current_loop_valid"
+public -module "acc_loop_controller" -var "current_loop"
+public -module "acc_loop_controller" -var "current_loop_finish"
+public -module "acc_loop_controller" -var "loop_stack_rd_idx"
+public -module "acc_loop_controller" -var "prefetch_loop_iterations_o"
+public -module "prim_count" -var "max_val"
+public -module "prim_count" -var "down_cnt"
+public -module "prim_flop" -var "d_i"
+
+// Mark the "model_handle" variable in the core model as public. We
+// use this to pass the information from the ELF file to the ISS on
+// the first call to AccTopApplyLoopWarp() in acc_top_sim.cc.
+public -module "acc_core_model" -var "model_handle"

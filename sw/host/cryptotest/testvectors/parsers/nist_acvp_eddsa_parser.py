@@ -1,0 +1,148 @@
+#!/usr/bin/env python3
+# Copyright zeroRISC Inc.
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+
+"""Parser for converting ACVP EdDSA testvectors to JSON.
+
+Uses the internalProjection files from the NIST ACVP-Server repo.
+Supports both pure Ed25519 (preHash=false) and HashEd25519
+(preHash=true).
+
+For HashEd25519, the parser pre-hashes the message with SHA-512 so the
+firmware receives the 64-byte digest directly.
+"""
+
+import argparse
+import hashlib
+import json
+import sys
+
+import jsonschema
+
+
+def parse_sigver(data):
+    """Parse EDDSA-SigVer internalProjection.
+
+    Supports both pure Ed25519 (preHash=false) and HashEd25519
+    (preHash=true). For HashEd25519, the message is pre-hashed with
+    SHA-512 before output.
+    """
+    test_vectors = []
+    for group in data["testGroups"]:
+        if group["curve"] != "ED-25519":
+            continue
+
+        pre_hash = group.get("preHash", False)
+        for test in group["tests"]:
+            msg_bytes = bytes.fromhex(test["message"])
+            if pre_hash:
+                message = list(hashlib.sha512(msg_bytes).digest())
+                sign_mode = "hash_eddsa"
+            else:
+                message = list(msg_bytes)
+                sign_mode = "eddsa"
+            test_vectors.append({
+                "vendor": "acvp",
+                "test_case_id": test["tcId"],
+                "algorithm": "ed25519",
+                "operation": "verify",
+                "sign_mode": sign_mode,
+                "message": message,
+                "public_key": list(bytes.fromhex(test["q"])),
+                "signature": list(bytes.fromhex(test["signature"])),
+                "result": test["testPassed"],
+            })
+    return test_vectors
+
+
+def parse_siggen(data):
+    """Parse EDDSA-SigGen internalProjection.
+
+    Supports both pure Ed25519 (preHash=false) and HashEd25519
+    (preHash=true). For HashEd25519, the message is pre-hashed with
+    SHA-512 before output.
+    """
+    test_vectors = []
+    for group in data["testGroups"]:
+        if group["curve"] != "ED-25519":
+            continue
+
+        pre_hash = group.get("preHash", False)
+        d = list(bytes.fromhex(group["d"]))
+        q = list(bytes.fromhex(group["q"]))
+        for test in group["tests"]:
+            msg_bytes = bytes.fromhex(test["message"])
+            context = list(bytes.fromhex(test.get("context", "")))
+            if pre_hash:
+                message = list(hashlib.sha512(msg_bytes).digest())
+                sign_mode = "hash_eddsa"
+            else:
+                message = list(msg_bytes)
+                sign_mode = "eddsa"
+            test_vectors.append({
+                "vendor": "acvp",
+                "test_case_id": test["tcId"],
+                "algorithm": "ed25519",
+                "operation": "sign",
+                "sign_mode": sign_mode,
+                "private_key": d,
+                "public_key": q,
+                "message": message,
+                "context": context,
+                "expected_signature": list(bytes.fromhex(test["signature"])),
+                "result": True,
+            })
+    return test_vectors
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--src",
+        metavar="FILE",
+        type=argparse.FileType("r"),
+        help="Read test vectors from this JSON file.",
+    )
+    parser.add_argument(
+        "--dst",
+        metavar="FILE",
+        type=argparse.FileType("w"),
+        help="Write output to this file.",
+    )
+    parser.add_argument(
+        "--schema",
+        type=str,
+        help="Testvector schema file",
+    )
+    parser.add_argument(
+        "--test-type",
+        type=str,
+        choices=["sigver", "siggen"],
+        required=True,
+        help="Type of test vectors to parse",
+    )
+    args = parser.parse_args()
+
+    data = json.load(args.src)
+    args.src.close()
+
+    if args.test_type == "sigver":
+        testvecs = parse_sigver(data)
+    elif args.test_type == "siggen":
+        testvecs = parse_siggen(data)
+
+    # Validate generated JSON
+    with open(args.schema) as schema_file:
+        schema = json.load(schema_file)
+    jsonschema.validate(testvecs, schema)
+
+    print(f"Created {len(testvecs)} tests", file=sys.stderr)
+    json.dump(testvecs, args.dst)
+    args.dst.close()
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

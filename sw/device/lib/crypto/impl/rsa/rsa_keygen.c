@@ -1,0 +1,806 @@
+// Copyright lowRISC contributors (OpenTitan project).
+// Copyright zeroRISC Inc.
+// Licensed under the Apache License, Version 2.0, see LICENSE for details.
+// SPDX-License-Identifier: Apache-2.0
+
+#include "sw/device/lib/crypto/impl/rsa/rsa_keygen.h"
+
+#include "sw/device/lib/base/hardened.h"
+#include "sw/device/lib/base/hardened_memory.h"
+#include "sw/device/lib/crypto/drivers/acc.h"
+#include "sw/device/lib/crypto/drivers/rv_core_ibex.h"
+#include "sw/device/lib/crypto/impl/rsa/rsa_datatypes.h"
+
+// Module ID for status codes.
+#define MODULE_ID MAKE_MODULE_ID('r', 'k', 'g')
+
+// Declare the ACC app.
+ACC_DECLARE_APP_SYMBOLS(run_rsa_keygen);
+static const acc_app_t kAccAppRsaKeygen = ACC_APP_T_INIT(run_rsa_keygen);
+
+// Declare offsets for input and output buffers.
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, mode);  // Application mode.
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen,
+                        session_token);          // Session token.
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, rsa_n);  // Modulus n.
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, rsa_p);  // Cofactor p.
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, rsa_q);  // Cofactor q.
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen,
+                        rsa_d_p);  // Private exponent component d_p.
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen,
+                        rsa_d_q);  // Private exponent component d_p.
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, rsa_i_q);       // CRT coefficient i_p.
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, rsa_cofactor);  // Cofactor p or q.
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, rsa_e);         // Public exponent e.
+
+static const acc_addr_t kAccVarRsaMode = ACC_ADDR_T_INIT(run_rsa_keygen, mode);
+static const acc_addr_t kAccVarRsaSessionToken =
+    ACC_ADDR_T_INIT(run_rsa_keygen, session_token);
+static const acc_addr_t kAccVarRsaN = ACC_ADDR_T_INIT(run_rsa_keygen, rsa_n);
+static const acc_addr_t kAccVarRsaP = ACC_ADDR_T_INIT(run_rsa_keygen, rsa_p);
+static const acc_addr_t kAccVarRsaQ = ACC_ADDR_T_INIT(run_rsa_keygen, rsa_q);
+static const acc_addr_t kAccVarRsaDp = ACC_ADDR_T_INIT(run_rsa_keygen, rsa_d_p);
+static const acc_addr_t kAccVarRsaDq = ACC_ADDR_T_INIT(run_rsa_keygen, rsa_d_q);
+static const acc_addr_t kAccVarRsaIq = ACC_ADDR_T_INIT(run_rsa_keygen, rsa_i_q);
+static const acc_addr_t kAccVarRsaCofactor =
+    ACC_ADDR_T_INIT(run_rsa_keygen, rsa_cofactor);
+static const acc_addr_t kAccVarRsaE = ACC_ADDR_T_INIT(run_rsa_keygen, rsa_e);
+
+// Declare mode constants.
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, MODE_GEN_RSA_2048);
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, MODE_COFACTOR_RSA_2048);
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, MODE_CHECK_RSA_2048);
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, MODE_GEN_RSA_3072);
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, MODE_COFACTOR_RSA_3072);
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, MODE_CHECK_RSA_3072);
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, MODE_GEN_RSA_4096);
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, MODE_COFACTOR_RSA_4096);
+ACC_DECLARE_SYMBOL_ADDR(run_rsa_keygen, MODE_CHECK_RSA_4096);
+static const uint32_t kAccRsaModeGen2048 =
+    ACC_ADDR_T_INIT(run_rsa_keygen, MODE_GEN_RSA_2048);
+static const uint32_t kAccRsaModeCofactor2048 =
+    ACC_ADDR_T_INIT(run_rsa_keygen, MODE_COFACTOR_RSA_2048);
+static const uint32_t kAccRsaModeCheck2048 =
+    ACC_ADDR_T_INIT(run_rsa_keygen, MODE_CHECK_RSA_2048);
+static const uint32_t kAccRsaModeGen3072 =
+    ACC_ADDR_T_INIT(run_rsa_keygen, MODE_GEN_RSA_3072);
+static const uint32_t kAccRsaModeCofactor3072 =
+    ACC_ADDR_T_INIT(run_rsa_keygen, MODE_COFACTOR_RSA_3072);
+static const uint32_t kAccRsaModeCheck3072 =
+    ACC_ADDR_T_INIT(run_rsa_keygen, MODE_CHECK_RSA_3072);
+static const uint32_t kAccRsaModeGen4096 =
+    ACC_ADDR_T_INIT(run_rsa_keygen, MODE_GEN_RSA_4096);
+static const uint32_t kAccRsaModeCofactor4096 =
+    ACC_ADDR_T_INIT(run_rsa_keygen, MODE_COFACTOR_RSA_4096);
+static const uint32_t kAccRsaModeCheck4096 =
+    ACC_ADDR_T_INIT(run_rsa_keygen, MODE_CHECK_RSA_4096);
+
+enum {
+  /* Fixed public exponent for generated keys. This exponent is 2^16 + 1, also
+     known as "F4" because it's the fourth Fermat number. */
+  kFixedPublicExponent = 65537,
+  /* Number of words used to represent the application mode. */
+  kAccRsaModeWords = 1,
+  /* Number of bits for the private exponent (d) check value for key import. */
+  kPrivateExponentCheckBits = 256,
+  /* Number of bytes for the private exponent (d) check value for key import. */
+  kPrivateExponentCheckBytes = kPrivateExponentCheckBits / 8,
+  /* Number of words for the private exponent (d) check value for key import. */
+  kPrivateExponentCheckWords = kPrivateExponentCheckBytes / sizeof(uint32_t),
+};
+
+/**
+ * Start the ACC key generation program in random-key mode.
+ *
+ * Cofactor mode should not use this routine, because it wipes DMEM and
+ * cofactor mode requires input data.
+ *
+ * @param mode Mode parameter for keygen.
+ * @param[out] session_token ACC session token for the operation.
+ * @return Result of the operation.
+ */
+OT_WARN_UNUSED_RESULT
+static status_t keygen_start(uint32_t mode, uint32_t *session_token) {
+  // Load the RSA key generation app. Fails if ACC is non-idle.
+  HARDENED_TRY(acc_load_app(kAccAppRsaKeygen));
+
+  // Generate a fresh session token, and store it in DMEM.
+  uint32_t token = ibex_rnd32_read();
+  HARDENED_TRY(acc_dmem_write(1, &token, kAccVarRsaSessionToken));
+  *session_token = token;
+
+  // Set mode and start ACC.
+  HARDENED_TRY(acc_dmem_write(kAccRsaModeWords, &mode, kAccVarRsaMode));
+  return acc_execute();
+}
+
+/**
+ * Finalize a key generation operation (for either mode).
+ *
+ * Checks the application mode against expectations, then reads back the
+ * modulus and private exponent.
+ *
+ * @param exp_mode Application mode to expect.
+ * @param num_words Number of words for modulus and private exponent.
+ * @param session_token ACC session token for the operation.
+ * @param[out] n Buffer for the modulus.
+ * @param[out] p Buffer for the first cofactor.
+ * @param[out] q Buffer for the second cofactor.
+ * @param[out] d_p Buffer for the first private exponent component.
+ * @param[out] d_q Buffer for the second private exponent component.
+ * @param[out] i_q Buffer for the CRT reconstruction coefficient.
+ * @return OK or error.
+ */
+OT_WARN_UNUSED_RESULT
+static status_t keygen_finalize(uint32_t exp_mode, size_t num_words,
+                                uint32_t session_token, uint32_t *n,
+                                uint32_t *p, uint32_t *q, uint32_t *d_p,
+                                uint32_t *d_q, uint32_t *i_q) {
+  // Return `OTCRYTPO_ASYNC_INCOMPLETE` if ACC not done.
+  HARDENED_TRY(acc_assert_idle());
+
+  // Check the session token matches the expected one.
+  // If this check fails, either the cryptolib client's logic is broken and
+  // providing an incorrect value for the token, or another cryptolib client
+  // (e.g. in a multitenant OS) has erroneously been allowed to access the ACC
+  // before the client which started the operation can clear the results. To
+  // maintain security, both of these must be treated as unrecoverable errors.
+  uint32_t stored_token = 0;
+  HARDENED_TRY(acc_dmem_read(1, kAccVarRsaSessionToken, &stored_token));
+  if (launder32(stored_token) != session_token) {
+    return OTCRYPTO_FATAL_ERR;
+  }
+  HARDENED_CHECK_EQ(stored_token, session_token);
+
+  // Read the mode from ACC dmem and panic if it's not as expected.
+  uint32_t act_mode = 0;
+  ACC_WIPE_IF_ERROR(acc_dmem_read(1, kAccVarRsaMode, &act_mode));
+  if (act_mode != exp_mode) {
+    return OTCRYPTO_FATAL_ERR;
+  }
+
+  // Read the public modulus (n) from ACC dmem.
+  ACC_WIPE_IF_ERROR(acc_dmem_read(num_words, kAccVarRsaN, n));
+
+  // Read the first cofactor (p) from ACC dmem.
+  ACC_WIPE_IF_ERROR(acc_dmem_read(num_words / 2, kAccVarRsaP, p));
+
+  // Read the first cofactor (q) from ACC dmem.
+  ACC_WIPE_IF_ERROR(acc_dmem_read(num_words / 2, kAccVarRsaQ, q));
+
+  // Read the first private exponent CRT component (d_p) from ACC dmem.
+  ACC_WIPE_IF_ERROR(acc_dmem_read(num_words / 2, kAccVarRsaDp, d_p));
+
+  // Read the second private expoent CRT component (d_q) from ACC dmem.
+  ACC_WIPE_IF_ERROR(acc_dmem_read(num_words / 2, kAccVarRsaDq, d_q));
+
+  // Read the CRT coefficient (i_q) from ACC dmem.
+  ACC_WIPE_IF_ERROR(acc_dmem_read(num_words / 2, kAccVarRsaIq, i_q));
+
+  // Wipe DMEM.
+  return acc_dmem_sec_wipe();
+}
+
+status_t rsa_keygen_2048_start(uint32_t *session_token) {
+  return keygen_start(kAccRsaModeGen2048, session_token);
+}
+
+status_t rsa_keygen_2048_finalize(uint32_t session_token,
+                                  rsa_2048_public_key_t *public_key,
+                                  rsa_2048_private_key_t *private_key) {
+  HARDENED_TRY(keygen_finalize(
+      kAccRsaModeGen2048, kRsa2048NumWords, session_token, public_key->n.data,
+      private_key->p.data, private_key->q.data, private_key->d_p.data,
+      private_key->d_q.data, private_key->i_q.data));
+
+  // Set the public exponent to F4, the only exponent our key generation
+  // algorithm supports.
+  public_key->e = kFixedPublicExponent;
+
+  return OTCRYPTO_OK;
+}
+
+status_t rsa_keygen_3072_start(uint32_t *session_token) {
+  return keygen_start(kAccRsaModeGen3072, session_token);
+}
+
+status_t rsa_keygen_3072_finalize(uint32_t session_token,
+                                  rsa_3072_public_key_t *public_key,
+                                  rsa_3072_private_key_t *private_key) {
+  HARDENED_TRY(keygen_finalize(
+      kAccRsaModeGen3072, kRsa3072NumWords, session_token, public_key->n.data,
+      private_key->p.data, private_key->q.data, private_key->d_p.data,
+      private_key->d_q.data, private_key->i_q.data));
+
+  // Set the public exponent to F4, the only exponent our key generation
+  // algorithm supports.
+  public_key->e = kFixedPublicExponent;
+
+  return OTCRYPTO_OK;
+}
+
+status_t rsa_keygen_4096_start(uint32_t *session_token) {
+  return keygen_start(kAccRsaModeGen4096, session_token);
+}
+
+status_t rsa_keygen_4096_finalize(uint32_t session_token,
+                                  rsa_4096_public_key_t *public_key,
+                                  rsa_4096_private_key_t *private_key) {
+  HARDENED_TRY(keygen_finalize(
+      kAccRsaModeGen4096, kRsa4096NumWords, session_token, public_key->n.data,
+      private_key->p.data, private_key->q.data, private_key->d_p.data,
+      private_key->d_q.data, private_key->i_q.data));
+
+  // Set the public exponent to F4, the only exponent our key generation
+  // algorithm supports.
+  public_key->e = kFixedPublicExponent;
+
+  return OTCRYPTO_OK;
+}
+
+status_t rsa_keygen_from_cofactor_2048_start(
+    const rsa_2048_public_key_t *public_key, const rsa_2048_short_t *cofactor,
+    uint32_t *session_token) {
+  // Only the exponent F4 is supported.
+  if (launder32(public_key->e) != kFixedPublicExponent) {
+    return OTCRYPTO_BAD_ARGS;
+  }
+  HARDENED_CHECK_EQ(public_key->e, kFixedPublicExponent);
+
+  // Load the RSA key generation app. Fails if ACC is non-idle.
+  HARDENED_TRY(acc_load_app(kAccAppRsaKeygen));
+
+  // Write the modulus and cofactor into DMEM.
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(public_key->n.data), public_key->n.data,
+                              kAccVarRsaN));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(cofactor->data), cofactor->data,
+                              kAccVarRsaCofactor));
+
+  // Generate a fresh session token, and store it in DMEM.
+  uint32_t token = ibex_rnd32_read();
+  HARDENED_TRY(acc_dmem_write(1, &token, kAccVarRsaSessionToken));
+  *session_token = token;
+
+  // Set mode and start ACC.
+  uint32_t mode = kAccRsaModeCofactor2048;
+  HARDENED_TRY(acc_dmem_write(kAccRsaModeWords, &mode, kAccVarRsaMode));
+  return acc_execute();
+}
+
+status_t rsa_keygen_from_cofactor_2048_finalize(
+    uint32_t session_token, rsa_2048_public_key_t *public_key,
+    rsa_2048_private_key_t *private_key) {
+  HARDENED_TRY(keygen_finalize(
+      kAccRsaModeCofactor2048, kRsa2048NumWords, session_token,
+      public_key->n.data, private_key->p.data, private_key->q.data,
+      private_key->d_p.data, private_key->d_q.data, private_key->i_q.data));
+
+  // Set the public exponent to F4, the only exponent our key generation
+  // algorithm supports.
+  public_key->e = kFixedPublicExponent;
+
+  return OTCRYPTO_OK;
+}
+
+status_t rsa_keygen_from_cofactor_3072_start(
+    const rsa_3072_public_key_t *public_key, const rsa_3072_short_t *cofactor,
+    uint32_t *session_token) {
+  // Only the exponent F4 is supported.
+  if (launder32(public_key->e) != kFixedPublicExponent) {
+    return OTCRYPTO_BAD_ARGS;
+  }
+  HARDENED_CHECK_EQ(public_key->e, kFixedPublicExponent);
+
+  // Load the RSA key generation app. Fails if ACC is non-idle.
+  HARDENED_TRY(acc_load_app(kAccAppRsaKeygen));
+
+  // Write the modulus and cofactor into DMEM.
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(public_key->n.data), public_key->n.data,
+                              kAccVarRsaN));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(cofactor->data), cofactor->data,
+                              kAccVarRsaCofactor));
+
+  // Generate a fresh session token, and store it in DMEM.
+  uint32_t token = ibex_rnd32_read();
+  HARDENED_TRY(acc_dmem_write(1, &token, kAccVarRsaSessionToken));
+  *session_token = token;
+
+  // Set mode and start ACC.
+  uint32_t mode = kAccRsaModeCofactor3072;
+  HARDENED_TRY(acc_dmem_write(kAccRsaModeWords, &mode, kAccVarRsaMode));
+  return acc_execute();
+}
+
+status_t rsa_keygen_from_cofactor_3072_finalize(
+    uint32_t session_token, rsa_3072_public_key_t *public_key,
+    rsa_3072_private_key_t *private_key) {
+  HARDENED_TRY(keygen_finalize(
+      kAccRsaModeCofactor3072, kRsa3072NumWords, session_token,
+      public_key->n.data, private_key->p.data, private_key->q.data,
+      private_key->d_p.data, private_key->d_q.data, private_key->i_q.data));
+
+  // Set the public exponent to F4, the only exponent our key generation
+  // algorithm supports.
+  public_key->e = kFixedPublicExponent;
+
+  return OTCRYPTO_OK;
+}
+
+status_t rsa_keygen_from_cofactor_4096_start(
+    const rsa_4096_public_key_t *public_key, const rsa_4096_short_t *cofactor,
+    uint32_t *session_token) {
+  // Only the exponent F4 is supported.
+  if (launder32(public_key->e) != kFixedPublicExponent) {
+    return OTCRYPTO_BAD_ARGS;
+  }
+  HARDENED_CHECK_EQ(public_key->e, kFixedPublicExponent);
+
+  // Load the RSA key generation app. Fails if ACC is non-idle.
+  HARDENED_TRY(acc_load_app(kAccAppRsaKeygen));
+
+  // Write the modulus and cofactor into DMEM.
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(public_key->n.data), public_key->n.data,
+                              kAccVarRsaN));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(cofactor->data), cofactor->data,
+                              kAccVarRsaCofactor));
+
+  // Generate a fresh session token, and store it in DMEM.
+  uint32_t token = ibex_rnd32_read();
+  HARDENED_TRY(acc_dmem_write(1, &token, kAccVarRsaSessionToken));
+  *session_token = token;
+
+  // Set mode and start ACC.
+  uint32_t mode = kAccRsaModeCofactor4096;
+  HARDENED_TRY(acc_dmem_write(kAccRsaModeWords, &mode, kAccVarRsaMode));
+  return acc_execute();
+}
+
+status_t rsa_keygen_from_cofactor_4096_finalize(
+    uint32_t session_token, rsa_4096_public_key_t *public_key,
+    rsa_4096_private_key_t *private_key) {
+  HARDENED_TRY(keygen_finalize(
+      kAccRsaModeCofactor4096, kRsa4096NumWords, session_token,
+      public_key->n.data, private_key->p.data, private_key->q.data,
+      private_key->d_p.data, private_key->d_q.data, private_key->i_q.data));
+
+  // Set the public exponent to F4, the only exponent our key generation
+  // algorithm supports.
+  public_key->e = kFixedPublicExponent;
+
+  return OTCRYPTO_OK;
+}
+
+status_t rsa_key_check_2048_start(const rsa_2048_public_key_t *public_key,
+                                  const rsa_2048_private_key_t *private_key,
+                                  uint32_t *session_token) {
+  // Load the RSA key generation app. Fails if ACC is non-idle.
+  HARDENED_TRY(acc_load_app(kAccAppRsaKeygen));
+
+  // Write the public exponent into DMEM, zero-extended to a full processor
+  // word.
+  HARDENED_TRY(acc_dmem_write(1, &public_key->e, kAccVarRsaE));
+
+  // Write the primes, CRT components of the private exponent, and CRT
+  // coefficient into DMEM.
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->p.data),
+                              private_key->p.data, kAccVarRsaP));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->q.data),
+                              private_key->q.data, kAccVarRsaQ));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->d_p.data),
+                              private_key->d_p.data, kAccVarRsaDp));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->d_q.data),
+                              private_key->d_q.data, kAccVarRsaDq));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->i_q.data),
+                              private_key->i_q.data, kAccVarRsaIq));
+
+  // Generate a fresh session token, and store it in DMEM.
+  uint32_t token = ibex_rnd32_read();
+  HARDENED_TRY(acc_dmem_write(1, &token, kAccVarRsaSessionToken));
+  *session_token = token;
+
+  // Set mode and start ACC.
+  uint32_t mode = kAccRsaModeCheck2048;
+  HARDENED_TRY(acc_dmem_write(kAccRsaModeWords, &mode, kAccVarRsaMode));
+  return acc_execute();
+}
+
+status_t rsa_key_check_2048_finalize(const rsa_2048_public_key_t *public_key,
+                                     uint32_t session_token,
+                                     hardened_bool_t *key_valid) {
+  // Return `OTCRYTPO_ASYNC_INCOMPLETE` if ACC not done.
+  HARDENED_TRY(acc_assert_idle());
+
+  // Defensively set the key to invalid unless we show otherwise later.
+  *key_valid = kHardenedBoolFalse;
+  HARDENED_CHECK_EQ(*key_valid, kHardenedBoolFalse);
+
+  // Check the session token matches the expected one.
+  // If this check fails, either the cryptolib client's logic is broken and
+  // providing an incorrect value for the token, or another cryptolib client
+  // (e.g. in a multitenant OS) has erroneously been allowed to access the
+  // ACC before the client which started the operation can clear the
+  // results. To maintain security, both of these must be treated as
+  // unrecoverable errors.
+  uint32_t stored_token = 0;
+  HARDENED_TRY(acc_dmem_read(1, kAccVarRsaSessionToken, &stored_token));
+  if (launder32(stored_token) != session_token) {
+    return OTCRYPTO_FATAL_ERR;
+  }
+  HARDENED_CHECK_EQ(stored_token, session_token);
+
+  // Spin here waiting for ACC to complete.
+  ACC_WIPE_IF_ERROR(acc_busy_wait_for_done());
+
+  // Read the mode from ACC dmem and panic if it's not as expected.
+  uint32_t act_mode = 0;
+  ACC_WIPE_IF_ERROR(acc_dmem_read(1, kAccVarRsaMode, &act_mode));
+
+  // Ensure that the actual mode is the same as the expected mode.
+  uint32_t exp_mode = kAccRsaModeCheck2048;
+  if (launder32(act_mode) != kAccRsaModeCheck2048) {
+    return OTCRYPTO_FATAL_ERR;
+  }
+  HARDENED_CHECK_EQ(act_mode, exp_mode);
+
+  // Prepare a multi-limb constant of 1 for comparing to in validity checks.
+  uint32_t one[kRsa2048NumWords / 2];
+  memset(&one, 0, sizeof(one));
+  one[0] = 1;
+
+  // Read the value of the first CRT component (d_p) validity check value
+  // from ACC dmem.
+  uint32_t dp_check[kRsa2048NumWords / 2];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kRsa2048NumWords / 2, kAccVarRsaDp, dp_check));
+
+  // Check that this matches the expected value of 1, and update the
+  // validity.
+  hardened_bool_t dp_valid = hardened_memeq(one, dp_check, ARRAYSIZE(dp_check));
+
+  // Read the value of the second CRT component (d_q) validity check value
+  // from ACC dmem.
+  uint32_t dq_check[kRsa2048NumWords / 2];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kRsa2048NumWords / 2, kAccVarRsaDq, dq_check));
+
+  // Check that this matches the expected value of 1, and update the
+  // validity.
+  hardened_bool_t dq_valid = hardened_memeq(one, dq_check, ARRAYSIZE(dq_check));
+
+  // Read the value of the CRT coefficient (i_q) validity check value
+  // from ACC dmem.
+  uint32_t iq_check[kRsa2048NumWords / 2];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kRsa2048NumWords / 2, kAccVarRsaIq, iq_check));
+
+  // Check that this matches the expected value of 1, and update the
+  // validity.
+  hardened_bool_t iq_valid = hardened_memeq(one, iq_check, ARRAYSIZE(iq_check));
+
+  // Read the recovered public modulus (n) from ACC dmem.
+  uint32_t recovered_n[kRsa2048NumWords];
+  ACC_WIPE_IF_ERROR(acc_dmem_read(kRsa2048NumWords, kAccVarRsaN, recovered_n));
+
+  // Check that this matches the public key modulus, and update the
+  // validity.
+  hardened_bool_t n_valid =
+      hardened_memeq(public_key->n.data, recovered_n, ARRAYSIZE(recovered_n));
+
+  // Read the private exponent (d) check value
+  uint32_t d_check[kPrivateExponentCheckWords];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kPrivateExponentCheckWords, kAccVarRsaE, d_check));
+
+  // Prepare a multi-limb all ones constant for comparing to in validity
+  // checks.
+  uint32_t all_ones[kPrivateExponentCheckWords];
+  memset(&all_ones, 0xFF, sizeof(all_ones));
+
+  // Check whether the private exponent check value this is all ones.
+  hardened_bool_t d_valid =
+      hardened_memeq(all_ones, d_check, ARRAYSIZE(d_check));
+
+  // Check if all tests passed, and if so set the key to valid.
+  if ((launder32(dp_valid) & launder32(dq_valid) & launder32(iq_valid) &
+       launder32(n_valid) & launder32(d_valid)) == kHardenedBoolTrue) {
+    HARDENED_CHECK_EQ(launder32(dp_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(dq_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(iq_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(n_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(d_valid), kHardenedBoolTrue);
+    *key_valid = dp_valid & dq_valid & iq_valid & n_valid & d_valid;
+  }
+
+  // Wipe DMEM.
+  return acc_dmem_sec_wipe();
+}
+
+status_t rsa_key_check_3072_start(const rsa_3072_public_key_t *public_key,
+                                  const rsa_3072_private_key_t *private_key,
+                                  uint32_t *session_token) {
+  // Load the RSA key generation app. Fails if ACC is non-idle.
+  HARDENED_TRY(acc_load_app(kAccAppRsaKeygen));
+
+  // Write the public exponent into DMEM, zero-extended to a full processor
+  // word.
+  HARDENED_TRY(acc_dmem_write(1, &public_key->e, kAccVarRsaE));
+
+  // Write the primes, CRT components of the private exponent, and CRT
+  // coefficient into DMEM.
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->p.data),
+                              private_key->p.data, kAccVarRsaP));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->q.data),
+                              private_key->q.data, kAccVarRsaQ));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->d_p.data),
+                              private_key->d_p.data, kAccVarRsaDp));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->d_q.data),
+                              private_key->d_q.data, kAccVarRsaDq));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->i_q.data),
+                              private_key->i_q.data, kAccVarRsaIq));
+
+  // Generate a fresh session token, and store it in DMEM.
+  uint32_t token = ibex_rnd32_read();
+  HARDENED_TRY(acc_dmem_write(1, &token, kAccVarRsaSessionToken));
+  *session_token = token;
+
+  // Set mode and start ACC.
+  uint32_t mode = kAccRsaModeCheck3072;
+  HARDENED_TRY(acc_dmem_write(kAccRsaModeWords, &mode, kAccVarRsaMode));
+  return acc_execute();
+}
+
+status_t rsa_key_check_3072_finalize(const rsa_3072_public_key_t *public_key,
+                                     uint32_t session_token,
+                                     hardened_bool_t *key_valid) {
+  // Return `OTCRYTPO_ASYNC_INCOMPLETE` if ACC not done.
+  HARDENED_TRY(acc_assert_idle());
+
+  // Defensively set the key to invalid unless we show otherwise later.
+  *key_valid = kHardenedBoolFalse;
+  HARDENED_CHECK_EQ(*key_valid, kHardenedBoolFalse);
+
+  // Check the session token matches the expected one.
+  // If this check fails, either the cryptolib client's logic is broken and
+  // providing an incorrect value for the token, or another cryptolib client
+  // (e.g. in a multitenant OS) has erroneously been allowed to access the
+  // ACC before the client which started the operation can clear the
+  // results. To maintain security, both of these must be treated as
+  // unrecoverable errors.
+  uint32_t stored_token = 0;
+  HARDENED_TRY(acc_dmem_read(1, kAccVarRsaSessionToken, &stored_token));
+  if (launder32(stored_token) != session_token) {
+    return OTCRYPTO_FATAL_ERR;
+  }
+  HARDENED_CHECK_EQ(stored_token, session_token);
+
+  // Spin here waiting for ACC to complete.
+  ACC_WIPE_IF_ERROR(acc_busy_wait_for_done());
+
+  // Read the mode from ACC dmem and panic if it's not as expected.
+  uint32_t act_mode = 0;
+  ACC_WIPE_IF_ERROR(acc_dmem_read(1, kAccVarRsaMode, &act_mode));
+
+  // Ensure that the actual mode is the same as the expected mode.
+  uint32_t exp_mode = kAccRsaModeCheck3072;
+  if (launder32(act_mode) != kAccRsaModeCheck3072) {
+    return OTCRYPTO_FATAL_ERR;
+  }
+  HARDENED_CHECK_EQ(act_mode, exp_mode);
+
+  // Prepare a multi-limb constant of 1 for comparing to in validity checks.
+  uint32_t one[kRsa3072NumWords / 2];
+  memset(&one, 0, sizeof(one));
+  one[0] = 1;
+
+  // Read the value of the first CRT component (d_p) validity check value
+  // from ACC dmem.
+  uint32_t dp_check[kRsa3072NumWords / 2];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kRsa3072NumWords / 2, kAccVarRsaDp, dp_check));
+
+  // Check that this matches the expected value of 1, and update the
+  // validity.
+  hardened_bool_t dp_valid = hardened_memeq(one, dp_check, ARRAYSIZE(dp_check));
+
+  // Read the value of the second CRT component (d_q) validity check value
+  // from ACC dmem.
+  uint32_t dq_check[kRsa3072NumWords / 2];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kRsa3072NumWords / 2, kAccVarRsaDq, dq_check));
+
+  // Check that this matches the expected value of 1, and update the
+  // validity.
+  hardened_bool_t dq_valid = hardened_memeq(one, dq_check, ARRAYSIZE(dq_check));
+
+  // Read the value of the CRT coefficient (i_q) validity check value
+  // from ACC dmem.
+  uint32_t iq_check[kRsa3072NumWords / 2];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kRsa3072NumWords / 2, kAccVarRsaIq, iq_check));
+
+  // Check that this matches the expected value of 1, and update the
+  // validity.
+  hardened_bool_t iq_valid = hardened_memeq(one, iq_check, ARRAYSIZE(iq_check));
+
+  // Read the recovered public modulus (n) from ACC dmem.
+  uint32_t recovered_n[kRsa3072NumWords];
+  ACC_WIPE_IF_ERROR(acc_dmem_read(kRsa3072NumWords, kAccVarRsaN, recovered_n));
+
+  // Check that this matches the public key modulus, and update the
+  // validity.
+  hardened_bool_t n_valid =
+      hardened_memeq(public_key->n.data, recovered_n, ARRAYSIZE(recovered_n));
+
+  // Read the private exponent (d) check value
+  uint32_t d_check[kPrivateExponentCheckWords];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kPrivateExponentCheckWords, kAccVarRsaE, d_check));
+
+  // Prepare a multi-limb all ones constant for comparing to in validity
+  // checks.
+  uint32_t all_ones[kPrivateExponentCheckWords];
+  memset(&all_ones, 0xFF, sizeof(all_ones));
+
+  // Check whether the private exponent check value this is all ones.
+  hardened_bool_t d_valid =
+      hardened_memeq(all_ones, d_check, ARRAYSIZE(d_check));
+
+  // Check if all tests passed, and if so set the key to valid.
+  if ((launder32(dp_valid) & launder32(dq_valid) & launder32(iq_valid) &
+       launder32(n_valid) & launder32(d_valid)) == kHardenedBoolTrue) {
+    HARDENED_CHECK_EQ(launder32(dp_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(dq_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(iq_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(n_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(d_valid), kHardenedBoolTrue);
+    *key_valid = dp_valid & dq_valid & iq_valid & n_valid & d_valid;
+  }
+
+  // Wipe DMEM.
+  return acc_dmem_sec_wipe();
+}
+
+status_t rsa_key_check_4096_start(const rsa_4096_public_key_t *public_key,
+                                  const rsa_4096_private_key_t *private_key,
+                                  uint32_t *session_token) {
+  // Load the RSA key generation app. Fails if ACC is non-idle.
+  HARDENED_TRY(acc_load_app(kAccAppRsaKeygen));
+
+  // Write the public exponent into DMEM, zero-extended to a full processor
+  // word.
+  HARDENED_TRY(acc_dmem_write(1, &public_key->e, kAccVarRsaE));
+
+  // Write the primes, CRT components of the private exponent, and CRT
+  // coefficient into DMEM.
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->p.data),
+                              private_key->p.data, kAccVarRsaP));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->q.data),
+                              private_key->q.data, kAccVarRsaQ));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->d_p.data),
+                              private_key->d_p.data, kAccVarRsaDp));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->d_q.data),
+                              private_key->d_q.data, kAccVarRsaDq));
+  HARDENED_TRY(acc_dmem_write(ARRAYSIZE(private_key->i_q.data),
+                              private_key->i_q.data, kAccVarRsaIq));
+
+  // Generate a fresh session token, and store it in DMEM.
+  uint32_t token = ibex_rnd32_read();
+  HARDENED_TRY(acc_dmem_write(1, &token, kAccVarRsaSessionToken));
+  *session_token = token;
+
+  // Set mode and start ACC.
+  uint32_t mode = kAccRsaModeCheck4096;
+  HARDENED_TRY(acc_dmem_write(kAccRsaModeWords, &mode, kAccVarRsaMode));
+  return acc_execute();
+}
+
+status_t rsa_key_check_4096_finalize(const rsa_4096_public_key_t *public_key,
+                                     uint32_t session_token,
+                                     hardened_bool_t *key_valid) {
+  // Return `OTCRYTPO_ASYNC_INCOMPLETE` if ACC not done.
+  HARDENED_TRY(acc_assert_idle());
+
+  // Defensively set the key to invalid unless we show otherwise later.
+  *key_valid = kHardenedBoolFalse;
+  HARDENED_CHECK_EQ(*key_valid, kHardenedBoolFalse);
+
+  // Spin here waiting for ACC to complete.
+  ACC_WIPE_IF_ERROR(acc_busy_wait_for_done());
+
+  // Check the session token matches the expected one.
+  // If this check fails, either the cryptolib client's logic is broken and
+  // providing an incorrect value for the token, or another cryptolib client
+  // (e.g. in a multitenant OS) has erroneously been allowed to access the
+  // ACC before the client which started the operation can clear the
+  // results. To maintain security, both of these must be treated as
+  // unrecoverable errors.
+  uint32_t stored_token = 0;
+  HARDENED_TRY(acc_dmem_read(1, kAccVarRsaSessionToken, &stored_token));
+  if (launder32(stored_token) != session_token) {
+    return OTCRYPTO_FATAL_ERR;
+  }
+  HARDENED_CHECK_EQ(stored_token, session_token);
+
+  // Read the mode from ACC dmem and panic if it's not as expected.
+  uint32_t act_mode = 0;
+  ACC_WIPE_IF_ERROR(acc_dmem_read(1, kAccVarRsaMode, &act_mode));
+
+  // Ensure that the actual mode is the same as the expected mode.
+  uint32_t exp_mode = kAccRsaModeCheck4096;
+  if (launder32(act_mode) != kAccRsaModeCheck4096) {
+    return OTCRYPTO_FATAL_ERR;
+  }
+  HARDENED_CHECK_EQ(act_mode, exp_mode);
+
+  // Prepare a multi-limb constant of 1 for comparing to in validity checks.
+  uint32_t one[kRsa4096NumWords / 2];
+  memset(&one, 0, sizeof(one));
+  one[0] = 1;
+
+  // Read the value of the first CRT component (d_p) validity check value
+  // from ACC dmem.
+  uint32_t dp_check[kRsa4096NumWords / 2];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kRsa4096NumWords / 2, kAccVarRsaDp, dp_check));
+
+  // Check that this matches the expected value of 1, and update the
+  // validity.
+  hardened_bool_t dp_valid = hardened_memeq(one, dp_check, ARRAYSIZE(dp_check));
+
+  // Read the value of the second CRT component (d_q) validity check value
+  // from ACC dmem.
+  uint32_t dq_check[kRsa4096NumWords / 2];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kRsa4096NumWords / 2, kAccVarRsaDq, dq_check));
+
+  // Check that this matches the expected value of 1, and update the
+  // validity.
+  hardened_bool_t dq_valid = hardened_memeq(one, dq_check, ARRAYSIZE(dq_check));
+
+  // Read the value of the CRT coefficient (i_q) validity check value
+  // from ACC dmem.
+  uint32_t iq_check[kRsa4096NumWords / 2];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kRsa4096NumWords / 2, kAccVarRsaIq, iq_check));
+
+  // Check that this matches the expected value of 1, and update the
+  // validity.
+  hardened_bool_t iq_valid = hardened_memeq(one, iq_check, ARRAYSIZE(iq_check));
+
+  // Read the recovered public modulus (n) from ACC dmem.
+  uint32_t recovered_n[kRsa4096NumWords];
+  ACC_WIPE_IF_ERROR(acc_dmem_read(kRsa4096NumWords, kAccVarRsaN, recovered_n));
+
+  // Check that this matches the public key modulus, and update the
+  // validity.
+  hardened_bool_t n_valid =
+      hardened_memeq(public_key->n.data, recovered_n, ARRAYSIZE(recovered_n));
+
+  // Read the private exponent (d) check value
+  uint32_t d_check[kPrivateExponentCheckWords];
+  ACC_WIPE_IF_ERROR(
+      acc_dmem_read(kPrivateExponentCheckWords, kAccVarRsaE, d_check));
+
+  // Prepare a multi-limb all ones constant for comparing to in validity
+  // checks.
+  uint32_t all_ones[kPrivateExponentCheckWords];
+  memset(&all_ones, 0xFF, sizeof(all_ones));
+
+  // Check whether the private exponent check value this is all ones.
+  hardened_bool_t d_valid =
+      hardened_memeq(all_ones, d_check, ARRAYSIZE(d_check));
+
+  // Check if all tests passed, and if so set the key to valid.
+  if ((launder32(dp_valid) & launder32(dq_valid) & launder32(iq_valid) &
+       launder32(n_valid) & launder32(d_valid)) == kHardenedBoolTrue) {
+    HARDENED_CHECK_EQ(launder32(dp_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(dq_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(iq_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(n_valid), kHardenedBoolTrue);
+    HARDENED_CHECK_EQ(launder32(d_valid), kHardenedBoolTrue);
+    *key_valid = dp_valid & dq_valid & iq_valid & n_valid & d_valid;
+  }
+
+  // Wipe DMEM.
+  return acc_dmem_sec_wipe();
+}

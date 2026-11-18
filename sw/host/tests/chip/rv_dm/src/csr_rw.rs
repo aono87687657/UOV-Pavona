@@ -1,0 +1,260 @@
+// Copyright lowRISC contributors (OpenTitan project).
+// Licensed under the Apache License, Version 2.0, see LICENSE for details.
+// SPDX-License-Identifier: Apache-2.0
+
+use std::time::Duration;
+
+use anyhow::{Context, Result, ensure};
+use clap::Parser;
+use rand::prelude::*;
+
+use opentitanlib::app::{TransportWrapper, UartRx};
+use opentitanlib::execute_test;
+use opentitanlib::io::jtag::{Jtag, JtagTap};
+use opentitanlib::test_utils::init::InitializeTest;
+use opentitanlib::uart::console::UartConsole;
+
+use ot_bindgen_dif as dif;
+use ot_hal::top;
+
+#[derive(Debug, Parser)]
+struct Opts {
+    #[command(flatten)]
+    init: InitializeTest,
+
+    #[arg(long)]
+    rv_dm_delayed_enable: bool,
+
+    /// Seed for random number generator.
+    #[arg(long)]
+    seed: Option<u64>,
+
+    /// Console receive timeout.
+    #[arg(long, value_parser = humantime::parse_duration, default_value = "100s")]
+    timeout: Duration,
+}
+
+fn test(jtag: &mut dyn Jtag, base: usize, offset: u32) -> Result<()> {
+    let addr = base as u32 + offset;
+
+    let mut old_value = 0;
+    jtag.read_memory32(addr, std::slice::from_mut(&mut old_value))?;
+
+    let new_value = old_value ^ 1;
+    jtag.write_memory32(addr, &[new_value])?;
+    let mut readback = 0;
+    jtag.read_memory32(addr, std::slice::from_mut(&mut readback))?;
+    ensure!(new_value == readback);
+
+    jtag.write_memory32(addr, &[old_value])?;
+    jtag.read_memory32(addr, std::slice::from_mut(&mut readback))?;
+    ensure!(old_value == readback);
+
+    Ok(())
+}
+
+fn test_csr_rw(opts: &Opts, transport: &TransportWrapper) -> Result<()> {
+    let seed = opts.seed.unwrap_or_else(|| thread_rng().r#gen());
+    log::info!("Random number generator seed is {:x}", seed);
+    let mut rng = rand_chacha::ChaCha12Rng::seed_from_u64(seed);
+
+    transport.pin_strapping("PINMUX_TAP_RISCV")?.apply()?;
+    transport.reset(UartRx::Clear)?;
+    let uart = &*transport.uart("console")?;
+    uart.set_flow_control(true)?;
+
+    if opts.rv_dm_delayed_enable {
+        UartConsole::wait_for(uart, r"DEBUG_MODE_ENABLED", opts.timeout)?;
+    } else {
+        // Avoid watchdog timeout by entering bootstrap mode.
+        transport.pin_strapping("ROM_BOOTSTRAP")?.apply()?;
+        transport.reset(UartRx::Clear)?;
+    }
+
+    let jtag = &mut *opts
+        .init
+        .jtag_params
+        .create(transport)?
+        .connect(JtagTap::RiscvTap)?;
+
+    let mut tests = [
+        ("aes", top::AES_BASE_ADDR, dif::AES_IV_0_REG_OFFSET),
+        #[cfg(feature = "egret")]
+        (
+            "adc_ctrl",
+            top::ADC_CTRL_AON_BASE_ADDR,
+            dif::ADC_CTRL_INTR_ENABLE_REG_OFFSET,
+        ),
+        (
+            "alert_handler",
+            top::ALERT_HANDLER_BASE_ADDR,
+            dif::ALERT_HANDLER_INTR_ENABLE_REG_OFFSET,
+        ),
+        (
+            "aon_timer",
+            top::AON_TIMER_AON_BASE_ADDR,
+            dif::AON_TIMER_WKUP_CTRL_REG_OFFSET,
+        ),
+        (
+            "csrng",
+            top::CSRNG_BASE_ADDR,
+            dif::CSRNG_INTR_ENABLE_REG_OFFSET,
+        ),
+        ("edn0", top::EDN0_BASE_ADDR, dif::EDN_INTR_ENABLE_REG_OFFSET),
+        ("edn1", top::EDN1_BASE_ADDR, dif::EDN_INTR_ENABLE_REG_OFFSET),
+        (
+            "entropy_src",
+            top::ENTROPY_SRC_BASE_ADDR,
+            dif::ENTROPY_SRC_INTR_ENABLE_REG_OFFSET,
+        ),
+        #[cfg(feature = "egret")]
+        (
+            "flash_ctrl",
+            top::FLASH_CTRL_CORE_BASE_ADDR,
+            dif::FLASH_CTRL_INTR_ENABLE_REG_OFFSET,
+        ),
+        (
+            "gpio",
+            top::GPIO_BASE_ADDR,
+            dif::GPIO_INTR_ENABLE_REG_OFFSET,
+        ),
+        (
+            "hmac",
+            top::HMAC_BASE_ADDR,
+            dif::HMAC_INTR_ENABLE_REG_OFFSET,
+        ),
+        ("i2c0", top::I2C0_BASE_ADDR, dif::I2C_INTR_ENABLE_REG_OFFSET),
+        #[cfg(feature = "egret")]
+        ("i2c1", top::I2C1_BASE_ADDR, dif::I2C_INTR_ENABLE_REG_OFFSET),
+        #[cfg(feature = "egret")]
+        ("i2c2", top::I2C2_BASE_ADDR, dif::I2C_INTR_ENABLE_REG_OFFSET),
+        #[cfg(feature = "egret")]
+        (
+            "keymgr",
+            top::KEYMGR_BASE_ADDR,
+            dif::KEYMGR_INTR_ENABLE_REG_OFFSET,
+        ),
+        #[cfg(feature = "dragonfly")]
+        (
+            "keymgr_dpe",
+            top::KEYMGR_DPE_BASE_ADDR,
+            dif::KEYMGR_DPE_INTR_ENABLE_REG_OFFSET,
+        ),
+        (
+            "kmac",
+            top::KMAC_BASE_ADDR,
+            dif::KMAC_INTR_ENABLE_REG_OFFSET,
+        ),
+        ("acc", top::ACC_BASE_ADDR, dif::ACC_INTR_ENABLE_REG_OFFSET),
+        (
+            "otp_ctrl",
+            top::OTP_CTRL_CORE_BASE_ADDR,
+            dif::OTP_CTRL_INTR_ENABLE_REG_OFFSET,
+        ),
+        #[cfg(feature = "egret")]
+        (
+            "pattgen",
+            top::PATTGEN_BASE_ADDR,
+            dif::PATTGEN_INTR_ENABLE_REG_OFFSET,
+        ),
+        (
+            "pinmux",
+            top::PINMUX_AON_BASE_ADDR,
+            dif::PINMUX_MIO_PAD_ATTR_0_REG_OFFSET,
+        ),
+        #[cfg(feature = "egret")]
+        ("pwm", top::PWM_AON_BASE_ADDR, dif::PWM_INVERT_REG_OFFSET),
+        (
+            "pwrmgr",
+            top::PWRMGR_AON_BASE_ADDR,
+            dif::PWRMGR_INTR_ENABLE_REG_OFFSET,
+        ),
+        // Skip ROM_CTRL which does not have RW registers
+        (
+            "rstmgr",
+            top::RSTMGR_AON_BASE_ADDR,
+            dif::RSTMGR_CPU_INFO_CTRL_REG_OFFSET,
+        ),
+        (
+            "rv_timer",
+            top::RV_TIMER_BASE_ADDR,
+            dif::RV_TIMER_INTR_ENABLE0_REG_OFFSET,
+        ),
+        #[cfg(feature = "egret")]
+        (
+            "sensor_ctrl",
+            top::SENSOR_CTRL_AON_BASE_ADDR,
+            dif::SENSOR_CTRL_INTR_ENABLE_REG_OFFSET,
+        ),
+        (
+            "spi_device",
+            top::SPI_DEVICE_BASE_ADDR,
+            dif::SPI_DEVICE_INTR_ENABLE_REG_OFFSET,
+        ),
+        (
+            "spi_host0",
+            top::SPI_HOST0_BASE_ADDR,
+            dif::SPI_HOST_INTR_ENABLE_REG_OFFSET,
+        ),
+        #[cfg(feature = "egret")]
+        (
+            "spi_host1",
+            top::SPI_HOST1_BASE_ADDR,
+            dif::SPI_HOST_INTR_ENABLE_REG_OFFSET,
+        ),
+        #[cfg(feature = "egret")]
+        (
+            "sysrst_ctrl",
+            top::SYSRST_CTRL_AON_BASE_ADDR,
+            dif::SYSRST_CTRL_INTR_ENABLE_REG_OFFSET,
+        ),
+        (
+            "uart0",
+            top::UART0_BASE_ADDR,
+            dif::UART_INTR_ENABLE_REG_OFFSET,
+        ),
+        #[cfg(feature = "egret")]
+        (
+            "uart1",
+            top::UART1_BASE_ADDR,
+            dif::UART_INTR_ENABLE_REG_OFFSET,
+        ),
+        #[cfg(feature = "egret")]
+        (
+            "uart2",
+            top::UART2_BASE_ADDR,
+            dif::UART_INTR_ENABLE_REG_OFFSET,
+        ),
+        #[cfg(feature = "egret")]
+        (
+            "uart3",
+            top::UART3_BASE_ADDR,
+            dif::UART_INTR_ENABLE_REG_OFFSET,
+        ),
+        #[cfg(feature = "egret")]
+        (
+            "usbdev",
+            top::USBDEV_BASE_ADDR,
+            dif::USBDEV_INTR_ENABLE_REG_OFFSET,
+        ),
+    ];
+
+    tests.shuffle(&mut rng);
+
+    for (name, base, offset) in tests.iter().copied() {
+        log::info!("Testing {}", name);
+        test(jtag, base, offset).with_context(|| format!("{} test failed", name))?;
+    }
+
+    Ok(())
+}
+
+fn main() -> Result<()> {
+    let opts = Opts::parse();
+    opts.init.init_logging();
+    let transport = opts.init.init_target()?;
+
+    execute_test!(test_csr_rw, &opts, &transport);
+
+    Ok(())
+}

@@ -1,0 +1,394 @@
+// Copyright lowRISC contributors (OpenTitan project).
+// Copyright zeroRISC Inc.
+// Licensed under the Apache License, Version 2.0, see LICENSE for details.
+// SPDX-License-Identifier: Apache-2.0
+
+#ifndef OPENTITAN_SW_DEVICE_LIB_CRYPTO_IMPL_RSA_RSA_KEYGEN_H_
+#define OPENTITAN_SW_DEVICE_LIB_CRYPTO_IMPL_RSA_RSA_KEYGEN_H_
+
+#include <stddef.h>
+#include <stdint.h>
+
+#include "sw/device/lib/base/hardened.h"
+#include "sw/device/lib/crypto/impl/rsa/rsa_datatypes.h"
+#include "sw/device/lib/crypto/impl/status.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif  // __cplusplus
+
+/**
+ * Starts an RSA-2048 key generation operation; returns immediately.
+ *
+ * The key exponent is always F4=65537; no other exponents are supported.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param[out] session_token ACC session token for the operation.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_2048_start(uint32_t *session_token);
+
+/**
+ * Waits for an RSA-2048 key generation to complete.
+ *
+ * Should be invoked only after `rsa_keygen_2048_start`. Blocks until ACC is
+ * done processing.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] public_key Generated public key (n, e).
+ * @param[out] private_key Generated private key (p, q, d_p, d_q, i_q).
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_2048_finalize(uint32_t session_token,
+                                  rsa_2048_public_key_t *public_key,
+                                  rsa_2048_private_key_t *private_key);
+
+/**
+ * Starts an RSA-3072 key generation operation; returns immediately.
+ *
+ * The key exponent is always F4=65537; no other exponents are supported.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param[out] session_token ACC session token for the operation.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_3072_start(uint32_t *session_token);
+
+/**
+ * Waits for an RSA-3072 key generation to complete.
+ *
+ * Should be invoked only after `rsa_keygen_3072_start`. Blocks until ACC is
+ * done processing.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] public_key Generated public key (n, e).
+ * @param[out] private_key Generated private key (p, q, d_p, d_q, i_q).
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_3072_finalize(uint32_t session_token,
+                                  rsa_3072_public_key_t *public_key,
+                                  rsa_3072_private_key_t *private_key);
+
+/**
+ * Starts an RSA-4096 key generation operation; returns immediately.
+ *
+ * The key exponent is always F4=65537; no other exponents are supported.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param[out] session_token ACC session token for the operation.
+ * @return Result of the operation (OK or error).
+ */
+
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_4096_start(uint32_t *session_token);
+
+/**
+ * Waits for an RSA-4096 key generation to complete.
+ *
+ * Should be invoked only after `rsa_keygen_4096_start`. Blocks until ACC is
+ * done processing.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] public_key Generated public key (n, e).
+ * @param[out] private_key Generated private key (p, q, d_p, d_q, i_q).
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_4096_finalize(uint32_t session_token,
+                                  rsa_4096_public_key_t *public_key,
+                                  rsa_4096_private_key_t *private_key);
+
+/**
+ * Starts an RSA-2048 key-from-cofactor operation; returns immediately.
+ *
+ * The key exponent must be F4=65537; no other exponents are supported. This
+ * routine does not perform any checks on the generated keypair (e.g. primality
+ * checks or even range checks).
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param public_key Public key (n, e).
+ * @param cofactor One of the prime cofactors (p or q).
+ * @param[out] session_token ACC session token for the operation.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_from_cofactor_2048_start(
+    const rsa_2048_public_key_t *public_key, const rsa_2048_short_t *cofactor,
+    uint32_t *session_token);
+
+/**
+ * Waits for an RSA-2048 key-from-cofactor operation to complete.
+ *
+ * Should be invoked only after `rsa_keygen_from_cofactor_2048_start`. Blocks
+ * until ACC is done processing.
+ *
+ * The public key returned by this function is recomputed by ACC; callers may
+ * find it helpful to compare the public key modulus returned to the one that
+ * was passed to ACC originally in order to check for errors.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] public_key Generated public key (n, e).
+ * @param[out] private_key Generated private key (p, q, d_p, d_q, i_q).
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_from_cofactor_2048_finalize(
+    uint32_t session_token, rsa_2048_public_key_t *public_key,
+    rsa_2048_private_key_t *private_key);
+
+/**
+ * Starts an RSA-3072 key-from-cofactor operation; returns immediately.
+ *
+ * The key exponent must be F4=65537; no other exponents are supported. This
+ * routine does not perform any checks on the generated keypair (e.g. primality
+ * checks or even range checks).
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param public_key Public key (n, e).
+ * @param cofactor One of the prime cofactors (p or q).
+ * @param[out] session_token ACC session token for the operation.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_from_cofactor_3072_start(
+    const rsa_3072_public_key_t *public_key, const rsa_3072_short_t *cofactor,
+    uint32_t *session_token);
+
+/**
+ * Waits for an RSA-3072 key-from-cofactor operation to complete.
+ *
+ * Should be invoked only after `rsa_keygen_from_cofactor_3072_start`. Blocks
+ * until ACC is done processing.
+ *
+ * The public key returned by this function is recomputed by ACC; callers may
+ * find it helpful to compare the public key modulus returned to the one that
+ * was passed to ACC originally in order to check for errors.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] public_key Generated public key (n, e).
+ * @param[out] private_key Generated private key (p, q, d_p, d_q, i_q).
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_from_cofactor_3072_finalize(
+    uint32_t session_token, rsa_3072_public_key_t *public_key,
+    rsa_3072_private_key_t *private_key);
+
+/**
+ * Starts an RSA-4096 key-from-cofactor operation; returns immediately.
+ *
+ * The key exponent must be F4=65537; no other exponents are supported. This
+ * routine does not perform any checks on the generated keypair (e.g. primality
+ * checks or even range checks).
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param public_key Public key (n, e).
+ * @param cofactor One of the prime cofactors (p or q).
+ * @param[out] session_token ACC session token for the operation.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_from_cofactor_4096_start(
+    const rsa_4096_public_key_t *public_key, const rsa_4096_short_t *cofactor,
+    uint32_t *session_token);
+
+/**
+ * Waits for an RSA-4096 key-from-cofactor operation to complete.
+ *
+ * Should be invoked only after `rsa_keygen_from_cofactor_4096_start`. Blocks
+ * until ACC is done processing.
+ *
+ * The public key returned by this function is recomputed by ACC; callers may
+ * find it helpful to compare the public key modulus returned to the one that
+ * was passed to ACC originally in order to check for errors.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] public_key Generated public key (n, e).
+ * @param[out] private_key Generated private key (p, q, d_p, d_q, i_q).
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_keygen_from_cofactor_4096_finalize(
+    uint32_t session_token, rsa_4096_public_key_t *public_key,
+    rsa_4096_private_key_t *private_key);
+
+/**
+ * Checks the validity of a RSA-2048 private key with respect to a given
+ * RSA-2048 public key.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * This method performs a series of checks to ensure that a private key is
+ * internally consistent with a given public key. Namely, it checks that
+ *
+ *  (a) the public modulus is the product of the primes in the private key,
+ *  (b) the private exponent, as determined by the private exponent CRT,
+ *      components in the private key, is the inverse of the public exponent
+ *      modulo the Carmichael function of the public modulus,
+ *  (c) the higher limbs of this reconstructed private exponent are non-zero, as
+ *      required in FIPS 186-5 section A.1.1,
+ *  (d) the CRT coefficient in the private key is the inverse of the second
+ *      modulus cofactor modulo the first.
+ *
+ * Note that this method does *not* perform a primality check on the prime
+ * cofactors in the private key, as the Miller-Rabin primality test implemented
+ * for the ACC is specialized to primes which are 3 mod 4, and this method
+ * needs to be able to apply its checks to any imported RSA key. The co-located
+ * check performed during RSA key generation to ensure the prime cofactors
+ * aren't 'too close' (e.g. for Fermat factorization) has similarly been elided.
+ *
+ * As part of performing these checks, check values are computed using the ACC
+ * which are verified on the Ibex by performing hardened comparisons to expected
+ * values.
+ *
+ * @param public_key Public key (n, e).
+ * @param private_key Private key (p, q, d_p, d_q, i_q).
+ * @param[out] session_token ACC session token for the operation.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_key_check_2048_start(const rsa_2048_public_key_t *public_key,
+                                  const rsa_2048_private_key_t *private_key,
+                                  uint32_t *session_token);
+
+/*
+ * Waits for an RSA-2048 private key check to complete.
+ *
+ * Should be invoked only after `rsa_key_check_2048_start`. Blocks until ACC is
+ * done processing.
+ *
+ * @param public_key Public key (n, e).
+ * @param session_token ACC session token for the operation.
+ * @param[out] key_valid Whether the provided private key is valid.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_key_check_2048_finalize(const rsa_2048_public_key_t *public_key,
+                                     uint32_t session_token,
+                                     hardened_bool_t *key_valid);
+
+/**
+ * Checks the validity of a RSA-3072 private key with respect to a given
+ * RSA-3072 public key.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * This method performs a series of checks to ensure that a private key is
+ * internally consistent with a given public key. Namely, it checks that
+ *
+ *  (a) the public modulus is the product of the primes in the private key,
+ *  (b) the private exponent, as determined by the private exponent CRT,
+ *      components in the private key, is the inverse of the public exponent
+ *      modulo the Carmichael function of the public modulus,
+ *  (c) the higher limbs of this reconstructed private exponent are non-zero, as
+ *      required in FIPS 186-5 section A.1.1,
+ *  (d) the CRT coefficient in the private key is the inverse of the second
+ *      modulus cofactor modulo the first.
+ *
+ * Note that this method does *not* perform a primality check on the prime
+ * cofactors in the private key, as the Miller-Rabin primality test implemented
+ * for the ACC is specialized to primes which are 3 mod 4, and this method
+ * needs to be able to apply its checks to any imported RSA key. The co-located
+ * check performed during RSA key generation to ensure the prime cofactors
+ * aren't 'too close' (e.g. for Fermat factorization) has similarly been elided.
+ *
+ * As part of performing these checks, check values are computed using the ACC
+ * which are verified on the Ibex by performing hardened comparisons to expected
+ * values.
+ *
+ * @param public_key Public key (n, e).
+ * @param private_key Private key (p, q, d_p, d_q, i_q).
+ * @param[out] session_token ACC session token for the operation.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_key_check_3072_start(const rsa_3072_public_key_t *public_key,
+                                  const rsa_3072_private_key_t *private_key,
+                                  uint32_t *session_token);
+
+/*
+ * Waits for an RSA-3072 private key check to complete.
+ *
+ * Should be invoked only after `rsa_key_check_3072_start`. Blocks until ACC is
+ * done processing.
+ *
+ * @param public_key Public key (n, e).
+ * @param session_token ACC session token for the operation.
+ * @param[out] key_valid Whether the provided private key is valid.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_key_check_3072_finalize(const rsa_3072_public_key_t *public_key,
+                                     uint32_t session_token,
+                                     hardened_bool_t *key_valid);
+
+/**
+ * Checks the validity of a RSA-4096 private key with respect to a given
+ * RSA-4096 public key.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * This method performs a series of checks to ensure that a private key is
+ * internally consistent with a given public key. Namely, it checks that
+ *
+ *  (a) the public modulus is the product of the primes in the private key,
+ *  (b) the private exponent, as determined by the private exponent CRT,
+ *      components in the private key, is the inverse of the public exponent
+ *      modulo the Carmichael function of the public modulus,
+ *  (c) the higher limbs of this reconstructed private exponent are non-zero, as
+ *      required in FIPS 186-5 section A.1.1,
+ *  (d) the CRT coefficient in the private key is the inverse of the second
+ *      modulus cofactor modulo the first.
+ *
+ * Note that this method does *not* perform a primality check on the prime
+ * cofactors in the private key, as the Miller-Rabin primality test implemented
+ * for the ACC is specialized to primes which are 3 mod 4, and this method
+ * needs to be able to apply its checks to any imported RSA key. The co-located
+ * check performed during RSA key generation to ensure the prime cofactors
+ * aren't 'too close' (e.g. for Fermat factorization) has similarly been elided.
+ *
+ * As part of performing these checks, check values are computed using the ACC
+ * which are verified on the Ibex by performing hardened comparisons to expected
+ * values.
+ *
+ * @param public_key Public key (n, e).
+ * @param private_key Private key (p, q, d_p, d_q, i_q).
+ * @param[out] session_token ACC session token for the operation.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_key_check_4096_start(const rsa_4096_public_key_t *public_key,
+                                  const rsa_4096_private_key_t *private_key,
+                                  uint32_t *session_token);
+
+/*
+ * Waits for an RSA-4096 private key check to complete.
+ *
+ * Should be invoked only after `rsa_key_check_4096_start`. Blocks until ACC is
+ * done processing.
+ *
+ * @param public_key Public key (n, e).
+ * @param session_token ACC session token for the operation.
+ * @param[out] key_valid Whether the provided private key is valid.
+ * @return Result of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_key_check_4096_finalize(const rsa_4096_public_key_t *public_key,
+                                     uint32_t session_token,
+                                     hardened_bool_t *key_valid);
+
+#ifdef __cplusplus
+}  // extern "C"
+#endif  // __cplusplus
+
+#endif  // OPENTITAN_SW_DEVICE_LIB_CRYPTO_IMPL_RSA_RSA_KEYGEN_H_

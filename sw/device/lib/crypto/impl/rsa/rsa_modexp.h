@@ -1,0 +1,345 @@
+// Copyright lowRISC contributors (OpenTitan project).
+// Copyright zeroRISC Inc.
+// Licensed under the Apache License, Version 2.0, see LICENSE for details.
+// SPDX-License-Identifier: Apache-2.0
+
+#ifndef OPENTITAN_SW_DEVICE_LIB_CRYPTO_IMPL_RSA_RSA_MODEXP_H_
+#define OPENTITAN_SW_DEVICE_LIB_CRYPTO_IMPL_RSA_RSA_MODEXP_H_
+
+#include <stddef.h>
+#include <stdint.h>
+
+#include "sw/device/lib/base/hardened.h"
+#include "sw/device/lib/crypto/impl/rsa/rsa_datatypes.h"
+#include "sw/device/lib/crypto/impl/status.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif  // __cplusplus
+
+/**
+ * Check that a modexp operation is complete and get the result size.
+ *
+ * After ACC finishes processing, this function reads the mode and infers the
+ * size of the modulus/signature for the just-finished operation. It then
+ * populates the `num_words` parameter with this size (expressed in 32b words).
+ * This is designed so that callers can call `rsa_modexp_wait()` and then use
+ * the size to select the appropriate `finalize()` call.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] num_words Number of words for result buffers.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_get_result_size(uint32_t session_token, size_t *num_words);
+
+/**
+ * Start a constant-time RSA-2048 modular exponentiation.
+ *
+ * This construct is for secret exponents, and is much slower than the
+ * variable-time version.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param base Exponentiation base.
+ * @param exp Exponent to raise the base to.
+ * @param modulus Modulus for exponentiation.
+ * @param[out] session_token ACC session token for the operation.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_2048_start(const rsa_2048_int_t *base,
+                                         const rsa_2048_int_t *exp,
+                                         const rsa_2048_int_t *modulus,
+                                         uint32_t *session_token);
+
+/**
+ * Waits for an RSA-2048 modular exponentiation to complete.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] result Exponentiation result = (base ^ exp) mod modulus.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_2048_finalize(uint32_t session_token,
+                                            rsa_2048_int_t *result);
+
+/**
+ * Start a constant-time CRT RSA-2048 modular exponentiation.
+ *
+ * This construct is for secret exponents, and is faster than the non-CRT
+ * constant-time version.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param base Exponentiation base.
+ * @param exp_p First CRT component of exponent to raise the base to.
+ * @param exp_q Second CRT component of exponent to raise the base to.
+ * @param crt_coeff CRT coefficient for exponentiation (inverse of q mod p).
+ * @param modulus_p First cofactor of modulus for exponentiation.
+ * @param modulus_q Second cofactor of modulus for exponentiation.
+ * @param[out] session_token ACC session token for the operation.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_crt_2048_start(const rsa_2048_int_t *base,
+                                             const rsa_2048_short_t *exp_p,
+                                             const rsa_2048_short_t *exp_q,
+                                             const rsa_2048_short_t *crt_coeff,
+                                             const rsa_2048_short_t *modulus_p,
+                                             const rsa_2048_short_t *modulus_q,
+                                             uint32_t *session_token);
+
+/**
+ * Waits for an RSA-2048 CRT modular exponentiation to complete.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] result Exponentiation result = (base ^ exp) mod modulus.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_crt_2048_finalize(uint32_t session_token,
+                                                rsa_2048_int_t *result);
+
+/**
+ * Start a variable-time RSA-2048 modular exponentiation.
+ *
+ * Do not use this construct with secret exponents; its timing depends on the
+ * exponent.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param base Exponentiation base.
+ * @param exp Exponent to raise the base to.
+ * @param modulus Modulus for exponentiation.
+ * @param[out] session_token ACC session token for the operation.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_vartime_2048_start(const rsa_2048_int_t *base,
+                                       const uint32_t exp,
+                                       const rsa_2048_int_t *modulus,
+                                       uint32_t *session_token);
+
+/**
+ * Waits for an RSA-2048 modular exponentiation to complete.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] result Exponentiation result = (base ^ exp) mod modulus.
+ * @param exp Exponent base was raised to.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_vartime_2048_finalize(uint32_t session_token,
+                                          const uint32_t exp,
+                                          rsa_2048_int_t *result);
+
+/**
+ * Start a constant-time RSA-3072 modular exponentiation.
+ *
+ * This construct is for secret exponents, and is much slower than the
+ * variable-time version.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param base Exponentiation base.
+ * @param exp Exponent to raise the base to.
+ * @param modulus Modulus for exponentiation.
+ * @param[out] session_token ACC session token for the operation.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_3072_start(const rsa_3072_int_t *base,
+                                         const rsa_3072_int_t *exp,
+                                         const rsa_3072_int_t *modulus,
+                                         uint32_t *session_token);
+
+/**
+ * Waits for an RSA-3072 modular exponentiation to complete.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] result Exponentiation result = (base ^ exp) mod modulus.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_3072_finalize(uint32_t session_token,
+                                            rsa_3072_int_t *result);
+
+/**
+ * Start a constant-time CRT RSA-3072 modular exponentiation.
+ *
+ * This construct is for secret exponents, and is faster than the non-CRT
+ * constant-time version.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param base Exponentiation base.
+ * @param exp_p First CRT component of exponent to raise the base to.
+ * @param exp_q Second CRT component of exponent to raise the base to.
+ * @param crt_coeff CRT coefficient for exponentiation (inverse of q mod p).
+ * @param modulus_p First cofactor of modulus for exponentiation.
+ * @param modulus_q Second cofactor of modulus for exponentiation.
+ * @param[out] session_token ACC session token for the operation.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_crt_3072_start(const rsa_3072_int_t *base,
+                                             const rsa_3072_short_t *exp_p,
+                                             const rsa_3072_short_t *exp_q,
+                                             const rsa_3072_short_t *crt_coeff,
+                                             const rsa_3072_short_t *modulus_p,
+                                             const rsa_3072_short_t *modulus_q,
+                                             uint32_t *session_token);
+
+/**
+ * Waits for an RSA-3072 CRT modular exponentiation to complete.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] result Exponentiation result = (base ^ exp) mod modulus.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_crt_3072_finalize(uint32_t session_token,
+                                                rsa_3072_int_t *result);
+
+/**
+ * Start a variable-time RSA-3072 modular exponentiation.
+ *
+ * Do not use this construct with secret exponents; its timing depends on the
+ * exponent.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param base Exponentiation base.
+ * @param exp Exponent to raise the base to.
+ * @param modulus Modulus for exponentiation.
+ * @param[out] session_token ACC session token for the operation.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_vartime_3072_start(const rsa_3072_int_t *base,
+                                       const uint32_t exp,
+                                       const rsa_3072_int_t *modulus,
+                                       uint32_t *session_token);
+
+/**
+ * Waits for an RSA-3072 modular exponentiation to complete.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] result Exponentiation result = (base ^ exp) mod modulus.
+ * @param exp Exponent base was raised to.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_vartime_3072_finalize(uint32_t session_token,
+                                          const uint32_t exp,
+                                          rsa_3072_int_t *result);
+
+/**
+ * Start a constant-time RSA-4096 modular exponentiation.
+ *
+ * This construct is for secret exponents, and is much slower than the
+ * variable-time version.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param base Exponentiation base.
+ * @param exp Exponent to raise the base to.
+ * @param modulus Modulus for exponentiation.
+ * @param[out] session_token ACC session token for the operation.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_4096_start(const rsa_4096_int_t *base,
+                                         const rsa_4096_int_t *exp,
+                                         const rsa_4096_int_t *modulus,
+                                         uint32_t *session_token);
+
+/**
+ * Waits for an RSA-4096 modular exponentiation to complete.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] result Exponentiation result = (base ^ exp) mod modulus.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_4096_finalize(uint32_t session_token,
+                                            rsa_4096_int_t *result);
+
+/**
+ * Start a constant-time CRT RSA-4096 modular exponentiation.
+ *
+ * This construct is for secret exponents, and is faster than the non-CRT
+ * constant-time version.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param base Exponentiation base.
+ * @param exp_p First CRT component of exponent to raise the base to.
+ * @param exp_q Second CRT component of exponent to raise the base to.
+ * @param crt_coeff CRT coefficient for exponentiation (inverse of q mod p).
+ * @param modulus_p First cofactor of modulus for exponentiation.
+ * @param modulus_q Second cofactor of modulus for exponentiation.
+ * @param[out] session_token ACC session token for the operation.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_crt_4096_start(const rsa_4096_int_t *base,
+                                             const rsa_4096_short_t *exp_p,
+                                             const rsa_4096_short_t *exp_q,
+                                             const rsa_4096_short_t *crt_coeff,
+                                             const rsa_4096_short_t *modulus_p,
+                                             const rsa_4096_short_t *modulus_q,
+                                             uint32_t *session_token);
+
+/**
+ * Waits for an RSA-4096 CRT modular exponentiation to complete.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] result Exponentiation result = (base ^ exp) mod modulus.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_consttime_crt_4096_finalize(uint32_t session_token,
+                                                rsa_4096_int_t *result);
+
+/**
+ * Start a variable-time RSA-4096 modular exponentiation.
+ *
+ * Do not use this construct with secret exponents; its timing depends on the
+ * exponent.
+ *
+ * Returns an `OTCRYPTO_ASYNC_INCOMPLETE` error if ACC is busy.
+ *
+ * @param base Exponentiation base.
+ * @param exp Exponent to raise the base to.
+ * @param modulus Modulus for exponentiation.
+ * @param[out] session_token ACC session token for the operation.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_vartime_4096_start(const rsa_4096_int_t *base,
+                                       const uint32_t exp,
+                                       const rsa_4096_int_t *modulus,
+                                       uint32_t *session_token);
+
+/**
+ * Waits for an RSA-4096 modular exponentiation to complete.
+ *
+ * @param session_token ACC session token for the operation.
+ * @param[out] result Exponentiation result = (base ^ exp) mod modulus.
+ * @param exp Exponent base was raised to.
+ * @return Status of the operation (OK or error).
+ */
+OT_WARN_UNUSED_RESULT
+status_t rsa_modexp_vartime_4096_finalize(uint32_t session_token,
+                                          const uint32_t exp,
+                                          rsa_4096_int_t *result);
+
+#ifdef __cplusplus
+}  // extern "C"
+#endif  // __cplusplus
+
+#endif  // OPENTITAN_SW_DEVICE_LIB_CRYPTO_IMPL_RSA_RSA_MODEXP_H_
