@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+sign,Ip,bnaesonly,ldirect,0,PASS,2131735,2244573
+sign,Ip,bnaesonly,ldirect,1,PASS,2131750,2244593
+sign,Ip,bnaesonly,ldirect,2,PASS,2131750,2244593
+sign,Ip,bnaesonly,ldirect,3,PASS,2131750,2244593
+sign,Ip,bnaesonly,ldirect,4,PASS,2131750,2244593
+sign,Ip,bnaesonly,ldirect,5,PASS,2131750,2244593
+sign,Ip,bnaesonly,ldirect,6,PASS,2131801,2244645
+sign,Ip,bnaesonly,ldirect,7,PASS,2131855,2244701
+sign,Ip,bnaesonly,ldirect,8,PASS,2131963,2244813
+sign,Ip,bnaesonly,ldirect,9,PASS,2132179,2245037
+sign,Ip,bnaesonly,ldirect,10,PASS,2132611,2245485
+sign,Ip,bnaesonly,ldirect,11,PASS,2133475,2246381

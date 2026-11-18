@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/pavona/pavona/main/sw/host/cryptotest/testvectors/data/schemas/uov_schema.json",
+  "title": "Cryptotest UOV Testvector",
+  "description": "A list of testvectors for UOV testing",
+  "$defs": {
+    "byte_array": {
+      "type": "array",
+      "items": {"type": "integer", "minimum": 0, "maximum": 255}
+    }
+  },
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "vendor": {"type": "string"},
+      "test_case_id": {"type": "integer"},
+      "operation": {"type": "string", "enum": ["keygen", "sign", "verify"]},
+      "parameter_set": {"type": "string", "enum": ["Ip", "Is", "Ip3"]},
+      "sk_seed": {"$ref": "#/$defs/byte_array"},
+      "pk": {"$ref": "#/$defs/byte_array"},
+      "message": {"$ref": "#/$defs/byte_array"},
+      "salt": {"$ref": "#/$defs/byte_array"},
+      "signature": {"$ref": "#/$defs/byte_array"},
+      "expected_hash": {
+        "description": "SHA3-256 of keygen's pk or sign's signature",
+        "$ref": "#/$defs/byte_array"
+      },
+      "result": {"type": "boolean"}
+    }
+  }
+}

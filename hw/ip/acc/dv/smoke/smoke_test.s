@@ -264,13 +264,81 @@ bn.mulqacc.so w30.L, w27.2, w28.3, 64
 bn.mulqacc.so w30.U, w27.3, w28.3, 0
 
 # w31 = w28[127:0] * w27[127:0] = 0x37adadae_f9dbff5e_73880075_5466a52c_67a8c221_6978ad1b_25769434_0f09b7c8
+
+# w0 = acc = 0x37adadae_f9dbff5e_73880075_5466a52c_67a8c221_6978ad1b_25769434_0f09b7c8
+bn.wsrr w0, 0x3 /* ACC */
+
+
 bn.mulqacc.Z       w27.0, w28.0, 0
 bn.mulqacc         w27.0, w28.1, 64
 bn.mulqacc         w27.1, w28.0, 64
 bn.mulqacc.wo w31, w27.1, w28.1, 128
 
-# w0 = acc = 0x37adadae_f9dbff5e_73880075_5466a52c_67a8c221_6978ad1b_25769434_0f09b7c8
-bn.wsrr w0, 0x3 /* ACC */
+li x23, 0x0000011b   # load GF(256) reduction polynomial x^8 + x^4 + x^3 + x + 1
+csrrw x0, mod0, x23  # sed mod register to GF(256) reduction polynomial
+
+li x23, 0x00000001
+csrrw x0, mod1, x23
+
+bn.gfmul.8.acc.z    w15, w16, w17
+bn.gfmul.8.inc      w17, w18, w19
+bn.gfmul.8.acc.inc  w13, w16, w15
+
+bn.gfmul.8.acc.vv   w10, w16, w15
+bn.gfmul.8.acc.vv   w20, w16, w15
+bn.gfmul.8.vv       w12, w17, w18
+
+li x23, 0x00000013   # load GF(16) reduction polynomial x^4 + x + 1
+csrrw x0, mod0, x23  # sed mod register to GF(16) reduction polynomial
+
+bn.gfmul.4.acc.z.inc w15, w16, w17
+bn.gfmul.4           w17, w18, w19
+bn.gfmul.4.acc       w14, w16, w15
+
+bn.gfmul.4.acc.vv   w14, w16, w15
+bn.gfmul.4.acc.vv   w20, w16, w15
+bn.gfmul.4.vv       w12, w17, w18
+
+li x23, 0x0000000a
+
+#lw x18, 32(x0)
+bn.lid x23, 32(x0)
+
+bn.aes128.kf w11, w10, 1
+bn.aes128.kf w12, w11, 2
+bn.aes128.kf w13, w12, 3
+bn.aes128.kf w14, w13, 4
+bn.aes128.kf w15, w14, 5
+bn.aes128.kf w16, w15, 6
+bn.aes128.kf w17, w16, 7
+bn.aes128.kf w18, w17, 8
+bn.aes128.kf w19, w18, 9
+bn.aes128.kf w20, w19, 10
+
+
+li x23, 0x00000008
+bn.lid x23, 64(x0)
+
+bn.rshi w10, w0, w10 >> 128
+
+#bn.xor w9, w9, w9
+#bn.rshi w9, w10, w9 >> 128
+#bn.xor w10, w9, w10
+#bn.xor w9, w8, w10
+
+bn.aes128.encz.swap w9, w8, w10
+bn.aes128.encm w9, w9, w11
+bn.aes128.encm w9, w9, w12
+bn.aes128.encm w9, w9, w13
+bn.aes128.encm w9, w9, w14
+bn.aes128.encm w9, w9, w15
+bn.aes128.encm w9, w9, w16
+bn.aes128.encm w9, w9, w17
+bn.aes128.encm w9, w9, w18
+bn.aes128.encm w9, w9, w19
+bn.aes128.encf w9, w9, w20
+
+
 
 # Nested loop testing, inner adds repeated a total of 3 * 5 = 15 times
 # x28 = 4, x29 = 3
@@ -429,6 +497,23 @@ reg_dump:
   .word 0xaaaaaaaa
   .word 0xbbbbbbbb
   .word 0xcccccccc
+  # AES
+  .word 0x03020100
+  .word 0x07060504
+  .word 0x0b0a0908
+  .word 0x0f0e0d0c
+  .word 0x00000000
+  .word 0x00000000
+  .word 0x00000000
+  .word 0x00000000
+  .word 0x33221100
+  .word 0x77665544
+  .word 0xbbaa9988
+  .word 0xffeeddcc
+  .word 0x33221100
+  .word 0x77665544
+  .word 0xbbaa9988
+  .word 0xffeeddcc
 
 .ifdef deterministic
 .balign 32

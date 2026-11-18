@@ -1,0 +1,7 @@
+op,family,param,tier,contract,protocol,run,acc_insn,exec_wait,host_io_fold,op_total_v2,app_load,whole_test_cycles,wall_s,verdict
+keygen,stream,ip,bngfaes,2,accept_only,accept,1677514,2022802,222459,2246823,574823,6496267,520.096,PASS
+keygen,stream,is,bngfaes,2,accept_only,accept,1958603,2360831,343270,2705494,533334,7165963,597.605,PASS
+keygen,stream,ip3,bngfaes,2,accept_only,accept,2142918,2571832,307709,2881227,577661,7282699,596.761,PASS
+keygen,stream_uniform,ip,bngfaes,2,accept_only,accept,1918881,2430617,223200,2655753,446357,6838283,525.636,PASS
+keygen,stream_uniform,is,bngfaes,2,accept_only,accept,2083348,2652963,343638,2998173,442444,7374859,571.446,PASS
+keygen,stream_uniform,ip3,bngfaes,2,accept_only,accept,2343426,2800729,308094,3110696,494653,7454731,585.637,PASS

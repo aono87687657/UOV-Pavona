@@ -422,6 +422,70 @@ bn.mulv.l.8S.odd.acc.z.hi  w23, w0, sw0.5
 
 bn.subv w6, w22, w23
 
+
+# test binary field ISE
+
+li x23, 0x0000011b   # load GF(256) reduction polynomial x^8 + x^4 + x^3 + x + 1
+csrrw x0, mod0, x23  # sed mod register to GF(256) reduction polynomial
+
+li x23, 0x00000001
+csrrw x0, mod1, x23
+
+bn.gfmul.8.acc.z    w15, w16, w17
+bn.gfmul.8.inc      w17, w18, w19
+bn.gfmul.8.acc.inc  w13, w16, w15
+
+bn.gfmul.8.acc.vv   w10, w16, w15
+bn.gfmul.8.acc.vv   w20, w16, w15
+bn.gfmul.8.vv       w12, w17, w18
+
+li x23, 0x00000013   # load GF(16) reduction polynomial x^4 + x + 1
+csrrw x0, mod0, x23  # sed mod register to GF(16) reduction polynomial
+
+bn.gfmul.4.acch.z.inc w15, w16, w17
+bn.gfmul.4            w17, w18, w19
+bn.gfmul.4.acch       w14, w16, w15
+
+bn.gfmul.4.acch.vv   w14, w16, w15
+bn.gfmul.4.acch.vv   w20, w16, w15
+bn.gfmul.4.vv        w12, w17, w18
+
+
+# test AES ISE
+
+li x23, 0x0000000a
+bn.lid x23, 32(x0)
+
+bn.aes128.kf w11, w10, 1
+bn.aes128.kf w12, w11, 2
+bn.aes128.kf w13, w12, 3
+bn.aes128.kf w14, w13, 4
+bn.aes128.kf w15, w14, 5
+bn.aes128.kf w16, w15, 6
+bn.aes128.kf w17, w16, 7
+bn.aes128.kf w18, w17, 8
+bn.aes128.kf w19, w18, 9
+bn.aes128.kf w20, w19, 10
+
+
+li x23, 0x00000008
+bn.lid x23, 64(x0)
+
+bn.rshi w10, w0, w10 >> 128
+
+bn.aes128.encz.swap w9, w8, w10
+bn.aes128.encm w9, w9, w11
+bn.aes128.encm w9, w9, w12
+bn.aes128.encm w9, w9, w13
+bn.aes128.encm w9, w9, w14
+bn.aes128.encm w9, w9, w15
+bn.aes128.encm w9, w9, w16
+bn.aes128.encm w9, w9, w17
+bn.aes128.encm w9, w9, w18
+bn.aes128.encm w9, w9, w19
+bn.aes128.encf w9, w9, w20
+
+
 # Nested loop testing, inner adds repeated a total of 3 * 5 = 15 times
 # x28 = 4, x29 = 3
 li x28, 4
@@ -579,6 +643,24 @@ reg_dump:
   .word 0xaaaaaaaa
   .word 0xbbbbbbbb
   .word 0xcccccccc
+  # AES
+  .word 0x03020100
+  .word 0x07060504
+  .word 0x0b0a0908
+  .word 0x0f0e0d0c
+  .word 0x00000000
+  .word 0x00000000
+  .word 0x00000000
+  .word 0x00000000
+  .word 0x33221100
+  .word 0x77665544
+  .word 0xbbaa9988
+  .word 0xffeeddcc
+  .word 0x33221100
+  .word 0x77665544
+  .word 0xbbaa9988
+  .word 0xffeeddcc
+
 
 .ifdef deterministic
 .balign 32

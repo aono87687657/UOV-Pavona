@@ -94,6 +94,8 @@
   address: 11
   doc: |
     The high 256-bits of the accumulator register used by the {{#acc-insn-ref BN.MULV}} instruction.
+    Also serves as a second, independent 256-bit GF-MAC accumulator for the
+    {{#acc-insn-ref BN.GFMUL}} `.acch` variants.
 
 - name: kmac_msg1
   address: 12

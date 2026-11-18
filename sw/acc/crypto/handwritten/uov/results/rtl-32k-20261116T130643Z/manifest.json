@@ -1,0 +1,47 @@
+{
+ "archive": {
+  "done": "collector_exit=0 postcheck_exit=0 archive_exit=0 finished=20261116T173249Z",
+  "files": 59,
+  "inventory": "10fdf7a02dc1d1798a0858603d2544877c268548d54e09a53328bb43e6472c6e"
+ },
+ "campaign": "rtl-2026-11b",
+ "cells": [
+  "acc_uov_keygen_stream_ip3_sw_test",
+  "acc_uov_keygen_stream_uniform_ip3_sw_test",
+  "acc_uov_keygen_stream_uniform_ip_sw_test",
+  "acc_uov_keygen_stream_ip_sw_test"
+ ],
+ "completion": {
+  "accepted": true,
+  "baseline": "identical",
+  "cells": 4,
+  "rows": 4
+ },
+ "definition": "0a1de858ba6ebabf63defed85f8e8a7cfa41bd7b862ab849b4b1289ebbee07c5",
+ "engine": "rtl",
+ "evidence": {
+  "results.csv": "0054b521a38941190c600f77fefc31b6e48d3c78185d9abd519ac3caf87e6cb9"
+ },
+ "execution": {
+  "bazel": "bazel 8.0.1",
+  "flags": "--test_timeout=604800 --cache_test_results=no --local_test_jobs=4 --//hw:make_options=-j,8 --//hw:verilator_options=--threads,4 --test_arg=--verilator-args=+ibex_tracer_enable=0"
+ },
+ "profile": 32,
+ "run": "rtl-32k-20261116T130643Z",
+ "schema": 2,
+ "source": {
+  "commit": "9fe0ccdd8c04e32c3fa15ba3332dd913b05b3b0f",
+  "config": {
+   ".bazelrc-site": "15d97e8406bbeaa209a2e86d84320f6c1f66b826913c028d0668e8ce3b68268b"
+  },
+  "overlay": {},
+  "snapshot": "ceef1d4699d8436a93052c03af134da67a17cae70ab67cd8d17ee81d798efbe8"
+ },
+ "tools": {
+  "measuring": {
+   "tools/gather_chip_matrix.py": "a2738593b0b3cdee4afe160184824110a276cc5e2822f4a80e81c3894af53342",
+   "tools/rtl_campaign.sh": "bd10f4554aed7e6b24361406539304ddb2e665f7d23008e38e2d41f179963991"
+  },
+  "publishing": "9fe0ccdd8c04e32c3fa15ba3332dd913b05b3b0f"
+ }
+}

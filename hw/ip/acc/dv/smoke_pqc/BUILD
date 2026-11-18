@@ -41,8 +41,10 @@ fusesoc_build(
         ],
     },
     pre_system_flags = [
-        "--flag",
-        "pqc",
+        "--flag=pqc",
+        "--flag=aes_bignum",
+        "--flag=gfmacc_bignum",
+        "--flag=mod_reg_poly",
         "--mapping=lowrisc:prim_generic:all:0.1",
     ],
     systems = ["lowrisc:ip:acc_top_sim"],

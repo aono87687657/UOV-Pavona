@@ -23,7 +23,7 @@ module acc_controller
   parameter int DmemSizeByte = 4096,
 
   // Enabling PQC hardware support with vector ISA extension
-  parameter bit AccPQCEn = 1'b1,
+  parameter bit AccPQCEn = 1'b0,
 
   localparam int ImemAddrWidth = prim_util_pkg::vbits(ImemSizeByte),
   localparam int DmemAddrWidth = prim_util_pkg::vbits(DmemSizeByte),
@@ -121,6 +121,13 @@ module acc_controller
   input  logic [WLEN-1:0]       mac_bignum_operation_result_i,
   output logic                  mac_bignum_en_o,
   output logic                  mac_bignum_commit_o,
+
+  // Bignum AES
+`ifdef AES_BIGNUM
+  output aes_bignum_operation_t aes_bignum_operation_o,
+  input  logic [WLEN-1:0]       aes_bignum_operation_result_i,
+  output logic                  aes_bignum_en_o,
+`endif
 
   // LSU
   output logic                     lsu_load_req_o,
@@ -1109,8 +1116,30 @@ module acc_controller
   assign mac_bignum_operation_o.lane_word_16  = insn_dec_bignum_i.mac_lane_word_16;
   assign mac_bignum_operation_o.exec_mode     = insn_dec_bignum_i.mac_exec_mode;
 
+`ifdef GFMACC_BIGNUM
+  assign mac_bignum_operation_o.gf_en             = insn_dec_bignum_i.mac_gf_en;
+  assign mac_bignum_operation_o.gf_mode           = insn_dec_bignum_i.mac_gf_mode;
+  assign mac_bignum_operation_o.gf_acc            = insn_dec_bignum_i.mac_gf_acc;
+  assign mac_bignum_operation_o.gf_acc_sel        = insn_dec_bignum_i.mac_gf_acc_sel;
+  assign mac_bignum_operation_o.gf_vxv            = insn_dec_bignum_i.mac_gf_vxv;
+  assign mac_bignum_operation_o.gf_inc            = insn_dec_bignum_i.mac_gf_inc;
+`endif
+
   assign mac_bignum_en_o     = insn_valid_i & insn_dec_bignum_i.mac_en;
   assign mac_bignum_commit_o = insn_executing;
+
+
+`ifdef AES_BIGNUM
+  assign aes_bignum_operation_o.operand_a         = rf_bignum_rd_data_a_no_intg;
+  assign aes_bignum_operation_o.operand_b         = rf_bignum_rd_data_b_no_intg;
+  assign aes_bignum_operation_o.key_expand        = insn_dec_bignum_i.aes_key_expand;
+  assign aes_bignum_operation_o.round             = insn_dec_bignum_i.aes_round;
+  assign aes_bignum_operation_o.swap_endian       = insn_dec_bignum_i.aes_swap_endian;
+  assign aes_bignum_operation_o.first_round       = insn_dec_bignum_i.aes_first_round;
+  assign aes_bignum_operation_o.final_round       = insn_dec_bignum_i.aes_final_round;
+
+  assign aes_bignum_en_o     = insn_valid_i & insn_dec_bignum_i.aes_en;
+`endif
 
   // Move / Conditional Select. Only select B register data when a selection instruction is being
   // executed and the selection flag isn't set. To avoid undesirable SCA leakage between the two
@@ -1267,12 +1296,25 @@ module acc_controller
   // accepts write data for the top half in the top half of the write data input). Otherwise
   // (shift-out to bottom half and all other BN.MULQACC instructions) simply pass the MAC result
   // through unchanged as write data.
+`ifdef AES_BIGNUM
+  assign mac_bignum_rf_wr_data[WLEN-1:WLEN/2] =
+    insn_dec_bignum_i.aes_en ? 
+      aes_bignum_operation_result_i[WLEN-1:WLEN/2] : (
+        insn_dec_bignum_i.mac_wr_hw_sel_upper &&
+        insn_dec_bignum_i.mac_shift_out          ? mac_bignum_operation_result_i[WLEN/2-1:0] :
+                                                   mac_bignum_operation_result_i[WLEN-1:WLEN/2]
+      );
+
+  assign mac_bignum_rf_wr_data[WLEN/2-1:0] = insn_dec_bignum_i.aes_en ? aes_bignum_operation_result_i[WLEN/2-1:0] :
+                                                                        mac_bignum_operation_result_i[WLEN/2-1:0];
+`else
   assign mac_bignum_rf_wr_data[WLEN-1:WLEN/2] =
       insn_dec_bignum_i.mac_wr_hw_sel_upper &&
       insn_dec_bignum_i.mac_shift_out          ? mac_bignum_operation_result_i[WLEN/2-1:0] :
                                                  mac_bignum_operation_result_i[WLEN-1:WLEN/2];
 
   assign mac_bignum_rf_wr_data[WLEN/2-1:0] = mac_bignum_operation_result_i[WLEN/2-1:0];
+`endif
 
   // Bignum register file write MUX. Depending on the data source, integrity bits do or don't have
   // to be appended; see comments on the "Base register file write MUX" for details.

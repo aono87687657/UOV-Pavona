@@ -33,6 +33,14 @@ _OTP_RMA_PATH = "{}/$(location {})".format(_PREFIX, _OTP_RMA)
 
 _FPGA_PATH_TMPL = "lowrisc_systems_{}_0.1/synth-vivado/{}"
 
+# Hardcode the UOV ISA; keep in sync with //hw:verilator_real.
+_UOV_ISE_FLAGS = [
+    "--flag=aes_bignum",
+    "--flag=gfmacc_bignum",
+]
+
+_MOD_REG_POLY_FLAG = ["--flag=mod_reg_poly"]
+
 # Note: all of the targets are tagged with "manual" to prevent them from being
 # matched by bazel wildcards like "//...".  In order to build the bitstream,
 # you need to ask for it directly or by dependency via another rule, such as
@@ -138,6 +146,7 @@ fusesoc_build(
         "mmi": [_FPGA_PATH_TMPL.format("chip_egret_cw340", "memories.mmi")],
         "logs": [_FPGA_PATH_TMPL.format("chip_egret_cw340", "lowrisc_systems_chip_egret_cw340_0.1.runs/")],
     },
+    pre_system_flags = _UOV_ISE_FLAGS + _MOD_REG_POLY_FLAG,
     systems = ["lowrisc:systems:chip_egret_cw340"],
     tags = ["manual"],
     target = "synth",
@@ -150,6 +159,45 @@ filegroup(
     output_group = "bitstream",
     tags = ["manual"],
 )
+
+_CW340_ISE_VARIANTS = {
+    "fixed_poly": _UOV_ISE_FLAGS,
+    "gfmacc_only": ["--flag=gfmacc_bignum"] + _MOD_REG_POLY_FLAG,
+    "no_ise": [],
+}
+
+[fusesoc_build(
+    name = "fpga_cw340_{}".format(variant),
+    testonly = True,
+    srcs = [
+        "//hw:rtl_files",
+        _CW340_TESTROM,
+        _OTP_RMA,
+    ],
+    cores = ["//hw:cores"],
+    data = ["//hw/ip/acc:rtl_files"],
+    flags = [
+        "--BootRomInitFile=" + _CW340_TESTROM_PATH,
+        "--OtpMacroMemInitFile=" + _OTP_RMA_PATH,
+    ],
+    output_groups = {
+        "bitstream": [_FPGA_PATH_TMPL.format("chip_egret_cw340", "lowrisc_systems_chip_egret_cw340_0.1.bit")],
+        "mmi": [_FPGA_PATH_TMPL.format("chip_egret_cw340", "memories.mmi")],
+        "logs": [_FPGA_PATH_TMPL.format("chip_egret_cw340", "lowrisc_systems_chip_egret_cw340_0.1.runs/")],
+    },
+    pre_system_flags = ise_flags,
+    systems = ["lowrisc:systems:chip_egret_cw340"],
+    tags = ["manual"],
+    target = "synth",
+) for variant, ise_flags in _CW340_ISE_VARIANTS.items()]
+
+[filegroup(
+    name = "fpga_cw340_{}_test_rom".format(variant),
+    testonly = True,
+    srcs = [":fpga_cw340_{}".format(variant)],
+    output_group = "bitstream",
+    tags = ["manual"],
+) for variant in _CW340_ISE_VARIANTS]
 
 filegroup(
     name = "cw340_mmi",

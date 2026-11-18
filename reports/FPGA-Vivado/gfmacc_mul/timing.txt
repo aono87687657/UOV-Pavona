@@ -1,0 +1,56 @@
+----------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1.1 (lin64) Build 2960000 Wed Aug  5 22:57:21 MDT 2020
+| Date         : Thu Nov  5 09:24:10 2026
+| Host         : anonymous running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_timing -file ../../../reports/FPGA-Vivado/gfmacc_mul/timing.txt
+| Design       : gfmacc
+| Device       : 7k160t-fbg676
+| Speed File   : -1  PRODUCTION 1.12 2017-02-17
+----------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.016ns  (required time - arrival time)
+  Source:                 mod_i[34]
+                            (input port)
+  Destination:            res[171]
+  Path Group:             **default**
+  Path Type:              Max at Slow Process Corner
+  Requirement:            5.848ns  (MaxDelay Path 5.848ns)
+  Data Path Delay:        5.832ns  (logic 0.618ns (10.597%)  route 5.214ns (89.403%))
+  Logic Levels:           7  (LUT3=1 LUT5=1 LUT6=4 MUXF7=1)
+  Output Delay:           0.000ns
+  Timing Exception:       MaxDelay Path 5.848ns -datapath_only
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  mod_i[34] (IN)
+                         net (fo=67, unset)           0.672     0.672    mod_i[34]
+    SLICE_X10Y31         MUXF7 (Prop_muxf7_S_O)       0.203     0.875 r  res[253]_INST_0_i_28/O
+                         net (fo=1, routed)           0.561     1.436    res[253]_INST_0_i_28_n_0
+    SLICE_X10Y32         LUT6 (Prop_lut6_I0_O)        0.150     1.586 r  res[253]_INST_0_i_15/O
+                         net (fo=1, routed)           0.447     2.033    res[253]_INST_0_i_15_n_0
+    SLICE_X11Y32         LUT6 (Prop_lut6_I1_O)        0.053     2.086 f  res[253]_INST_0_i_9/O
+                         net (fo=128, routed)         1.054     3.140    res[253]_INST_0_i_9_n_0
+    SLICE_X26Y32         LUT3 (Prop_lut3_I2_O)        0.053     3.193 r  res[170]_INST_0_i_4/O
+                         net (fo=3, routed)           0.665     3.858    b_words4[42][2]
+    SLICE_X25Y33         LUT6 (Prop_lut6_I1_O)        0.053     3.911 r  res[171]_INST_0_i_5/O
+                         net (fo=1, routed)           0.592     4.503    p_words4195_in[3]
+    SLICE_X25Y31         LUT6 (Prop_lut6_I1_O)        0.053     4.556 r  res[171]_INST_0_i_2/O
+                         net (fo=1, routed)           0.551     5.107    res[171]_INST_0_i_2_n_0
+    SLICE_X25Y30         LUT5 (Prop_lut5_I3_O)        0.053     5.160 r  res[171]_INST_0/O
+                         net (fo=0)                   0.672     5.832    res[171]
+                                                                      r  res[171] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         max delay                    5.848     5.848    
+                         output delay                -0.000     5.848    
+  -------------------------------------------------------------------
+                         required time                          5.848    
+                         arrival time                          -5.832    
+  -------------------------------------------------------------------
+                         slack                                  0.016    
+
+
+
+

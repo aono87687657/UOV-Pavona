@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+verify,Is,bnaesonly,full,0,PASS,805637,877465
+verify,Is,bnaesonly,full,1,PASS,805643,877473
+verify,Is,bnaesonly,full,2,PASS,805643,877473
+verify,Is,bnaesonly,full,3,PASS,805643,877473
+verify,Is,bnaesonly,full,4,PASS,805643,877473
+verify,Is,bnaesonly,full,5,PASS,805643,877473
+verify,Is,bnaesonly,full,6,PASS,805669,877500
+verify,Is,bnaesonly,full,7,PASS,805696,877528
+verify,Is,bnaesonly,full,8,PASS,805750,877584
+verify,Is,bnaesonly,full,9,PASS,805858,877696
+verify,Is,bnaesonly,full,10,PASS,806074,877920
+verify,Is,bnaesonly,full,11,PASS,806506,878368

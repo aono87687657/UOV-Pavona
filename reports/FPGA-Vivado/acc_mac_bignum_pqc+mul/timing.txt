@@ -1,0 +1,153 @@
+----------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1.1 (lin64) Build 2960000 Wed Aug  5 22:57:21 MDT 2020
+| Date         : Fri Nov  6 06:07:47 2026
+| Host         : anonymous running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_timing -file ../../../reports/FPGA-Vivado/acc_mac_bignum_pqc+mul/timing.txt
+| Design       : acc_mac_bignum
+| Device       : 7k160t-fbg676
+| Speed File   : -1  PRODUCTION 1.12 2017-02-17
+----------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.022ns  (required time - arrival time)
+  Source:                 operation_i[data_type]
+                            (input port)
+  Destination:            operation_flags_o[Z]
+  Path Group:             **default**
+  Path Type:              Max at Slow Process Corner
+  Requirement:            18.519ns  (MaxDelay Path 18.519ns)
+  Data Path Delay:        18.497ns  (logic 7.191ns (38.878%)  route 11.306ns (61.122%))
+  Logic Levels:           41  (CARRY4=28 DSP48E1=1 LUT2=1 LUT3=3 LUT4=2 LUT5=4 LUT6=2)
+  Output Delay:           0.000ns
+  Timing Exception:       MaxDelay Path 18.519ns -datapath_only
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 f  operation_i[data_type] (IN)
+                         net (fo=1067, unset)         0.672     0.672    gen_mul_pqc.mul/operation_i[data_type]
+    SLICE_X54Y46         LUT2 (Prop_lut2_I1_O)        0.053     0.725 r  gen_mul_pqc.mul/gen_mults[1].product_full_i_86/O
+                         net (fo=303, routed)         1.396     2.121    u_operand_a_blanker/u_blank_and/gen_mults[9].product_full
+    SLICE_X44Y33         LUT6 (Prop_lut6_I0_O)        0.053     2.174 r  u_operand_a_blanker/u_blank_and/gen_mults[2].product_full_i_125/O
+                         net (fo=2, routed)           1.008     3.182    u_operand_a_blanker/u_blank_and/gen_mults[2].product_full_i_125_n_0
+    SLICE_X63Y37         LUT6 (Prop_lut6_I0_O)        0.053     3.235 r  u_operand_a_blanker/u_blank_and/gen_mults[6].product_full_i_131/O
+                         net (fo=2, routed)           0.357     3.592    u_operand_a_blanker/u_blank_and/gen_mults[6].product_full_i_131_n_0
+    SLICE_X63Y40         LUT5 (Prop_lut5_I4_O)        0.053     3.645 r  u_operand_a_blanker/u_blank_and/gen_mults[6].product_full_i_29/O
+                         net (fo=1, routed)           0.579     4.224    gen_mul_pqc.mul/gen_mults[6].product_full_1[3]
+    DSP48_X3Y19          DSP48E1 (Prop_dsp48e1_A[3]_P[23])
+                                                      3.255     7.479 r  gen_mul_pqc.mul/gen_mults[6].product_full/P[23]
+                         net (fo=3, routed)           1.013     8.491    gen_mul_pqc.mul/gen_mults[6].product_full[23]
+    SLICE_X58Y49         LUT3 (Prop_lut3_I2_O)        0.065     8.556 r  gen_mul_pqc.mul/operation_result_o[169]_INST_0_i_30/O
+                         net (fo=2, routed)           0.729     9.286    gen_mul_pqc.mul/operation_result_o[169]_INST_0_i_30_n_0
+    SLICE_X58Y50         LUT4 (Prop_lut4_I3_O)        0.168     9.454 r  gen_mul_pqc.mul/operation_result_o[169]_INST_0_i_34/O
+                         net (fo=1, routed)           0.000     9.454    gen_mul_pqc.mul/operation_result_o[169]_INST_0_i_34_n_0
+    SLICE_X58Y50         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.297     9.751 r  gen_mul_pqc.mul/operation_result_o[169]_INST_0_i_22/CO[3]
+                         net (fo=1, routed)           0.000     9.751    gen_mul_pqc.mul/operation_result_o[169]_INST_0_i_22_n_0
+    SLICE_X58Y51         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060     9.811 r  gen_mul_pqc.mul/operation_result_o[176]_INST_0_i_19/CO[3]
+                         net (fo=1, routed)           0.000     9.811    gen_mul_pqc.mul/operation_result_o[176]_INST_0_i_19_n_0
+    SLICE_X58Y52         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060     9.871 r  gen_mul_pqc.mul/operation_result_o[180]_INST_0_i_22/CO[3]
+                         net (fo=1, routed)           0.000     9.871    gen_mul_pqc.mul/operation_result_o[180]_INST_0_i_22_n_0
+    SLICE_X58Y53         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.212    10.083 r  gen_mul_pqc.mul/operation_result_o[184]_INST_0_i_22/O[1]
+                         net (fo=4, routed)           0.897    10.980    gen_mac_adder_pqc.adder/partial32[1]_0[21]
+    SLICE_X50Y52         LUT3 (Prop_lut3_I0_O)        0.170    11.150 r  gen_mac_adder_pqc.adder/operation_result_o[23]_INST_0_i_10/O
+                         net (fo=2, routed)           0.297    11.447    gen_mul_pqc.mul/operation_result_o[86]_INST_0_i_10_0[2]
+    SLICE_X50Y52         CARRY4 (Prop_carry4_DI[2]_CO[3])
+                                                      0.363    11.810 r  gen_mul_pqc.mul/operation_result_o[23]_INST_0_i_8/CO[3]
+                         net (fo=1, routed)           0.000    11.810    gen_mul_pqc.mul/operation_result_o[23]_INST_0_i_8_n_0
+    SLICE_X50Y53         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    11.870 r  gen_mul_pqc.mul/operation_result_o[27]_INST_0_i_8/CO[3]
+                         net (fo=1, routed)           0.000    11.870    gen_mul_pqc.mul/operation_result_o[27]_INST_0_i_8_n_0
+    SLICE_X50Y54         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    11.930 r  gen_mul_pqc.mul/operation_result_o[31]_INST_0_i_8/CO[3]
+                         net (fo=1, routed)           0.000    11.930    gen_mul_pqc.mul/operation_result_o[31]_INST_0_i_8_n_0
+    SLICE_X50Y55         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    11.990 r  gen_mul_pqc.mul/operation_result_o[35]_INST_0_i_8/CO[3]
+                         net (fo=1, routed)           0.000    11.990    gen_mul_pqc.mul/operation_result_o[35]_INST_0_i_8_n_0
+    SLICE_X50Y56         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    12.050 r  gen_mul_pqc.mul/operation_result_o[39]_INST_0_i_8/CO[3]
+                         net (fo=1, routed)           0.000    12.050    gen_mul_pqc.mul/operation_result_o[39]_INST_0_i_8_n_0
+    SLICE_X50Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    12.110 r  gen_mul_pqc.mul/operation_result_o[43]_INST_0_i_8/CO[3]
+                         net (fo=1, routed)           0.000    12.110    gen_mul_pqc.mul/operation_result_o[43]_INST_0_i_8_n_0
+    SLICE_X50Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    12.170 r  gen_mul_pqc.mul/operation_result_o[47]_INST_0_i_8/CO[3]
+                         net (fo=1, routed)           0.000    12.170    gen_mul_pqc.mul/operation_result_o[47]_INST_0_i_8_n_0
+    SLICE_X50Y59         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.135    12.305 r  gen_mul_pqc.mul/operation_result_o[51]_INST_0_i_8/O[0]
+                         net (fo=4, routed)           0.553    12.858    gen_mul_pqc.mul/result_640[112]
+    SLICE_X54Y55         LUT5 (Prop_lut5_I4_O)        0.153    13.011 r  gen_mul_pqc.mul/operation_result_o[112]_INST_0_i_14/O
+                         net (fo=1, routed)           0.331    13.342    gen_mul_pqc.mul/operation_result_o[112]_INST_0_i_14_n_0
+    SLICE_X54Y55         LUT5 (Prop_lut5_I4_O)        0.053    13.395 r  gen_mul_pqc.mul/operation_result_o[112]_INST_0_i_8/O
+                         net (fo=2, routed)           0.632    14.027    gen_mac_adder_pqc.adder/A_buffed[112]
+    SLICE_X46Y57         CARRY4 (Prop_carry4_DI[3]_CO[3])
+                                                      0.234    14.261 r  gen_mac_adder_pqc.adder/operation_result_o[112]_INST_0_i_7/CO[3]
+                         net (fo=1, routed)           0.000    14.261    gen_mac_adder_pqc.adder/operation_result_o[112]_INST_0_i_7_n_0
+    SLICE_X46Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    14.321 r  gen_mac_adder_pqc.adder/operation_result_o[116]_INST_0_i_7/CO[3]
+                         net (fo=1, routed)           0.000    14.321    gen_mac_adder_pqc.adder/operation_result_o[116]_INST_0_i_7_n_0
+    SLICE_X46Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    14.381 r  gen_mac_adder_pqc.adder/operation_result_o[120]_INST_0_i_7/CO[3]
+                         net (fo=1, routed)           0.000    14.381    gen_mac_adder_pqc.adder/operation_result_o[120]_INST_0_i_7_n_0
+    SLICE_X46Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    14.441 r  gen_mac_adder_pqc.adder/operation_result_o[124]_INST_0_i_7/CO[3]
+                         net (fo=1, routed)           0.000    14.441    gen_mac_adder_pqc.adder/operation_result_o[124]_INST_0_i_7_n_0
+    SLICE_X46Y61         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    14.501 r  gen_mac_adder_pqc.adder/operation_result_o[127]_INST_0_i_8/CO[3]
+                         net (fo=128, routed)         1.108    15.609    gen_mac_adder_pqc.adder/CO[0]
+    SLICE_X44Y53         LUT5 (Prop_lut5_I2_O)        0.053    15.662 f  gen_mac_adder_pqc.adder/operation_result_o[139]_INST_0_i_5/O
+                         net (fo=7, routed)           0.770    16.432    gen_mac_adder_pqc.adder/operation_i[gf_en]_33
+    SLICE_X40Y58         LUT3 (Prop_lut3_I0_O)        0.053    16.485 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_101/O
+                         net (fo=1, routed)           0.000    16.485    gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_101_n_0
+    SLICE_X40Y58         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.216    16.701 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_91/CO[3]
+                         net (fo=1, routed)           0.000    16.701    gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_91_n_0
+    SLICE_X40Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    16.761 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_81/CO[3]
+                         net (fo=1, routed)           0.000    16.761    gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_81_n_0
+    SLICE_X40Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    16.821 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_71/CO[3]
+                         net (fo=1, routed)           0.000    16.821    gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_71_n_0
+    SLICE_X40Y61         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    16.881 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_61/CO[3]
+                         net (fo=1, routed)           0.000    16.881    gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_61_n_0
+    SLICE_X40Y62         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    16.941 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_51/CO[3]
+                         net (fo=1, routed)           0.000    16.941    gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_51_n_0
+    SLICE_X40Y63         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    17.001 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_41/CO[3]
+                         net (fo=1, routed)           0.000    17.001    gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_41_n_0
+    SLICE_X40Y64         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    17.061 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_31/CO[3]
+                         net (fo=1, routed)           0.000    17.061    gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_31_n_0
+    SLICE_X40Y65         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    17.121 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_21/CO[3]
+                         net (fo=1, routed)           0.000    17.121    gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_21_n_0
+    SLICE_X40Y66         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    17.181 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_11/CO[3]
+                         net (fo=1, routed)           0.000    17.181    gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_11_n_0
+    SLICE_X40Y67         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.060    17.241 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_3/CO[3]
+                         net (fo=1, routed)           0.000    17.241    gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_3_n_0
+    SLICE_X40Y68         CARRY4 (Prop_carry4_CI_CO[2])
+                                                      0.132    17.373 r  gen_mac_adder_pqc.adder/operation_flags_o[Z]_INST_0_i_1/CO[2]
+                         net (fo=1, routed)           0.292    17.665    adder_result_hw_is_zero0
+    SLICE_X39Y67         LUT4 (Prop_lut4_I1_O)        0.160    17.825 r  operation_flags_o[Z]_INST_0/O
+                         net (fo=0)                   0.672    18.497    operation_flags_o[Z]
+                                                                      r  operation_flags_o[Z] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         max delay                   18.519    18.519    
+                         output delay                -0.000    18.519    
+  -------------------------------------------------------------------
+                         required time                         18.519    
+                         arrival time                         -18.497    
+  -------------------------------------------------------------------
+                         slack                                  0.022    
+
+
+
+

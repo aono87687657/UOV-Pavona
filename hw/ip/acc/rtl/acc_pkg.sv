@@ -233,6 +233,9 @@ package acc_pkg;
     InsnOpcodeBaseJalr       = 7'h67,
     InsnOpcodeBaseJal        = 7'h6f,
     InsnOpcodeBaseSystem     = 7'h73,
+`ifdef AES_BIGNUM
+    InsnOpcodeBignumAES      = 7'h77,
+`endif
     InsnOpcodeBignumMisc     = 7'h0B,
     InsnOpcodeBignumArith    = 7'h2B,
     InsnOpcodeBignumMulqacc  = 7'h3B,
@@ -542,6 +545,24 @@ package acc_pkg;
 
     logic                    mac_en;
 
+`ifdef GFMACC_BIGNUM
+    logic                    mac_gf_en;
+    logic                    mac_gf_mode;
+    logic                    mac_gf_acc;
+    logic                    mac_gf_acc_sel;
+    logic                    mac_gf_vxv;
+    logic                    mac_gf_inc;
+`endif
+
+`ifdef AES_BIGNUM
+    logic                    aes_en;
+    logic                    aes_key_expand;
+    logic [4:0]              aes_round;
+    logic                    aes_swap_endian;
+    logic                    aes_first_round;
+    logic                    aes_final_round;
+`endif
+
     logic                    rf_we;
     rf_wd_sel_e              rf_wdata_sel;
     logic                    rf_ren_a;
@@ -592,6 +613,14 @@ package acc_pkg;
     logic op_en;
     logic acc_rd_en;
   } mac_predec_bignum_t;
+
+
+`ifdef AES_BIGNUM
+  typedef struct packed {
+    logic op_en;
+    logic key_expand;
+  } aes_predec_bignum_t;
+`endif
 
   typedef struct packed {
     logic call_stack_pop;
@@ -647,7 +676,27 @@ package acc_pkg;
     logic            lane_word_32;
     logic            lane_word_16;
     logic [1:0]      exec_mode;
+`ifdef GFMACC_BIGNUM
+    logic            gf_en;
+    logic            gf_mode;
+    logic            gf_acc;
+    logic            gf_acc_sel;
+    logic            gf_vxv;
+    logic            gf_inc;
+`endif
   } mac_bignum_operation_t;
+
+`ifdef AES_BIGNUM
+  typedef struct packed {
+    logic [WLEN-1:0] operand_a;
+    logic [WLEN-1:0] operand_b;
+    logic            key_expand;
+    logic [4:0]      round;
+    logic            swap_endian;
+    logic            first_round;
+    logic            final_round;
+  } aes_bignum_operation_t;
+`endif
 
   // States for KMAC error handling
   // Encoding generated with:
@@ -695,7 +744,8 @@ package acc_pkg;
   typedef enum logic [StateEagerWidth-1:0] {
     StDigestWait   = 4'b1010,
     StDigestShare0 = 4'b0111,
-    StDigestShare1 = 4'b1100
+    StDigestShare1 = 4'b1100,
+    StDigestEagerWait = 4'b1001
   } kmac_eager_state_e;
 
   // Encoding generated with:

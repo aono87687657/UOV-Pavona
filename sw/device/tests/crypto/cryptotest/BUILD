@@ -3,7 +3,7 @@
 # Licensed under the Apache License, Version 2.0, see LICENSE for details.
 # SPDX-License-Identifier: Apache-2.0
 
-load(":cryptotest.bzl", "cryptotest")
+load(":cryptotest.bzl", "FIRMWARE_DEPS", "cryptotest")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -718,3 +718,32 @@ cryptotest(
     test_harness = "//sw/host/tests/crypto/rsa_kat:harness",
     test_vectors = RSA_TESTVECTOR_TARGETS,
 )
+
+# pqov KAT on the CW340, one target per tier, parameter set and operation so a
+# run can be resumed: uov_kat_<tier>_<param>_<op>. 100 cases each (verify: 100
+# accepts and 100 one-bit rejects). The tier picks the firmware's kernels.
+# Needs the PQC bitstream, so it does not get the default exec envs.
+[
+    cryptotest(
+        name = "uov_kat_{}_{}_{}".format(tier, param, op),
+        exec_envs = {
+            "//hw/top_egret:fpga_cw340_test_rom": "fpga_cw340",
+        },
+        firmware_deps = [
+            dep
+            for dep in FIRMWARE_DEPS
+            if dep != "//sw/device/tests/crypto/cryptotest/firmware:uov"
+        ] + ["//sw/device/tests/crypto/cryptotest/firmware:uov_{}_{}".format(tier, param)],
+        fpga_timeout = "eternal",
+        slow_test = True,
+        test_args = "--label={} --uov-json=\"$(rootpath {})\"".format(
+            tier,
+            "//sw/host/cryptotest/testvectors/data:pqov_uov_{}_{}_json".format(param, op),
+        ),
+        test_harness = "//sw/host/tests/crypto/uov_kat:harness",
+        test_vectors = ["//sw/host/cryptotest/testvectors/data:pqov_uov_{}_{}_json".format(param, op)],
+    )
+    for tier in ("bngfaes", "bngfonly", "bnaesonly", "sw")
+    for param in ("Ip", "Is", "Ip3")
+    for op in ("keygen", "sign", "verify")
+]

@@ -1,0 +1,57 @@
+Loaded 36 testvec case(s) from sw/acc/crypto/handwritten/test_data/testvectors-Is-pkc-skc.retrygrid
+[testvec mode] running cases [27..27] of 36
+
+============================================================
+OV_OV16_160_64_SKC_Sign Test
+============================================================
+Output directory: chip-matrix/retry-32-20261102T162404Z-9de05305/kat/_tmp/sign_Is_bngfaes_ldirect_27
+ELF: sw/acc/crypto/handwritten/uov/dmem32k/sign_ldirect/ov-Is-skc/ov-Is-sign_ldirect_testvec_bngfaes.elf
+Iterations: 1
+
+============================================================
+Test Iteration 1/1
+============================================================
+
+--- Iteration 1 ---
+  testvec salt: 1d9c6306a79203318287132b2c62dc2f
+sk_seed (32B): 9604b1b80df48d31dd0d399dc91d8530b72c5d9a9920f33b43331b983b95047f
+message (0B):
+Computing reference (pk_seed, O, S)...
+  pk_seed: c16cb174eddcd3c6ed16772cf80725b6
+  O matrix size: 3072 bytes
+  S matrix size: 196608 bytes
+Running ACC simulation...
+
+Extracting salt and counter...
+  Salt from DMEM (0x1b60): 1d9c6306a79203318287132b2c62dc2f
+  OK caller inputs intact: sk_seed (32B), msg_len, msg[:0]
+  Counter (GPR x8): 0
+  Target hash t: ef2baccb98d53038dad9d1938d01b1e2a472722137dd931a33903db7bbfdac43
+
+Replicating signing retry loop (counters 0..0)...
+  Counter 0: L invertible (GE success)
+  Vinegar (first 32 bytes): eb91d709b63f6cc76bd3bb9bde66f7c2e4e87ac5c8bbf1053c55a364d55aeaf1
+  L matrix size: 2048 bytes
+
+Computing Y = batch_quad_trimat_eval(P1, vinegar)...
+  Expected Y: eba6bfa7288916d5f41cc3a27c436d4bb0aaf114151bd9bcfa738f1fbf4fdaa3
+Computing reference Gaussian elimination...
+Computing reference back-substitution...
+
+Validating results...
+
+[12] Signature verification via public map (ACC-extracted bytes)...
+✓ Verification P(x) vs target hash validation PASSED: all 32 bytes match
+[12] Signature verification PASSED: P(x) == target hash
+[KAT] OK Testvec sig byte-wise MATCH (96 B)
+
+All validations passed!
+
+============================================================
+TEST SUMMARY - OV_OV16_160_64_SKC_Sign
+============================================================
+  Total:  1
+  Passed: 1
+  Failed: 0
+
+ALL TESTS PASSED

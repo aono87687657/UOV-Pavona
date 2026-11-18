@@ -16,3 +16,4 @@ pub mod mldsa_commands;
 pub mod mlkem_commands;
 pub mod rsa_commands;
 pub mod sphincsplus_commands;
+pub mod uov_commands;

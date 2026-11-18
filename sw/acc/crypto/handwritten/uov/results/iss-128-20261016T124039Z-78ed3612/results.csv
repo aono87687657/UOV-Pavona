@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+verify,Ip,bnaesonly,full,0,PASS,1207956,1247297
+verify,Ip,bnaesonly,full,1,PASS,1207962,1247305
+verify,Ip,bnaesonly,full,2,PASS,1207962,1247305
+verify,Ip,bnaesonly,full,3,PASS,1207962,1247305
+verify,Ip,bnaesonly,full,4,PASS,1207962,1247305
+verify,Ip,bnaesonly,full,5,PASS,1207962,1247305
+verify,Ip,bnaesonly,full,6,PASS,1207988,1247332
+verify,Ip,bnaesonly,full,7,PASS,1208015,1247360
+verify,Ip,bnaesonly,full,8,PASS,1208069,1247416
+verify,Ip,bnaesonly,full,9,PASS,1208177,1247528
+verify,Ip,bnaesonly,full,10,PASS,1208393,1247752
+verify,Ip,bnaesonly,full,11,PASS,1208825,1248200

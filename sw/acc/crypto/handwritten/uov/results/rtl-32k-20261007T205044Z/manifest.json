@@ -1,0 +1,104 @@
+{
+ "archive": {
+  "done": "collector_exit=0 postcheck_exit=0 archive_exit=0 finished=20261008T140102Z",
+  "files": 619,
+  "inventory": "194462eb055e4fcad8c2df80415bdba80c3856d3ab18287b6262a6ced7de9158"
+ },
+ "campaign": "rtl-2026-10b",
+ "cells": [
+  "acc_uov_keygen_stream_ip_bngfaes_test",
+  "acc_uov_keygen_stream_ip_bngfonly_test",
+  "acc_uov_keygen_stream_ip_bnaesonly_test",
+  "acc_uov_keygen_stream_ip_sw_test",
+  "acc_uov_keygen_stream_is_bngfaes_test",
+  "acc_uov_keygen_stream_is_bngfonly_test",
+  "acc_uov_keygen_stream_is_bnaesonly_test",
+  "acc_uov_keygen_stream_is_sw_test",
+  "acc_uov_keygen_stream_uniform_ip_bngfaes_test",
+  "acc_uov_keygen_stream_uniform_ip_bngfonly_test",
+  "acc_uov_keygen_stream_uniform_ip_bnaesonly_test",
+  "acc_uov_keygen_stream_uniform_ip_sw_test",
+  "acc_uov_keygen_stream_uniform_is_bngfaes_test",
+  "acc_uov_keygen_stream_uniform_is_bngfonly_test",
+  "acc_uov_keygen_stream_uniform_is_bnaesonly_test",
+  "acc_uov_keygen_stream_uniform_is_sw_test",
+  "acc_uov_verify_stream_uniform_ip_bngfaes_test",
+  "acc_uov_verify_stream_uniform_ip_bngfonly_test",
+  "acc_uov_verify_stream_uniform_ip_bnaesonly_test",
+  "acc_uov_verify_stream_uniform_ip_sw_test",
+  "acc_uov_verify_stream_uniform_is_bngfaes_test",
+  "acc_uov_verify_stream_uniform_is_bngfonly_test",
+  "acc_uov_verify_stream_uniform_is_bnaesonly_test",
+  "acc_uov_verify_stream_uniform_is_sw_test",
+  "acc_uov_verify_stream_ip_bngfaes_test",
+  "acc_uov_verify_stream_ip_bngfonly_test",
+  "acc_uov_verify_stream_ip_bnaesonly_test",
+  "acc_uov_verify_stream_ip_sw_test",
+  "acc_uov_verify_stream_is_bngfaes_test",
+  "acc_uov_verify_stream_is_bngfonly_test",
+  "acc_uov_verify_stream_is_bnaesonly_test",
+  "acc_uov_verify_stream_is_sw_test",
+  "acc_uov_sign_ip_bngfaes_test",
+  "acc_uov_sign_ip_bngfonly_test",
+  "acc_uov_sign_ip_bnaesonly_test",
+  "acc_uov_sign_ip_sw_test",
+  "acc_uov_sign_is_bngfaes_test",
+  "acc_uov_sign_is_bngfonly_test",
+  "acc_uov_sign_is_bnaesonly_test",
+  "acc_uov_sign_is_sw_test",
+  "acc_uov_keygen_stream_ip3_bngfaes_test",
+  "acc_uov_keygen_stream_ip3_bngfonly_test",
+  "acc_uov_keygen_stream_ip3_bnaesonly_test",
+  "acc_uov_keygen_stream_ip3_sw_test",
+  "acc_uov_keygen_stream_uniform_ip3_bngfaes_test",
+  "acc_uov_keygen_stream_uniform_ip3_bngfonly_test",
+  "acc_uov_keygen_stream_uniform_ip3_bnaesonly_test",
+  "acc_uov_keygen_stream_uniform_ip3_sw_test",
+  "acc_uov_verify_stream_ip3_bngfaes_test",
+  "acc_uov_verify_stream_ip3_bngfonly_test",
+  "acc_uov_verify_stream_ip3_bnaesonly_test",
+  "acc_uov_verify_stream_ip3_sw_test",
+  "acc_uov_verify_stream_uniform_ip3_bngfaes_test",
+  "acc_uov_verify_stream_uniform_ip3_bngfonly_test",
+  "acc_uov_verify_stream_uniform_ip3_bnaesonly_test",
+  "acc_uov_verify_stream_uniform_ip3_sw_test",
+  "acc_uov_sign_ip3_bngfaes_test",
+  "acc_uov_sign_ip3_bngfonly_test",
+  "acc_uov_sign_ip3_bnaesonly_test",
+  "acc_uov_sign_ip3_sw_test"
+ ],
+ "completion": {
+  "accepted": true,
+  "baseline": "identical",
+  "cells": 60,
+  "rows": 60
+ },
+ "definition": "a1e0deb8f2ca21037c3d46f3e9ec7ddffa392897d19754892a2181440fb0738f",
+ "engine": "rtl",
+ "evidence": {
+  "results.csv": "bd0f5565f734dd738124380c1099eea8b047034cdf91fbb37042962c989aa8b7"
+ },
+ "execution": {
+  "bazel": "bazel 8.0.1",
+  "flags": "--test_timeout=604800 --cache_test_results=no --local_test_jobs=4 --//hw:make_options=-j,8 --//hw:verilator_options=--threads,4 --test_arg=--verilator-args=+ibex_tracer_enable=0"
+ },
+ "profile": 32,
+ "run": "rtl-32k-20261007T205044Z",
+ "schema": 2,
+ "source": {
+  "commit": "ea4d5d4eecc9ca3089205670969a438ba974c36a",
+  "config": {
+   ".bazelrc-site": "15d97e8406bbeaa209a2e86d84320f6c1f66b826913c028d0668e8ce3b68268b"
+  },
+  "overlay": {},
+  "snapshot": "61ec75976111c271daa23fb5542d83eb1a1165916b0fa6ae8f709ee3c3fe65ef"
+ },
+ "tools": {
+  "measuring": {
+   "tools/acc_bind.py": "9cc3da0f1f92e167656e5c62419ca868c01590a209fd42f1e257611a7694394d",
+   "tools/gather_chip_matrix.py": "7ac8a71e63d22ef16bf502bb539cb418e0a0a27ec662c00efda131a8b7022325",
+   "tools/rtl_campaign.sh": "e5545c6a4746f6976b55d8337d43982a39ebb5857d709136977010ae62f959f3"
+  },
+  "publishing": "ea4d5d4eecc9ca3089205670969a438ba974c36a"
+ }
+}

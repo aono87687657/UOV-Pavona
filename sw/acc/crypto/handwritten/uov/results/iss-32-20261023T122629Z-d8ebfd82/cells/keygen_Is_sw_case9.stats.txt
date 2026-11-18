@@ -1,0 +1,2 @@
+executed 108883361 instructions in 127556668 cycles
+# elf: sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/ov-Is-pkc+skc/ov-Is-keygen_stream_sw.elf

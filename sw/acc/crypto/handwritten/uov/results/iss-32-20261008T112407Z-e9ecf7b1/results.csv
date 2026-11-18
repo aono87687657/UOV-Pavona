@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+sign,Ip,sw,ldirect,0,PASS,16298904,19487725
+sign,Ip,sw,ldirect,1,PASS,16298919,19487745
+sign,Ip,sw,ldirect,2,PASS,16298919,19487745
+sign,Ip,sw,ldirect,3,PASS,16298919,19487745
+sign,Ip,sw,ldirect,4,PASS,16298919,19487745
+sign,Ip,sw,ldirect,5,PASS,16298919,19487745
+sign,Ip,sw,ldirect,6,PASS,16298970,19487797
+sign,Ip,sw,ldirect,7,PASS,16299024,19487853
+sign,Ip,sw,ldirect,8,PASS,16299132,19487965
+sign,Ip,sw,ldirect,9,PASS,16299348,19488189
+sign,Ip,sw,ldirect,10,PASS,16299780,19488637
+sign,Ip,sw,ldirect,11,PASS,16300644,19489533

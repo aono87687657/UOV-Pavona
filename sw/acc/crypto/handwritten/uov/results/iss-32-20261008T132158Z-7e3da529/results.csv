@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+verify,Ip3,sw,stream_uniform,0,PASS,18845020,22752878
+verify,Ip3,sw,stream_uniform,1,PASS,18845026,22752886
+verify,Ip3,sw,stream_uniform,2,PASS,18845026,22752886
+verify,Ip3,sw,stream_uniform,3,PASS,18845026,22752886
+verify,Ip3,sw,stream_uniform,4,PASS,18845026,22752886
+verify,Ip3,sw,stream_uniform,5,PASS,18845026,22752886
+verify,Ip3,sw,stream_uniform,6,PASS,18845052,22752913
+verify,Ip3,sw,stream_uniform,7,PASS,18845079,22752941
+verify,Ip3,sw,stream_uniform,8,PASS,18845133,22752997
+verify,Ip3,sw,stream_uniform,9,PASS,18845241,22753109
+verify,Ip3,sw,stream_uniform,10,PASS,18845457,22753333
+verify,Ip3,sw,stream_uniform,11,PASS,18845889,22753781

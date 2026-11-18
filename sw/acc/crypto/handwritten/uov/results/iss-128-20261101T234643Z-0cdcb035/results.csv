@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+keygen,Ip3,bngfaes,sp,0,PASS,1641122,2079442
+keygen,Ip3,bngfaes,sp,1,PASS,1641122,2079442
+keygen,Ip3,bngfaes,sp,2,PASS,1641122,2079442
+keygen,Ip3,bngfaes,sp,3,PASS,1641122,2079442
+keygen,Ip3,bngfaes,sp,4,PASS,1641122,2079442
+keygen,Ip3,bngfaes,sp,5,PASS,1641122,2079442
+keygen,Ip3,bngfaes,sp,6,PASS,1641122,2079442
+keygen,Ip3,bngfaes,sp,7,PASS,1641122,2079442
+keygen,Ip3,bngfaes,sp,8,PASS,1641122,2079442
+keygen,Ip3,bngfaes,sp,9,PASS,1641122,2079442
+keygen,Ip3,bngfaes,sp,10,PASS,1641122,2079442
+keygen,Ip3,bngfaes,sp,11,PASS,1641122,2079442

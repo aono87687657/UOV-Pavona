@@ -1,0 +1,103 @@
+{
+ "archive": {
+  "done": "collector_exit=0 postcheck_exit=0 archive_exit=0 finished=20261021T102043Z",
+  "files": 619,
+  "inventory": "0c2163089e99f73b33af8adb645c146641a571e091f1173c3677245a9f18e9a7"
+ },
+ "campaign": "rtl-2026-10g",
+ "cells": [
+  "acc_uov_keygen_stream_ip_bngfaes_test",
+  "acc_uov_keygen_stream_ip_bngfonly_test",
+  "acc_uov_keygen_stream_ip_bnaesonly_test",
+  "acc_uov_keygen_stream_ip_sw_test",
+  "acc_uov_keygen_stream_is_bngfaes_test",
+  "acc_uov_keygen_stream_is_bngfonly_test",
+  "acc_uov_keygen_stream_is_bnaesonly_test",
+  "acc_uov_keygen_stream_is_sw_test",
+  "acc_uov_keygen_stream_uniform_ip_bngfaes_test",
+  "acc_uov_keygen_stream_uniform_ip_bngfonly_test",
+  "acc_uov_keygen_stream_uniform_ip_bnaesonly_test",
+  "acc_uov_keygen_stream_uniform_ip_sw_test",
+  "acc_uov_keygen_stream_uniform_is_bngfaes_test",
+  "acc_uov_keygen_stream_uniform_is_bngfonly_test",
+  "acc_uov_keygen_stream_uniform_is_bnaesonly_test",
+  "acc_uov_keygen_stream_uniform_is_sw_test",
+  "acc_uov_verify_stream_uniform_ip_bngfaes_test",
+  "acc_uov_verify_stream_uniform_ip_bngfonly_test",
+  "acc_uov_verify_stream_uniform_ip_bnaesonly_test",
+  "acc_uov_verify_stream_uniform_ip_sw_test",
+  "acc_uov_verify_stream_uniform_is_bngfaes_test",
+  "acc_uov_verify_stream_uniform_is_bngfonly_test",
+  "acc_uov_verify_stream_uniform_is_bnaesonly_test",
+  "acc_uov_verify_stream_uniform_is_sw_test",
+  "acc_uov_verify_stream_ip_bngfaes_test",
+  "acc_uov_verify_stream_ip_bngfonly_test",
+  "acc_uov_verify_stream_ip_bnaesonly_test",
+  "acc_uov_verify_stream_ip_sw_test",
+  "acc_uov_verify_stream_is_bngfaes_test",
+  "acc_uov_verify_stream_is_bngfonly_test",
+  "acc_uov_verify_stream_is_bnaesonly_test",
+  "acc_uov_verify_stream_is_sw_test",
+  "acc_uov_sign_ip_bngfaes_test",
+  "acc_uov_sign_ip_bngfonly_test",
+  "acc_uov_sign_ip_bnaesonly_test",
+  "acc_uov_sign_ip_sw_test",
+  "acc_uov_sign_is_bngfaes_test",
+  "acc_uov_sign_is_bngfonly_test",
+  "acc_uov_sign_is_bnaesonly_test",
+  "acc_uov_sign_is_sw_test",
+  "acc_uov_keygen_stream_ip3_bngfaes_test",
+  "acc_uov_keygen_stream_ip3_bngfonly_test",
+  "acc_uov_keygen_stream_ip3_bnaesonly_test",
+  "acc_uov_keygen_stream_ip3_sw_test",
+  "acc_uov_keygen_stream_uniform_ip3_bngfaes_test",
+  "acc_uov_keygen_stream_uniform_ip3_bngfonly_test",
+  "acc_uov_keygen_stream_uniform_ip3_bnaesonly_test",
+  "acc_uov_keygen_stream_uniform_ip3_sw_test",
+  "acc_uov_verify_stream_ip3_bngfaes_test",
+  "acc_uov_verify_stream_ip3_bngfonly_test",
+  "acc_uov_verify_stream_ip3_bnaesonly_test",
+  "acc_uov_verify_stream_ip3_sw_test",
+  "acc_uov_verify_stream_uniform_ip3_bngfaes_test",
+  "acc_uov_verify_stream_uniform_ip3_bngfonly_test",
+  "acc_uov_verify_stream_uniform_ip3_bnaesonly_test",
+  "acc_uov_verify_stream_uniform_ip3_sw_test",
+  "acc_uov_sign_ip3_bngfaes_test",
+  "acc_uov_sign_ip3_bngfonly_test",
+  "acc_uov_sign_ip3_bnaesonly_test",
+  "acc_uov_sign_ip3_sw_test"
+ ],
+ "completion": {
+  "accepted": true,
+  "baseline": "identical",
+  "cells": 60,
+  "rows": 60
+ },
+ "definition": "38098e88d355d1eeaea486a4b8518d413d15c39cfaad546167315de5243617f2",
+ "engine": "rtl",
+ "evidence": {
+  "results.csv": "adc8c0e9d4d8d75b1c89cb37279ff511f1b423c790efb3ef6adac1bad1855eec"
+ },
+ "execution": {
+  "bazel": "bazel 8.0.1",
+  "flags": "--test_timeout=604800 --cache_test_results=no --local_test_jobs=4 --//hw:make_options=-j,8 --//hw:verilator_options=--threads,4 --experimental_convenience_symlinks=ignore --test_arg=--verilator-args=+ibex_tracer_enable=0"
+ },
+ "profile": 32,
+ "run": "rtl-32k-20261020T131346Z",
+ "schema": 2,
+ "source": {
+  "commit": "72bcf5d6b5d8caec21786d3e4b1c44cc244f49ae",
+  "config": {
+   ".bazelrc-site": "15d97e8406bbeaa209a2e86d84320f6c1f66b826913c028d0668e8ce3b68268b"
+  },
+  "overlay": {},
+  "snapshot": "820815a610c4330cdee1844e3ea1e3a77b5a6de84cfd7d070e520eb06eeb5e99"
+ },
+ "tools": {
+  "measuring": {
+   "tools/gather_chip_matrix.py": "a2738593b0b3cdee4afe160184824110a276cc5e2822f4a80e81c3894af53342",
+   "tools/rtl_campaign.sh": "bd10f4554aed7e6b24361406539304ddb2e665f7d23008e38e2d41f179963991"
+  },
+  "publishing": "ef23ffe8cd4b62a5b7e7e2bd02565dd255a4eb30"
+ }
+}

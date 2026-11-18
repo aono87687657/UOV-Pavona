@@ -1,0 +1,2 @@
+executed 34083332 instructions in 35072539 cycles
+# elf: sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/ov-Ip-keygen_stream_bngfonly.elf

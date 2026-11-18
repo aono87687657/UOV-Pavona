@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+verify,Is,bnaesonly,stream_uniform,0,PASS,805783,877675
+verify,Is,bnaesonly,stream_uniform,1,PASS,805789,877683
+verify,Is,bnaesonly,stream_uniform,2,PASS,805789,877683
+verify,Is,bnaesonly,stream_uniform,3,PASS,805789,877683
+verify,Is,bnaesonly,stream_uniform,4,PASS,805789,877683
+verify,Is,bnaesonly,stream_uniform,5,PASS,805789,877683
+verify,Is,bnaesonly,stream_uniform,6,PASS,805815,877710
+verify,Is,bnaesonly,stream_uniform,7,PASS,805842,877738
+verify,Is,bnaesonly,stream_uniform,8,PASS,805896,877794
+verify,Is,bnaesonly,stream_uniform,9,PASS,806004,877906
+verify,Is,bnaesonly,stream_uniform,10,PASS,806220,878130
+verify,Is,bnaesonly,stream_uniform,11,PASS,806652,878578

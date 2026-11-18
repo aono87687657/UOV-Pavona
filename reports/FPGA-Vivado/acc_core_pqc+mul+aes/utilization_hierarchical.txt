@@ -1,0 +1,171 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1.1 (lin64) Build 2960000 Wed Aug  5 22:57:21 MDT 2020
+| Date         : Fri Nov  6 17:17:11 2026
+| Host         : anonymous running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_utilization -hierarchical -hierarchical_depth 6 -file ../../../reports/FPGA-Vivado/acc_core_pqc+mul+aes/utilization_hierarchical.txt
+| Design       : acc_core
+| Device       : 7k160tfbg676-1
+| Design State : Routed
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++------------------------------------------------+--------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+|                    Instance                    |                Module                | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | DSP Blocks |
++------------------------------------------------+--------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+| acc_core                                       |                                (top) |      55745 |      55673 |      72 |    0 | 16592 |      0 |      0 |         16 |
+|   (acc_core)                                   |                                (top) |        163 |        163 |       0 |    0 |    24 |      0 |      0 |          0 |
+|   u_acc_aes_bignum                             |                       acc_aes_bignum |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     u_aes_round_keyexpand_hi                   |                  aes_round_keyexpand |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[0].sbox_inst               |                      aes_sbox_lut_55 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[10].sbox_inst              |                      aes_sbox_lut_56 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[11].sbox_inst              |                      aes_sbox_lut_57 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[12].sbox_inst              |                      aes_sbox_lut_58 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[13].sbox_inst              |                      aes_sbox_lut_59 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[14].sbox_inst              |                      aes_sbox_lut_60 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[15].sbox_inst              |                      aes_sbox_lut_61 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[1].sbox_inst               |                      aes_sbox_lut_62 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[2].sbox_inst               |                      aes_sbox_lut_63 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[3].sbox_inst               |                      aes_sbox_lut_64 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[4].sbox_inst               |                      aes_sbox_lut_65 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[5].sbox_inst               |                      aes_sbox_lut_66 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[6].sbox_inst               |                      aes_sbox_lut_67 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[7].sbox_inst               |                      aes_sbox_lut_68 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[8].sbox_inst               |                      aes_sbox_lut_69 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[9].sbox_inst               |                      aes_sbox_lut_70 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     u_aes_round_keyexpand_lo                   |               aes_round_keyexpand_39 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[0].sbox_inst               |                         aes_sbox_lut |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[10].sbox_inst              |                      aes_sbox_lut_40 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[11].sbox_inst              |                      aes_sbox_lut_41 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[12].sbox_inst              |                      aes_sbox_lut_42 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[13].sbox_inst              |                      aes_sbox_lut_43 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[14].sbox_inst              |                      aes_sbox_lut_44 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[15].sbox_inst              |                      aes_sbox_lut_45 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[1].sbox_inst               |                      aes_sbox_lut_46 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[2].sbox_inst               |                      aes_sbox_lut_47 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[3].sbox_inst               |                      aes_sbox_lut_48 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[4].sbox_inst               |                      aes_sbox_lut_49 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[5].sbox_inst               |                      aes_sbox_lut_50 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[6].sbox_inst               |                      aes_sbox_lut_51 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[7].sbox_inst               |                      aes_sbox_lut_52 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[8].sbox_inst               |                      aes_sbox_lut_53 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       gen_sub_bytes[9].sbox_inst               |                      aes_sbox_lut_54 |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|   u_acc_alu_bignum                             |                       acc_alu_bignum |      12920 |      12920 |       0 |    0 |  3116 |      0 |      0 |          0 |
+|     (u_acc_alu_bignum)                         |                       acc_alu_bignum |       1359 |       1359 |       0 |    0 |  1648 |      0 |      0 |          0 |
+|     gen_adder_pqc.u_adder_x_op_b_blanked       |      prim_blanker__parameterized2_32 |          1 |          1 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       u_blank_and                              |         prim_and2__parameterized4_38 |          1 |          1 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     gen_pqc_wsr.u_kmac_msg0_ctr                |           prim_count__parameterized1 |         70 |         70 |       0 |    0 |    25 |      0 |      0 |          0 |
+|       (gen_pqc_wsr.u_kmac_msg0_ctr)            |           prim_count__parameterized1 |          3 |          3 |       0 |    0 |     1 |      0 |      0 |          0 |
+|       gen_cnts[0].u_cnt_flop                   |         prim_flop__parameterized5_36 |         41 |         41 |       0 |    0 |    12 |      0 |      0 |          0 |
+|       gen_cnts[1].u_cnt_flop                   |        prim_flop__parameterized15_37 |         26 |         26 |       0 |    0 |    12 |      0 |      0 |          0 |
+|     gen_pqc_wsr.u_kmac_msg1_ctr                |        prim_count__parameterized1_33 |        137 |        137 |       0 |    0 |    25 |      0 |      0 |          0 |
+|       (gen_pqc_wsr.u_kmac_msg1_ctr)            |        prim_count__parameterized1_33 |          6 |          6 |       0 |    0 |     1 |      0 |      0 |          0 |
+|       gen_cnts[0].u_cnt_flop                   |         prim_flop__parameterized5_35 |        105 |        105 |       0 |    0 |    12 |      0 |      0 |          0 |
+|       gen_cnts[1].u_cnt_flop                   |           prim_flop__parameterized15 |         26 |         26 |       0 |    0 |    12 |      0 |      0 |          0 |
+|     gen_pqc_wsr.u_kmac_msg1_fifo               |                          prim_packer |       5709 |       5709 |       0 |    0 |   709 |      0 |      0 |          0 |
+|     gen_pqc_wsr.u_kmac_msg_fifo                |                       prim_packer_34 |       5662 |       5662 |       0 |    0 |   709 |      0 |      0 |          0 |
+|   u_acc_controller                             |                       acc_controller |       1828 |       1784 |      44 |    0 |   628 |      0 |      0 |          0 |
+|     (u_acc_controller)                         |                       acc_controller |         42 |         42 |       0 |    0 |    84 |      0 |      0 |          0 |
+|     rf_bignum_rd_a_idirect_onehot__enc         |                      prim_onehot_enc |         15 |         15 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     rf_bignum_rd_b_indirect_onehot_enc         |                    prim_onehot_enc_4 |         15 |         15 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     rf_bignum_wr_indirect_onehot_enc           |                    prim_onehot_enc_5 |         19 |         19 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     u_acc_loop_controller                      |                  acc_loop_controller |       1636 |       1592 |      44 |    0 |   539 |      0 |      0 |          0 |
+|       g_loop_counters[0].u_loop_count          |                           prim_count |        167 |        167 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[0].u_loop_count)      |                           prim_count |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_30 |        119 |        119 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_31 |         40 |         40 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[1].u_loop_count          |                         prim_count_7 |        151 |        151 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[1].u_loop_count)      |                         prim_count_7 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_28 |        103 |        103 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_29 |         40 |         40 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[2].u_loop_count          |                         prim_count_8 |        167 |        167 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[2].u_loop_count)      |                         prim_count_8 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_26 |        119 |        119 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_27 |         40 |         40 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[3].u_loop_count          |                         prim_count_9 |        151 |        151 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[3].u_loop_count)      |                         prim_count_9 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_24 |        103 |        103 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_25 |         40 |         40 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[4].u_loop_count          |                        prim_count_10 |        167 |        167 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[4].u_loop_count)      |                        prim_count_10 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_22 |        119 |        119 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_23 |         40 |         40 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[5].u_loop_count          |                        prim_count_11 |        151 |        151 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[5].u_loop_count)      |                        prim_count_11 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_20 |        103 |        103 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_21 |         40 |         40 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[6].u_loop_count          |                        prim_count_12 |        167 |        167 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[6].u_loop_count)      |                        prim_count_12 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_18 |        119 |        119 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_19 |         40 |         40 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[7].u_loop_count          |                        prim_count_13 |        151 |        151 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[7].u_loop_count)      |                        prim_count_13 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |           prim_flop__parameterized10 |        103 |        103 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |           prim_flop__parameterized11 |         40 |         40 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       loop_info_stack                          |                            acc_stack |        357 |        313 |      44 |    0 |    11 |      0 |      0 |          0 |
+|         (loop_info_stack)                      |                            acc_stack |         74 |         30 |      44 |    0 |     0 |      0 |      0 |          0 |
+|         u_cnt_err_flop                         |         prim_flop__parameterized8_14 |          2 |          2 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         u_stack_wr_ptr                         |        prim_count__parameterized0_15 |        281 |        281 |       0 |    0 |    10 |      0 |      0 |          0 |
+|           (u_stack_wr_ptr)                     |        prim_count__parameterized0_15 |          0 |          0 |       0 |    0 |     1 |      0 |      0 |          0 |
+|           gen_cnts[0].u_cnt_flop               |        prim_flop__parameterized12_16 |        274 |        274 |       0 |    0 |     5 |      0 |      0 |          0 |
+|           gen_cnts[1].u_cnt_flop               |        prim_flop__parameterized13_17 |          7 |          7 |       0 |    0 |     4 |      0 |      0 |          0 |
+|       u_loop_counter_err_flop                  |           prim_flop__parameterized14 |          9 |          9 |       0 |    0 |     8 |      0 |      0 |          0 |
+|     u_state_error_flop                         |          prim_flop__parameterized8_6 |          0 |          0 |       0 |    0 |     1 |      0 |      0 |          0 |
+|     u_state_regs                               | prim_sparse_fsm_flop__parameterized0 |        102 |        102 |       0 |    0 |     4 |      0 |      0 |          0 |
+|       u_state_flop                             |            prim_flop__parameterized9 |        102 |        102 |       0 |    0 |     4 |      0 |      0 |          0 |
+|   u_acc_instruction_fetch                      |                acc_instruction_fetch |      32930 |      32930 |       0 |    0 |   486 |      0 |      0 |          0 |
+|     (u_acc_instruction_fetch)                  |                acc_instruction_fetch |          8 |          8 |       0 |    0 |    26 |      0 |      0 |          0 |
+|     u_acc_predecode                            |                        acc_predecode |         41 |         41 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     u_aes_predec_bignum_flop                   |            prim_flop__parameterized3 |       1469 |       1469 |       0 |    0 |     9 |      0 |      0 |          0 |
+|     u_alu_predec_bignum_flop                   |            prim_flop__parameterized2 |       1791 |       1791 |       0 |    0 |   116 |      0 |      0 |          0 |
+|     u_ctrl_flow_predec_flop                    |            prim_flop__parameterized4 |         24 |         24 |       0 |    0 |     6 |      0 |      0 |          0 |
+|     u_ctrl_flow_target_predec_flop             |            prim_flop__parameterized5 |          9 |          9 |       0 |    0 |    12 |      0 |      0 |          0 |
+|     u_insn_fetch_resp_data_intg_flop           |            prim_flop__parameterized1 |      10644 |      10644 |       0 |    0 |    83 |      0 |      0 |          0 |
+|     u_ispr_predec_bignum_flop                  |            prim_flop__parameterized7 |       2349 |       2349 |       0 |    0 |    73 |      0 |      0 |          0 |
+|     u_lsu_addr_en_predec_flop                  |          prim_flop__parameterized8_2 |          3 |          3 |       0 |    0 |     1 |      0 |      0 |          0 |
+|     u_mac_predec_bignum_flop                   |          prim_flop__parameterized3_3 |         52 |         52 |       0 |    0 |    14 |      0 |      0 |          0 |
+|     u_rf_predec_bignum_flop                    |            prim_flop__parameterized6 |      16594 |      16594 |       0 |    0 |   146 |      0 |      0 |          0 |
+|   u_acc_lsu                                    |                              acc_lsu |         78 |         78 |       0 |    0 |     3 |      0 |      0 |          0 |
+|   u_acc_mac_bignum                             |                       acc_mac_bignum |       3215 |       3215 |       0 |    0 |   624 |      0 |      0 |         16 |
+|     (u_acc_mac_bignum)                         |                       acc_mac_bignum |        722 |        722 |       0 |    0 |   624 |      0 |      0 |          0 |
+|     gen_mac_adder_pqc.adder                    |                           buffer_bit |         21 |         21 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     gen_mul_pqc.mul                            |                          unified_mul |        198 |        198 |       0 |    0 |     0 |      0 |      0 |         16 |
+|     u_acc_blanker                              |         prim_blanker__parameterized2 |          2 |          2 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       u_blank_and                              |            prim_and2__parameterized4 |          2 |          2 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     u_gfmacc                                   |                               gfmacc |       2272 |       2272 |       0 |    0 |     0 |      0 |      0 |          0 |
+|   u_acc_rf_base                                |                          acc_rf_base |       1011 |        983 |      28 |    0 |  1181 |      0 |      0 |          0 |
+|     (u_acc_rf_base)                            |                          acc_rf_base |         35 |         35 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     gen_rf_base_ff.u_acc_rf_base_inner         |                       acc_rf_base_ff |        705 |        705 |       0 |    0 |  1171 |      0 |      0 |          0 |
+|     u_call_stack                               |            acc_stack__parameterized0 |        271 |        243 |      28 |    0 |    10 |      0 |      0 |          0 |
+|       (u_call_stack)                           |            acc_stack__parameterized0 |         28 |          0 |      28 |    0 |     0 |      0 |      0 |          0 |
+|       u_cnt_err_flop                           |          prim_flop__parameterized8_1 |          1 |          1 |       0 |    0 |     1 |      0 |      0 |          0 |
+|       u_stack_wr_ptr                           |           prim_count__parameterized0 |        242 |        242 |       0 |    0 |     9 |      0 |      0 |          0 |
+|         (u_stack_wr_ptr)                       |           prim_count__parameterized0 |          0 |          0 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |           prim_flop__parameterized12 |        235 |        235 |       0 |    0 |     4 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |           prim_flop__parameterized13 |          7 |          7 |       0 |    0 |     4 |      0 |      0 |          0 |
+|   u_acc_rf_bignum                              |                        acc_rf_bignum |        285 |        285 |       0 |    0 |  9985 |      0 |      0 |          0 |
+|     gen_rf_bignum_ff.u_acc_rf_bignum_inner     |                     acc_rf_bignum_ff |        285 |        285 |       0 |    0 |  9985 |      0 |      0 |          0 |
+|       (gen_rf_bignum_ff.u_acc_rf_bignum_inner) |                     acc_rf_bignum_ff |        285 |        285 |       0 |    0 |  9984 |      0 |      0 |          0 |
+|       u_we_err_flop                            |            prim_flop__parameterized8 |          0 |          0 |       0 |    0 |     1 |      0 |      0 |          0 |
+|   u_acc_rnd                                    |                              acc_rnd |       2758 |       2758 |       0 |    0 |   519 |      0 |      0 |          0 |
+|     (u_acc_rnd)                                |                              acc_rnd |          9 |          9 |       0 |    0 |   263 |      0 |      0 |          0 |
+|     u_xoshiro256pp                             |                    prim_xoshiro256pp |       2749 |       2749 |       0 |    0 |   256 |      0 |      0 |          0 |
+|   u_acc_start_stop_control                     |               acc_start_stop_control |        573 |        573 |       0 |    0 |    26 |      0 |      0 |          0 |
+|     (u_acc_start_stop_control)                 |               acc_start_stop_control |          5 |          5 |       0 |    0 |    13 |      0 |      0 |          0 |
+|     u_prim_mubi4_sender_rma_ack                |                    prim_mubi4_sender |          3 |          3 |       0 |    0 |     4 |      0 |      0 |          0 |
+|       gen_flops.u_prim_flop                    |                          prim_flop_0 |          3 |          3 |       0 |    0 |     4 |      0 |      0 |          0 |
+|     u_state_regs                               |                 prim_sparse_fsm_flop |        562 |        562 |       0 |    0 |     7 |      0 |      0 |          0 |
+|       u_state_flop                             |            prim_flop__parameterized0 |        562 |        562 |       0 |    0 |     7 |      0 |      0 |          0 |
+|     u_wipe_after_urnd_refresh_flop             |    prim_mubi4_sender__parameterized0 |          4 |          4 |       0 |    0 |     2 |      0 |      0 |          0 |
+|       gen_flops.u_prim_flop                    |                            prim_flop |          4 |          4 |       0 |    0 |     2 |      0 |      0 |          0 |
++------------------------------------------------+--------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

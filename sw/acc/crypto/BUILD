@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 load("//rules:acc.bzl", "acc_binary", "acc_library")
+load(":uov_nistkat.bzl", "uov_nistkat_tests")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -489,3 +490,5 @@ acc_binary(
         ":x25519",
     ],
 )
+
+uov_nistkat_tests(name = "uov_nistkat")

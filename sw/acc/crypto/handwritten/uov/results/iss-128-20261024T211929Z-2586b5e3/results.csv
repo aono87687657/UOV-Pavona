@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+keygen,Is,bngfonly,sp,0,PASS,11537400,12105812
+keygen,Is,bngfonly,sp,1,PASS,11537400,12105812
+keygen,Is,bngfonly,sp,2,PASS,11537400,12105812
+keygen,Is,bngfonly,sp,3,PASS,11537400,12105812
+keygen,Is,bngfonly,sp,4,PASS,11537400,12105812
+keygen,Is,bngfonly,sp,5,PASS,11537400,12105812
+keygen,Is,bngfonly,sp,6,PASS,11537400,12105812
+keygen,Is,bngfonly,sp,7,PASS,11537400,12105812
+keygen,Is,bngfonly,sp,8,PASS,11537400,12105812
+keygen,Is,bngfonly,sp,9,PASS,11537400,12105812
+keygen,Is,bngfonly,sp,10,PASS,11537400,12105812
+keygen,Is,bngfonly,sp,11,PASS,11537400,12105812

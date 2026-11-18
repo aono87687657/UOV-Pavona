@@ -215,6 +215,76 @@ cc_library(
     ],
 )
 
+UOV_DEPS = [
+    "//hw/top/dt",
+    "//sw/device/lib/base:memory",
+    "//sw/device/lib/base:status",
+    "//sw/device/lib/crypto/impl:sha3",
+    "//sw/device/lib/dif:acc",
+    "//sw/device/lib/runtime:log",
+    "//sw/device/lib/testing:acc_testutils",
+    "//sw/device/lib/testing/test_framework:ujson_ottf",
+    "//sw/device/lib/ujson",
+    "//sw/device/tests/crypto/cryptotest/json:uov_commands",
+]
+
+# The UOV driver against one tier's 32 KiB kernels for one parameter set,
+# uov_<tier>_<param>; one image cannot hold more apps than that. `uov`, in the
+# default cryptotest firmware, is the deployed bngfaes tier for Ip and Is.
+# keygen: dmem32k/keygen_stream, sign: dmem32k/sign_ldirect (sign_rtl hostfed
+# harness), verify: dmem32k/verify_stream.
+UOV_DIR = "//sw/acc/crypto/handwritten/uov/dmem32k"
+
+UOV_PKG = {
+    "keygen_stream": "ov-{}-pkc+skc",
+    "sign_rtl": "ov-{}-skc",
+    "verify_stream": "ov-{}-pkc",
+}
+
+UOV_TIER_COPTS = {
+    "bngfaes": ["-DUOV_IP3_SLICE_BYTES=17280"],
+    "bngfonly": ["-DUOV_IP3_SLICE_BYTES=17280"],
+    # Their Is window holds 703 entries, not 960 (winend 0x58e0).
+    "bnaesonly": [
+        "-DUOV_IP3_SLICE_BYTES=14400",
+        "-DUOV_IS_ROWS=12,15,37",
+    ],
+    "sw": [
+        "-DUOV_IP3_SLICE_BYTES=14400",
+        "-DUOV_IS_ROWS=12,15,37",
+    ],
+}
+
+[
+    cc_library(
+        name = name,
+        srcs = ["uov.c"],
+        hdrs = ["uov.h"],
+        copts = ["-DUOV_TIER=" + tier] + UOV_TIER_COPTS[tier] + [
+            "-DUOV_WITH_" + p.upper()
+            for p in params
+        ],
+        deps = UOV_DEPS + [
+            "{}/{}/{}:ov_{}_{}_{}{}".format(
+                UOV_DIR,
+                family,
+                UOV_PKG[family].format(param),
+                param,
+                family,
+                tier,
+                "_hostfed" if family == "sign_rtl" else "",
+            )
+            for family in UOV_PKG
+            for param in params
+        ],
+    )
+    for name, tier, params in [("uov", "bngfaes", ["Ip", "Is"])] + [
+        ("uov_{}_{}".format(tier, param), tier, [param])
+        for tier in UOV_TIER_COPTS
+        for param in ("Ip", "Is", "Ip3")
+    ]
+]
+
 cc_library(
     name = "mldsa",
     srcs = ["mldsa.c"],

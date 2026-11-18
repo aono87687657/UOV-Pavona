@@ -1,0 +1,2 @@
+# Branches check_const_time.py may report for ov-Is-sign_ldirect_bngfaes: the retry when L is singular.
+0x0164  # beq x4, x5 in the sign loop

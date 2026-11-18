@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+keygen,Ip,sw,stream,0,PASS,119894706,139749112
+keygen,Ip,sw,stream,1,PASS,119894706,139749112
+keygen,Ip,sw,stream,2,PASS,119894706,139749112
+keygen,Ip,sw,stream,3,PASS,119894706,139749112
+keygen,Ip,sw,stream,4,PASS,119894706,139749112
+keygen,Ip,sw,stream,5,PASS,119894706,139749112
+keygen,Ip,sw,stream,6,PASS,119894706,139749112
+keygen,Ip,sw,stream,7,PASS,119894706,139749112
+keygen,Ip,sw,stream,8,PASS,119894706,139749112
+keygen,Ip,sw,stream,9,PASS,119894706,139749112
+keygen,Ip,sw,stream,10,PASS,119894706,139749112
+keygen,Ip,sw,stream,11,PASS,119894706,139749112

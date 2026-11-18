@@ -1,0 +1,14 @@
+op,family,param,tier,contract,protocol,run,acc_insn,exec_wait,host_io_fold,op_total_v2,app_load,whole_test_cycles,wall_s,verdict
+keygen,stream,ip3,bnaesonly,2,accept_only,accept,40049651,41101776,308129,41411758,525020,45801483,4136.18,PASS
+keygen,stream,ip3,bngfonly,2,accept_only,accept,48289144,49550088,307753,49859513,591462,54300683,4876.05,PASS
+keygen,stream_uniform,ip3,bnaesonly,2,accept_only,accept,40150614,41214935,308094,41524901,530327,45955083,3871.06,PASS
+keygen,stream_uniform,ip,bngfonly,2,accept_only,accept,42703335,43862338,223194,44087465,465816,48322571,3640.03,PASS
+keygen,stream_uniform,is,bnaesonly,2,accept_only,accept,32836529,35171911,343715,35517243,458302,39933963,3275.68,PASS
+keygen,stream_uniform,is,bngfonly,2,accept_only,accept,36983983,38028908,343653,38374161,462275,42799115,3949.82,PASS
+sign,ldirect,ip3,bngfonly,2,accept_negative,accept,8649789,8860171,868,8861072,435259,29499403,3490.45,PASS
+sign,ldirect,ip,bngfonly,2,accept_negative,accept,6937931,7102205,802,7103039,449718,24264715,1851.34,PASS
+sign,ldirect,is,bngfonly,2,accept_negative,accept,10063693,10243193,716,10243941,256836,33112075,2623.95,PASS
+verify,stream,ip3,sw,2,accept_reject,accept,18845866,22755953,66006,22822460,532053,49070091,3741.96,PASS
+verify,stream,is,sw,2,accept_reject,accept,21380937,26002373,90978,26094086,451001,55558155,4388.33,PASS
+verify,stream_uniform,ip3,sw,2,accept_reject,accept,18845889,22755989,66006,22822507,532987,49096715,5743.2,PASS
+verify,stream_uniform,is,sw,2,accept_reject,accept,21380961,26002306,90978,26094019,518406,55699467,5257.52,PASS

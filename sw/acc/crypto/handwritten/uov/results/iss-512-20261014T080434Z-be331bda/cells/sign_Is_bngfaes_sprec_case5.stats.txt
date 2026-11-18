@@ -1,0 +1,395 @@
+Execution time
+--------------
+ACC executed 1494274 instructions in 2157678 cycles.
+The execution stalled for 663404 cycles (44.4 percent).
+The execution would take 21.58 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.lid           625790
+bn.gfmul         605391
+bn.aes128.encm    97200
+bn.sid            29342
+bn.rshi           14804
+bn.xor            14477
+loopi             12691
+csrrw             12567
+addi              11653
+add               10880
+bn.add            10801
+bn.aes128.encz    10800
+bn.aes128.encf    10800
+lw                 6493
+bn.wsrw            6314
+bn.and             5883
+bn.sel             4096
+bn.cmp             2080
+bn.or               963
+loop                411
+bn.mov              320
+sw                  147
+lui                 112
+bn.wsrr             100
+slli                 98
+jal                  12
+jalr                 12
+bn.aes128.kf         10
+beq                   8
+sub                   5
+bn.addi               4
+or                    3
+srli                  2
+and                   2
+bn.sd                 1
+bn.not                1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function                             [instr., stall]
+-----------------------------------  -----------------
+$d                                   [1337533, 655131]
+$x                                   [156141, 8258]
+expandv_msg_len_zero                 [293, 3]
+msg_len_zero                         [263, 1]
+_imem_start                          [13, 4]
+expandv                              [6, 0]
+hash_salted_msg                      [5, 2]
+gf16_matvec_48_64                    [3, 0]
+sig_loop                             [2, 2]
+expandv_short_msg                    [2, 1]
+done_sign                            [2, 1]
+gf16trimat_2trimat_madd_96_48_64_32  [2, 0]
+gf16_transpose_64_64                 [2, 0]
+gaussian_elemination_64x64           [2, 0]
+expandsk_ret_O_pkseed                [1, 1]
+ov_Is_skc_sign                       [1, 0]
+gf16_matvec_2048_96                  [1, 0]
+batch_quad_trimat_eval_gf16_cached   [1, 0]
+back_substitution                    [1, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+lui            [5, 1]
+addi           [5, 0]
+lw             [1, 1]
+jal            [1, 1]
+ecall          [1, 1]
+
+ov_Is_skc_sign
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+csrrw           [12560, 0]
+addi            [11100, 0]
+add             [10880, 0]
+bn.aes128.encf  [10800, 0]
+lw              [6491, 6491]
+bn.wsrw         [6310, 0]
+bn.mov          [320, 0]
+sw              [147, 0]
+lui             [106, 0]
+bn.wsrr         [97, 1743]
+slli            [97, 0]
+jal             [10, 10]
+jalr            [10, 10]
+sub             [5, 0]
+beq             [4, 4]
+or              [2, 0]
+srli            [1, 0]
+and             [1, 0]
+
+expandsk_ret_O_pkseed
+instruction    [count, stalls]
+-------------  -----------------
+bn.lid         [1, 1]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.lid          [625789, 625789]
+bn.gfmul        [605391, 0]
+bn.sid          [29342, 29342]
+bn.rshi         [14804, 0]
+bn.xor          [14466, 0]
+loopi           [12691, 0]
+bn.add          [10801, 0]
+bn.aes128.encz  [10800, 0]
+bn.and          [5883, 0]
+bn.sel          [4096, 0]
+bn.cmp          [2080, 0]
+bn.or           [963, 0]
+loop            [411, 0]
+bn.aes128.kf    [10, 0]
+bn.addi         [4, 0]
+bn.sd           [1, 0]
+bn.not          [1, 0]
+
+gf16trimat_2trimat_madd_96_48_64_32
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2, 0]
+
+hash_salted_msg
+instruction    [count, stalls]
+-------------  -----------------
+beq            [2, 2]
+srli           [1, 0]
+addi           [1, 0]
+and            [1, 0]
+
+msg_len_zero
+instruction    [count, stalls]
+-------------  -----------------
+addi           [257, 0]
+csrrw          [2, 0]
+jalr           [1, 1]
+bn.wsrw        [1, 0]
+bn.wsrr        [1, 0]
+lui            [1, 0]
+
+sig_loop
+instruction    [count, stalls]
+-------------  -----------------
+beq            [1, 1]
+jal            [1, 1]
+
+expandv
+instruction    [count, stalls]
+-------------  -----------------
+addi           [3, 0]
+slli           [1, 0]
+or             [1, 0]
+csrrw          [1, 0]
+
+expandv_short_msg
+instruction    [count, stalls]
+-------------  -----------------
+beq            [1, 1]
+csrrw          [1, 0]
+
+expandv_msg_len_zero
+instruction    [count, stalls]
+-------------  -----------------
+addi           [285, 0]
+bn.wsrw        [3, 0]
+bn.wsrr        [2, 2]
+csrrw          [2, 0]
+jalr           [1, 1]
+
+gf16_matvec_2048_96
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [1, 0]
+
+gf16_transpose_64_64
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2, 0]
+
+batch_quad_trimat_eval_gf16_cached
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [1, 0]
+
+gaussian_elemination_64x64
+instruction    [count, stalls]
+-------------  -----------------
+addi           [1, 0]
+csrrw          [1, 0]
+
+back_substitution
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [1, 0]
+
+gf16_matvec_48_64
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [3, 0]
+
+done_sign
+instruction    [count, stalls]
+-------------  -----------------
+lw             [1, 1]
+addi           [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1         3234
+            2           96
+            3         6085
+            4       291842
+            5          161
+            6         6145
+            7            3
+            8         4003
+            9          220
+           10         3072
+           11         3009
+           12          416
+           13           53
+           14         4465
+           15         6111
+           16           98
+           17            9
+           18            1
+           20            1
+           22            2
+           23            2
+           24            1
+           26            3
+           27           96
+           29           94
+           30           64
+           38            1
+           61            1
+          266            1
+          296            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            4         9027
+            7            1
+            8         3906
+           12           95
+           14         4371
+           18           63
+           29           94
+           30           63
+           32            1
+           46            1
+          277            1
+         3373            1
+        12878           94
+        17417            1
+        21890            1
+       105259            1
+
+Function call statistics
+------------------------
+Function 0x34 (ov_Is_skc_sign)
+  is called from the following functions
+    * 1 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 1 times from 0x2c (_imem_start+0x2c)
+  calls
+    no other function (leaf function).
+
+Function 0xc50 (expandsk_ret_O_pkseed)
+  is called from the following functions
+    * 1 times by function 0x30 (_imem_start+0x30)
+  from the following call sites
+    * 1 times from 0x50 ($x+0x18)
+  calls
+    no other function (leaf function).
+
+Function 0x1284 (gf16trimat_2trimat_madd_96_48_64_32)
+  is called from the following functions
+    * 1 times by function 0x30 (_imem_start+0x30)
+  from the following call sites
+    * 1 times from 0x84 ($x+0x4c)
+  calls
+    no other function (leaf function).
+
+Function 0x238 (hash_salted_msg)
+  is called from the following functions
+    * 1 times by function 0x30 (_imem_start+0x30)
+  from the following call sites
+    * 1 times from 0xdc ($x+0x14)
+  calls
+    no other function (leaf function).
+
+Function 0x6e8 (expandv)
+  is called from the following functions
+    * 1 times by function 0x30 (_imem_start+0x30)
+  from the following call sites
+    * 1 times from 0x10c (sig_loop+0x4)
+  calls
+    no other function (leaf function).
+
+Function 0x1204 (gf16_matvec_2048_96)
+  is called from the following functions
+    * 1 times by function 0x30 (_imem_start+0x30)
+  from the following call sites
+    * 1 times from 0x13c ($x+0x14)
+  calls
+    no other function (leaf function).
+
+Function 0xd1c (gf16_transpose_64_64)
+  is called from the following functions
+    * 2 times by function 0x30 (_imem_start+0x30)
+  from the following call sites
+    * 1 times from 0x140 ($x+0x18)
+    * 1 times from 0x1a8 ($x+0x18)
+  calls
+    no other function (leaf function).
+
+Function 0xfd4 (batch_quad_trimat_eval_gf16_cached)
+  is called from the following functions
+    * 1 times by function 0x30 (_imem_start+0x30)
+  from the following call sites
+    * 1 times from 0x15c ($x+0x34)
+  calls
+    no other function (leaf function).
+
+Function 0x104c (gaussian_elemination_64x64)
+  is called from the following functions
+    * 1 times by function 0x30 (_imem_start+0x30)
+  from the following call sites
+    * 1 times from 0x180 ($x+0x8)
+  calls
+    no other function (leaf function).
+
+Function 0x16b4 (back_substitution)
+  is called from the following functions
+    * 1 times by function 0x30 (_imem_start+0x30)
+  from the following call sites
+    * 1 times from 0x1ac ($x+0x1c)
+  calls
+    no other function (leaf function).
+
+Function 0x11a0 (gf16_matvec_48_64)
+  is called from the following functions
+    * 1 times by function 0x30 (_imem_start+0x30)
+  from the following call sites
+    * 1 times from 0x1c0 ($x+0x4)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 12 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  2 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 12 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 13102
+Loop body length (instructions): min: 2, max: 77, avg: 4.46
+Number of iterations: min: 1, max: 97, avg: 25.13

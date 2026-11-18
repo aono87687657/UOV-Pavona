@@ -1,0 +1,104 @@
+{
+ "archive": {
+  "done": "collector_exit=0 postcheck_exit=0 archive_exit=0 finished=20261017T021641Z",
+  "files": 619,
+  "inventory": "ed7793109f6f4329a6aa0f05212eeb0feafe95770b1d625b7fed70bf7ee010f9"
+ },
+ "campaign": "rtl-2026-10e",
+ "cells": [
+  "acc_uov_keygen_stream_ip_bngfaes_test",
+  "acc_uov_keygen_stream_ip_bngfonly_test",
+  "acc_uov_keygen_stream_ip_bnaesonly_test",
+  "acc_uov_keygen_stream_ip_sw_test",
+  "acc_uov_keygen_stream_is_bngfaes_test",
+  "acc_uov_keygen_stream_is_bngfonly_test",
+  "acc_uov_keygen_stream_is_bnaesonly_test",
+  "acc_uov_keygen_stream_is_sw_test",
+  "acc_uov_keygen_stream_uniform_ip_bngfaes_test",
+  "acc_uov_keygen_stream_uniform_ip_bngfonly_test",
+  "acc_uov_keygen_stream_uniform_ip_bnaesonly_test",
+  "acc_uov_keygen_stream_uniform_ip_sw_test",
+  "acc_uov_keygen_stream_uniform_is_bngfaes_test",
+  "acc_uov_keygen_stream_uniform_is_bngfonly_test",
+  "acc_uov_keygen_stream_uniform_is_bnaesonly_test",
+  "acc_uov_keygen_stream_uniform_is_sw_test",
+  "acc_uov_verify_stream_uniform_ip_bngfaes_test",
+  "acc_uov_verify_stream_uniform_ip_bngfonly_test",
+  "acc_uov_verify_stream_uniform_ip_bnaesonly_test",
+  "acc_uov_verify_stream_uniform_ip_sw_test",
+  "acc_uov_verify_stream_uniform_is_bngfaes_test",
+  "acc_uov_verify_stream_uniform_is_bngfonly_test",
+  "acc_uov_verify_stream_uniform_is_bnaesonly_test",
+  "acc_uov_verify_stream_uniform_is_sw_test",
+  "acc_uov_verify_stream_ip_bngfaes_test",
+  "acc_uov_verify_stream_ip_bngfonly_test",
+  "acc_uov_verify_stream_ip_bnaesonly_test",
+  "acc_uov_verify_stream_ip_sw_test",
+  "acc_uov_verify_stream_is_bngfaes_test",
+  "acc_uov_verify_stream_is_bngfonly_test",
+  "acc_uov_verify_stream_is_bnaesonly_test",
+  "acc_uov_verify_stream_is_sw_test",
+  "acc_uov_sign_ip_bngfaes_test",
+  "acc_uov_sign_ip_bngfonly_test",
+  "acc_uov_sign_ip_bnaesonly_test",
+  "acc_uov_sign_ip_sw_test",
+  "acc_uov_sign_is_bngfaes_test",
+  "acc_uov_sign_is_bngfonly_test",
+  "acc_uov_sign_is_bnaesonly_test",
+  "acc_uov_sign_is_sw_test",
+  "acc_uov_keygen_stream_ip3_bngfaes_test",
+  "acc_uov_keygen_stream_ip3_bngfonly_test",
+  "acc_uov_keygen_stream_ip3_bnaesonly_test",
+  "acc_uov_keygen_stream_ip3_sw_test",
+  "acc_uov_keygen_stream_uniform_ip3_bngfaes_test",
+  "acc_uov_keygen_stream_uniform_ip3_bngfonly_test",
+  "acc_uov_keygen_stream_uniform_ip3_bnaesonly_test",
+  "acc_uov_keygen_stream_uniform_ip3_sw_test",
+  "acc_uov_verify_stream_ip3_bngfaes_test",
+  "acc_uov_verify_stream_ip3_bngfonly_test",
+  "acc_uov_verify_stream_ip3_bnaesonly_test",
+  "acc_uov_verify_stream_ip3_sw_test",
+  "acc_uov_verify_stream_uniform_ip3_bngfaes_test",
+  "acc_uov_verify_stream_uniform_ip3_bngfonly_test",
+  "acc_uov_verify_stream_uniform_ip3_bnaesonly_test",
+  "acc_uov_verify_stream_uniform_ip3_sw_test",
+  "acc_uov_sign_ip3_bngfaes_test",
+  "acc_uov_sign_ip3_bngfonly_test",
+  "acc_uov_sign_ip3_bnaesonly_test",
+  "acc_uov_sign_ip3_sw_test"
+ ],
+ "completion": {
+  "accepted": true,
+  "baseline": "identical",
+  "cells": 60,
+  "rows": 60
+ },
+ "definition": "863caa872940dddc4a3a42247e275daa8aa5a352aa9e5a2d70f939c63175d6db",
+ "engine": "rtl",
+ "evidence": {
+  "results.csv": "eaaf3dd80eaa2ba727c935e63d444eeefd31c4ca07d2ed6e8f0c7fb039716d4c"
+ },
+ "execution": {
+  "bazel": "bazel 8.0.1 (from the run's build event log; its manifest recorded no version)",
+  "flags": "--test_timeout=604800 --cache_test_results=no --local_test_jobs=2 --//hw:make_options=-j,8 --//hw:verilator_options=--threads,4 --experimental_convenience_symlinks=ignore --test_arg=--verilator-args=+ibex_tracer_enable=0"
+ },
+ "profile": 32,
+ "run": "rtl-32k-20261015T192307Z",
+ "schema": 2,
+ "source": {
+  "commit": "d7500a3a567e486d06960ea80006d29128761a0a",
+  "config": {
+   ".bazelrc-site": "15d97e8406bbeaa209a2e86d84320f6c1f66b826913c028d0668e8ce3b68268b"
+  },
+  "overlay": {},
+  "snapshot": "23ab9861bad2ff0f36a1d003d7368cc96e0c1466dd958b5bbcc28e862c95a485"
+ },
+ "tools": {
+  "measuring": {
+   "tools/check_firmware_kernels.py": "fce6318e9aceb2facf1cbb97d7aa503c843efdd965b3e44a85c1ae219a122ccc",
+   "tools/gather_chip_matrix.py": "1cc69d5a093135308548076783fc27151b2088ede68a2717e2de0b402bd5ab05",
+   "tools/rtl_campaign.sh": "42dbdcd49c9041325446dbd9ad2183a16079ad4d8bb19e7792bc511cd22cbc28"
+  },
+  "publishing": "e22d57af02196a54a602c57916c035f09b28fa54"
+ }
+}

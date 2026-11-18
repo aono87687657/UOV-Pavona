@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+sign,Ip3,bngfaes,ldirect,0,PASS,283840,334300
+sign,Ip3,bngfaes,ldirect,1,PASS,283855,334320
+sign,Ip3,bngfaes,ldirect,2,PASS,283855,334320
+sign,Ip3,bngfaes,ldirect,3,PASS,283855,334320
+sign,Ip3,bngfaes,ldirect,4,PASS,283855,334320
+sign,Ip3,bngfaes,ldirect,5,PASS,283855,334320
+sign,Ip3,bngfaes,ldirect,6,PASS,283906,334372
+sign,Ip3,bngfaes,ldirect,7,PASS,283960,334428
+sign,Ip3,bngfaes,ldirect,8,PASS,284068,334540
+sign,Ip3,bngfaes,ldirect,9,PASS,284284,334764
+sign,Ip3,bngfaes,ldirect,10,PASS,284716,335212
+sign,Ip3,bngfaes,ldirect,11,PASS,285580,336108

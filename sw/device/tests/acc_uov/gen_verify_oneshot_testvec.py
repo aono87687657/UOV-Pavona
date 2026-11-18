@@ -1,0 +1,187 @@
+#!/usr/bin/env python3
+"""Emit the host-side fixtures for the chip-level one-shot verify tests (Ip3, Ip, Is).
+
+  --vectors : verify_oneshot_<param>_testvec.h - key A with case 11 (msglen 1,024),
+              the case 0 signature (msglen 0) and key B, another keypair. Ip3 signs
+              every case under one key, so key B is the .nistkat key 0 with its own
+              message; Ip and Is have a key per case, so key B is case 0's, and the
+              header also carries their check plan (signature flips, key bytes to
+              corrupt; the Ip3 plan is in verify_oneshot_test.c). Keys carry their
+              zero padding (a word multiple), messages 32-byte granules, signatures
+              their slot.
+  --geom    : verify_oneshot_geom_<app>.h - hdr/sig/msg/cpk addresses and the
+              linked end of THIS ELF, its loadable-image hash and the poison
+              intervals (context blocks and the arm's scratch).
+
+Usage (from the repo root; --param defaults to Ip3 for --vectors and to the app's
+parameter set for --geom):
+  gen_verify_oneshot_testvec.py --vectors --param Ip > sw/device/tests/acc_uov/verify_oneshot_ip_testvec.h
+  gen_verify_oneshot_testvec.py --geom --app ov_Ip_verify_full_bngfaes --elf <elf> \\
+      > sw/device/tests/acc_uov/verify_oneshot_geom_ov_Ip_verify_full_bngfaes.h
+"""
+import argparse
+import contextlib
+import hashlib
+import os
+import sys
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.abspath(os.path.join(_HERE, '..', '..', '..', '..'))
+sys.path[:0] = [REPO, os.path.join(REPO, 'sw/acc/crypto/handwritten/own_utils')]
+from ov_keygen_test_utils import _kg_objdump_syms
+from ov_pk_utils import parse_pkc_test_data_file
+from ov_params import OV_IP, OV_IP3, OV_IS
+
+MSG_MAX = 1024
+# ov: sizes and signature layout. pad: zero bytes after the cpk that the P3 loader may
+# read. slot: signature slot. ctx: acc/oil/target block bytes. key_b: file suffix of the
+# second keypair (None: case 0's key). flips: the untimed signature flips (byte, mask)
+# the ISS driver makes, byte 0 being the metered reject's (None: in the C test).
+PARAMS = {
+    'Ip3': dict(ov=OV_IP3, pad=225, slot=160, ctx=64, key_b='.nistkat', flips=None),
+    'Ip': dict(ov=OV_IP, pad=264, slot=128, ctx=64, key_b=None,
+               flips=((67, 1), (68, 1), (90, 1), (111, 1), (112, 1), (120, 1), (127, 1))),
+    'Is': dict(ov=OV_IS, pad=0, slot=96, ctx=32, key_b=None,
+               flips=((47, 0x10), (48, 1), (60, 1), (79, 0x10), (80, 1), (88, 1), (95, 1))),
+}
+SCRATCH = (('rkbuf', 352), ('blkbuf', 384), ('aes128hw_mem_scratch', 96), ('aes128hw_bank_verify_slot', 32))
+
+
+def carr(name, data, per_line=12):
+    out = [f'static const uint8_t {name}[{len(data)}] __attribute__((aligned(4))) = {{']
+    for i in range(0, len(data), per_line):
+        out.append('    ' + ' '.join(f'0x{b:02x},' for b in data[i:i + per_line]))
+    out.append('};')
+    return '\n'.join(out)
+
+
+def load_hash(elf):
+    from elftools.elf.elffile import ELFFile
+    h = hashlib.sha256()
+    for s in ELFFile(open(elf, 'rb')).iter_segments():
+        if s['p_type'] == 'PT_LOAD':
+            h.update(b'%x %x %x ' % (s['p_paddr'], s['p_filesz'], s['p_memsz']) + s.data())
+    return h.hexdigest()[:16]
+
+
+def weighted_entries(ov, sig):
+    """First and last P3 entry whose weight o_i * o_j is non-zero under this signature."""
+    if ov.gf == 16:
+        o = [(sig[(ov.v + k) // 2] >> 4 * ((ov.v + k) % 2)) & 0xF for k in range(ov.o)]
+    else:
+        o = sig[ov.v:ov.v + ov.o]
+    ks = [k for k, (i, j) in enumerate((i, j) for i in range(ov.o) for j in range(i, ov.o)) if o[i] and o[j]]
+    return ks[0], ks[-1]
+
+
+def vectors(param):
+    p, ov = PARAMS[param], PARAMS[param]['ov']
+    src = os.path.join(REPO, 'sw/acc/crypto/handwritten/test_data', f'testvectors-{param}-pkc-skc')
+    b_file = src + (p['key_b'] or '')
+    with contextlib.redirect_stdout(sys.stderr):
+        cases = [tuple(bytes(x) for x in c) for c in parse_pkc_test_data_file(src, ov)]
+        b = tuple(bytes(x) for x in parse_pkc_test_data_file(b_file, ov)[0]) if p['key_b'] else cases[0]
+    cpk_a, _, msg11, sig11 = cases[11]
+    cpk_0, _, msg0, sig0 = cases[0]
+    cpk_b, _, msg_b, sig_b = b
+    assert cpk_b != cpk_a, 'key B must differ from key A'
+    assert cpk_0 in (cpk_a, cpk_b), 'case 0 must be signed under key A or key B'
+    assert len(cpk_a) == len(cpk_b) == ov.cpk_size and len(msg11) == MSG_MAX and len(msg0) == 0
+    assert all(len(s) == ov.signature_bytes <= p['slot'] for s in (sig11, sig0, sig_b)) and len(msg_b) <= MSG_MAX
+    key_bytes = ov.cpk_size + p['pad']
+    assert key_bytes % 4 == 0, 'keys travel as whole words'
+    own_b = cpk_0 == cpk_a          # case 0 is key A's, so key B brings its own message
+    key = lambda c: c + bytes(p['pad'])
+    msg = lambda m: m + bytes(-len(m) % 32)
+    sig = lambda s: s + bytes(p['slot'] - len(s))
+    h = lambda f: hashlib.sha256(open(f, 'rb').read()).hexdigest()[:16]
+    print(f'// Generated by gen_verify_oneshot_testvec.py --vectors{"" if param == "Ip3" else " --param " + param}; '
+          'do not edit.')
+    print(f'// key A = {os.path.basename(src)} (sha256 {h(src)}..) {"cases 11 and 0" if own_b else "case 11"}; '
+          f'key B = {os.path.basename(b_file)} {"key 0" if p["key_b"] else "case 0"} (sha256 {h(b_file)}..).')
+    print('#include <stdint.h>')
+    print(f'#define VERIFY_ONESHOT_CPK_LEN {ov.cpk_size}u')
+    print(f'#define VERIFY_ONESHOT_KEY_BYTES {key_bytes}u')
+    print(f'#define VERIFY_ONESHOT_SIG_SLOT {p["slot"]}u')
+    print(f'#define VERIFY_ONESHOT_MSG11_LEN {len(msg11)}u')
+    if own_b:
+        print(f'#define VERIFY_ONESHOT_MSGB_LEN {len(msg_b)}u')
+    else:
+        print('#define VERIFY_ONESHOT_CASE0_KEY_B 1')
+    if p['flips']:
+        e = ov.pub_m_byte
+        first, last = weighted_entries(ov, sig11)
+        print(f'// plan: key A corrupted at pk_seed byte 3, P3 entry {first} byte 0, entry {last} byte {e - 1}')
+        print('#define VERIFY_ONESHOT_FLIPS ' + ', '.join(f'{{{x}, {m:#04x}}}' for x, m in p['flips']))
+        print(f'#define VERIFY_ONESHOT_CORRUPT 3, {16 + first * e}, {16 + last * e + e - 1}')
+    print(carr('kKeyA', key(cpk_a)))
+    print(carr('kKeyB', key(cpk_b)))
+    print(carr('kMsg11', msg(msg11)))
+    print(carr('kSig11', sig(sig11)))
+    print(carr('kSig0', sig(sig0)))
+    if own_b:
+        print(carr('kMsgB', msg(msg_b)))
+        print(carr('kSigB', sig(sig_b)))
+
+
+def geom(param, app, elf):
+    p = PARAMS[param]
+    s = _kg_objdump_syms(elf)
+    for k in ('hdr', 'sig', 'msg', 'cpk', 'accctx', 'oil', 'target', 'seed', '_dmem_data_end'):
+        if k not in s:
+            raise SystemExit(f'{elf}: no symbol {k}')
+    if s['cpk'] + p['ov'].cpk_size + p['pad'] > s['_dmem_data_end']:
+        raise SystemExit('cpk + padding must lie inside the linked image')
+    if s['msg'] + MSG_MAX > s['cpk'] or s['sig'] + p['slot'] > s['msg']:
+        raise SystemExit('sig / msg slots overlap their neighbours')
+    if any(s[k] % 4 for k in ('hdr', 'sig', 'msg', 'cpk')):
+        raise SystemExit('the host writes whole words: slots must be word aligned')
+    print(f'// Generated by gen_verify_oneshot_testvec.py --geom for {app}; do not edit.')
+    print(f'// ELF {os.path.basename(elf)} loadable image sha256 {load_hash(elf)}..; linked end {s["_dmem_data_end"]:#x}.')
+    print('#include <stdint.h>')
+    for k, n in (('hdr', 'HDR'), ('sig', 'SIG'), ('msg', 'MSG'), ('cpk', 'CPK'), ('_dmem_data_end', 'DATA_END')):
+        print(f'#define VERIFY_ONESHOT_{n}_ADDR {s[k]:#x}u')
+    # mutable state only (as the ISS harness poisons): context blocks and this arm's
+    # scratch; never the AES/GF constant tables
+    ivals = [(s['oil'], p['ctx']), (s['accctx'], p['ctx']), (s['target'], p['ctx']), (s['seed'], 32)]
+    ivals += [(s[k], n) for k, n in SCRATCH if k in s]
+    if 'sfk_stack' in s:
+        ivals.append((s['sfk_stack'], s['sfk_stack_end'] - s['sfk_stack']))
+    ivals.sort()
+    for (x0, n0), (x1, _) in zip(ivals, ivals[1:]):
+        if x0 + n0 > x1:
+            raise SystemExit(f'overlapping poison intervals {ivals}')
+    if any(x % 4 or n % 4 or x + n > s['_dmem_data_end'] for x, n in ivals):
+        raise SystemExit(f'poison intervals must be whole words inside the image: {ivals}')
+    print(f'#define VERIFY_ONESHOT_POISON_COUNT {len(ivals)}u')
+    print('static const struct { uint32_t addr; uint32_t len; } kPoison[] = {')
+    for x, n in ivals:
+        print(f'    {{{x:#x}u, {n}u}},')
+    print('};')
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument('--vectors', action='store_true', help='emit verify_oneshot_<param>_testvec.h')
+    ap.add_argument('--geom', action='store_true', help='emit verify_oneshot_geom_<app>.h for --elf')
+    ap.add_argument('--param', choices=sorted(PARAMS),
+                    help='parameter set (default: Ip3 for --vectors, the one in --app for --geom)')
+    ap.add_argument('--app', default='', help='chip app name, ov_<param>_verify_full_<tier>')
+    ap.add_argument('--elf', default='', help="that app's ELF")
+    a = ap.parse_args()
+    if a.vectors == a.geom:
+        raise SystemExit('pick --vectors or --geom')
+    if a.vectors:
+        vectors(a.param or 'Ip3')
+    elif not (a.app and a.elf):
+        raise SystemExit('--geom needs --app and --elf')
+    else:
+        named = (a.app.split('_') + [''])[1]          # ov_<param>_verify_full_<tier>
+        param = a.param or named
+        if param not in PARAMS or (named in PARAMS and named != param):
+            raise SystemExit(f'--app {a.app}: --param must name its parameter set ({", ".join(PARAMS)})')
+        geom(param, a.app, a.elf)
+
+
+if __name__ == '__main__':
+    main()

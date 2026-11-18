@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+verify,Is,bngfaes,full,0,PASS,163439,165544
+verify,Is,bngfaes,full,1,PASS,163445,165552
+verify,Is,bngfaes,full,2,PASS,163445,165552
+verify,Is,bngfaes,full,3,PASS,163445,165552
+verify,Is,bngfaes,full,4,PASS,163445,165552
+verify,Is,bngfaes,full,5,PASS,163445,165552
+verify,Is,bngfaes,full,6,PASS,163471,165579
+verify,Is,bngfaes,full,7,PASS,163498,165607
+verify,Is,bngfaes,full,8,PASS,163552,165663
+verify,Is,bngfaes,full,9,PASS,163660,165775
+verify,Is,bngfaes,full,10,PASS,163876,165999
+verify,Is,bngfaes,full,11,PASS,164308,166447

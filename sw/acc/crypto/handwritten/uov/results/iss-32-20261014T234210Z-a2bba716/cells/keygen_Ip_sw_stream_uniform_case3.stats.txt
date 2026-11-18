@@ -1,0 +1,2 @@
+executed 125688802 instructions in 145705767 cycles
+# elf: sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream_uniform/ov-Ip-keygen_stream_uniform_sw.elf

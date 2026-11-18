@@ -1,0 +1,3 @@
+[PASS] Is/bngfonly case2: cpk==KAT (66,576B) csk==sk  cycles=146,014,215
+
+=== Is/bngfonly: 1 pass, 0 fail ===

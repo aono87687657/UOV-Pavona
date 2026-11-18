@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+keygen,Ip,bnaesonly,sp,0,PASS,39216370,40127154
+keygen,Ip,bnaesonly,sp,1,PASS,39216370,40127154
+keygen,Ip,bnaesonly,sp,2,PASS,39216370,40127154
+keygen,Ip,bnaesonly,sp,3,PASS,39216370,40127154
+keygen,Ip,bnaesonly,sp,4,PASS,39216370,40127154
+keygen,Ip,bnaesonly,sp,5,PASS,39216370,40127154
+keygen,Ip,bnaesonly,sp,6,PASS,39216370,40127154
+keygen,Ip,bnaesonly,sp,7,PASS,39216370,40127154
+keygen,Ip,bnaesonly,sp,8,PASS,39216370,40127154
+keygen,Ip,bnaesonly,sp,9,PASS,39216370,40127154
+keygen,Ip,bnaesonly,sp,10,PASS,39216370,40127154
+keygen,Ip,bnaesonly,sp,11,PASS,39216370,40127154

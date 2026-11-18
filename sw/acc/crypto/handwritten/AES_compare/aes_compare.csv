@@ -1,0 +1,7 @@
+variant,op,bytes_per_call,datapath,op_cycles,setup_cycles,cycles_per_byte,commit
+ISE,keyschedule,,256-bit,10,8,,6382387d78-dirty
+ISE,encrypt,32,256-bit dual-block,11,8,0.344,6382387d78-dirty
+compute-GF,keyschedule,,256-bit,731,26,,6382387d78-dirty
+compute-GF,encrypt,32,256-bit dual-block,923,40,28.844,6382387d78-dirty
+T-table,keyschedule,,32-bit GPR,492,7,,6382387d78-dirty
+T-table,encrypt,16,32-bit GPR,1147,9,71.688,6382387d78-dirty

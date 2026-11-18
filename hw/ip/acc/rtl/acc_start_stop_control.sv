@@ -34,7 +34,7 @@ module acc_start_stop_control
   import prim_mubi_pkg::*;
 #(
   // Enabling PQC hardware support with vector ISA extension
-  parameter bit AccPQCEn = 1'b1,
+  parameter bit AccPQCEn = 1'b0,
   // Disable URND advance when not in use. Useful for SCA only.
   parameter bit SecMuteUrnd = 1'b0,
   // Skip URND re-seed at the start of the operation. Useful for SCA only.

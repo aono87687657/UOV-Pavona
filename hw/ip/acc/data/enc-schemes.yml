@@ -455,3 +455,46 @@ wcsr:
     fixed:
       bits: 30-28
       value: bxxx
+
+# Used for bn.gfmul variants
+bngfmul:
+  parents:
+    - custom1
+    - wdr3
+    - funct3(funct3=b110)  # Using unused funct3 value
+  fields:
+    # field_size: 31-30   # 00=GF16(4-bit), 01=GF256(8-bit), 10=GF65536(16-bit), 11=reserved
+    # acc: 29             # 0=basic (pure product), 1=accumulate (.acc/.acch)
+    # zero_acc: 28        # 0=normal, 1=zero accumulator (.z)
+    # vxv: 27             # 0=Vector×Scalar, 1=Vector×Vector pairwise
+    # inc: 26             # 0=no auto-increment (still indexes via mod1), 1=read wrs2[mod1] and auto-increment mod1
+    # acc_sel: 25         # 0=accumulate in ACC, 1=accumulate in ACCH (.acch; only valid with acc=1)
+    type: 31-25
+
+# Used for AES encryption round instructions
+bnaes_enc:
+  parents:
+    - rv(opcode=b11101)
+    - funct3(funct3=b010)  # Using available funct3 value
+    - wdr3
+  fields:
+    round_type: 31-30   # 00=zero, 01=middle, 10=final, 11=key_schedule
+    swap_endian: 29     # 0=disabled, 1=swap plaintext bytes per 128-bit lane before AddRoundKey
+    fixed:
+      bits: 28-25
+      value: bxxxx
+
+# Used for AES key schedule forward instruction
+bnaes_kf:
+  parents:
+    - rv(opcode=b11101)
+    - funct3(funct3=b010)  # Using available funct3 value
+  fields:
+    round_type: 31-30   # 00=zero, 01=middle, 10=final, 11=key_schedule
+    wrs: 24-20          # Source register (current round key)
+    imm: 19-15          # Round number immediate (unsigned)
+    wrd: 11-7           # Destination register (next round key)
+    fixed:
+      bits: 29-25
+      value: b0xxxx
+

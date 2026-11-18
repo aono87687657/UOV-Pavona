@@ -1,0 +1,233 @@
+--------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1.1 (lin64) Build 2960000 Wed Aug  5 22:57:21 MDT 2020
+| Date         : Fri Nov  6 13:14:01 2026
+| Host         : anonymous running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_timing -file ../../../reports/FPGA-Vivado/acc_core_pqc+mul_reg/timing.txt
+| Design       : acc_core
+| Device       : 7k160t-fbg676
+| Speed File   : -1  PRODUCTION 1.12 2017-02-17
+--------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.028ns  (required time - arrival time)
+  Source:                 u_acc_instruction_fetch/u_rf_predec_bignum_flop/q_o_reg[63]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@14.706ns period=29.412ns})
+  Destination:            u_acc_rf_bignum/gen_rf_bignum_ff.u_acc_rf_bignum_inner/g_rf[16].rf_reg[16][307]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@14.706ns period=29.412ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            29.412ns  (clk_i rise@29.412ns - clk_i rise@0.000ns)
+  Data Path Delay:        29.419ns  (logic 8.587ns (29.189%)  route 20.832ns (70.811%))
+  Logic Levels:           66  (CARRY4=40 DSP48E1=1 LUT3=6 LUT4=4 LUT5=4 LUT6=11)
+  Clock Path Skew:        0.102ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.399ns = ( 30.811 - 29.412 ) 
+    Source Clock Delay      (SCD):    1.379ns
+    Clock Pessimism Removal (CPR):    0.082ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=16699, unset)        1.379     1.379    u_acc_instruction_fetch/u_rf_predec_bignum_flop/clk_i
+    SLICE_X74Y125        FDCE                                         r  u_acc_instruction_fetch/u_rf_predec_bignum_flop/q_o_reg[63]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X74Y125        FDCE (Prop_fdce_C_Q)         0.308     1.687 r  u_acc_instruction_fetch/u_rf_predec_bignum_flop/q_o_reg[63]/Q
+                         net (fo=315, routed)         3.136     4.823    u_acc_instruction_fetch/u_rf_predec_bignum_flop/Q[63]
+    SLICE_X78Y2          LUT4 (Prop_lut4_I2_O)        0.053     4.876 r  u_acc_instruction_fetch/u_rf_predec_bignum_flop/u_rd_mux_b/out_o0_inferred__42/dmem_wdata_o[43]_INST_0_i_12/O
+                         net (fo=1, routed)           0.527     5.403    u_acc_instruction_fetch/u_rf_predec_bignum_flop/u_rd_mux_b/out_o0_inferred__42/dmem_wdata_o[43]_INST_0_i_12_n_0
+    SLICE_X78Y1          LUT6 (Prop_lut6_I0_O)        0.053     5.456 r  u_acc_instruction_fetch/u_rf_predec_bignum_flop/u_rd_mux_b/out_o0_inferred__42/dmem_wdata_o[43]_INST_0_i_8/O
+                         net (fo=1, routed)           0.379     5.836    u_acc_instruction_fetch/u_rf_predec_bignum_flop/u_rd_mux_b/out_o0_inferred__42/dmem_wdata_o[43]_INST_0_i_8_n_0
+    SLICE_X74Y1          LUT6 (Prop_lut6_I5_O)        0.053     5.889 r  u_acc_instruction_fetch/u_rf_predec_bignum_flop/u_rd_mux_b/out_o0_inferred__42/dmem_wdata_o[43]_INST_0_i_4/O
+                         net (fo=1, routed)           0.412     6.301    u_acc_instruction_fetch/u_rf_predec_bignum_flop/u_rd_mux_b/out_o0_inferred__42/dmem_wdata_o[43]_INST_0_i_4_n_0
+    SLICE_X73Y2          LUT6 (Prop_lut6_I4_O)        0.053     6.354 r  u_acc_instruction_fetch/u_rf_predec_bignum_flop/u_rd_mux_b/out_o0_inferred__42/dmem_wdata_o[43]_INST_0_i_2/O
+                         net (fo=1, routed)           0.937     7.291    u_acc_instruction_fetch/u_rf_predec_bignum_flop/u_rd_mux_b/out_o0_inferred__42/dmem_wdata_o[43]_INST_0_i_2_n_0
+    SLICE_X73Y26         LUT6 (Prop_lut6_I0_O)        0.053     7.344 r  u_acc_instruction_fetch/u_rf_predec_bignum_flop/u_rd_mux_b/out_o0_inferred__42/dmem_wdata_o[43]_INST_0_i_1/O
+                         net (fo=10, routed)          1.113     8.457    u_acc_instruction_fetch/u_rf_predec_bignum_flop/rf_bignum_rd_data_b_intg[43]
+    SLICE_X83Y38         LUT5 (Prop_lut5_I0_O)        0.053     8.510 r  u_acc_instruction_fetch/u_rf_predec_bignum_flop/gen_mults[6].product_full_i_223/O
+                         net (fo=1, routed)           0.298     8.808    u_acc_instruction_fetch/u_rf_predec_bignum_flop/gen_mults[6].product_full_i_223_n_0
+    SLICE_X83Y38         LUT6 (Prop_lut6_I5_O)        0.053     8.861 f  u_acc_instruction_fetch/u_rf_predec_bignum_flop/gen_mults[6].product_full_i_173/O
+                         net (fo=3, routed)           0.732     9.594    u_acc_instruction_fetch/u_rf_predec_bignum_flop/q_o_reg[1]_rep__0_20
+    SLICE_X79Y38         LUT6 (Prop_lut6_I3_O)        0.053     9.647 f  u_acc_instruction_fetch/u_rf_predec_bignum_flop/gen_mults[1].product_full_i_152/O
+                         net (fo=5, routed)           1.080    10.727    u_acc_instruction_fetch/u_rf_predec_bignum_flop/q_o_reg[1]_rep__0_19
+    SLICE_X61Y41         LUT4 (Prop_lut4_I0_O)        0.053    10.780 r  u_acc_instruction_fetch/u_rf_predec_bignum_flop/gen_mults[4].product_full_i_63/O
+                         net (fo=1, routed)           0.604    11.384    u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/gen_mults[4].product_full_3
+    SLICE_X60Y41         LUT6 (Prop_lut6_I3_O)        0.053    11.437 r  u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/gen_mults[4].product_full_i_12/O
+                         net (fo=1, routed)           0.901    12.338    u_acc_mac_bignum/gen_mul_pqc.mul/gen_mults[4].product_full_1[4]
+    DSP48_X2Y16          DSP48E1 (Prop_dsp48e1_B[4]_P[16])
+                                                      3.098    15.436 r  u_acc_mac_bignum/gen_mul_pqc.mul/gen_mults[4].product_full/P[16]
+                         net (fo=3, routed)           0.858    16.294    u_acc_mac_bignum/gen_mul_pqc.mul/gen_mults[4].product_full_0[16]
+    SLICE_X48Y41         LUT3 (Prop_lut3_I0_O)        0.065    16.359 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q[178]_i_26/O
+                         net (fo=2, routed)           0.602    16.961    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q[178]_i_26_n_0
+    SLICE_X48Y41         LUT4 (Prop_lut4_I3_O)        0.170    17.131 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q[178]_i_29/O
+                         net (fo=1, routed)           0.000    17.131    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q[178]_i_29_n_0
+    SLICE_X48Y41         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.324    17.455 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[178]_i_22/CO[3]
+                         net (fo=1, routed)           0.000    17.455    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[178]_i_22_n_0
+    SLICE_X48Y42         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    17.513 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[182]_i_22/CO[3]
+                         net (fo=1, routed)           0.000    17.513    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[182]_i_22_n_0
+    SLICE_X48Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    17.571 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[186]_i_22/CO[3]
+                         net (fo=1, routed)           0.000    17.571    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[186]_i_22_n_0
+    SLICE_X48Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    17.629 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[196]_i_20/CO[3]
+                         net (fo=1, routed)           0.000    17.629    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[196]_i_20_n_0
+    SLICE_X48Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    17.687 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[200]_i_21/CO[3]
+                         net (fo=1, routed)           0.000    17.687    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[200]_i_21_n_0
+    SLICE_X48Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    17.745 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[204]_i_22/CO[3]
+                         net (fo=1, routed)           0.000    17.745    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[204]_i_22_n_0
+    SLICE_X48Y47         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    17.803 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[204]_i_20/CO[3]
+                         net (fo=1, routed)           0.000    17.803    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[204]_i_20_n_0
+    SLICE_X48Y48         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    17.861 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[211]_i_17/CO[3]
+                         net (fo=1, routed)           0.000    17.861    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[211]_i_17_n_0
+    SLICE_X48Y49         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    17.919 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[215]_i_20/CO[3]
+                         net (fo=1, routed)           0.001    17.920    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[215]_i_20_n_0
+    SLICE_X48Y50         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    17.978 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[219]_i_20/CO[3]
+                         net (fo=1, routed)           0.000    17.978    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[219]_i_20_n_0
+    SLICE_X48Y51         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    18.036 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[223]_i_20/CO[3]
+                         net (fo=1, routed)           0.000    18.036    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[223]_i_20_n_0
+    SLICE_X48Y52         CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.136    18.172 r  u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q_reg[226]_i_18/O[2]
+                         net (fo=4, routed)           0.820    18.992    gen_mul_pqc.mul/partial32[1]_18[62]
+    SLICE_X46Y53         LUT3 (Prop_lut3_I0_O)        0.162    19.154 r  gen_acch_wr_en.acch_intg_q[29]_i_7/O
+                         net (fo=2, routed)           0.477    19.631    gen_acch_wr_en.acch_intg_q[29]_i_7_n_0
+    SLICE_X46Y53         LUT4 (Prop_lut4_I0_O)        0.164    19.795 r  gen_acch_wr_en.acch_intg_q[29]_i_11/O
+                         net (fo=1, routed)           0.000    19.795    u_acc_mac_bignum/gen_mul_pqc.mul/acc_intg_q[108]_i_7_0[3]
+    SLICE_X46Y53         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.216    20.011 r  u_acc_mac_bignum/gen_mul_pqc.mul/gen_acch_wr_en.acch_intg_q_reg[29]_i_6/CO[3]
+                         net (fo=1, routed)           0.000    20.011    u_acc_mac_bignum/gen_mul_pqc.mul/gen_acch_wr_en.acch_intg_q_reg[29]_i_6_n_0
+    SLICE_X46Y54         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.212    20.223 r  u_acc_mac_bignum/gen_mul_pqc.mul/gen_acch_wr_en.acch_intg_q_reg[40]_i_6/O[1]
+                         net (fo=4, routed)           0.715    20.937    u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/result_640[65]
+    SLICE_X47Y50         LUT6 (Prop_lut6_I3_O)        0.155    21.092 r  u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/acc_intg_q[196]_i_18/O
+                         net (fo=1, routed)           0.293    21.386    u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/acc_intg_q[196]_i_18_n_0
+    SLICE_X47Y50         LUT5 (Prop_lut5_I4_O)        0.053    21.439 r  u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/acc_intg_q[196]_i_7/O
+                         net (fo=4, routed)           0.607    22.045    u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/q_o_reg[14]_0[153]
+    SLICE_X45Y54         LUT3 (Prop_lut3_I0_O)        0.053    22.098 r  u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/gen_mac_adder_pqc.adder/acc_intg_q[196]_i_10/O
+                         net (fo=1, routed)           0.000    22.098    u_acc_instruction_fetch_n_3243
+    SLICE_X45Y54         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.233    22.331 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[196]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    22.331    gen_mac_adder_pqc.adder/acc_intg_q_reg[196]_i_5_n_0
+    SLICE_X45Y55         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    22.389 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[200]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    22.389    gen_mac_adder_pqc.adder/acc_intg_q_reg[200]_i_5_n_0
+    SLICE_X45Y56         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    22.447 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[204]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    22.447    gen_mac_adder_pqc.adder/acc_intg_q_reg[204]_i_5_n_0
+    SLICE_X45Y57         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    22.505 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[208]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    22.505    gen_mac_adder_pqc.adder/acc_intg_q_reg[208]_i_5_n_0
+    SLICE_X45Y58         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    22.563 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[211]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    22.563    gen_mac_adder_pqc.adder/acc_intg_q_reg[211]_i_5_n_0
+    SLICE_X45Y59         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    22.621 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[215]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    22.621    gen_mac_adder_pqc.adder/acc_intg_q_reg[215]_i_5_n_0
+    SLICE_X45Y60         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    22.679 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[219]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    22.679    gen_mac_adder_pqc.adder/acc_intg_q_reg[219]_i_5_n_0
+    SLICE_X45Y61         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    22.737 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[223]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    22.737    gen_mac_adder_pqc.adder/acc_intg_q_reg[223]_i_5_n_0
+    SLICE_X45Y62         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    22.795 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[226]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    22.795    gen_mac_adder_pqc.adder/acc_intg_q_reg[226]_i_5_n_0
+    SLICE_X45Y63         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    22.853 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[237]_i_6/CO[3]
+                         net (fo=1, routed)           0.000    22.853    gen_mac_adder_pqc.adder/acc_intg_q_reg[237]_i_6_n_0
+    SLICE_X45Y64         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    22.911 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[241]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    22.911    gen_mac_adder_pqc.adder/acc_intg_q_reg[241]_i_5_n_0
+    SLICE_X45Y65         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    22.969 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[245]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    22.969    gen_mac_adder_pqc.adder/acc_intg_q_reg[245]_i_5_n_0
+    SLICE_X45Y66         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.027 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[249]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    23.027    gen_mac_adder_pqc.adder/acc_intg_q_reg[249]_i_5_n_0
+    SLICE_X45Y67         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.085 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[252]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    23.085    gen_mac_adder_pqc.adder/acc_intg_q_reg[252]_i_5_n_0
+    SLICE_X45Y68         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.143 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[256]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    23.143    gen_mac_adder_pqc.adder/acc_intg_q_reg[256]_i_5_n_0
+    SLICE_X45Y69         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.201 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[260]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    23.201    gen_mac_adder_pqc.adder/acc_intg_q_reg[260]_i_5_n_0
+    SLICE_X45Y70         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.259 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[264]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    23.259    gen_mac_adder_pqc.adder/acc_intg_q_reg[264]_i_5_n_0
+    SLICE_X45Y71         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.317 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[274]_i_6/CO[3]
+                         net (fo=1, routed)           0.000    23.317    gen_mac_adder_pqc.adder/acc_intg_q_reg[274]_i_6_n_0
+    SLICE_X45Y72         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.375 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[278]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    23.375    gen_mac_adder_pqc.adder/acc_intg_q_reg[278]_i_5_n_0
+    SLICE_X45Y73         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.433 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[282]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    23.433    gen_mac_adder_pqc.adder/acc_intg_q_reg[282]_i_5_n_0
+    SLICE_X45Y74         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.491 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[286]_i_5/CO[3]
+                         net (fo=1, routed)           0.008    23.499    gen_mac_adder_pqc.adder/acc_intg_q_reg[286]_i_5_n_0
+    SLICE_X45Y75         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.557 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[289]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    23.557    gen_mac_adder_pqc.adder/acc_intg_q_reg[289]_i_5_n_0
+    SLICE_X45Y76         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.615 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[293]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    23.615    gen_mac_adder_pqc.adder/acc_intg_q_reg[293]_i_5_n_0
+    SLICE_X45Y77         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.673 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[297]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    23.673    gen_mac_adder_pqc.adder/acc_intg_q_reg[297]_i_5_n_0
+    SLICE_X45Y78         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058    23.731 r  gen_mac_adder_pqc.adder/acc_intg_q_reg[301]_i_5/CO[3]
+                         net (fo=1, routed)           0.000    23.731    u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/acc_intg_q[302]_i_3_1[0]
+    SLICE_X45Y79         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.213    23.944 r  u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/gen_mac_adder_pqc.adder/acc_intg_q_reg[304]_i_8/O[1]
+                         net (fo=1, routed)           0.419    24.363    u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/gen_mac_adder_pqc.adder/acc_intg_q_reg[304]_i_8_n_6
+    SLICE_X47Y79         LUT5 (Prop_lut5_I1_O)        0.152    24.515 r  u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/acc_intg_q[303]_i_3/O
+                         net (fo=7, routed)           0.819    25.334    u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/u_acc_mac_bignum/p_0_in[126]
+    SLICE_X63Y80         LUT3 (Prop_lut3_I2_O)        0.053    25.387 r  u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/g_rf[0].rf[0][303]_i_17/O
+                         net (fo=1, routed)           0.613    26.000    u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/g_rf[0].rf[0][303]_i_17_n_0
+    SLICE_X70Y83         LUT6 (Prop_lut6_I5_O)        0.053    26.053 r  u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/g_rf[0].rf[0][303]_i_10/O
+                         net (fo=1, routed)           0.503    26.556    u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/mac_bignum_operation_result[254]
+    SLICE_X71Y87         LUT5 (Prop_lut5_I4_O)        0.053    26.609 r  u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/g_rf[0].rf[0][303]_i_6/O
+                         net (fo=1, routed)           0.808    27.417    u_acc_rnd/u_xoshiro256pp/rf_bignum_wr_data_no_intg_ctrl[126]
+    SLICE_X72Y103        LUT3 (Prop_lut3_I2_O)        0.053    27.470 r  u_acc_rnd/u_xoshiro256pp/g_rf[0].rf[0][303]_i_3/O
+                         net (fo=4, routed)           0.906    28.377    u_acc_rnd/u_xoshiro256pp/sec_wipe_wdr_q_reg_8[24]
+    SLICE_X79Y104        LUT6 (Prop_lut6_I1_O)        0.053    28.430 r  u_acc_rnd/u_xoshiro256pp/g_rf[0].rf[0][307]_i_6/O
+                         net (fo=1, routed)           0.558    28.988    u_acc_rnd/u_xoshiro256pp/g_rf[0].rf[0][307]_i_6_n_0
+    SLICE_X82Y104        LUT6 (Prop_lut6_I0_O)        0.053    29.041 r  u_acc_rnd/u_xoshiro256pp/g_rf[0].rf[0][307]_i_3/O
+                         net (fo=1, routed)           0.487    29.528    u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/g_rf[0].rf_reg[0][311]_0[2]
+    SLICE_X84Y108        LUT3 (Prop_lut3_I1_O)        0.053    29.581 r  u_acc_instruction_fetch/u_insn_fetch_resp_data_intg_flop/g_rf[0].rf[0][307]_i_1/O
+                         net (fo=32, routed)          1.217    30.798    u_acc_rf_bignum/gen_rf_bignum_ff.u_acc_rf_bignum_inner/wr_data_intg_mux_out[307]
+    SLICE_X105Y115       FDRE                                         r  u_acc_rf_bignum/gen_rf_bignum_ff.u_acc_rf_bignum_inner/g_rf[16].rf_reg[16][307]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     29.412    29.412 r  
+                                                      0.000    29.412 r  clk_i (IN)
+                         net (fo=16699, unset)        1.399    30.811    u_acc_rf_bignum/gen_rf_bignum_ff.u_acc_rf_bignum_inner/clk_i
+    SLICE_X105Y115       FDRE                                         r  u_acc_rf_bignum/gen_rf_bignum_ff.u_acc_rf_bignum_inner/g_rf[16].rf_reg[16][307]/C
+                         clock pessimism              0.082    30.893    
+                         clock uncertainty           -0.035    30.858    
+    SLICE_X105Y115       FDRE (Setup_fdre_C_D)       -0.032    30.826    u_acc_rf_bignum/gen_rf_bignum_ff.u_acc_rf_bignum_inner/g_rf[16].rf_reg[16][307]
+  -------------------------------------------------------------------
+                         required time                         30.826    
+                         arrival time                         -30.798    
+  -------------------------------------------------------------------
+                         slack                                  0.028    
+
+
+
+

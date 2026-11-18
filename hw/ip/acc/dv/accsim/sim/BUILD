@@ -155,6 +155,7 @@ py_library(
         ":ext_regs",
         ":flags",
         ":gpr",
+        ":kmac",
         ":loop",
         ":reg",
         ":trace",
@@ -181,10 +182,17 @@ py_library(
 )
 
 py_library(
+    name = "kmac",
+    srcs = ["kmac.py"],
+    deps = [requirement("pycryptodome")],
+)
+
+py_library(
     name = "wsr",
     srcs = ["wsr.py"],
     deps = [
         ":ext_regs",
+        ":kmac",
         ":trace",
         requirement("pycryptodome"),
     ],

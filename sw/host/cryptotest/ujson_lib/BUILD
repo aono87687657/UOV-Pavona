@@ -63,6 +63,11 @@ ujson_rust(
 )
 
 ujson_rust(
+    name = "uov_commands_rust",
+    srcs = ["//sw/device/tests/crypto/cryptotest/json:uov_commands"],
+)
+
+ujson_rust(
     name = "mlkem_commands_rust",
     srcs = ["//sw/device/tests/crypto/cryptotest/json:mlkem_commands"],
 )
@@ -89,6 +94,7 @@ rust_library(
         "src/aes_gcm_commands.rs",
         "src/aes_kwp_commands.rs",
         "src/commands.rs",
+        "src/uov_commands.rs",
         "src/drbg_commands.rs",
         "src/ecdh_commands.rs",
         "src/ecdsa_commands.rs",
@@ -118,6 +124,7 @@ rust_library(
         ":rsa_commands_rust",
         ":sphincsplus_commands_rust",
         ":ed25519_commands_rust",
+        ":uov_commands_rust",
     ],
     rustc_env = {
         "commands_loc": "$(execpath :commands_rust)",
@@ -135,6 +142,7 @@ rust_library(
         "rsa_commands_loc": "$(execpath :rsa_commands_rust)",
         "sphincsplus_commands_loc": "$(execpath :sphincsplus_commands_rust)",
         "ed25519_commands_loc": "$(execpath :ed25519_commands_rust)",
+        "uov_commands_loc": "$(execpath :uov_commands_rust)",
     },
     deps = [
         "//sw/host/opentitanlib",

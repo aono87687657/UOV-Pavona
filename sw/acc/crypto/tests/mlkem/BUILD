@@ -9,7 +9,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 load("@ot_python_deps//:requirements.bzl", "requirement")
-load("//rules:acc.bzl", "acc_autogen_sim_test", "acc_binary", "acc_consttime_test", "acc_library", "acc_sim_test")
+load("//rules:acc.bzl", "acc_autogen_sim_test", "acc_binary", "acc_consttime_test", "acc_library")
 
 package(default_visibility = ["//visibility:public"])
 

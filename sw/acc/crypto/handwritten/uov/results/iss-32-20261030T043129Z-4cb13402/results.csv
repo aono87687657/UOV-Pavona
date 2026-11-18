@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+verify,Ip,bngfaes,stream,0,PASS,149278,154873
+verify,Ip,bngfaes,stream,1,PASS,149284,154881
+verify,Ip,bngfaes,stream,2,PASS,149284,154881
+verify,Ip,bngfaes,stream,3,PASS,149284,154881
+verify,Ip,bngfaes,stream,4,PASS,149284,154881
+verify,Ip,bngfaes,stream,5,PASS,149284,154881
+verify,Ip,bngfaes,stream,6,PASS,149310,154908
+verify,Ip,bngfaes,stream,7,PASS,149337,154936
+verify,Ip,bngfaes,stream,8,PASS,149391,154992
+verify,Ip,bngfaes,stream,9,PASS,149499,155104
+verify,Ip,bngfaes,stream,10,PASS,149715,155328
+verify,Ip,bngfaes,stream,11,PASS,150147,155776

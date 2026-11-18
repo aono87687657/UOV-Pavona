@@ -27,4 +27,5 @@ exports_files([
     "mlkem_schema.json",
     "rsa_schema.json",
     "sphincsplus_schema.json",
+    "uov_schema.json",
 ])

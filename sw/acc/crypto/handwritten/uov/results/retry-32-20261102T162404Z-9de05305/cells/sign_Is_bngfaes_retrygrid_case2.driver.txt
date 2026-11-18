@@ -1,0 +1,57 @@
+Loaded 36 testvec case(s) from sw/acc/crypto/handwritten/test_data/testvectors-Is-pkc-skc.retrygrid
+[testvec mode] running cases [2..2] of 36
+
+============================================================
+OV_OV16_160_64_SKC_Sign Test
+============================================================
+Output directory: chip-matrix/retry-32-20261102T162404Z-9de05305/kat/_tmp/sign_Is_bngfaes_ldirect_2
+ELF: sw/acc/crypto/handwritten/uov/dmem32k/sign_ldirect/ov-Is-skc/ov-Is-sign_ldirect_testvec_bngfaes.elf
+Iterations: 1
+
+============================================================
+Test Iteration 1/1
+============================================================
+
+--- Iteration 1 ---
+  testvec salt: b332ca6f4ca87981312c205d99584909
+sk_seed (32B): 934d60b35624d740b30a7f227af2ae7c678e4e04e13c5f509eade2b79aea77e2
+message (32B): b0d9eb4a05a2f24cd929c0b8f165818625bf51be9999c6f9850ab471bb3410a7
+Computing reference (pk_seed, O, S)...
+  pk_seed: 38d091e9d01e3f205c1fb92d4592ee05
+  O matrix size: 3072 bytes
+  S matrix size: 196608 bytes
+Running ACC simulation...
+
+Extracting salt and counter...
+  Salt from DMEM (0x1b60): b332ca6f4ca87981312c205d99584909
+  OK caller inputs intact: sk_seed (32B), msg_len, msg[:32]
+  Counter (GPR x8): 0
+  Target hash t: 8128d74b03daacefaa8c145940dcaad39ad8367efd268ca346abb34088c12122
+
+Replicating signing retry loop (counters 0..0)...
+  Counter 0: L invertible (GE success)
+  Vinegar (first 32 bytes): 639a0c65e0144dd3096b5a5d1dc32e62093e2e4301d387485938265c56fb4296
+  L matrix size: 2048 bytes
+
+Computing Y = batch_quad_trimat_eval(P1, vinegar)...
+  Expected Y: 9614d19b77542dd057497be06687b5b89f728fd97431c8e553f92a5715a3db43
+Computing reference Gaussian elimination...
+Computing reference back-substitution...
+
+Validating results...
+
+[12] Signature verification via public map (ACC-extracted bytes)...
+✓ Verification P(x) vs target hash validation PASSED: all 32 bytes match
+[12] Signature verification PASSED: P(x) == target hash
+[KAT] OK Testvec sig byte-wise MATCH (96 B)
+
+All validations passed!
+
+============================================================
+TEST SUMMARY - OV_OV16_160_64_SKC_Sign
+============================================================
+  Total:  1
+  Passed: 1
+  Failed: 0
+
+ALL TESTS PASSED

@@ -1,0 +1,2 @@
+executed 46689932 instructions in 47751757 cycles
+# elf: sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/ov-Ip3-pkc+skc/ov-Ip3-keygen_stream_bnaesonly.elf

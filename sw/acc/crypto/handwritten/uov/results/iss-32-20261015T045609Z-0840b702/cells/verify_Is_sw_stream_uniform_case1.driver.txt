@@ -1,0 +1,34 @@
+Parsing test data from: sw/acc/crypto/handwritten/test_data/testvectors-Is-pkc-skc
+  Case 1: Null message (sm length = signature length)
+  cpk=66576B, sk=32B, msg=0B, sig=96B
+  Case 2: Message length = 1 bytes
+  cpk=66576B, sk=32B, msg=1B, sig=96B
+  Case 3: Message length = 2 bytes
+  cpk=66576B, sk=32B, msg=2B, sig=96B
+  Case 4: Message length = 4 bytes
+  cpk=66576B, sk=32B, msg=4B, sig=96B
+  Case 5: Message length = 8 bytes
+  cpk=66576B, sk=32B, msg=8B, sig=96B
+  Case 6: Message length = 16 bytes
+  cpk=66576B, sk=32B, msg=16B, sig=96B
+  Case 7: Message length = 32 bytes
+  cpk=66576B, sk=32B, msg=32B, sig=96B
+  Case 8: Message length = 64 bytes
+  cpk=66576B, sk=32B, msg=64B, sig=96B
+  Case 9: Message length = 128 bytes
+  cpk=66576B, sk=32B, msg=128B, sig=96B
+  Case 10: Message length = 256 bytes
+  cpk=66576B, sk=32B, msg=256B, sig=96B
+  Case 11: Message length = 512 bytes
+  cpk=66576B, sk=32B, msg=512B, sig=96B
+  Case 12: Message length = 1024 bytes
+  cpk=66576B, sk=32B, msg=1024B, sig=96B
+Successfully parsed 12 test case(s)
+
+Is streamed verify, case 1 (msglen 1): PASS
+   INIT       21,283,352 insn 25,895,596 cyc
+   UPD r0       36,929 insn   39,394 cyc
+   UPD r14      37,430 insn   39,922 cyc
+   UPD r34      22,365 insn   23,842 cyc
+   FINAL            22 insn       33 cyc
+   TOTAL      21,380,098 insn 25,998,787 cyc

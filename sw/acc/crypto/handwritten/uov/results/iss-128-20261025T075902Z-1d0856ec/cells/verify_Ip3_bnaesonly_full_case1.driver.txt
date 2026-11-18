@@ -1,0 +1,84 @@
+Parsing test data from: sw/acc/crypto/handwritten/test_data/testvectors-Ip3-pkc-skc
+  Case 1: Null message (sm length = signature length)
+  cpk=46591B, sk=32B, msg=0B, sig=135B
+  Case 2: Message length = 1 bytes
+  cpk=46591B, sk=32B, msg=1B, sig=135B
+  Case 3: Message length = 2 bytes
+  cpk=46591B, sk=32B, msg=2B, sig=135B
+  Case 4: Message length = 4 bytes
+  cpk=46591B, sk=32B, msg=4B, sig=135B
+  Case 5: Message length = 8 bytes
+  cpk=46591B, sk=32B, msg=8B, sig=135B
+  Case 6: Message length = 16 bytes
+  cpk=46591B, sk=32B, msg=16B, sig=135B
+  Case 7: Message length = 32 bytes
+  cpk=46591B, sk=32B, msg=32B, sig=135B
+  Case 8: Message length = 64 bytes
+  cpk=46591B, sk=32B, msg=64B, sig=135B
+  Case 9: Message length = 128 bytes
+  cpk=46591B, sk=32B, msg=128B, sig=135B
+  Case 10: Message length = 256 bytes
+  cpk=46591B, sk=32B, msg=256B, sig=135B
+  Case 11: Message length = 512 bytes
+  cpk=46591B, sk=32B, msg=512B, sig=135B
+  Case 12: Message length = 1024 bytes
+  cpk=46591B, sk=32B, msg=1024B, sig=135B
+Successfully parsed 12 test case(s)
+[DMEM profile: 131072 B total, bus 130048, dmem_address 0x80000, layout module hw/ip/acc/util/shared/mem_layout.py]
+[ELF sw/acc/crypto/handwritten/uov/dmem_large/verify_full/ov-Ip3-pkc/ov-Ip3-verify_full_bnaesonly.elf
+ sha256 c4786fa4478dccccf7158041d249a09187acaeccf3a0a3557123c4c2ae2f3718
+ tier by fingerprint bnaesonly; _dmem_data_end 48736; _dmem_bss_end 48736; cpk@0x5a0 msg@0x1a0 sig@0xe0]
+[harness sha256 5cea5ec4abca2ece.. options poison=False tier=bnaesonly stats=False]
+Parsing test data from: sw/acc/crypto/handwritten/test_data/testvectors-Ip3-pkc-skc.nistkat
+  Case 1: Message length = 33 bytes
+  cpk=46591B, sk=32B, msg=33B, sig=135B
+  Case 2: Message length = 66 bytes
+  cpk=46591B, sk=32B, msg=66B, sig=135B
+  Case 3: Message length = 99 bytes
+  cpk=46591B, sk=32B, msg=99B, sig=135B
+  Case 4: Message length = 132 bytes
+  cpk=46591B, sk=32B, msg=132B, sig=135B
+  Case 5: Message length = 165 bytes
+  cpk=46591B, sk=32B, msg=165B, sig=135B
+  Case 6: Message length = 198 bytes
+  cpk=46591B, sk=32B, msg=198B, sig=135B
+  Case 7: Message length = 231 bytes
+  cpk=46591B, sk=32B, msg=231B, sig=135B
+  Case 8: Message length = 264 bytes
+  cpk=46591B, sk=32B, msg=264B, sig=135B
+  Case 9: Message length = 297 bytes
+  cpk=46591B, sk=32B, msg=297B, sig=135B
+  Case 10: Message length = 330 bytes
+  cpk=46591B, sk=32B, msg=330B, sig=135B
+  Case 11: Message length = 363 bytes
+  cpk=46591B, sk=32B, msg=363B, sig=135B
+  Case 12: Message length = 396 bytes
+  cpk=46591B, sk=32B, msg=396B, sig=135B
+Successfully parsed 12 test case(s)
+case 1: msglen 1; sequences 1/1: 6 of 6
+  ok  case 1 accept, reference accepts: result 0 (want 0)
+  ok  case 1 with the resident key corrupted at pk_seed byte 3, reference rejects: result -1 (want -1)
+  ok  case 1 with the resident key corrupted at P3 entry 0 byte 0, reference rejects: result -1 (want -1)
+  ok  case 1 with the resident key corrupted at P3 entry 1034 byte 44, reference rejects: result -1 (want -1)
+  ok  case 1 accept after the key is restored, reference accepts: result 0 (want 0)
+  ok  testvectors-Ip3-pkc-skc.nistkat case 0's signature under case 1's key, reference rejects: result -1 (want -1)
+  ok  case 1's signature under testvectors-Ip3-pkc-skc.nistkat case 0's key, reference rejects: result -1 (want -1)
+  ok  testvectors-Ip3-pkc-skc.nistkat case 0's key accepts its own signature, reference accepts: result 0 (want 0)
+  ok  case 1 accept after its key is restored over testvectors-Ip3-pkc-skc.nistkat case 0's, reference accepts: result 0 (want 0)
+  ok  case 1 sig byte 0 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 1 sig byte 73 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 1 sig byte 74 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 1 sig byte 100 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 1 accept after the flips of bytes 0, 73, 74, 100, reference accepts: result 0 (want 0)
+  ok  case 1 sig byte 118 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 1 sig byte 119 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 1 sig byte 127 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 1 sig byte 134 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 1 accept after the flips of bytes 118, 119, 127, 134, reference accepts: result 0 (want 0)
+  ok  case 1 msg_len 0x401 rejected as a length error (host contract): result -2 (want -2)
+  ok  case 1 msg_len 0x80000000 rejected as a length error (host contract): result -2 (want -2)
+  ok  case 1 msg_len 0xffffffff rejected as a length error (host contract): result -2 (want -2)
+  ok  case 1 accept after the length errors, reference accepts: result 0 (want 0)
+  ok  case 1 accept with non-zero P3 padding (padding must not contribute), reference accepts: result 0 (want 0)
+  ok  cpk unchanged after 24 runs on this image
+IP3 ONESHOT VERIFY PASS: 24 of 24 checks passed

@@ -16,7 +16,7 @@ module acc_predecode
 #(
   parameter int ImemSizeByte = 4096,
   // Enabling PQC hardware support with vector ISA extension
-  parameter bit AccPQCEn = 1'b1,
+  parameter bit AccPQCEn = 1'b0,
 
   localparam int ImemAddrWidth = prim_util_pkg::vbits(ImemSizeByte)
 ) (
@@ -31,6 +31,9 @@ module acc_predecode
   output alu_predec_bignum_t       alu_predec_bignum_o,
   output ispr_predec_bignum_t      ispr_predec_bignum_o,
   output mac_predec_bignum_t       mac_predec_bignum_o,
+`ifdef AES_BIGNUM
+  output aes_predec_bignum_t       aes_predec_bignum_o,
+`endif
   output logic                     lsu_addr_en_predec_o,
   output ctrl_flow_predec_t        ctrl_flow_predec_o,
   output logic [ImemAddrWidth-1:0] ctrl_flow_target_predec_o
@@ -81,6 +84,11 @@ module acc_predecode
 
   logic mac_bignum_op_en;
   logic mac_bignum_acc_rd_en;
+
+`ifdef AES_BIGNUM
+  logic aes_bignum_op_en;
+  logic aes_bignum_key_expand;
+`endif
 
   logic ispr_rd_en;
   logic ispr_wr_en;
@@ -187,6 +195,11 @@ module acc_predecode
 
     mac_bignum_op_en     = 1'b0;
     mac_bignum_acc_rd_en = 1'b0;
+
+`ifdef AES_BIGNUM
+    aes_bignum_op_en      = 1'b0;
+    aes_bignum_key_expand = 1'b0;
+`endif
 
     ispr_rd_en = 1'b0;
     ispr_wr_en = 1'b0;
@@ -360,6 +373,18 @@ module acc_predecode
                 end
               end
             end
+`ifdef GFMACC_BIGNUM
+            3'b110: begin
+              rf_ren_a_bignum  = 1'b1;
+              rf_ren_b_bignum  = 1'b1;
+              mac_bignum_op_en = 1'b1;
+              rf_we_bignum     = 1'b1;
+
+              if ((imem_rdata_i[28] == 1'b0) && (imem_rdata_i[29] == 1'b1)) begin
+                mac_bignum_acc_rd_en = 1'b1;
+              end
+            end
+`endif
             default: ;
           endcase
         end
@@ -571,6 +596,25 @@ module acc_predecode
           end
         end
 
+        /////////////////////////////////////////////////////////////////////
+        // BN.AES128.ENCZ/BN.BN.AES128.ENCM/BN.BN.AES128.ENCF/BN.AES128.KF //
+        /////////////////////////////////////////////////////////////////////
+
+`ifdef AES_BIGNUM
+        InsnOpcodeBignumAES: begin
+          rf_ren_b_bignum  = 1'b1;
+          rf_we_bignum     = 1'b1;
+
+          if (imem_rdata_i[31:30] != 2'b11)
+            rf_ren_a_bignum  = 1'b1;
+          else
+            aes_bignum_key_expand = 1'b1;
+
+          aes_bignum_op_en = 1'b1;
+        end
+`endif
+
+
         default: ;
       endcase
     end
@@ -678,6 +722,11 @@ module acc_predecode
 
   assign mac_predec_bignum_o.op_en     = mac_bignum_op_en;
   assign mac_predec_bignum_o.acc_rd_en = mac_bignum_acc_rd_en;
+
+`ifdef AES_BIGNUM
+  assign aes_predec_bignum_o.op_en      = aes_bignum_op_en;
+  assign aes_predec_bignum_o.key_expand = aes_bignum_key_expand;
+`endif
 
   assign insn_rs1 = imem_rdata_i[19:15];
   assign insn_rd  = imem_rdata_i[11:7];

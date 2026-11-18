@@ -1118,6 +1118,21 @@ class LeqTest(InsnInformationFlowTest):
         return op_vals[self.operand] <= self.get_value(op_vals)
 
 
+class MaskSetTest(InsnInformationFlowTest):
+    '''Tests that all bits of the value are set in the operand.'''
+
+    def check(self, op_vals: Dict[str, int]) -> bool:
+        mask = self.get_value(op_vals)
+        return (op_vals[self.operand] & mask) == mask
+
+
+class MaskClearTest(InsnInformationFlowTest):
+    '''Tests that all bits of the value are clear in the operand.'''
+
+    def check(self, op_vals: Dict[str, int]) -> bool:
+        return (op_vals[self.operand] & self.get_value(op_vals)) == 0
+
+
 class MultiTest(InsnInformationFlowTest):
     '''Combination of multiple tests.'''
 
@@ -1135,7 +1150,8 @@ def _parse_iflow_test(test_yml: object, what: str,
     Tests are expected to be strings of the form "<operand> <comparison>
     <value>", where:
       - <operand> is the name of one of the instruction's operands
-      - <comparison> is "==", "!=", ">=", or "<="
+      - <comparison> is "==", "!=", ">=", "<=", "&" (all bits of <value>
+        set in the operand) or "!&" (all bits of <value> clear)
       - <value> is an integer that is within the allowed range of values
         for this operand (for instance, for a flag group it would be 0 or 1,
         and for a register it would be between 0 and 31).
@@ -1169,6 +1185,8 @@ def _parse_iflow_test(test_yml: object, what: str,
         '!=': NotEqTest,
         '>=': GeqTest,
         '<=': LeqTest,
+        '&': MaskSetTest,
+        '!&': MaskClearTest,
     }
     constructor = constructors.get(comparison, None)
     if constructor is None:

@@ -79,6 +79,10 @@ dependencies = [
 
   # Dependency license checker
   "pip-licenses==5.0.0",
+
+  # Dependencies: UOV KAT drivers (sw/acc/crypto/handwritten/own_utils)
+  "galois==0.4.11",
+  "numpy ~= 2.2",
 ]
 
 [tool.setuptools]

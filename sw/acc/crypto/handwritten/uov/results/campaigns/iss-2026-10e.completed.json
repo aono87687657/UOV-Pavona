@@ -1,0 +1,406 @@
+{
+ "campaign": "iss-2026-10e",
+ "cohorts": {
+  "iss:keygen/full/bngfaes/Ip@512": {
+   "manifest": "3c8f1bff2af5cb74ca3ad4753627943309468a5b715435a921d28fcc002afefc",
+   "run": "iss-512-20261014T074632Z-2bbe40e3"
+  },
+  "iss:keygen/full/bngfaes/Is@512": {
+   "manifest": "c558095c440bd80238d1251564300d37c71c2327ae828737c8a9b55b36e61637",
+   "run": "iss-512-20261014T075144Z-a88375c3"
+  },
+  "iss:keygen/min/bnaesonly/Ip3@128": {
+   "manifest": "79a0f82580cb83084e577c4d08c654581d990db4a502e8a7a79981c01fa07630",
+   "run": "iss-128-20261016T091106Z-4f1746f2"
+  },
+  "iss:keygen/min/bnaesonly/Ip@128": {
+   "manifest": "a6a9ee9d5d1393921b2c5b9c853c7616241b8235bf403d5474949b2ba69bfdf0",
+   "run": "iss-128-20261016T095040Z-deb25730"
+  },
+  "iss:keygen/min/bnaesonly/Is@128": {
+   "manifest": "d8c18dd676ec0222c83cf9a876ce8e3a9e49c3db8e6a92fe40455608a4ce348a",
+   "run": "iss-128-20261016T102103Z-b38b8071"
+  },
+  "iss:keygen/min/bngfaes/Ip3@128": {
+   "manifest": "e2c1fa3af3ccb7a9311f51246d4ef1c71715dcab1d87acc1663840edbd9a7561",
+   "run": "iss-128-20261016T132024Z-d8d540ec"
+  },
+  "iss:keygen/min/bngfaes/Ip@128": {
+   "manifest": "9364696f0516d5bf80638b7193e257e036c5b96ff536361c3639dc85009b53d0",
+   "run": "iss-128-20261016T133123Z-7c9fda18"
+  },
+  "iss:keygen/min/bngfaes/Is@128": {
+   "manifest": "4acd5a20b5aec70fd10d75e99d8850eb3941c1a3df8dc3bf04016c6eee916952",
+   "run": "iss-128-20261016T133621Z-a3cda888"
+  },
+  "iss:keygen/min/bngfonly/Ip3@128": {
+   "manifest": "e627a3c8e27bd9ab573fda78c21b112a405294841ee3a88f14a92c5fc29c6aa7",
+   "run": "iss-128-20261015T175150Z-ede2fcde"
+  },
+  "iss:keygen/min/bngfonly/Ip@128": {
+   "manifest": "8403510042a42fe511ccb38f92380be937cfbb38221f4f20af3c12f25cf49f6d",
+   "run": "iss-128-20261015T211006Z-0cb86b23"
+  },
+  "iss:keygen/min/bngfonly/Is@128": {
+   "manifest": "878f1d05dc2a56e3bcdcda48c620b20ad0a3f247d42dcfb8276c2559e40ec784",
+   "run": "iss-128-20261015T222522Z-94879489"
+  },
+  "iss:keygen/min/sw/Ip3@128": {
+   "manifest": "d6ef3603d7781ff5f56640d3b7fa6a1ebeabf57e9fc0e5087336f9c599df79af",
+   "run": "iss-128-20261014T080559Z-f1a858a9"
+  },
+  "iss:keygen/min/sw/Ip@128": {
+   "manifest": "7cdebf9336bc5511321fd62395d977536e28cf4049d7559e76e7e610b63386ea",
+   "run": "iss-128-20261014T164848Z-67cafe86"
+  },
+  "iss:keygen/min/sw/Is@128": {
+   "manifest": "712c8615e57989644d2783376f9d9f5dcc476554336bb3b0521cb96e2dc76430",
+   "run": "iss-128-20261014T193434Z-c07bc9b3"
+  },
+  "iss:keygen/sp/bnaesonly/Ip3@128": {
+   "manifest": "1fd6587e005248ed09bfb961172b30d59dc30acd76ec05b66919c6c96b578846",
+   "run": "iss-128-20261016T105228Z-d7c87e3a"
+  },
+  "iss:keygen/sp/bnaesonly/Ip@128": {
+   "manifest": "1d5dc6bd71a7de6dc96707957299fb635ec88c13bd2d71dd0f5a0c2c1c647736",
+   "run": "iss-128-20261016T112237Z-06b9c861"
+  },
+  "iss:keygen/sp/bnaesonly/Is@128": {
+   "manifest": "783d0b0d296a451d47a265a3efb4ff712b6df47505a599b81db7f00f6b61ab58",
+   "run": "iss-128-20261016T114819Z-022855e7"
+  },
+  "iss:keygen/sp/bngfaes/Ip3@128": {
+   "manifest": "8ca9c0d04d0a0775dc1d888fb7e47028ddd46b133abdcfcefbf93e2d50aeba2e",
+   "run": "iss-128-20261016T134428Z-273a2786"
+  },
+  "iss:keygen/sp/bngfaes/Ip@128": {
+   "manifest": "e0e8d827ec303796a13b991b251d2b9edad30f9a8e412772b83c5d94d26c00bc",
+   "run": "iss-128-20261016T134635Z-6b7232a6"
+  },
+  "iss:keygen/sp/bngfaes/Is@128": {
+   "manifest": "67d7272674af656ca1a4beadb48da1664e274cec618bf3432344ef5405b2e436",
+   "run": "iss-128-20261016T134819Z-69b8d319"
+  },
+  "iss:keygen/sp/bngfonly/Ip3@128": {
+   "manifest": "d4d6bc3271f772389b3bad39b6172576401106b0a73c67fa43fc34f7af07c066",
+   "run": "iss-128-20261016T003414Z-563711e0"
+  },
+  "iss:keygen/sp/bngfonly/Ip@128": {
+   "manifest": "d657d998994f7b36ffbf9081897b6e18c42fb1b6fb792aa9580d9103c8fa276d",
+   "run": "iss-128-20261016T004340Z-700e03bf"
+  },
+  "iss:keygen/sp/bngfonly/Is@128": {
+   "manifest": "09aedf15eadb91a396fc1c147c999961f778e375a9b1a082d5c973edb05166c4",
+   "run": "iss-128-20261016T005123Z-c7fbbda2"
+  },
+  "iss:keygen/sp/sw/Ip3@128": {
+   "manifest": "f2bd41549233da8faac4fe4655b76e534769197433efc81f15f01493ba8854fc",
+   "run": "iss-128-20261015T001754Z-60a75cc5"
+  },
+  "iss:keygen/sp/sw/Ip@128": {
+   "manifest": "aa45c3c2ea329f7ee1bcf673d1fa4bd4790d7424e963faf28f4e39ad8b04ebd9",
+   "run": "iss-128-20261015T010508Z-932c2bab"
+  },
+  "iss:keygen/sp/sw/Is@128": {
+   "manifest": "6ec67f14922a21665956d42465dca62c037300eac286c881120b361c7391c8ec",
+   "run": "iss-128-20261015T014458Z-a1e0031a"
+  },
+  "iss:keygen/stream/bnaesonly/Ip3@32": {
+   "manifest": "7dff17b288e1ccd5a0cee0855b999202685db8d76306418a5b5c9902461634f5",
+   "run": "iss-32-20261015T102453Z-b756b8fc"
+  },
+  "iss:keygen/stream/bnaesonly/Ip@32": {
+   "manifest": "028dc08fc4c45ccd4b6ec94a3c1a63b5f0a22f9632b22e6dd617cdf0e03a7016",
+   "run": "iss-32-20261015T105909Z-7a93941b"
+  },
+  "iss:keygen/stream/bnaesonly/Is@32": {
+   "manifest": "131655711187b3ee94dd38660441ecdd2b201fe6e845d43eb31fd56b8da09cbf",
+   "run": "iss-32-20261015T112625Z-49ff5c86"
+  },
+  "iss:keygen/stream/bngfaes/Ip3@32": {
+   "manifest": "3b41bd221f34ba803642386ee1fd1ea4a563bfee252b9c8ede290947cd869e0e",
+   "run": "iss-32-20261015T133354Z-2b329f86"
+  },
+  "iss:keygen/stream/bngfaes/Ip@32": {
+   "manifest": "03ec6d4f3c564bc644b64756679ee8fad4ef178ae509855492f3623ec9faf201",
+   "run": "iss-32-20261015T133716Z-0866691b"
+  },
+  "iss:keygen/stream/bngfaes/Is@32": {
+   "manifest": "f83d16fd8941cf571eb4c58842b1702a1adb74916a26838581e4a5dcf0fb8729",
+   "run": "iss-32-20261015T133957Z-108f3711"
+  },
+  "iss:keygen/stream/bngfonly/Ip3@32": {
+   "manifest": "e46bdbb9872adc83556097bdf6f18878aea6c0176691322c1f8b247fbb67abc9",
+   "run": "iss-32-20261015T051441Z-83025454"
+  },
+  "iss:keygen/stream/bngfonly/Ip@32": {
+   "manifest": "0538aefc455e3ac011cf8f977595e6bb6bc67f2dad84bdca1e739832a1fb58ad",
+   "run": "iss-32-20261015T055717Z-7f574039"
+  },
+  "iss:keygen/stream/bngfonly/Is@32": {
+   "manifest": "8299875076998e90c007c88574d28b11342402af4caf11f67f79aa26120b292d",
+   "run": "iss-32-20261015T062739Z-9f7324ec"
+  },
+  "iss:keygen/stream/sw/Ip3@32": {
+   "manifest": "33358fdec9363aec94e8489c05c13c6d0365c37f02430a7bc04c2a93ffbf377d",
+   "run": "iss-32-20261014T170509Z-4ab32a3e"
+  },
+  "iss:keygen/stream/sw/Ip@32": {
+   "manifest": "a16af8d468103a02ca3c64b1ae6bbf09802ffd5ff420fa7284b51c72f9826687",
+   "run": "iss-32-20261014T185401Z-e0c4d6e8"
+  },
+  "iss:keygen/stream/sw/Is@32": {
+   "manifest": "be1a468d9b03281cc5c6e8a75ea29c707916b3424f3a78f9201d09818db517be",
+   "run": "iss-32-20261014T202234Z-ef3a26a9"
+  },
+  "iss:keygen/stream_uniform/bnaesonly/Ip3@32": {
+   "manifest": "7358a011623660225a95d18d48875c18780b0ce6984293d50784e5b809f659ec",
+   "run": "iss-32-20261015T115325Z-c371dbfd"
+  },
+  "iss:keygen/stream_uniform/bnaesonly/Ip@32": {
+   "manifest": "549f159451b9e7e34ac900cb40f29c0ec9e7c6712238abbf46bb2fcf069ffc2b",
+   "run": "iss-32-20261015T122507Z-5ff527d9"
+  },
+  "iss:keygen/stream_uniform/bnaesonly/Is@32": {
+   "manifest": "7e3c897d9c3268681778ffbac273a150d3b93e3a115975f2b5c7660d751de09c",
+   "run": "iss-32-20261015T125219Z-b1c2c240"
+  },
+  "iss:keygen/stream_uniform/bngfaes/Ip3@32": {
+   "manifest": "004390d2fffbba1058e5a03b633d71933bc79745f256a63930a7cd4f1b794314",
+   "run": "iss-32-20261015T134345Z-eff6af29"
+  },
+  "iss:keygen/stream_uniform/bngfaes/Ip@32": {
+   "manifest": "de589cef97474caa73a7f0c9c891dde92d7f1bde18edef04fdbb782b2fd4fea2",
+   "run": "iss-32-20261015T134724Z-07a462d9"
+  },
+  "iss:keygen/stream_uniform/bngfaes/Is@32": {
+   "manifest": "9e93e8445b960a1cb4541a6097389c743191e38f88e9e57d88905d7cee23b3d5",
+   "run": "iss-32-20261015T135027Z-0d023830"
+  },
+  "iss:keygen/stream_uniform/bngfonly/Ip3@32": {
+   "manifest": "7553cc923a06b31af5be252537d3d48727592bb53d3c62af4f471e74a48b1502",
+   "run": "iss-32-20261015T070203Z-d9c22663"
+  },
+  "iss:keygen/stream_uniform/bngfonly/Ip@32": {
+   "manifest": "3f1f42d6feb0747e7808a421fe4fdf4709b7c0c2ca9b7424423ba97578a008c5",
+   "run": "iss-32-20261015T074920Z-5f92904d"
+  },
+  "iss:keygen/stream_uniform/bngfonly/Is@32": {
+   "manifest": "e07c8ecd27a87dd846674ec136ff712e744fe34fd7a5df994282bd0e0c86e51a",
+   "run": "iss-32-20261015T082651Z-cb86b64f"
+  },
+  "iss:keygen/stream_uniform/sw/Ip3@32": {
+   "manifest": "031e5eec0e392c3145bb2332a314e9aaf96b31a71235798fa43d91460b5c2e74",
+   "run": "iss-32-20261014T215413Z-d97236cb"
+  },
+  "iss:keygen/stream_uniform/sw/Ip@32": {
+   "manifest": "3fda1dd04b04b4c25215b9f3fc79e1246634cf76438998976a2f0b5d13b4e05b",
+   "run": "iss-32-20261014T234210Z-a2bba716"
+  },
+  "iss:keygen/stream_uniform/sw/Is@32": {
+   "manifest": "5679f52740ad573a64d26fd44eb857d48b4990c54f9f4e31097149f61f8533ae",
+   "run": "iss-32-20261015T011019Z-ecb744ad"
+  },
+  "iss:sign/ldirect/bnaesonly/Ip3@32": {
+   "manifest": "347a03996010b0cfc5896f082ff46cf4406320322505978768d91d07a1b05d4e",
+   "run": "iss-32-20261015T131921Z-a0690d3b"
+  },
+  "iss:sign/ldirect/bnaesonly/Ip@32": {
+   "manifest": "55850fb3a705b961408ff60d2b252e0fd51cd68d883f016b41c342c1c1ff4387",
+   "run": "iss-32-20261015T132144Z-8ce45266"
+  },
+  "iss:sign/ldirect/bnaesonly/Is@32": {
+   "manifest": "bd1f222cc153db9b50c7d892d5a660b2e310f1a6160a177caa6b48514ce03f5c",
+   "run": "iss-32-20261015T132356Z-91c59348"
+  },
+  "iss:sign/ldirect/bngfaes/Ip3@32": {
+   "manifest": "45460254e6a958ab29c82be9c13e75321bf803fbae4b97f9b2c7b048b4038ec5",
+   "run": "iss-32-20261015T135427Z-2798d66b"
+  },
+  "iss:sign/ldirect/bngfaes/Ip@32": {
+   "manifest": "1dea1cc22b217c7a884a4e6dd34c25b672ecb572149d0673386ca54b748995f5",
+   "run": "iss-32-20261015T135510Z-0d4ae356"
+  },
+  "iss:sign/ldirect/bngfaes/Is@32": {
+   "manifest": "348e4c67451afd9552368b5f7ed7628a7ad6f6ef722d8bc29f55be837148cf1f",
+   "run": "iss-32-20261015T135548Z-891b8df2"
+  },
+  "iss:sign/ldirect/bngfonly/Ip3@32": {
+   "manifest": "ca6cf13ac44b28ba3dc41a616eb8c834f8ee1ac09e4b76a365e6fc06e95f7fbb",
+   "run": "iss-32-20261015T090447Z-f54aa090"
+  },
+  "iss:sign/ldirect/bngfonly/Ip@32": {
+   "manifest": "8543975a77082e9b30b8baf399bbd596da0fb6e7a8514bcfc879c842b2b4387f",
+   "run": "iss-32-20261015T091333Z-a207fb30"
+  },
+  "iss:sign/ldirect/bngfonly/Is@32": {
+   "manifest": "1ce554f7431cc1737d3da55aec02394aaaf98294e9bf76f9537ccbbbb1910ae8",
+   "run": "iss-32-20261015T092040Z-8202522e"
+  },
+  "iss:sign/ldirect/sw/Ip3@32": {
+   "manifest": "3994e97a1fd982c4cc0701b42feef9206d0c6fa241fe9f5ce80539e45b3e6f1c",
+   "run": "iss-32-20261015T024127Z-29d46548"
+  },
+  "iss:sign/ldirect/sw/Ip@32": {
+   "manifest": "58462e7dfbc26b1a53df02edf2f861e0a5f35e2d52527273116743a0c80f63f6",
+   "run": "iss-32-20261015T025830Z-b18771b6"
+  },
+  "iss:sign/ldirect/sw/Is@32": {
+   "manifest": "1035bf5f9b7bc4e86f55d592539048f38d20356f2930ecc6042deef16e94878e",
+   "run": "iss-32-20261015T031218Z-229d62bc"
+  },
+  "iss:sign/sprec/bngfaes/Ip@512": {
+   "manifest": "d0a9b686c5bdb8f9a2f4597119520c1bc1a24966dc7d9520b5feb14e4177b724",
+   "run": "iss-512-20261014T075936Z-3072d1a4"
+  },
+  "iss:sign/sprec/bngfaes/Is@512": {
+   "manifest": "4d46bd7da4fc0bf1a20d6f077d6d9baa4d47d92d2919511a0e3f5014e391d47b",
+   "run": "iss-512-20261014T080434Z-be331bda"
+  },
+  "iss:verify/full/bnaesonly/Ip3@128": {
+   "manifest": "bc2d771554913237ce1654d74177e2d410fae7093d6639536549a7de50ebc8f6",
+   "run": "iss-128-20261016T121349Z-83da3754"
+  },
+  "iss:verify/full/bnaesonly/Ip@128": {
+   "manifest": "a4254e13458e8e61f9f04f248ecd275d065d24f6d99ea0b757cc6b26e88cf971",
+   "run": "iss-128-20261016T124039Z-78ed3612"
+  },
+  "iss:verify/full/bnaesonly/Is@128": {
+   "manifest": "ae1a2cc70a1105be6ae109fb8f89013dec0567a006e444b482ac608c2ed13049",
+   "run": "iss-128-20261016T130308Z-e37b79f7"
+  },
+  "iss:verify/full/bngfaes/Ip3@128": {
+   "manifest": "7232e6471fd909569bf20ddb7ec0d19a2d96c6f2095084dab714c10a2da1b861",
+   "run": "iss-128-20261016T135124Z-4099bee7"
+  },
+  "iss:verify/full/bngfaes/Ip@128": {
+   "manifest": "6986c4a30993472df3ae43e709c2d2ae2c0e2fa9093f1b95bb7b12115f514c7b",
+   "run": "iss-128-20261016T135920Z-1f018453"
+  },
+  "iss:verify/full/bngfaes/Is@128": {
+   "manifest": "68999c72970c277b42102ef6272aee7b41f5355a68b13c00899932a0ac0279d5",
+   "run": "iss-128-20261016T140537Z-cef7d405"
+  },
+  "iss:verify/full/bngfonly/Ip3@128": {
+   "manifest": "15ae4be918424f0e88068389f227e07f3db22603c73c6080679c58c3d20bcc5f",
+   "run": "iss-128-20261016T010248Z-47263248"
+  },
+  "iss:verify/full/bngfonly/Ip@128": {
+   "manifest": "99731fb704a82ca869185063165497e71e1815028f67f8d1f1c36e9cb10fbb6d",
+   "run": "iss-128-20261016T040419Z-c393a12d"
+  },
+  "iss:verify/full/bngfonly/Is@128": {
+   "manifest": "ebf04f4e2ce271cbd45ed6bd7216f38304a51626a35934e77d24b1bbe1da591f",
+   "run": "iss-128-20261016T061612Z-9c51e8c8"
+  },
+  "iss:verify/full/sw/Ip3@128": {
+   "manifest": "a150bba69c71e1d0910649fe84d329968cf2acd5ab5287ff1801abf6bebaaf63",
+   "run": "iss-128-20261015T023026Z-3910732f"
+  },
+  "iss:verify/full/sw/Ip@128": {
+   "manifest": "00d560cd2060458661371421b1c754d789fd4e9f10e68731cc00fc29f4c58872",
+   "run": "iss-128-20261015T080118Z-08833643"
+  },
+  "iss:verify/full/sw/Is@128": {
+   "manifest": "ccb3db51eb69716a8e9c4d9549e787ee49c83c6448bee5a34455828f0592251c",
+   "run": "iss-128-20261015T122214Z-aaabe733"
+  },
+  "iss:verify/stream/bnaesonly/Ip3@32": {
+   "manifest": "8033fbd1fa8e427eadb9aecddc9ed4c4535cd655df669511a2b007e022b10d64",
+   "run": "iss-32-20261015T132623Z-c75d81fb"
+  },
+  "iss:verify/stream/bnaesonly/Ip@32": {
+   "manifest": "f8f0d7ac3c933953d8f986bcdc36fb23919b5ad4163fbff93d5749edee5b086b",
+   "run": "iss-32-20261015T132749Z-11e5b592"
+  },
+  "iss:verify/stream/bnaesonly/Is@32": {
+   "manifest": "972c7e89cf5d869ecd54314a4b116e8206bbdc4d83da545807422e1306dbac3e",
+   "run": "iss-32-20261015T132905Z-b47f1111"
+  },
+  "iss:verify/stream/bngfaes/Ip3@32": {
+   "manifest": "370e96fc17a2c4fd9a3d4f880ee0dda08743188b9aab5c2c6fa4e9aa94282c59",
+   "run": "iss-32-20261015T135654Z-894e6280"
+  },
+  "iss:verify/stream/bngfaes/Ip@32": {
+   "manifest": "c7cfd6fa2c3eaa550970b9cd738a94378391b4fb4543855660861ed28669532b",
+   "run": "iss-32-20261015T135727Z-cf820e50"
+  },
+  "iss:verify/stream/bngfaes/Is@32": {
+   "manifest": "f3632e1ae555e5df04e1a17e90ce6ae0321b98b3c438d8b4b28b3f19cfde9b2e",
+   "run": "iss-32-20261015T135755Z-9cd065af"
+  },
+  "iss:verify/stream/bngfonly/Ip3@32": {
+   "manifest": "62e5196adafef5e4595677fb6cb97a6a01362affb2143e354f6399c0c67636e2",
+   "run": "iss-32-20261015T093529Z-d4a5e9a5"
+  },
+  "iss:verify/stream/bngfonly/Ip@32": {
+   "manifest": "df5bd400a8ea3c8c8f9813c287c31e8c91f44e9b232a242adcfb2ecb78b0b30c",
+   "run": "iss-32-20261015T094315Z-21eea765"
+  },
+  "iss:verify/stream/bngfonly/Is@32": {
+   "manifest": "f09c8e2a9511160551576c574bddaf53b3162ae329a95fec8e86e5ba39a295d4",
+   "run": "iss-32-20261015T095022Z-9c2fec2d"
+  },
+  "iss:verify/stream/sw/Ip3@32": {
+   "manifest": "9ad0b450fc9a87f74c3cd5f21d34bf68bf65bb9d6c7ac6ce3ae2df9537cf64d6",
+   "run": "iss-32-20261015T034022Z-e7621c5b"
+  },
+  "iss:verify/stream/sw/Ip@32": {
+   "manifest": "c6644a0650a984b20029f8d8ce27da401d5151e0390fd0e5a42cad655f0c56ce",
+   "run": "iss-32-20261015T035617Z-1c1c96a2"
+  },
+  "iss:verify/stream/sw/Is@32": {
+   "manifest": "7ac4e820df04bced8b5c74ad85db56a79179ecb3808c2004aa6a2a8f45b46caa",
+   "run": "iss-32-20261015T040913Z-4843fa64"
+  },
+  "iss:verify/stream_uniform/bnaesonly/Ip3@32": {
+   "manifest": "b940474be5416548956a64a12d5fd914d190f8106472e6ed65dfefa6c0202811",
+   "run": "iss-32-20261015T133007Z-baae878b"
+  },
+  "iss:verify/stream_uniform/bnaesonly/Ip@32": {
+   "manifest": "311bdfd3fa1fec519d758b0919830e0b5019029ca990156f7767247f61b50886",
+   "run": "iss-32-20261015T133134Z-0958e850"
+  },
+  "iss:verify/stream_uniform/bnaesonly/Is@32": {
+   "manifest": "b5223dfed3b23dae37e87630132c1eacb2cef335b6362b6bf6918dadbdcf5735",
+   "run": "iss-32-20261015T133251Z-1c8195be"
+  },
+  "iss:verify/stream_uniform/bngfaes/Ip3@32": {
+   "manifest": "c5d5997daff4d7434b5b02c9eae5dacdae4e3ebe45b361ab9ecfd571104bb8c8",
+   "run": "iss-32-20261015T135829Z-a1ac5edc"
+  },
+  "iss:verify/stream_uniform/bngfaes/Ip@32": {
+   "manifest": "a84bdd093df0cc1f38b3ee818e1f5ce77f1531fb935839af2ccc55319bc539d6",
+   "run": "iss-32-20261015T135904Z-f111cd66"
+  },
+  "iss:verify/stream_uniform/bngfaes/Is@32": {
+   "manifest": "7f2fc2c11dceae4d97fe5c58d3f3be9c2aecc3f8172d185e336dbb08e874e38b",
+   "run": "iss-32-20261015T135934Z-52e0ad42"
+  },
+  "iss:verify/stream_uniform/bngfonly/Ip3@32": {
+   "manifest": "a2d306a0ed46ab971884efe6fe08ba23d68e174b62e9a594f2a185ad6557f547",
+   "run": "iss-32-20261015T100012Z-d79974f3"
+  },
+  "iss:verify/stream_uniform/bngfonly/Ip@32": {
+   "manifest": "bce9c4290b3e9f567b189baac25773f9e0f756b8c8f0a4c89d36a733e41d0f7f",
+   "run": "iss-32-20261015T100754Z-6cababaa"
+  },
+  "iss:verify/stream_uniform/bngfonly/Is@32": {
+   "manifest": "4bbfdc1464ae3bd130d0b694078aa23fd95a7b9f661a2f801173c9c3de92cfeb",
+   "run": "iss-32-20261015T101511Z-da398ce4"
+  },
+  "iss:verify/stream_uniform/sw/Ip3@32": {
+   "manifest": "163202e64f3b8afd2adb7dd70682e101b673bab5f4fa90f2061612ab34f01f01",
+   "run": "iss-32-20261015T042709Z-942f9228"
+  },
+  "iss:verify/stream_uniform/sw/Ip@32": {
+   "manifest": "5b7f92febdbe1afdf2c6d923c106411fafeb9102df6ef1955c3502ab6e89a5a0",
+   "run": "iss-32-20261015T044312Z-09eead7e"
+  },
+  "iss:verify/stream_uniform/sw/Is@32": {
+   "manifest": "c765704e4713c13a55494fa25fd5c93b6970877942db6b50d0cd40ac9b86f8fb",
+   "run": "iss-32-20261015T045609Z-0840b702"
+  }
+ },
+ "definition": "8d3e606c1cf08fbef3449111aab9eecb7dd2983aa48ddd02135758418fe4320d"
+}

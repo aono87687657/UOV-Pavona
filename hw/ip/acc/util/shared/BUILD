@@ -9,26 +9,31 @@ package(default_visibility = ["//visibility:public"])
 py_library(
     name = "bit_ranges",
     srcs = ["bit_ranges.py"],
+    imports = [".."],
 )
 
 py_library(
     name = "bool_literal",
     srcs = ["bool_literal.py"],
+    imports = [".."],
 )
 
 py_library(
     name = "cache",
     srcs = ["cache.py"],
+    imports = [".."],
 )
 
 py_library(
     name = "check",
     srcs = ["check.py"],
+    imports = [".."],
 )
 
 py_library(
     name = "constants",
     srcs = ["constants.py"],
+    imports = [".."],
     deps = [
         ":insn_yaml",
         ":operand",
@@ -38,6 +43,7 @@ py_library(
 py_library(
     name = "control_flow",
     srcs = ["control_flow.py"],
+    imports = [".."],
     deps = [
         ":decode",
         ":insn_yaml",
@@ -48,6 +54,7 @@ py_library(
 py_library(
     name = "decode",
     srcs = ["decode.py"],
+    imports = [".."],
     deps = [
         ":elf",
         ":insn_yaml",
@@ -57,6 +64,7 @@ py_library(
 py_library(
     name = "elf",
     srcs = ["elf.py"],
+    imports = [".."],
     deps = [
         ":mem_layout",
     ],
@@ -64,7 +72,11 @@ py_library(
 
 py_library(
     name = "encoding",
-    srcs = ["encoding.py"],
+    srcs = [
+        "__init__.py",
+        "encoding.py",
+    ],
+    imports = [".."],
     deps = [
         ":bool_literal",
         ":encoding_scheme",
@@ -74,7 +86,11 @@ py_library(
 
 py_library(
     name = "encoding_scheme",
-    srcs = ["encoding_scheme.py"],
+    srcs = [
+        "__init__.py",
+        "encoding_scheme.py",
+    ],
+    imports = [".."],
     deps = [
         ":bit_ranges",
         ":bool_literal",
@@ -84,7 +100,11 @@ py_library(
 
 py_library(
     name = "information_flow",
-    srcs = ["information_flow.py"],
+    srcs = [
+        "__init__.py",
+        "information_flow.py",
+    ],
+    imports = [".."],
     deps = [
         ":operand",
         "//util/serialize:parse_helpers",
@@ -93,7 +113,11 @@ py_library(
 
 py_library(
     name = "information_flow_analysis",
-    srcs = ["information_flow_analysis.py"],
+    srcs = [
+        "__init__.py",
+        "information_flow_analysis.py",
+    ],
+    imports = [".."],
     deps = [
         ":cache",
         ":constants",
@@ -107,7 +131,11 @@ py_library(
 
 py_library(
     name = "isr",
-    srcs = ["isr.py"],
+    srcs = [
+        "__init__.py",
+        "isr.py",
+    ],
+    imports = [".."],
     deps = [
         "//util/serialize:parse_helpers",
     ],
@@ -115,7 +143,12 @@ py_library(
 
 py_library(
     name = "insn_yaml",
-    srcs = ["insn_yaml.py"],
+    srcs = [
+        "__init__.py",
+        "insn_yaml.py",
+    ],
+    data = ["//hw/ip/acc/data:all_files"],
+    imports = [".."],
     deps = [
         ":encoding",
         ":encoding_scheme",
@@ -131,6 +164,7 @@ py_library(
 py_library(
     name = "instruction_count_range",
     srcs = ["instruction_count_range.py"],
+    imports = [".."],
     deps = [
         ":control_flow",
         ":decode",
@@ -139,7 +173,11 @@ py_library(
 
 py_library(
     name = "lsu_desc",
-    srcs = ["lsu_desc.py"],
+    srcs = [
+        "__init__.py",
+        "lsu_desc.py",
+    ],
+    imports = [".."],
     deps = [
         "//util/serialize:parse_helpers",
     ],
@@ -148,6 +186,7 @@ py_library(
 py_library(
     name = "mem_layout",
     srcs = ["mem_layout.py"],
+    imports = [".."],
     deps = [
         ":acc_reggen",
         "//util/reggen:reg_block",
@@ -156,7 +195,11 @@ py_library(
 
 py_library(
     name = "operand",
-    srcs = ["operand.py"],
+    srcs = [
+        "__init__.py",
+        "operand.py",
+    ],
+    imports = [".."],
     deps = [
         ":encoding",
         ":encoding_scheme",
@@ -169,6 +212,7 @@ py_library(
     name = "acc_reggen",
     srcs = ["acc_reggen.py"],
     data = ["//hw/ip/acc/data:all_files"],
+    imports = [".."],
     deps = [
         "//util/reggen:ip_block",
         "//util/reggen:reg_block",
@@ -178,11 +222,13 @@ py_library(
 py_library(
     name = "reg_dump",
     srcs = ["reg_dump.py"],
+    imports = [".."],
 )
 
 py_library(
     name = "section",
     srcs = ["section.py"],
+    imports = [".."],
     deps = [
         ":decode",
         ":insn_yaml",
@@ -192,6 +238,7 @@ py_library(
 py_library(
     name = "syntax",
     srcs = ["syntax.py"],
+    imports = [".."],
     deps = [
         ":operand",
     ],
@@ -200,11 +247,13 @@ py_library(
 py_library(
     name = "testgen",
     srcs = ["testgen.py"],
+    imports = [".."],
 )
 
 py_library(
     name = "toolchain",
     srcs = ["toolchain.py"],
+    imports = [".."],
 )
 
 py_test(

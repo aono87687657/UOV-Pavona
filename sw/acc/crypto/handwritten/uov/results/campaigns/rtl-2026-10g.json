@@ -1,0 +1,569 @@
+{
+ "baseline": "000da3b636b5c8004d6b931017427fc6613378bdc5e32c37853471ab13672f8a",
+ "cells": [
+  {
+   "cell": "acc_uov_keygen_stream_ip_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_ip_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_ip_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_ip_sw_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_is_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_is_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_is_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_is_sw_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_ip_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_ip_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_ip_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_ip_sw_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_is_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_is_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_is_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_is_sw_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_ip_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_ip_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_ip_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_ip_sw_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_is_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_is_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_is_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_is_sw_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_ip_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_ip_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_ip_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_ip_sw_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_is_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_is_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_is_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_is_sw_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_sign_ip_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_sign_ip_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_sign_ip_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_sign_ip_sw_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_sign_is_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_sign_is_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_sign_is_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_sign_is_sw_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_ip3_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_ip3_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_ip3_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_ip3_sw_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_ip3_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_ip3_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_ip3_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_stream_uniform_ip3_sw_test",
+   "profile": 32,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_verify_stream_ip3_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_ip3_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_ip3_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_ip3_sw_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_ip3_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_ip3_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_ip3_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_verify_stream_uniform_ip3_sw_test",
+   "profile": 32,
+   "protocol": "accept_reject"
+  },
+  {
+   "cell": "acc_uov_sign_ip3_bngfaes_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_sign_ip3_bngfonly_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_sign_ip3_bnaesonly_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_sign_ip3_sw_test",
+   "profile": 32,
+   "protocol": "accept_negative"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_ip_bngfaes_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_ip_bngfonly_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_ip_bnaesonly_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_ip_sw_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_ip3_bngfaes_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_ip3_bngfonly_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_ip3_bnaesonly_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_ip3_sw_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_is_bngfaes_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_is_bngfonly_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_is_bnaesonly_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_sp_is_sw_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_min_ip_bngfaes_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_min_ip_bngfonly_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_min_ip_bnaesonly_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_min_ip_sw_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_min_ip3_bngfaes_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_min_ip3_bngfonly_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_min_ip3_bnaesonly_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_min_ip3_sw_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_min_is_bngfaes_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_min_is_bngfonly_test",
+   "profile": 128,
+   "protocol": "aba"
+  },
+  {
+   "cell": "acc_uov_keygen_min_is_bnaesonly_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_keygen_min_is_sw_test",
+   "profile": 128,
+   "protocol": "accept_only"
+  },
+  {
+   "cell": "acc_uov_verify_full_ip_bngfaes_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  },
+  {
+   "cell": "acc_uov_verify_full_ip_bngfonly_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  },
+  {
+   "cell": "acc_uov_verify_full_ip_bnaesonly_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  },
+  {
+   "cell": "acc_uov_verify_full_ip_sw_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  },
+  {
+   "cell": "acc_uov_verify_full_ip3_bngfaes_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  },
+  {
+   "cell": "acc_uov_verify_full_ip3_bngfonly_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  },
+  {
+   "cell": "acc_uov_verify_full_ip3_bnaesonly_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  },
+  {
+   "cell": "acc_uov_verify_full_ip3_sw_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  },
+  {
+   "cell": "acc_uov_verify_full_is_bngfaes_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  },
+  {
+   "cell": "acc_uov_verify_full_is_bngfonly_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  },
+  {
+   "cell": "acc_uov_verify_full_is_bnaesonly_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  },
+  {
+   "cell": "acc_uov_verify_full_is_sw_test",
+   "profile": 128,
+   "protocol": "verify_oneshot"
+  }
+ ],
+ "config": {
+  ".bazelrc-site": "15d97e8406bbeaa209a2e86d84320f6c1f66b826913c028d0668e8ce3b68268b"
+ },
+ "created": "2026-10-20T18:27:12+02:00",
+ "engine": "rtl",
+ "generation": "chip-meters-g4",
+ "measuring_commit": "72bcf5d6b5d8caec21786d3e4b1c44cc244f49ae",
+ "name": "rtl-2026-10g",
+ "note": "registered after launch; the runs did not bind this definition",
+ "overlays": {
+  "128": {
+   "hw/ip/acc/data/acc.hjson": [
+    "f528f46a606d886cf404730d8df95f4b7394246038d5f0e3a1bb03d7ea81d245",
+    "100644"
+   ],
+   "hw/ip/acc/doc/registers.md": [
+    "3ad7544664040dae42c18973fb04fcda7681f71a7326f77943945e520bcc440e",
+    "100644"
+   ],
+   "hw/ip/acc/dv/memutil/acc_memutil.cc": [
+    "7d1b36a79106576a87f106cf478c959bd595bf3de9a1fcac9825342dad957555",
+    "100644"
+   ],
+   "hw/ip/acc/rtl/acc_reg_pkg.sv": [
+    "104d2c2f1e69a6c149aed08e1286f588d1a8bbe70614044cabfdc687f64e415d",
+    "100644"
+   ],
+   "hw/ip/acc/rtl/acc_reg_top.sv": [
+    "80f233860adfd0447e79e5ea6d55f30203f61e6ffc2a355a6f09c7a453164ae5",
+    "100644"
+   ],
+   "hw/top_egret/data/autogen/top_egret.gen.hjson": [
+    "0c34b5f78ad894e0f43eaeaa266682af8a41d83acb168d485a2acdaa8b1fe288",
+    "100644"
+   ],
+   "hw/top_egret/doc/memory_map.md": [
+    "8ecf56aeb4f664bb3166aa41b49ea6b23ff42bca74e57ac8675da919ad20df33",
+    "100644"
+   ],
+   "hw/top_egret/dv/autogen/xbar_env_pkg__params.sv": [
+    "f8382bd889037eba4219a27c3f43df44f79656fd66fee5b0c14718c2c05948aa",
+    "100644"
+   ],
+   "hw/top_egret/dv/autogen/xbar_tgl_excl.cfg": [
+    "36d91f011cba6cfe398abd486642e24181c9c668c26c9ebe0c0faa63a3ad0e04",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/data/autogen/xbar_main.gen.hjson": [
+    "adbb1046984edeb0f33fe7fd644dfd1329e2baa5f8d8ea7271819d10ba8dd7df",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/dv/autogen/xbar_cover.cfg": [
+    "a5469ab5fe2a26d1932a41ce83c9092ac753e43f3530ac744dd4e8ea1749d4c1",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/dv/autogen/xbar_env_pkg__params.sv": [
+    "fcab2ddfedc420ed20c7d03b1c68118e162f0dfc7b880066af0ec75a4354ec8d",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/rtl/autogen/tl_main_pkg.sv": [
+    "439bbab439289f9219cab2b34d2f049b7c408a60158d9d49fca6530880c6a9d8",
+    "100644"
+   ],
+   "hw/top_egret/rtl/autogen/top_egret_pkg.sv": [
+    "20fab801a60be4912f3941536cd54c063d365c55adc39ab92d2bb77ad7dcb0b4",
+    "100644"
+   ],
+   "hw/top_egret/sw/autogen/chip/top_egret.rs": [
+    "0c5f71638279904908443a8e98e5822bc5ad705e7241854cc7e2d501554e3e7c",
+    "100644"
+   ],
+   "hw/top_egret/sw/autogen/top_egret.h": [
+    "7210da09aecd3b06410ea84164a8206e234eda69d62dc1543eeb839ae54fb4fe",
+    "100644"
+   ],
+   "hw/top_egret/sw/autogen/top_egret_memory.h": [
+    "3ff2350cec17f1dd053f096aeb727da8e38a70b28bbbe209f3c8172b4903d025",
+    "100644"
+   ]
+  },
+  "32": {}
+ },
+ "schema": 1,
+ "tooling_commit": "ef23ffe8cd4b62a5b7e7e2bd02565dd255a4eb30"
+}

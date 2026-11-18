@@ -1,0 +1,2 @@
+executed 35594565 instructions in 37921308 cycles
+# elf: sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/ov-Is-keygen_stream_bnaesonly.elf

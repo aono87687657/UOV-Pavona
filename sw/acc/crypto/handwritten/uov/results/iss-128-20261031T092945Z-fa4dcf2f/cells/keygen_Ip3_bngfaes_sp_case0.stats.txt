@@ -1,0 +1,345 @@
+Execution time
+--------------
+ACC executed 1641122 instructions in 2079442 cycles.
+The execution stalled for 438320 cycles (26.7 percent).
+The execution would take 20.79 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.gfmul         549450
+bn.lid           305160
+bn.aes128.encm    96444
+bn.sd             91386
+addi              87173
+bn.ld             83758
+bn.wsrw           83611
+add               70647
+csrrw             41812
+lw                29770
+xor               24840
+bn.rshi           21312
+and               14491
+sll               13455
+sw                12729
+srl               12420
+srli              11903
+or                11386
+bn.add            10716
+bn.aes128.encz    10716
+bn.aes128.encf    10716
+bn.sid             9107
+bn.xor             6662
+loopi              5360
+loop               5264
+sub                3149
+jal                2896
+jalr               2896
+beq                2842
+slli               2707
+andi               2366
+lui                1915
+bn.mov              893
+bn.sub              710
+bn.addi             149
+bn.or               149
+bn.wsrr             105
+bn.and               45
+bn.aes128.kf         10
+bn.not                1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function               [instr., stall]
+---------------------  -----------------
+$d                     [1099953, 398024]
+$x                     [538567, 39327]
+expand_batch           [893, 893]
+expand_360             [893, 0]
+phase4_row_setup       [814, 74]
+_imem_start            [1, 1]
+expandsk_ret_O_pkseed  [1, 1]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [1, 1]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [96444, 0]
+addi            [87173, 0]
+bn.wsrw         [83611, 0]
+add             [70425, 0]
+csrrw           [41812, 0]
+lw              [29696, 29696]
+xor             [24840, 0]
+and             [14491, 0]
+sll             [13455, 0]
+sw              [12729, 0]
+srl             [12420, 0]
+srli            [11755, 0]
+or              [11386, 0]
+bn.aes128.encf  [10716, 0]
+sub             [3149, 0]
+jalr            [2896, 2896]
+beq             [2842, 2842]
+slli            [2485, 0]
+andi            [2218, 0]
+jal             [2003, 2003]
+lui             [1915, 0]
+bn.wsrr         [105, 1889]
+ecall           [1, 1]
+
+expandsk_ret_O_pkseed
+instruction    [count, stalls]
+-------------  -----------------
+bn.lid         [1, 1]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.gfmul        [549450, 0]
+bn.lid          [305159, 305159]
+bn.sd           [91386, 0]
+bn.ld           [83758, 83758]
+bn.rshi         [21312, 0]
+bn.add          [10716, 0]
+bn.aes128.encz  [10716, 0]
+bn.sid          [9107, 9107]
+bn.xor          [6661, 0]
+loopi           [5360, 0]
+loop            [5264, 0]
+bn.sub          [710, 0]
+bn.addi         [149, 0]
+bn.or           [149, 0]
+bn.and          [45, 0]
+bn.aes128.kf    [10, 0]
+bn.not          [1, 0]
+
+phase4_row_setup
+instruction    [count, stalls]
+-------------  -----------------
+slli           [222, 0]
+add            [222, 0]
+srli           [148, 0]
+andi           [148, 0]
+lw             [74, 74]
+
+expand_batch
+instruction    [count, stalls]
+-------------  -----------------
+jal            [893, 893]
+
+expand_360
+instruction    [count, stalls]
+-------------  -----------------
+bn.mov         [893, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1         5668
+            2         2265
+            4       117226
+            5         4375
+            6          856
+            8         3404
+            9           45
+           12         3609
+           13        10790
+           14          990
+           15          946
+           16           44
+           17           45
+           18        18787
+           19        17028
+           20          792
+           21          812
+           24            8
+           25          267
+           26          215
+           27          599
+           36         1035
+           38           32
+           39           43
+           57            1
+          146          893
+          467            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1         2069
+            2         1094
+            4        46665
+            6          855
+            8          450
+            9           44
+           12         3608
+           13          440
+           14          990
+           15          946
+           16           44
+           17           45
+           18        17894
+           19        17028
+           20          792
+           21          812
+           24            8
+           25           10
+           44          183
+           45          215
+           46          495
+           49         1440
+          148          745
+          169         1034
+          174           16
+          175            2
+          176            1
+          177           56
+          178         1440
+          193           32
+          194           42
+         3657            1
+
+Function call statistics
+------------------------
+Function 0x17d8 (expandsk_ret_O_pkseed)
+  is called from the following functions
+    * 1 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 1 times from 0x14 ($x+0x10)
+  calls
+    no other function (leaf function).
+
+Function 0x168c (phase4_row_setup)
+  is called from the following functions
+    * 74 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 8 times from 0x138 ($x)
+    * 8 times from 0x278 ($x+0x18)
+    * 8 times from 0x3b8 ($x+0x18)
+    * 8 times from 0x4f8 ($x+0x18)
+    * 8 times from 0x74c ($x)
+    * 8 times from 0x87c ($x+0x18)
+    * 8 times from 0x9ac ($x+0x18)
+    * 8 times from 0xadc ($x+0x18)
+    * 2 times from 0xd24 ($x)
+    * 2 times from 0xe40 ($x+0x18)
+    * 2 times from 0xf5c ($x+0x18)
+    * 2 times from 0x1078 ($x+0x18)
+    * 1 times from 0x12a8 ($x+0x24)
+    * 1 times from 0x13c4 ($x+0x18)
+  calls
+    no other function (leaf function).
+
+Function 0x1640 (expand_batch)
+  is called from the following functions
+    * 482 times by function 0x0 (_imem_start)
+    * 66 times by function 0x13c ($x+0x4)
+    * 66 times by function 0x27c ($x+0x1c)
+    * 66 times by function 0x3bc ($x+0x1c)
+    * 64 times by function 0x4fc ($x+0x1c)
+    * 34 times by function 0x750 ($x+0x4)
+    * 34 times by function 0x880 ($x+0x1c)
+    * 34 times by function 0x9b0 ($x+0x1c)
+    * 32 times by function 0xae0 ($x+0x1c)
+    * 4 times by function 0xf60 ($x+0x1c)
+    * 3 times by function 0xd28 ($x+0x4)
+    * 3 times by function 0xe44 ($x+0x1c)
+    * 3 times by function 0x107c ($x+0x1c)
+    * 1 times by function 0x12ac ($x+0x28)
+    * 1 times by function 0x13c8 ($x+0x1c)
+  from the following call sites
+    * 411 times from 0x16ec ($x)
+    * 52 times from 0x1d0 ($x)
+    * 52 times from 0x310 ($x)
+    * 52 times from 0x450 ($x)
+    * 52 times from 0x590 ($x)
+    * 52 times from 0x7e8 ($x)
+    * 52 times from 0x918 ($x)
+    * 52 times from 0xa48 ($x)
+    * 52 times from 0xb78 ($x)
+    * 13 times from 0xdc0 ($x)
+    * 13 times from 0xedc ($x)
+    * 13 times from 0xff8 ($x)
+    * 13 times from 0x1114 ($x)
+    * 7 times from 0x1344 ($x)
+    * 7 times from 0x1460 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x1fc0 (expand_360)
+  is called from the following functions
+    * 66 times by function 0x13c ($x+0x4)
+    * 66 times by function 0x27c ($x+0x1c)
+    * 66 times by function 0x3bc ($x+0x1c)
+    * 64 times by function 0x4fc ($x+0x1c)
+    * 52 times by function 0x1d4 ($x+0x4)
+    * 52 times by function 0x314 ($x+0x4)
+    * 52 times by function 0x454 ($x+0x4)
+    * 52 times by function 0x594 ($x+0x4)
+    * 52 times by function 0x7ec ($x+0x4)
+    * 52 times by function 0x91c ($x+0x4)
+    * 52 times by function 0xa4c ($x+0x4)
+    * 52 times by function 0xb7c ($x+0x4)
+    * 34 times by function 0x750 ($x+0x4)
+    * 34 times by function 0x880 ($x+0x1c)
+    * 34 times by function 0x9b0 ($x+0x1c)
+    * 32 times by function 0xae0 ($x+0x1c)
+    * 13 times by function 0xdc4 ($x+0x4)
+    * 13 times by function 0xee0 ($x+0x4)
+    * 13 times by function 0xffc ($x+0x4)
+    * 13 times by function 0x1118 ($x+0x4)
+    * 7 times by function 0x1348 ($x+0x4)
+    * 7 times by function 0x1464 ($x+0x4)
+    * 4 times by function 0xf60 ($x+0x1c)
+    * 3 times by function 0xd28 ($x+0x4)
+    * 3 times by function 0xe44 ($x+0x1c)
+    * 3 times by function 0x107c ($x+0x1c)
+    * 1 times by function 0x12ac ($x+0x28)
+    * 1 times by function 0x13c8 ($x+0x1c)
+  from the following call sites
+    * 893 times from 0x1640 (expand_batch)
+  calls
+    no other function (leaf function).
+
+Function 0x1714 (_slot_write)
+  is called from the following functions
+    * 1035 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 1035 times from 0x15e0 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 2896 function calls, there were
+  1102 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  967 leaf function calls (no function prologue/epilogue needed)
+Overall, 827 of 2896 (28.56 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 10624
+Loop body length (instructions): min: 1, max: 388, avg: 7.48
+Number of iterations: min: 1, max: 2070, avg: 17.14
+
+# elf: sw/acc/crypto/handwritten/uov/dmem_large/keygen_sp/ov-Ip3-pkc+skc/ov-Ip3-keygen_sp_bngfaes.elf

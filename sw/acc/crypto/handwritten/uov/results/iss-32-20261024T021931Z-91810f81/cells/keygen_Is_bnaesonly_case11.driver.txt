@@ -1,0 +1,5 @@
+case 11: sk_seed bf1124d36c93e08e.., expect cpk 66576 B
+pk_seed OK
+cpk byte-identical (66576 B)
+negative controls OK
+IS STREAMED KEYGEN PASS

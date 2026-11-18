@@ -1,0 +1,126 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1.1 (lin64) Build 2960000 Wed Aug  5 22:57:21 MDT 2020
+| Date         : Thu Nov  5 14:25:57 2026
+| Host         : anonymous running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_utilization -hierarchical -hierarchical_depth 6 -file ../../../reports/FPGA-Vivado/acc_core_mul/utilization_hierarchical.txt
+| Design       : acc_core
+| Device       : 7k160tfbg676-1
+| Design State : Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++------------------------------------------------+--------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+|                    Instance                    |                Module                | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | DSP Blocks |
++------------------------------------------------+--------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+| acc_core                                       |                                (top) |      31412 |      31340 |      72 |    0 | 13375 |      0 |      0 |         16 |
+|   (acc_core)                                   |                                (top) |          2 |          2 |       0 |    0 |    27 |      0 |      0 |          0 |
+|   u_acc_alu_base                               |                         acc_alu_base |          0 |          0 |       0 |    0 |     0 |      0 |      0 |          0 |
+|   u_acc_alu_bignum                             |                       acc_alu_bignum |        309 |        309 |       0 |    0 |   320 |      0 |      0 |          0 |
+|   u_acc_controller                             |                       acc_controller |       2304 |       2260 |      44 |    0 |   629 |      0 |      0 |          0 |
+|     (u_acc_controller)                         |                       acc_controller |         42 |         42 |       0 |    0 |    84 |      0 |      0 |          0 |
+|     rf_bignum_rd_a_idirect_onehot__enc         |                      prim_onehot_enc |          1 |          1 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     rf_bignum_rd_b_indirect_onehot_enc         |                    prim_onehot_enc_7 |          1 |          1 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     rf_bignum_wr_indirect_onehot_enc           |                    prim_onehot_enc_8 |         12 |         12 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     u_acc_loop_controller                      |                  acc_loop_controller |       2137 |       2093 |      44 |    0 |   540 |      0 |      0 |          0 |
+|       g_loop_counters[0].u_loop_count          |                           prim_count |        229 |        229 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[0].u_loop_count)      |                           prim_count |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_33 |        150 |        150 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_34 |         71 |         71 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[1].u_loop_count          |                        prim_count_10 |        213 |        213 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[1].u_loop_count)      |                        prim_count_10 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_31 |        134 |        134 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_32 |         71 |         71 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[2].u_loop_count          |                        prim_count_11 |        229 |        229 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[2].u_loop_count)      |                        prim_count_11 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_29 |        150 |        150 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_30 |         71 |         71 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[3].u_loop_count          |                        prim_count_12 |        213 |        213 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[3].u_loop_count)      |                        prim_count_12 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_27 |        134 |        134 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_28 |         71 |         71 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[4].u_loop_count          |                        prim_count_13 |        229 |        229 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[4].u_loop_count)      |                        prim_count_13 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_25 |        150 |        150 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_26 |         71 |         71 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[5].u_loop_count          |                        prim_count_14 |        213 |        213 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[5].u_loop_count)      |                        prim_count_14 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_23 |        134 |        134 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_24 |         71 |         71 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[6].u_loop_count          |                        prim_count_15 |        229 |        229 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[6].u_loop_count)      |                        prim_count_15 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |        prim_flop__parameterized10_21 |        150 |        150 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |        prim_flop__parameterized11_22 |         71 |         71 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       g_loop_counters[7].u_loop_count          |                        prim_count_16 |        214 |        214 |       0 |    0 |    65 |      0 |      0 |          0 |
+|         (g_loop_counters[7].u_loop_count)      |                        prim_count_16 |          8 |          8 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |           prim_flop__parameterized10 |        135 |        135 |       0 |    0 |    32 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |           prim_flop__parameterized11 |         71 |         71 |       0 |    0 |    32 |      0 |      0 |          0 |
+|       loop_info_stack                          |                            acc_stack |        361 |        317 |      44 |    0 |    12 |      0 |      0 |          0 |
+|         (loop_info_stack)                      |                            acc_stack |         74 |         30 |      44 |    0 |     0 |      0 |      0 |          0 |
+|         u_cnt_err_flop                         |         prim_flop__parameterized8_17 |          1 |          1 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         u_stack_wr_ptr                         |        prim_count__parameterized0_18 |        287 |        287 |       0 |    0 |    11 |      0 |      0 |          0 |
+|           (u_stack_wr_ptr)                     |        prim_count__parameterized0_18 |          0 |          0 |       0 |    0 |     1 |      0 |      0 |          0 |
+|           gen_cnts[0].u_cnt_flop               |        prim_flop__parameterized12_19 |        280 |        280 |       0 |    0 |     6 |      0 |      0 |          0 |
+|           gen_cnts[1].u_cnt_flop               |        prim_flop__parameterized13_20 |          7 |          7 |       0 |    0 |     4 |      0 |      0 |          0 |
+|       u_loop_counter_err_flop                  |           prim_flop__parameterized14 |          9 |          9 |       0 |    0 |     8 |      0 |      0 |          0 |
+|     u_state_error_flop                         |          prim_flop__parameterized8_9 |          0 |          0 |       0 |    0 |     1 |      0 |      0 |          0 |
+|     u_state_regs                               | prim_sparse_fsm_flop__parameterized0 |        112 |        112 |       0 |    0 |     4 |      0 |      0 |          0 |
+|       u_state_flop                             |            prim_flop__parameterized9 |        112 |        112 |       0 |    0 |     4 |      0 |      0 |          0 |
+|   u_acc_instruction_fetch                      |                acc_instruction_fetch |      21605 |      21605 |       0 |    0 |   374 |      0 |      0 |          0 |
+|     (u_acc_instruction_fetch)                  |                acc_instruction_fetch |          8 |          8 |       0 |    0 |    26 |      0 |      0 |          0 |
+|     u_acc_predecode                            |                        acc_predecode |         41 |         41 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     u_alu_predec_bignum_flop                   |            prim_flop__parameterized2 |       1291 |       1291 |       0 |    0 |    86 |      0 |      0 |          0 |
+|     u_ctrl_flow_predec_flop                    |            prim_flop__parameterized4 |         25 |         25 |       0 |    0 |     6 |      0 |      0 |          0 |
+|     u_ctrl_flow_target_predec_flop             |            prim_flop__parameterized5 |         10 |         10 |       0 |    0 |    12 |      0 |      0 |          0 |
+|     u_insn_fetch_resp_data_intg_flop           |            prim_flop__parameterized1 |       5525 |       5525 |       0 |    0 |    53 |      0 |      0 |          0 |
+|     u_ispr_predec_bignum_flop                  |            prim_flop__parameterized7 |       1673 |       1673 |       0 |    0 |    51 |      0 |      0 |          0 |
+|     u_lsu_addr_en_predec_flop                  |          prim_flop__parameterized8_6 |          3 |          3 |       0 |    0 |     1 |      0 |      0 |          0 |
+|     u_mac_predec_bignum_flop                   |            prim_flop__parameterized3 |         20 |         20 |       0 |    0 |    15 |      0 |      0 |          0 |
+|     u_rf_predec_bignum_flop                    |            prim_flop__parameterized6 |      13027 |      13027 |       0 |    0 |   124 |      0 |      0 |          0 |
+|   u_acc_lsu                                    |                              acc_lsu |        155 |        155 |       0 |    0 |     3 |      0 |      0 |          0 |
+|   u_acc_mac_bignum                             |                       acc_mac_bignum |       4225 |       4225 |       0 |    0 |   312 |      0 |      0 |         16 |
+|     (u_acc_mac_bignum)                         |                       acc_mac_bignum |       1197 |       1197 |       0 |    0 |   312 |      0 |      0 |          0 |
+|     gen_mul.mul                                |                       acc_bignum_mul |        435 |        435 |       0 |    0 |     0 |      0 |      0 |         16 |
+|     u_acc_blanker                              |         prim_blanker__parameterized3 |         64 |         64 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       u_blank_and                              |          prim_and2__parameterized5_5 |         64 |         64 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     u_gfmacc                                   |                               gfmacc |       2273 |       2273 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     u_operand_a_blanker                        |       prim_blanker__parameterized3_2 |        128 |        128 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       u_blank_and                              |          prim_and2__parameterized5_4 |        128 |        128 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     u_operand_b_blanker                        |       prim_blanker__parameterized3_3 |        128 |        128 |       0 |    0 |     0 |      0 |      0 |          0 |
+|       u_blank_and                              |            prim_and2__parameterized5 |        128 |        128 |       0 |    0 |     0 |      0 |      0 |          0 |
+|   u_acc_rf_base                                |                          acc_rf_base |        924 |        896 |      28 |    0 |  1180 |      0 |      0 |          0 |
+|     (u_acc_rf_base)                            |                          acc_rf_base |          3 |          3 |       0 |    0 |     0 |      0 |      0 |          0 |
+|     gen_rf_base_ff.u_acc_rf_base_inner         |                       acc_rf_base_ff |        795 |        795 |       0 |    0 |  1170 |      0 |      0 |          0 |
+|     u_call_stack                               |            acc_stack__parameterized0 |        126 |         98 |      28 |    0 |    10 |      0 |      0 |          0 |
+|       (u_call_stack)                           |            acc_stack__parameterized0 |         28 |          0 |      28 |    0 |     0 |      0 |      0 |          0 |
+|       u_cnt_err_flop                           |          prim_flop__parameterized8_1 |          1 |          1 |       0 |    0 |     1 |      0 |      0 |          0 |
+|       u_stack_wr_ptr                           |           prim_count__parameterized0 |         97 |         97 |       0 |    0 |     9 |      0 |      0 |          0 |
+|         (u_stack_wr_ptr)                       |           prim_count__parameterized0 |          0 |          0 |       0 |    0 |     1 |      0 |      0 |          0 |
+|         gen_cnts[0].u_cnt_flop                 |           prim_flop__parameterized12 |         87 |         87 |       0 |    0 |     4 |      0 |      0 |          0 |
+|         gen_cnts[1].u_cnt_flop                 |           prim_flop__parameterized13 |         10 |         10 |       0 |    0 |     4 |      0 |      0 |          0 |
+|   u_acc_rf_bignum                              |                        acc_rf_bignum |        268 |        268 |       0 |    0 |  9985 |      0 |      0 |          0 |
+|     gen_rf_bignum_ff.u_acc_rf_bignum_inner     |                     acc_rf_bignum_ff |        268 |        268 |       0 |    0 |  9985 |      0 |      0 |          0 |
+|       (gen_rf_bignum_ff.u_acc_rf_bignum_inner) |                     acc_rf_bignum_ff |        268 |        268 |       0 |    0 |  9984 |      0 |      0 |          0 |
+|       u_we_err_flop                            |            prim_flop__parameterized8 |          0 |          0 |       0 |    0 |     1 |      0 |      0 |          0 |
+|   u_acc_rnd                                    |                              acc_rnd |       1488 |       1488 |       0 |    0 |   519 |      0 |      0 |          0 |
+|     (u_acc_rnd)                                |                              acc_rnd |         15 |         15 |       0 |    0 |   263 |      0 |      0 |          0 |
+|     u_xoshiro256pp                             |                    prim_xoshiro256pp |       1473 |       1473 |       0 |    0 |   256 |      0 |      0 |          0 |
+|   u_acc_start_stop_control                     |               acc_start_stop_control |        207 |        207 |       0 |    0 |    26 |      0 |      0 |          0 |
+|     (u_acc_start_stop_control)                 |               acc_start_stop_control |          2 |          2 |       0 |    0 |    13 |      0 |      0 |          0 |
+|     u_prim_mubi4_sender_rma_ack                |                    prim_mubi4_sender |          4 |          4 |       0 |    0 |     4 |      0 |      0 |          0 |
+|       gen_flops.u_prim_flop                    |                          prim_flop_0 |          4 |          4 |       0 |    0 |     4 |      0 |      0 |          0 |
+|     u_state_regs                               |                 prim_sparse_fsm_flop |        190 |        190 |       0 |    0 |     7 |      0 |      0 |          0 |
+|       u_state_flop                             |            prim_flop__parameterized0 |        190 |        190 |       0 |    0 |     7 |      0 |      0 |          0 |
+|     u_wipe_after_urnd_refresh_flop             |    prim_mubi4_sender__parameterized0 |         12 |         12 |       0 |    0 |     2 |      0 |      0 |          0 |
+|       gen_flops.u_prim_flop                    |                            prim_flop |         12 |         12 |       0 |    0 |     2 |      0 |      0 |          0 |
++------------------------------------------------+--------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

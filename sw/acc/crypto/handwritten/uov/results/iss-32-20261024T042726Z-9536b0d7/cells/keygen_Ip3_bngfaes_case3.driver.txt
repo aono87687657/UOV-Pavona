@@ -1,0 +1,5 @@
+case 3: sk_seed 00f329242b5b4d96.., expect cpk 46591 B
+pk_seed OK
+cpk byte-identical (46591 B)
+negative controls OK
+IP3 STREAMED KEYGEN PASS

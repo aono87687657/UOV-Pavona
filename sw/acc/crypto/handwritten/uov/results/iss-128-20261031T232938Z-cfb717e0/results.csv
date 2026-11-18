@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+keygen,Ip3,sw,min,0,PASS,543798913,655628991
+keygen,Ip3,sw,min,1,PASS,543798913,655628991
+keygen,Ip3,sw,min,2,PASS,543798913,655628991
+keygen,Ip3,sw,min,3,PASS,543798913,655628991
+keygen,Ip3,sw,min,4,PASS,543798913,655628991
+keygen,Ip3,sw,min,5,PASS,543798913,655628991
+keygen,Ip3,sw,min,6,PASS,543798913,655628991
+keygen,Ip3,sw,min,7,PASS,543798913,655628991
+keygen,Ip3,sw,min,8,PASS,543798913,655628991
+keygen,Ip3,sw,min,9,PASS,543798913,655628991
+keygen,Ip3,sw,min,10,PASS,543798913,655628991
+keygen,Ip3,sw,min,11,PASS,543798913,655628991

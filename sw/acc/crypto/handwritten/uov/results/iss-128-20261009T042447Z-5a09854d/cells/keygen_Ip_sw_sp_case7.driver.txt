@@ -1,0 +1,3 @@
+[PASS] Ip/sw case7: cpk==KAT (43,576B) csk==sk  cycles=60,376,060
+
+=== Ip/sw: 1 pass, 0 fail ===

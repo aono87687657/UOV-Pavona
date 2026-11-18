@@ -1,0 +1,4 @@
+[PASS] Ip3/bngfonly case0: cpk==KAT (46,591B) csk==sk  cycles=12,013,022
+
+=== Ip3/bngfonly: 1 pass, 0 fail ===
+    cycles (case 0): 12,013,022

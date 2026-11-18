@@ -1,0 +1,54 @@
+--------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1.1 (lin64) Build 2960000 Wed Aug  5 22:57:21 MDT 2020
+| Date         : Thu Nov  5 11:45:27 2026
+| Host         : anonymous running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_timing -file ../../../reports/FPGA-Vivado/acc_aes_bignum/timing.txt
+| Design       : acc_aes_bignum
+| Device       : 7k160t-fbg676
+| Speed File   : -1  PRODUCTION 1.12 2017-02-17
+--------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.014ns  (required time - arrival time)
+  Source:                 operation_i[operand_a][168]
+                            (input port)
+  Destination:            operation_result_o[145]
+  Path Group:             **default**
+  Path Type:              Max at Slow Process Corner
+  Requirement:            4.484ns  (MaxDelay Path 4.484ns)
+  Data Path Delay:        4.470ns  (logic 0.318ns (7.114%)  route 4.152ns (92.886%))
+  Logic Levels:           6  (LUT3=1 LUT5=1 LUT6=4)
+  Output Delay:           0.000ns
+  Timing Exception:       MaxDelay Path 4.484ns -datapath_only
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  operation_i[operand_a][168] (IN)
+                         net (fo=0)                   0.672     0.672    u_aes_round_keyexpand_hi/gen_sub_bytes[5].sbox_inst/operation_i[operand_a][0]
+    SLICE_X28Y71         LUT3 (Prop_lut3_I2_O)        0.053     0.725 r  u_aes_round_keyexpand_hi/gen_sub_bytes[5].sbox_inst/operation_result_o[168]_INST_0_i_2/O
+                         net (fo=33, routed)          0.788     1.513    u_aes_round_keyexpand_hi/gen_sub_bytes[5].sbox_inst/aes_predec_bignum_i[op_en]_8[0]
+    SLICE_X27Y72         LUT6 (Prop_lut6_I0_O)        0.053     1.566 r  u_aes_round_keyexpand_hi/gen_sub_bytes[5].sbox_inst/g3_b1__20/O
+                         net (fo=2, routed)           0.640     2.205    u_aes_round_keyexpand_hi_n_329
+    SLICE_X28Y71         LUT5 (Prop_lut5_I2_O)        0.053     2.258 r  operation_result_o[153]_INST_0_i_9/O
+                         net (fo=1, routed)           0.527     2.785    operation_result_o[153]_INST_0_i_9_n_0
+    SLICE_X29Y67         LUT6 (Prop_lut6_I5_O)        0.053     2.838 r  operation_result_o[153]_INST_0_i_3/O
+                         net (fo=2, routed)           0.555     3.393    u_aes_round_keyexpand_hi/gen_sub_bytes[10].sbox_inst/operation_result_o[145]
+    SLICE_X29Y66         LUT6 (Prop_lut6_I2_O)        0.053     3.446 r  u_aes_round_keyexpand_hi/gen_sub_bytes[10].sbox_inst/operation_result_o[145]_INST_0_i_1/O
+                         net (fo=1, routed)           0.299     3.745    u_aes_round_keyexpand_hi/gen_sub_bytes[10].sbox_inst/p_0_in[17]
+    SLICE_X30Y66         LUT6 (Prop_lut6_I0_O)        0.053     3.798 r  u_aes_round_keyexpand_hi/gen_sub_bytes[10].sbox_inst/operation_result_o[145]_INST_0/O
+                         net (fo=0)                   0.672     4.470    operation_result_o[145]
+                                                                      r  operation_result_o[145] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         max delay                    4.484     4.484    
+                         output delay                -0.000     4.484    
+  -------------------------------------------------------------------
+                         required time                          4.484    
+                         arrival time                          -4.470    
+  -------------------------------------------------------------------
+                         slack                                  0.014    
+
+
+
+

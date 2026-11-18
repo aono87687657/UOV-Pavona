@@ -1,0 +1,63 @@
+Loaded 12 testvec case(s) from sw/acc/crypto/handwritten/test_data/testvectors-Ip-pkc-skc
+[testvec mode] running cases [6..6] of 12
+
+============================================================
+OV_OV256_112_44_SKC_Sign Test
+============================================================
+Output directory: chip-matrix/iss-512-20261023T091827Z-c65e02a2/kat/_tmp/sign_Ip_bngfaes_sprec_6
+ELF: sw/acc/crypto/handwritten/uov/dmem_large/sign_sprec/ov-Ip-skc/ov-Ip-sign_sprec_testvec_bngfaes.elf
+Iterations: 1
+
+============================================================
+Test Iteration 1/1
+============================================================
+
+--- Iteration 1 ---
+  testvec salt: 4b83c2bafacee02b502c8587d6b109f0
+sk_seed (32B): 0b32f3af5940961543c7960befa4701501af2b73ac675441d0a9067a0db2685e
+message (32B): b0e722806952fe398bf6b560d8107411427558fb38f256ce8651a39609fd69aa
+Computing reference (pk_seed, O, S)...
+  pk_seed: 7c796e0787552817d31408a36a00cade
+  O matrix size: 2992 bytes
+  S matrix size: 191488 bytes
+Running ACC simulation...
+
+Extracting salt and counter...
+  Salt from DMEM (0x1980): 4b83c2bafacee02b502c8587d6b109f0
+  OK caller inputs intact: sk_seed (32B), msg_len, msg[:32]
+  Counter (GPR x8): 0
+  Target hash t: 4140cb8aa9c3d925fba5e7790a6684f8818d8437a7b01759b9c2859e1bc434cabd36a3ca60e3ff84f9f6c3c6
+
+Replicating signing retry loop (counters 0..0)...
+  Counter 0: L invertible (GE success)
+  Vinegar (first 32 bytes): 23f1aceaeaec6a7091a9125ee538574402c0f15646e125ee4b97301947988ad9
+  L matrix size: 2816 bytes
+
+Computing Y = batch_quad_trimat_eval(P1, vinegar)...
+  Expected Y: 69f597d0c23e5196a4fe44e80b4c596fe68743dcc7b7128bd55c2427b4e7b2965cc601f34d98b17d4e1480db
+Computing reference Gaussian elimination...
+Computing reference back-substitution...
+
+Validating results...
+
+[12] Signature verification via public map (ACC-extracted bytes)...
+✓ Verification P(x) vs target hash validation PASSED: all 44 bytes match
+
+[13] Negative test: altered signature...
+
+[14] Negative test: altered public key...
+[12] Signature verification PASSED: P(x) == target hash
+[13] Altered signature correctly fails: P(x') != target (44/44 bytes differ, flipped sig byte 66)
+[14] Altered public key correctly fails: P'(x) != target (1/44 bytes differ, flipped pk byte 173618, after 1 attempt(s))
+[KAT] OK Testvec sig byte-wise MATCH (128 B)
+
+All validations passed!
+
+============================================================
+TEST SUMMARY - OV_OV256_112_44_SKC_Sign
+============================================================
+  Total:  1
+  Passed: 1
+  Failed: 0
+
+ALL TESTS PASSED

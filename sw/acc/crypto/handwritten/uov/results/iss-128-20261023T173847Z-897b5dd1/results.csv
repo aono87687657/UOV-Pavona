@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+keygen,Is,sw,min,0,PASS,332961005,401364567
+keygen,Is,sw,min,1,PASS,332961005,401364567
+keygen,Is,sw,min,2,PASS,332961005,401364567
+keygen,Is,sw,min,3,PASS,332961005,401364567
+keygen,Is,sw,min,4,PASS,332961005,401364567
+keygen,Is,sw,min,5,PASS,332961005,401364567
+keygen,Is,sw,min,6,PASS,332961005,401364567
+keygen,Is,sw,min,7,PASS,332961005,401364567
+keygen,Is,sw,min,8,PASS,332961005,401364567
+keygen,Is,sw,min,9,PASS,332961005,401364567
+keygen,Is,sw,min,10,PASS,332961005,401364567
+keygen,Is,sw,min,11,PASS,332961005,401364567

@@ -111,6 +111,13 @@ cc_library(
 )
 
 cc_library(
+    name = "uov_commands",
+    srcs = ["uov_commands.c"],
+    hdrs = ["uov_commands.h"],
+    deps = ["//sw/device/lib/ujson"],
+)
+
+cc_library(
     name = "mlkem_commands",
     srcs = ["mlkem_commands.c"],
     hdrs = ["mlkem_commands.h"],

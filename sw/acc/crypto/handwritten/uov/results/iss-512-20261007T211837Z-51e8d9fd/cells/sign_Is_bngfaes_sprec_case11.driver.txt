@@ -1,0 +1,58 @@
+Loaded 12 testvec case(s) from sw/acc/crypto/handwritten/test_data/testvectors-Is-pkc-skc
+[testvec mode] running cases [11..11] of 12
+
+============================================================
+OV_OV16_160_64_SKC_Sign Test
+============================================================
+Output directory: chip-matrix/iss-512-20261007T211837Z-51e8d9fd/kat/_tmp/sign_Is_bngfaes_sprec_11
+ELF: sw/acc/crypto/handwritten/uov/dmem_large/sign_sprec/ov-Is-sign_sprec_testvec_bngfaes.elf
+Iterations: 1
+
+============================================================
+Test Iteration 1/1
+============================================================
+
+--- Iteration 1 ---
+  testvec salt: 652c06fab5f69ebd8391ebf9927bb061
+sk_seed (32B): bf1124d36c93e08ee37a7bba7318c4a0aa77a0c06927c115ddf145430a81257e
+message (1024B): 58679f1576ededf3e560c339c92d9cd1bac4ff7478acbb0fba47b0fd928798c3a7a0c8d0c55f1c5267c425ecb79c4e9378c7eed0e3f94099410d16637486d576f26faeb80e09dd2e8ca26d06b177e02ea18603b8751a9f3f62e86353db620b309486676110f1c2e9795f84960403343b0ee5e506a9963f00925b6674fa806be5bab609830821992ed69809a25aef4f709367c22c3f35b76ea08286510f55396c14d26874138f1720ab0c081bb153c009d835d92c7f7465b4fdef6903c37ad5a05c19f4eb284bdd293b775f343504321062bbb1691ce249987bdb6ecb8fb752930f2d329b7aafd52c26973317a2cb46f475bcebbe5750032ef2fc8406479e9118b48cda81d30bdad22206f3d507ddf2b2b98318c7df1c1f413a935069950af52417f9c1e946d91b9337f24fabfe6ae6c1d70b58da98c15c16a565f396266dd17cb4d0510a01047bbcae155fadb26500b6542568317b7d2dfaeb3dde5ca803ad5197393ed7bf9036f3d11c03d3b8b8e50b5992125b3276635c6bdbf5bdbd65f066acd4945a74e8197309c064b37e30306b2aca4ebf8ba47f844dddb0276084d992f68bd20ba670a4bde9fbe9feb9c12453631b03e736afa3e2a261ba908c6f3e85304ab7c5fa5d47e787f1a259e7a16d2bcd829d81e848c7c965e242a3e8eca0ccbf46fdced1c104457c3fa3cf45ebbcd4ee384519d671e1269410f8f6fbddfaa50cced5320f6b0d43385baef9cf5a4d45ebda142a78026091cebd96c36743b363322232b19c14fc9aff45ec013d0c1d34e0a90ab426900a2d149c3d5cb8c01d5803d76c57c924a9e22b667b9826ee45c417ebbb086f6e20af9a409515111bfea4f3e9552012b21c98357ec5db986aadd8bd7cefb8e1e0de9794699bc1f55b2db125fc2c1b697dddcdc0dba6941ae52070d27c310741d98debe7552776355f7069e05a359c34e288902cee26bc3bf165de529c4702b1e83192200ef2ac8661ba7d7f8482e41505a9c987e3dfb5348987df28ffaa130d3725b0e9fc85f45c2810402556ff2849673f36cbe3422e142d2545f6dbd70f15d762da0d99b52e54b3b8b33b989e6697c7d7ccb780bd471a0a9cc392d4d42f2e734779824c051beb451f3fdba518fe074e2c4df8e73bac1d0cd6d21bcc2b9810f977ad86576008f3e1489c517658235c59fd2a3ecf33c7e0073015c12ab79a013db383d77204ffc48faa8b0b4c915500ea7db8a56a65b807fc65d87a4da0af34911251625ae402e2c340496f0e816fe81f126aea1672b48f57753756761f06c548f5ee31a665ab86aaa1fbf2f31ff68379caa71209bbf56acdb4e643513144cd4c0e1c2173abf7aec4839d746f85cbd6c5f52940e4463d8534e9f288a660791a3c554d49aaa42711e1cf4e9355d1510f6749d45625f898c8a6cc835ad14784cce15521f4a3f69fd8e95345
+Computing reference (pk_seed, O, S)...
+  pk_seed: 2c9016497bfb30d8bc463a850f27e258
+  O matrix size: 3072 bytes
+  S matrix size: 196608 bytes
+Running ACC simulation...
+
+Extracting salt and counter...
+  Salt from DMEM (0x12c0): 652c06fab5f69ebd8391ebf9927bb061
+  OK caller inputs intact: sk_seed (32B), msg_len, msg[:1024]
+  Counter (GPR x8): 1
+  Target hash t: 50cc3f9263fe7bec2bc338428cb19ebf5d0f59b5bbd89b36352a60c89fe68ecf
+
+Replicating signing retry loop (counters 0..1)...
+  Counter 0: L singular (GE fail) -- skipped
+  Counter 1: L invertible (GE success)
+  Vinegar (first 32 bytes): 61c51d1dcd57baa8cfb71f9aaa738d9262ffa2fdd9dd122456f00661edd3f5f2
+  L matrix size: 2048 bytes
+
+Computing Y = batch_quad_trimat_eval(P1, vinegar)...
+  Expected Y: aa868b04194648f24ef4e3a9eda3b9b60c995694cb15ee16bb6eca0734eaac63
+Computing reference Gaussian elimination...
+Computing reference back-substitution...
+
+Validating results...
+
+[12] Signature verification via public map (ACC-extracted bytes)...
+✓ Verification P(x) vs target hash validation PASSED: all 32 bytes match
+[12] Signature verification PASSED: P(x) == target hash
+[KAT] OK Testvec sig byte-wise MATCH (96 B)
+
+All validations passed!
+
+============================================================
+TEST SUMMARY - OV_OV16_160_64_SKC_Sign
+============================================================
+  Total:  1
+  Passed: 1
+  Failed: 0
+
+ALL TESTS PASSED

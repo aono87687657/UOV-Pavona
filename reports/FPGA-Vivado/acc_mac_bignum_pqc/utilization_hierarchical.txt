@@ -1,0 +1,36 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1.1 (lin64) Build 2960000 Wed Aug  5 22:57:21 MDT 2020
+| Date         : Fri Nov  6 05:34:13 2026
+| Host         : anonymous running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_utilization -hierarchical -hierarchical_depth 6 -file ../../../reports/FPGA-Vivado/acc_mac_bignum_pqc/utilization_hierarchical.txt
+| Design       : acc_mac_bignum
+| Device       : 7k160tfbg676-1
+| Design State : Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++---------------------------+----------------+------------+------------+---------+------+-----+--------+--------+------------+
+|          Instance         |     Module     | Total LUTs | Logic LUTs | LUTRAMs | SRLs | FFs | RAMB36 | RAMB18 | DSP Blocks |
++---------------------------+----------------+------------+------------+---------+------+-----+--------+--------+------------+
+| acc_mac_bignum            |          (top) |       5403 |       5403 |       0 |    0 | 624 |      0 |      0 |         16 |
+|   (acc_mac_bignum)        |          (top) |          9 |          9 |       0 |    0 | 624 |      0 |      0 |          0 |
+|   gen_mac_adder_pqc.adder |     buffer_bit |       1889 |       1889 |       0 |    0 |   0 |      0 |      0 |          0 |
+|   gen_mul_pqc.mul         |    unified_mul |       2961 |       2961 |       0 |    0 |   0 |      0 |      0 |         16 |
+|   u_acc_blanker           |   prim_blanker |          1 |          1 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     u_blank_and           |    prim_and2_3 |          1 |          1 |       0 |    0 |   0 |      0 |      0 |          0 |
+|   u_operand_a_blanker     | prim_blanker_0 |        470 |        470 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     u_blank_and           |    prim_and2_2 |        470 |        470 |       0 |    0 |   0 |      0 |      0 |          0 |
+|   u_operand_b_blanker     | prim_blanker_1 |         74 |         74 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     u_blank_and           |      prim_and2 |         74 |         74 |       0 |    0 |   0 |      0 |      0 |          0 |
++---------------------------+----------------+------------+------------+---------+------+-----+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+sign,Ip3,bngfonly,ldirect,0,PASS,8649488,8859108
+sign,Ip3,bngfonly,ldirect,1,PASS,8649503,8859128
+sign,Ip3,bngfonly,ldirect,2,PASS,8649503,8859128
+sign,Ip3,bngfonly,ldirect,3,PASS,8649503,8859128
+sign,Ip3,bngfonly,ldirect,4,PASS,8649503,8859128
+sign,Ip3,bngfonly,ldirect,5,PASS,8649503,8859128
+sign,Ip3,bngfonly,ldirect,6,PASS,8649554,8859180
+sign,Ip3,bngfonly,ldirect,7,PASS,8649608,8859236
+sign,Ip3,bngfonly,ldirect,8,PASS,8649716,8859348
+sign,Ip3,bngfonly,ldirect,9,PASS,8649932,8859572
+sign,Ip3,bngfonly,ldirect,10,PASS,8650364,8860020
+sign,Ip3,bngfonly,ldirect,11,PASS,8651228,8860916

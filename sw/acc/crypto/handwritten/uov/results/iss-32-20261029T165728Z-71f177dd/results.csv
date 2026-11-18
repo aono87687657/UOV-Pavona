@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+keygen,Is,sw,stream_uniform,0,PASS,106125325,124802512
+keygen,Is,sw,stream_uniform,1,PASS,106125325,124802512
+keygen,Is,sw,stream_uniform,2,PASS,106125325,124802512
+keygen,Is,sw,stream_uniform,3,PASS,106125325,124802512
+keygen,Is,sw,stream_uniform,4,PASS,106125325,124802512
+keygen,Is,sw,stream_uniform,5,PASS,106125325,124802512
+keygen,Is,sw,stream_uniform,6,PASS,106125325,124802512
+keygen,Is,sw,stream_uniform,7,PASS,106125325,124802512
+keygen,Is,sw,stream_uniform,8,PASS,106125325,124802512
+keygen,Is,sw,stream_uniform,9,PASS,106125325,124802512
+keygen,Is,sw,stream_uniform,10,PASS,106125325,124802512
+keygen,Is,sw,stream_uniform,11,PASS,106125325,124802512

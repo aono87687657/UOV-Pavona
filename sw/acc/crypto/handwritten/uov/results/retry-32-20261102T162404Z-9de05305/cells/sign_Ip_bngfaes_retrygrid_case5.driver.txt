@@ -1,0 +1,64 @@
+Loaded 36 testvec case(s) from sw/acc/crypto/handwritten/test_data/testvectors-Ip-pkc-skc.retrygrid
+[testvec mode] running cases [5..5] of 36
+
+============================================================
+OV_OV256_112_44_SKC_Sign Test
+============================================================
+Output directory: chip-matrix/retry-32-20261102T162404Z-9de05305/kat/_tmp/sign_Ip_bngfaes_ldirect_5
+ELF: sw/acc/crypto/handwritten/uov/dmem32k/sign_ldirect/ov-Ip-skc/ov-Ip-sign_ldirect_testvec_bngfaes.elf
+Iterations: 1
+
+============================================================
+Test Iteration 1/1
+============================================================
+
+--- Iteration 1 ---
+  testvec salt: 3f6dea7838318cff1e0f218227f797a2
+sk_seed (32B): 934d60b35624d740b30a7f227af2ae7c678e4e04e13c5f509eade2b79aea77e2
+message (1024B): 2f32e74a867c78264e988081a2ae4b280f8ebb47026784111678c5758ffdec217792c65f2bdb4398086ad8f6a2458c2984fcc491af1596235dbd3cb5cdc76cbf5fe2375de64e82458d6cd81e594d10f8eb6737e43efa73c73b521b5a83e3448431b2b7052f31be892725b0036b5863ce71b432d6c649909e19112a3c10e468347c4645e3b17fc336601911d5c519e72778a7b79c4dd77012d8eebea003324b3d4785a3e837184f6cfe098925dfa9763dc36948cdeb10bbdbc595bbce85465c832849ceaab8d42ae3df70f556f715dfdb4dac92a4886157cfbdf55c64268fa4229495be4fd1ef4218930eb264f250973cbd7d12a75c3f4f48c67aaf423b6ad2666d158840532f20a52a88e534eb46303a3db1b3d2555977490382d12d9d1855328a61ac40a338605326c78044821dfb5d7dc860760e774ae64fd1f259bbbef2dad1cdc7369adc642e25f6df89ea2838c7549dd77f1516ff83db75a38d5b2436b11cdc140c4cc6f9ade35a251f7377b1747f6dd6bd754da9d71311108f8551eabfa0733cc55dda9abc2040a4b1168e6ec246c6c5b184dbffdbc6e2b75458a03e3798a0557c573823d94214d5f174ad8887e2457c2ddc6e7c55886ea495d915ff3925cef6e00c1477a2ef19d6c47beda6ee4c8f73d166f99ea6c4c5c90da8364997d69772dde4314c6013b7395401c90f2d40ea9d5cc4ec4e324ad4ae83b267da8ef512b1ef3b0b6c202b228f173f7630162b702591927ac91fd4591a0478457636ceb66b9c4792734f372734b4066c72e7a407953a6f6eda4404e1d16de22d09fb9c14ce9ef5e5129f3eb3edfb541ede3447a791510c27e0a04c34aadb8fa8b5e2c1cc8a7d9ccd2a3c311374b39ead31b5e66549b4c9bb01503fb1d6a1d93d67688fcbb239be1f0a7eebc0d65277cda55bf60b3097d3dc1099161663c4a5e6336e06639f863540cfade00236d533e4aef1a895647344acdbdd270525a53c9e3839e38012f0770680f4b686c4cb5ea4a3dd961a51dcb90f6d44f35babd512b3122efdcd4a9414055dbd24e953e251046bcf7a92c2f235ef928ecbac256a22ba88bd58c34512e07956539c3879f97c055c12cf620b42a91c5125b63ab9702e3b723901061ab0d83b691717073c4a0b90466ff19e93658178518e6edfe3c3d153f6a91377de169401157923b03439bcf23732c15731bb05757a6c644e97ceea21280e4de501e7ab22740493cf0fe675d92adae1673830f026cb868fff44ad08ef212e8d44b66077fc5e58f60de4bb3538f91b7becb762d126031740f69c0d5767a70bbff8282af8aa87ead78df52cc4caa8f65abca9603993a4196e29fcf5b14542a72cb6c3881315536424307b1ddcee4775ca8bd05fc83de6319f53241579919898bc990d47acff487d7f344fdb127bf4f7cd336d28c8c9f36fd9ac9cc63d2488f8
+Computing reference (pk_seed, O, S)...
+  pk_seed: 38d091e9d01e3f205c1fb92d4592ee05
+  O matrix size: 2992 bytes
+  S matrix size: 191488 bytes
+Running ACC simulation...
+
+Extracting salt and counter...
+  Salt from DMEM (0x2a60): 3f6dea7838318cff1e0f218227f797a2
+  OK caller inputs intact: sk_seed (32B), msg_len, msg[:1024]
+  Counter (GPR x8): 1
+  Target hash t: 46fa7de7b86acdf589a7871494d15237a83e0ac4bad34a07776632a382e92df2e35235e89cf01462c5b9b557
+
+Replicating signing retry loop (counters 0..1)...
+  Counter 0: L singular (GE fail) -- skipped
+  Counter 1: L invertible (GE success)
+  Vinegar (first 32 bytes): 6e444fe447422433f6006eb4618df886eaf20ac5f84d6572de1c63f5effcf4f2
+  L matrix size: 2816 bytes
+
+Computing Y = batch_quad_trimat_eval(P1, vinegar)...
+  Expected Y: 3a244c67ceaacdf71c81de296f355abaab79eee77e746c8167e53d1a7b280ee99db335fcccd951337f0b08ee
+Computing reference Gaussian elimination...
+Computing reference back-substitution...
+
+Validating results...
+
+[12] Signature verification via public map (ACC-extracted bytes)...
+✓ Verification P(x) vs target hash validation PASSED: all 44 bytes match
+
+[13] Negative test: altered signature...
+
+[14] Negative test: altered public key...
+[12] Signature verification PASSED: P(x) == target hash
+[13] Altered signature correctly fails: P(x') != target (44/44 bytes differ, flipped sig byte 0)
+[14] Altered public key correctly fails: P'(x) != target (1/44 bytes differ, flipped pk byte 204804, after 1 attempt(s))
+[KAT] OK Testvec sig byte-wise MATCH (128 B)
+
+All validations passed!
+
+============================================================
+TEST SUMMARY - OV_OV256_112_44_SKC_Sign
+============================================================
+  Total:  1
+  Passed: 1
+  Failed: 0
+
+ALL TESTS PASSED

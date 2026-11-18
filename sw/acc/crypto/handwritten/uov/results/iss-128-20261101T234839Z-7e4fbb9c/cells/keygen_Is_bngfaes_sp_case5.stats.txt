@@ -1,0 +1,216 @@
+Execution time
+--------------
+ACC executed 1795872 instructions in 2227917 cycles.
+The execution stalled for 432045 cycles (24.1 percent).
+The execution would take 22.28 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.gfmul         691200
+bn.lid           404355
+addi             110147
+bn.rshi          104740
+bn.wsrw          104449
+bn.sd             98305
+bn.aes128.encm    97200
+add               53314
+csrrw             52228
+bn.sid            13266
+bn.aes128.encz    10800
+bn.aes128.encf    10800
+bn.add            10800
+loop               6290
+bn.xor             6146
+bn.ld              6145
+beq                4608
+srli               3073
+loopi              2052
+lw                 1732
+sub                1537
+andi               1536
+lui                 350
+slli                195
+sw                  106
+bn.addi              98
+jal                  97
+bn.wsrr              97
+jalr                 97
+bn.or                97
+bn.aes128.kf         10
+or                    1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function               [instr., stall]
+---------------------  -----------------
+$d                     [1354303, 423765]
+$x                     [441470, 8278]
+p1op2_rows1_94_setup   [96, 0]
+_imem_start            [2, 1]
+expandsk_ret_O_pkseed  [1, 1]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+lui            [1, 1]
+addi           [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.gfmul        [691200, 0]
+bn.lid          [404354, 404354]
+bn.rshi         [104740, 0]
+bn.sd           [98305, 0]
+bn.sid          [13266, 13266]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+loop            [6290, 0]
+bn.xor          [6146, 0]
+bn.ld           [6145, 6145]
+loopi           [2052, 0]
+bn.addi         [98, 0]
+bn.or           [97, 0]
+bn.aes128.kf    [10, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+addi            [110146, 0]
+bn.wsrw         [104449, 0]
+bn.aes128.encm  [97200, 0]
+add             [53218, 0]
+csrrw           [52228, 0]
+bn.aes128.encf  [10800, 0]
+beq             [4608, 4608]
+srli            [3073, 0]
+lw              [1732, 1732]
+sub             [1537, 0]
+andi            [1536, 0]
+lui             [349, 0]
+slli            [195, 0]
+sw              [106, 0]
+bn.wsrr         [97, 1743]
+jal             [97, 97]
+jalr            [97, 97]
+ecall           [1, 1]
+or              [1, 0]
+
+expandsk_ret_O_pkseed
+instruction    [count, stalls]
+-------------  -----------------
+bn.lid         [1, 1]
+
+p1op2_rows1_94_setup
+instruction    [count, stalls]
+-------------  -----------------
+add            [96, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1         2125
+            2         1728
+            3       145480
+            4         2049
+            5          864
+            6            1
+            8            1
+            9         1512
+           12            1
+           13         7536
+           14            1
+           15           96
+           20           24
+           22        23064
+           23         1512
+           24        22320
+           25         1488
+           27          864
+           28         3072
+           34           64
+           35           32
+           38            1
+           57            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1         2079
+            2         1631
+            3        81920
+            5          768
+            9         1512
+           13         7536
+           15            1
+           17           22
+           18           73
+           19            1
+           20           24
+           22        23064
+           23         1512
+           24        22320
+           25         1488
+           27          768
+           28         1024
+           36           64
+           37           32
+           57            1
+          125         2048
+         3136            1
+
+Function call statistics
+------------------------
+Function 0xd40 (expandsk_ret_O_pkseed)
+  is called from the following functions
+    * 1 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 1 times from 0x14 ($x+0x8)
+  calls
+    no other function (leaf function).
+
+Function 0xcfc (p1op2_rows1_94_setup)
+  is called from the following functions
+    * 96 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 16 times from 0x138 ($x)
+    * 16 times from 0x24c ($x+0x8)
+    * 16 times from 0x360 ($x+0x8)
+    * 16 times from 0x474 ($x+0x8)
+    * 8 times from 0x718 ($x)
+    * 8 times from 0x820 ($x+0x8)
+    * 8 times from 0x928 ($x+0x8)
+    * 8 times from 0xa30 ($x+0x8)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 97 function calls, there were
+  1 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  96 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 97 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 8342
+Loop body length (instructions): min: 1, max: 375, avg: 11.11
+Number of iterations: min: 1, max: 2080, avg: 25.06
+
+# elf: sw/acc/crypto/handwritten/uov/dmem_large/keygen_sp/ov-Is-pkc+skc/ov-Is-keygen_sp_bngfaes.elf

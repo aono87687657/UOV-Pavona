@@ -92,6 +92,11 @@ filegroup(
 
 fusesoc_build(
     name = "verilator_real",
+    pre_system_flags = [
+        "--flag=aes_bignum",
+        "--flag=gfmacc_bignum",
+        "--flag=mod_reg_poly",
+    ],
     srcs = [
         ":dpi_files",
         ":dv_common_files",

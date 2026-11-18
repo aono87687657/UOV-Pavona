@@ -1,0 +1,25 @@
+.section .data
+.balign 32
+mat:
+    .zero 4096
+.balign 32
+.global mask
+mask:
+    .word 0x00ff00ff, 0x00ff00ff, 0x00ff00ff, 0x00ff00ff, 0x00ff00ff, 0x00ff00ff, 0x00ff00ff, 0x00ff00ff
+    .word 0x0000ffff, 0x0000ffff, 0x0000ffff, 0x0000ffff, 0x0000ffff, 0x0000ffff, 0x0000ffff, 0x0000ffff
+    .word 0xffffffff, 0x00000000, 0xffffffff, 0x00000000, 0xffffffff, 0x00000000, 0xffffffff, 0x00000000
+    .word 0xffffffff, 0xffffffff, 0x00000000, 0x00000000, 0xffffffff, 0xffffffff, 0x00000000, 0x00000000
+    .word 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+.balign 32
+stack:
+    .zero 32
+stack_end:
+.section .text.start
+.global main
+.balign 4
+main:
+    la x2, stack_end
+    la x10, mat
+    jal x1, gf256_transpose_44_44
+
+    ecall

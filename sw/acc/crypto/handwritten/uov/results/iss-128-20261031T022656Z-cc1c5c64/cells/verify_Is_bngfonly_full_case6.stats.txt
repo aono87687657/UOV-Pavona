@@ -1,0 +1,4285 @@
+case 6 accept:
+Execution time
+--------------
+ACC executed 9905800 instructions in 10037544 cycles.
+The execution stalled for 131744 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10812
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194695, 118836]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10811, 10811]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          161
+            3         2208
+            4           97
+            5         6207
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+cpk pk_seed byte 3:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+cpk P3 entry 0 byte 0:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+cpk P3 entry 2077 byte 31:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+key restored:
+Execution time
+--------------
+ACC executed 9905800 instructions in 10037544 cycles.
+The execution stalled for 131744 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10812
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194695, 118836]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10811, 10811]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          161
+            3         2208
+            4           97
+            5         6207
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+other signature:
+Execution time
+--------------
+ACC executed 9905826 instructions in 10037570 cycles.
+The execution stalled for 131744 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54268
+csrrw            32417
+bn.lid           12892
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10805
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678655, 12899]
+$x           [194720, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12892, 12892]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43449, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10805, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           27            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           27            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+signature under the other key:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+other key:
+Execution time
+--------------
+ACC executed 9905827 instructions in 10037572 cycles.
+The execution stalled for 131745 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54268
+csrrw            32417
+bn.lid           12892
+loopi            10899
+jal              10812
+jalr             10810
+lui              10805
+bn.wsrw          10805
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678655, 12899]
+$x           [194721, 118836]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12892, 12892]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43449, 0]
+jal            [10811, 10811]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10805, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          161
+            3         2208
+            4           97
+            5         6207
+            6         4657
+           12            2
+           13            1
+           16            1
+           27            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           27            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+key restored over the other key:
+Execution time
+--------------
+ACC executed 9905800 instructions in 10037544 cycles.
+The execution stalled for 131744 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10812
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194695, 118836]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10811, 10811]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          161
+            3         2208
+            4           97
+            5         6207
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+flip 0^0x1:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+flip 47^0x10:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+flip 48^0x1:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+flip 60^0x1:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+accept after flips:
+Execution time
+--------------
+ACC executed 9905800 instructions in 10037544 cycles.
+The execution stalled for 131744 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10812
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194695, 118836]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10811, 10811]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          161
+            3         2208
+            4           97
+            5         6207
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+flip 79^0x10:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+flip 80^0x1:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+flip 88^0x1:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+flip 95^0x1:
+Execution time
+--------------
+ACC executed 9905799 instructions in 10037542 cycles.
+The execution stalled for 131743 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10811
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194694, 118835]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10810, 10810]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          160
+            3         2208
+            4           96
+            5         6208
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+accept after flips:
+Execution time
+--------------
+ACC executed 9905800 instructions in 10037544 cycles.
+The execution stalled for 131744 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10812
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194695, 118836]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10811, 10811]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          161
+            3         2208
+            4           97
+            5         6207
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98
+
+
+len 0x401:
+Execution time
+--------------
+ACC executed 16 instructions in 22 cycles.
+The execution stalled for 6 cycles (37.5 percent).
+The execution would take 0.00 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+addi                 5
+sw                   2
+srli                 2
+bne                  2
+lw                   1
+sub                  1
+jal                  1
+csrrw                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+_imem_start  [12, 5]
+$x           [4, 1]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [4, 1]
+bne            [2, 2]
+srli           [2, 0]
+lw             [1, 1]
+jal            [1, 1]
+sw             [1, 0]
+sub            [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+ecall          [1, 1]
+addi           [1, 0]
+sw             [1, 0]
+csrrw          [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2            1
+            4            2
+            6            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            4            1
+            6            2
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 0
+
+
+len 0x80000000:
+Execution time
+--------------
+ACC executed 12 instructions in 17 cycles.
+The execution stalled for 5 cycles (41.7 percent).
+The execution would take 0.00 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+addi                 4
+sw                   2
+lw                   1
+srli                 1
+bne                  1
+jal                  1
+csrrw                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+_imem_start  [8, 4]
+$x           [4, 1]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [3, 1]
+lw             [1, 1]
+bne            [1, 1]
+jal            [1, 1]
+sw             [1, 0]
+srli           [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+ecall          [1, 1]
+addi           [1, 0]
+sw             [1, 0]
+csrrw          [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2            1
+            4            1
+            6            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            6            2
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 0
+
+
+len 0xffffffff:
+Execution time
+--------------
+ACC executed 12 instructions in 17 cycles.
+The execution stalled for 5 cycles (41.7 percent).
+The execution would take 0.00 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+addi                 4
+sw                   2
+lw                   1
+srli                 1
+bne                  1
+jal                  1
+csrrw                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+_imem_start  [8, 4]
+$x           [4, 1]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [3, 1]
+lw             [1, 1]
+bne            [1, 1]
+jal            [1, 1]
+sw             [1, 0]
+srli           [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+ecall          [1, 1]
+addi           [1, 0]
+sw             [1, 0]
+csrrw          [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2            1
+            4            1
+            6            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            6            2
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 0
+
+
+accept after length errors:
+Execution time
+--------------
+ACC executed 9905800 instructions in 10037544 cycles.
+The execution stalled for 131744 cycles (1.3 percent).
+The execution would take 100.38 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+bn.xor         2959394
+bn.or          1846874
+bn.rshi        1702977
+bn.gfmul       1514562
+bn.and         1512070
+bn.addi         108013
+bn.movr          97210
+addi             54243
+csrrw            32417
+bn.lid           12891
+loopi            10899
+jal              10812
+jalr             10810
+lui              10805
+bn.wsrw          10804
+bn.add           10800
+loop               162
+sw                  10
+bn.mov              10
+bn.ld                7
+lw                   6
+srli                 4
+beq                  4
+bn.sd                4
+bne                  2
+sub                  2
+andi                 2
+slli                 1
+ori                  1
+bn.wsrr              1
+bn.cmp               1
+csrrs                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$d           [9678654, 12898]
+$x           [194695, 118836]
+aes128       [32400, 0]
+_imem_start  [31, 10]
+KeySchedule  [20, 0]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [2959394, 0]
+bn.or          [1846874, 0]
+bn.rshi        [1702977, 0]
+bn.gfmul       [1514562, 0]
+bn.and         [1512070, 0]
+bn.addi        [108013, 0]
+bn.lid         [12891, 12891]
+loopi          [10899, 0]
+bn.add         [10800, 0]
+loop           [162, 0]
+bn.ld          [7, 7]
+bn.sd          [4, 0]
+bn.cmp         [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+bn.movr        [97210, 97210]
+addi           [43424, 0]
+jal            [10811, 10811]
+jalr           [10810, 10810]
+csrrw          [10807, 0]
+bn.wsrw        [10804, 0]
+lui            [10804, 0]
+bn.mov         [10, 0]
+beq            [4, 4]
+srli           [2, 0]
+andi           [2, 0]
+ecall          [1, 1]
+slli           [1, 0]
+ori            [1, 0]
+bn.wsrr        [1, 0]
+sub            [1, 0]
+csrrs          [1, 0]
+sw             [1, 0]
+
+KeySchedule
+instruction    [count, stalls]
+-------------  -----------------
+addi           [10, 0]
+csrrw          [10, 0]
+
+aes128
+instruction    [count, stalls]
+-------------  -----------------
+csrrw          [21600, 0]
+addi           [10800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1        10628
+            2          161
+            3         2208
+            4           97
+            5         6207
+            6         4657
+           12            2
+           13            1
+           16            1
+           28            1
+           29            1
+           34            1
+           37            1
+           68           10
+           69        10800
+           91        86400
+          113        10800
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1            1
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           28            1
+           29            1
+          917         4560
+          923           95
+         1681            1
+      5628334            1
+
+Function call statistics
+------------------------
+Function 0x388 (KeySchedule)
+  is called from the following functions
+    * 10 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 10 times from 0x1c0 ($x)
+  calls
+    no other function (leaf function).
+
+Function 0x498 (aes128)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 6144 times from 0x28c ($x)
+    * 4656 times from 0x238 ($x)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 10810 function calls, there were
+  10 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  10800 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 10810 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 11061
+Loop body length (instructions): min: 2, max: 91, avg: 88.99
+Number of iterations: min: 1, max: 96, avg: 9.98

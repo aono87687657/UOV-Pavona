@@ -15,7 +15,7 @@ module acc_mac_bignum
   import acc_pkg::*;
 #(
   // Enabling PQC hardware support with vector ISA extension
-  parameter bit AccPQCEn = 1'b1
+  parameter bit AccPQCEn = 1'b0
 ) (
   input logic clk_i,
   input logic rst_ni,
@@ -23,6 +23,12 @@ module acc_mac_bignum
   input mac_bignum_operation_t operation_i,
   input logic                  mac_en_i,
   input logic                  mac_commit_i,
+
+`ifdef GFMACC_BIGNUM
+  input  logic [WLEN-1:0] mod_i,
+  output logic [WLEN-1:0] mod_o,
+  output logic            gf_mul_wr_mod_en,
+`endif
 
   output logic [WLEN-1:0] operation_result_o,
   output flags_t          operation_flags_o,
@@ -70,7 +76,9 @@ module acc_mac_bignum
   logic [ADDER_WIDTH-1:0] adder_op_a;
   logic [ADDER_WIDTH-1:0] adder_op_b;
   logic [ADDER_WIDTH-1:0] adder_result;
+  logic [ADDER_WIDTH-1:0] adder_result_pre;
   logic [ADDER_WIDTH-1:0] mul_res_shifted;
+  logic [ADDER_WIDTH-1:0] mul_res_shifted_pre;
 
   logic [1:0]      adder_result_hw_is_zero;
 
@@ -122,7 +130,7 @@ module acc_mac_bignum
         .A                 (operand_a_blanked),
         .B                 (operand_b_blanked),
         .data_type_64_shift(operation_i.pre_acc_shift_imm),
-        .result            (mul_res_shifted)
+        .result            (mul_res_shifted_pre)
       );
     end else begin : gen_mul
       acc_bignum_mul mul (
@@ -131,10 +139,34 @@ module acc_mac_bignum
         .word_sel_A        (operation_i.operand_a_qw_sel),
         .word_sel_B        (operation_i.operand_b_qw_sel),
         .data_type_64_shift(operation_i.pre_acc_shift_imm),
-        .result            (mul_res_shifted)
+        .result            (mul_res_shifted_pre)
       );
     end
   endgenerate
+
+`ifdef GFMACC_BIGNUM
+  logic [255:0] gf_res;
+
+  (* keep_hierarchy = "yes" *)
+  gfmacc u_gfmacc (
+    .operand_a(operand_a_blanked),
+    .operand_b(operand_b_blanked),
+    .mode(operation_i.gf_mode),
+    .vxv(operation_i.gf_vxv),
+    .inc(operation_i.gf_inc),
+    .mod_i(mod_i),
+    .mod_o(mod_o),
+    .wr_mod_en(gf_mul_wr_mod_en),
+    .res(gf_res)
+  );
+`endif
+
+//logic unused_tmp;
+//assign unused_tmp = operation_i.gf_mode[1] ^ operation_i.gf_mode[0] ^ operation_i.gf_acc ^ operation_i.gf_vxv;
+
+  assign mul_res_shifted = mul_res_shifted_pre;
+
+
 
   `ASSERT_KNOWN_IF(PreAccShiftImmKnown, operation_i.pre_acc_shift_imm, mac_en_i)
 
@@ -203,7 +235,13 @@ module acc_mac_bignum
   // acc_rd_en is so if .Z set in MULQACC (zero_acc) so accumulator reads as 0
   prim_blanker #(.Width(WLEN)) u_acc_blanker (
     .in_i (acc_no_intg_q),
+`ifdef GFMACC_BIGNUM
+    .en_i (mac_predec_bignum_i.acc_rd_en 
+               & ((operation_i.gf_en == 1'b0) ? 1'b1 
+                                              : (operation_i.gf_acc_sel == 1'b0))),
+`else
     .en_i (mac_predec_bignum_i.acc_rd_en),
+`endif
     .out_o(acc_blanked)
   );
 
@@ -213,13 +251,30 @@ module acc_mac_bignum
 
       prim_blanker #(.Width(WLEN)) u_acch_blanker (
         .in_i (gen_acch_reg.acch_no_intg_q),
-        .en_i (mac_predec_bignum_i.acc_rd_en & operation_i.mulv),
+        .en_i (mac_predec_bignum_i.acc_rd_en & (operation_i.mulv
+`ifdef GFMACC_BIGNUM
+              | operation_i.gf_acc_sel
+`endif
+              )),
         .out_o(acch_blanked)
       );
     end
   endgenerate
 
   assign adder_op_a = mul_res_shifted;
+
+`ifdef GFMACC_BIGNUM
+  if (AccPQCEn) begin : gen_add_gf_pqc
+    assign adder_result = (operation_i.gf_en == 1'b0) ? adder_result_pre : (
+      (operation_i.gf_acc_sel ? {gf_res, {(ADDER_WIDTH-WLEN){1'b0}}}
+                              : { {(ADDER_WIDTH-WLEN){1'b0}}, gf_res})
+      ^ adder_op_b);
+  end else begin : gen_add_gf
+    assign adder_result = (operation_i.gf_en == 1'b0) ? adder_result_pre : (gf_res ^ adder_op_b);
+  end
+`else
+  assign adder_result = adder_result_pre;
+`endif
 
   generate
     if (AccPQCEn) begin : gen_adder_op_pqc
@@ -242,7 +297,7 @@ module acc_mac_bignum
         .B        (adder_op_b[WLEN-1:0]),
         .word_mode(mode),
         .cin      (1'b0),
-        .res      (adder_result[WLEN-1:0]),
+        .res      (adder_result_pre[WLEN-1:0]),
         .cout     ()
       );
 
@@ -251,7 +306,7 @@ module acc_mac_bignum
         .B        (operation_i.mulv ? adder_op_b[WLEN+:WLEN] : 256'b0),
         .word_mode(operation_i.data_type == 1'b0 ? VecType_s32 : VecType_d64),
         .cin      (1'b0),
-        .res      (adder_result[WLEN+:WLEN]),
+        .res      (adder_result_pre[WLEN+:WLEN]),
         .cout     ()
       );
 
@@ -261,7 +316,7 @@ module acc_mac_bignum
       assign adder_result_hw_is_zero[1] = adder_result[WLEN/2+:WLEN/2] == 'h0;
 
     end else begin : gen_mac_adder
-      assign adder_result = adder_op_a + adder_op_b;
+      assign adder_result_pre = adder_op_a + adder_op_b;
       // Split zero check between the two halves of the result. This is used for flag setting (see
       // below).
       assign adder_result_hw_is_zero[0] = adder_result[WLEN/2-1:0] == 'h0;
@@ -336,7 +391,13 @@ module acc_mac_bignum
 
   // Only write to accumulator if the MAC is enabled or an ACC ISPR write is occurring or secure
   // wipe of the internal state is occurring.
+`ifdef GFMACC_BIGNUM
+  assign acc_en = ((operation_i.gf_en == 1'b0) & mac_en_i & mac_commit_i) |
+                  ((operation_i.gf_en == 1'b1) & operation_i.gf_acc & (operation_i.gf_acc_sel == 1'b0) & mac_commit_i) |
+                  ispr_acc_wr_en_i | sec_wipe_acc_urnd_i;
+`else
   assign acc_en = (mac_en_i & mac_commit_i) | ispr_acc_wr_en_i | sec_wipe_acc_urnd_i;
+`endif
 
   always_ff @(posedge clk_i) begin
     if (acc_en) begin
@@ -375,8 +436,15 @@ module acc_mac_bignum
 
       // Only write to accumulator if the MAC is enabled or an ACC ISPR write is occurring or secure
       // wipe of the internal state is occurring.
+`ifdef GFMACC_BIGNUM
+      assign acch_en = ((operation_i.gf_en == 1'b0) & mac_en_i & mac_commit_i & operation_i.mulv) |
+                       ((operation_i.gf_en == 1'b1) & operation_i.gf_acc & operation_i.gf_acc_sel & mac_commit_i) |
+                       ispr_acch_wr_en_i | sec_wipe_acch_urnd_i;
+`else
       assign acch_en = (mac_en_i & mac_commit_i & operation_i.mulv) |
                        ispr_acch_wr_en_i | sec_wipe_acch_urnd_i;
+`endif
+
 
       always_ff @(posedge clk_i) begin
         if (acch_en) begin
@@ -393,7 +461,12 @@ module acc_mac_bignum
       always_comb begin
         case (operation_i.mulv)
           1'b0 : begin
+`ifdef GFMACC_BIGNUM
+            operation_result_o = operation_i.gf_acc_sel ? adder_result[2*WLEN-1:WLEN]
+                                                        : adder_result[WLEN-1:0];
+`else
             operation_result_o = adder_result[WLEN-1:0];
+`endif
           end
           default: begin
             case (operation_i.exec_mode)

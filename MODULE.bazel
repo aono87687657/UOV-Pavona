@@ -374,6 +374,9 @@ use_repo(mldsa_native, "mldsa_native")
 verilator = use_extension("//third_party/verilator:extensions.bzl", "verilator")
 use_repo(verilator, "verilator")
 
+pqov_kat = use_extension("//third_party/pqov_kat:extensions.bzl", "pqov_kat")
+use_repo(pqov_kat, "pqov_kat")
+
 # Hooks:
 # Extension for linking in externally managed test and provisioning customizations
 # for both secure/non-secure manufacturer domains.

@@ -1,0 +1,4 @@
+[PASS] Is/sw case0: cpk==KAT (66,576B) csk==sk  cycles=61,662,937
+
+=== Is/sw: 1 pass, 0 fail ===
+    cycles (case 0): 61,662,937

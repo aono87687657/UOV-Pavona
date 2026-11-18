@@ -1,0 +1,8 @@
+op,family,param,tier,contract,protocol,run,acc_insn,exec_wait,host_io_fold,op_total_v2,app_load,whole_test_cycles,wall_s,verdict
+keygen,stream,ip,bngfonly,2,accept_only,accept,34069380,34892775,222459,35116795,585803,39399435,5563.5,PASS
+keygen,stream,is,bngfonly,2,accept_only,accept,32666735,33487309,343334,33832067,545410,38322187,2925.32,PASS
+keygen,stream,is,bnaesonly,2,accept_only,accept,32499216,34687166,343713,35032490,474894,39471115,5481.39,PASS
+verify,stream,ip,sw,2,accept_reject,accept,15200606,18335084,61608,18397188,447551,40028171,3346.83,PASS
+keygen,stream_uniform,ip,bnaesonly,2,accept_only,accept,34584845,35774760,223194,35999887,504306,40312843,3170.52,PASS
+keygen,stream,ip,bnaesonly,2,accept_only,accept,34427677,35454888,223194,35680015,501073,39968779,6111.73,PASS
+verify,stream_uniform,ip,sw,2,accept_reject,accept,15211952,18350460,61608,18412564,458213,40103947,3054.2,PASS

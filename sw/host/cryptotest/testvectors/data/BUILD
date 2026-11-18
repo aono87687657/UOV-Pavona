@@ -1044,3 +1044,38 @@ NIST_CAVP_AES_KAT_TESTVECTORS = [
     )
     for testname, rsp_filename, mode, size in NIST_CAVP_AES_KAT_TESTVECTORS
 ]
+
+# pqov's own KAT: 100 cases per parameter set, mlen 33..3300. Ip3 is round-3 Ip.
+[
+    run_binary(
+        name = "pqov_uov_{}_{}_json".format(param, test_type),
+        srcs = [
+            "//sw/host/cryptotest/testvectors/data/schemas:uov_schema.json",
+            "@pqov_kat//:{}_pkc_skc".format(param),
+        ],
+        outs = [":pqov_uov_{}_{}.json".format(param, test_type)],
+        args = [
+            "--src",
+            "$(location @pqov_kat//:{}_pkc_skc)".format(param),
+            "--dst",
+            "$(location :pqov_uov_{}_{}.json)".format(param, test_type),
+            "--schema",
+            "$(location //sw/host/cryptotest/testvectors/data/schemas:uov_schema.json)",
+            "--parameter-set",
+            param,
+            "--test-type",
+            test_type,
+        ],
+        tool = "//sw/host/cryptotest/testvectors/parsers:pqov_kat_parser",
+    )
+    for param in [
+        "Ip",
+        "Is",
+        "Ip3",
+    ]
+    for test_type in [
+        "keygen",
+        "sign",
+        "verify",
+    ]
+]

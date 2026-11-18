@@ -1,0 +1,3 @@
+[PASS] Is/bnaesonly case4: cpk==KAT (66,576B) csk==sk  cycles=33,701,433
+
+=== Is/bnaesonly: 1 pass, 0 fail ===

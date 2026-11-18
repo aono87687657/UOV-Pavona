@@ -1,0 +1,1692 @@
+{
+ "cohorts": [
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfaes",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfaes",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfaes",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bnaesonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bnaesonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bnaesonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "sw",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "sw",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "sw",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfaes",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfaes",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfaes",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bngfonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bnaesonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bnaesonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "bnaesonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "sw",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "sw",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/keygen_stream/tests/test_stream_keygen.py"
+   ],
+   "op": "keygen",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-keygen-kat",
+   "tier": "sw",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "bngfaes",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "bngfaes",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "bngfaes",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "bngfonly",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "bngfonly",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "bngfonly",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "bnaesonly",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "bnaesonly",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "bnaesonly",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "sw",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "sw",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "sign-kat",
+   "tier": "sw",
+   "variant": "ldirect"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfaes",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfaes",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream_round3/tests/test_ip3_stream.py",
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfaes",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream_round3/tests/test_ip3_stream.py",
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bnaesonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bnaesonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream_round3/tests/test_ip3_stream.py",
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bnaesonly",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "sw",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "sw",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream_round3/tests/test_ip3_stream.py",
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "sw",
+   "variant": "stream"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfaes",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfaes",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream_round3/tests/test_ip3_stream.py",
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfaes",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream_round3/tests/test_ip3_stream.py",
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bngfonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bnaesonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bnaesonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream_round3/tests/test_ip3_stream.py",
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "bnaesonly",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "sw",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Is",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "sw",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream_round3/tests/test_ip3_stream.py",
+    "sw/acc/crypto/handwritten/uov/dmem32k/verify_stream/tests/measure_cycles.py"
+   ],
+   "op": "verify",
+   "param": "Ip3",
+   "profile": 32,
+   "protocol": "stream-verify-accept",
+   "tier": "sw",
+   "variant": "stream_uniform"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "keygen",
+   "param": "Ip",
+   "profile": 512,
+   "protocol": "keygen-single-execution-kat",
+   "tier": "bngfaes",
+   "variant": "full"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "keygen",
+   "param": "Is",
+   "profile": 512,
+   "protocol": "keygen-single-execution-kat",
+   "tier": "bngfaes",
+   "variant": "full"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Ip",
+   "profile": 512,
+   "protocol": "sign-kat",
+   "tier": "bngfaes",
+   "variant": "sprec"
+  },
+  {
+   "cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "drivers": [
+    "sw/acc/crypto/handwritten/own_utils/run_test.py"
+   ],
+   "op": "sign",
+   "param": "Is",
+   "profile": 512,
+   "protocol": "sign-kat",
+   "tier": "bngfaes",
+   "variant": "sprec"
+  }
+ ],
+ "config": {
+  ".bazelrc-site": null
+ },
+ "created": "2026-10-19T20:12:37+02:00",
+ "name": "iss-2026-10f",
+ "overlays": {
+  "32": {},
+  "512": {
+   "hw/ip/acc/data/acc.hjson": [
+    "6d6ffbb4c09a35ecd9f8b5ab72d77fedf41a134d122fd797d69aca384a14f4bd",
+    "100644"
+   ],
+   "hw/ip/acc/doc/registers.md": [
+    "40f5e421365f6b5e6740eec9c8479aee72791a56c8f1803679ddfb617f1ad1e2",
+    "100644"
+   ],
+   "hw/ip/acc/dv/memutil/acc_memutil.cc": [
+    "a819b31445eb7d4a5b083f03d11f940fbd81b9c96c1a3317d0f68efafe59fd53",
+    "100644"
+   ],
+   "hw/ip/acc/rtl/acc_reg_pkg.sv": [
+    "54288bb4c6f617837fd54fdf3453d3cca40bdb3cb1fe6254d475615e5ce753a2",
+    "100644"
+   ],
+   "hw/ip/acc/rtl/acc_reg_top.sv": [
+    "c9398baf645854da2e3687ffa3c9582ccaa25a15a3801dc18925bc362d9a0ba5",
+    "100644"
+   ],
+   "hw/top_egret/data/autogen/top_egret.gen.hjson": [
+    "0c34b5f78ad894e0f43eaeaa266682af8a41d83acb168d485a2acdaa8b1fe288",
+    "100644"
+   ],
+   "hw/top_egret/doc/memory_map.md": [
+    "8ecf56aeb4f664bb3166aa41b49ea6b23ff42bca74e57ac8675da919ad20df33",
+    "100644"
+   ],
+   "hw/top_egret/dv/autogen/xbar_env_pkg__params.sv": [
+    "f8382bd889037eba4219a27c3f43df44f79656fd66fee5b0c14718c2c05948aa",
+    "100644"
+   ],
+   "hw/top_egret/dv/autogen/xbar_tgl_excl.cfg": [
+    "36d91f011cba6cfe398abd486642e24181c9c668c26c9ebe0c0faa63a3ad0e04",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/data/autogen/xbar_main.gen.hjson": [
+    "adbb1046984edeb0f33fe7fd644dfd1329e2baa5f8d8ea7271819d10ba8dd7df",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/dv/autogen/xbar_cover.cfg": [
+    "a5469ab5fe2a26d1932a41ce83c9092ac753e43f3530ac744dd4e8ea1749d4c1",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/dv/autogen/xbar_env_pkg__params.sv": [
+    "fcab2ddfedc420ed20c7d03b1c68118e162f0dfc7b880066af0ec75a4354ec8d",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/rtl/autogen/tl_main_pkg.sv": [
+    "439bbab439289f9219cab2b34d2f049b7c408a60158d9d49fca6530880c6a9d8",
+    "100644"
+   ],
+   "hw/top_egret/rtl/autogen/top_egret_pkg.sv": [
+    "20fab801a60be4912f3941536cd54c063d365c55adc39ab92d2bb77ad7dcb0b4",
+    "100644"
+   ],
+   "hw/top_egret/sw/autogen/chip/top_egret.rs": [
+    "0c5f71638279904908443a8e98e5822bc5ad705e7241854cc7e2d501554e3e7c",
+    "100644"
+   ],
+   "hw/top_egret/sw/autogen/top_egret.h": [
+    "7210da09aecd3b06410ea84164a8206e234eda69d62dc1543eeb839ae54fb4fe",
+    "100644"
+   ],
+   "hw/top_egret/sw/autogen/top_egret_memory.h": [
+    "3ff2350cec17f1dd053f096aeb727da8e38a70b28bbbe209f3c8172b4903d025",
+    "100644"
+   ]
+  }
+ },
+ "schema": 1,
+ "tooling_commit": "c5ef6d2a46b1d9f23b2703989ca7614158d25678"
+}

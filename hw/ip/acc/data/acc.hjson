@@ -803,7 +803,7 @@
     // Dmem size (given as `items` below) must be a power of two.
     { window: {
         name: "DMEM",
-        items: "7936", // 31kB visible over bus (1 kB scracth)
+        items: "7936", // 31 kiB visible over bus (1 kiB scratch) -> 32 kiB total
         unusual: "true", // Needed to avoid an error because of the non-power-of-two size
         swaccess: "rw",
         data-intg-passthru: "true",
@@ -819,8 +819,9 @@
           If ACC is busy, any access additionally triggers an
           ILLEGAL_BUS_ACCESS fatal error.
 
-          Note that DMEM is actually 4kiB in size, but only the first 3kiB of
-          the memory is visible through this register interface.
+          Note that DMEM is actually 32kiB in size, but only the first 31kiB of
+          the memory is visible through this register interface. The remaining
+          1kiB is ACC-only scratch.
         '''
       }
     }

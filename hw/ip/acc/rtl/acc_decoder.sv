@@ -18,7 +18,7 @@ module acc_decoder
   import acc_pkg::*;
 #(
   // Enabling PQC hardware support with vector ISA extension
-  parameter bit AccPQCEn = 1'b1
+  parameter bit AccPQCEn = 1'b0
 ) (
   // For assertions only.
   input logic clk_i,
@@ -93,6 +93,23 @@ module acc_decoder
   logic       mac_zero_acc_bignum;
   logic       mac_shift_out_bignum;
   logic       mac_en_bignum;
+`ifdef GFMACC_BIGNUM
+  logic       mac_gf_en;
+  logic       mac_gf_mode;
+  logic       mac_gf_acc;
+  logic       mac_gf_acc_sel;
+  logic       mac_gf_vxv;
+  logic       mac_gf_inc;
+`endif
+
+`ifdef AES_BIGNUM
+  logic       aes_en_bignum;
+  logic       aes_key_expand_bignum;
+  logic [4:0] aes_round_bignum;
+  logic       aes_swap_endian;
+  logic       aes_first_round_bignum;
+  logic       aes_final_round_bignum;
+`endif
 
   logic rf_ren_a_base;
   logic rf_ren_b_base;
@@ -298,6 +315,22 @@ module acc_decoder
     mac_exec_mode:       AccPQCEn ? mac_exec_mode_pqc : 2'b00,
     // Normal assignments
     mac_en:              mac_en_bignum,
+`ifdef GFMACC_BIGNUM
+    mac_gf_en:           mac_gf_en,
+    mac_gf_mode:         mac_gf_mode,
+    mac_gf_acc:          mac_gf_acc,
+    mac_gf_acc_sel:      mac_gf_acc_sel,
+    mac_gf_vxv:          mac_gf_vxv,
+    mac_gf_inc:          mac_gf_inc,
+`endif
+`ifdef AES_BIGNUM
+    aes_en:              aes_en_bignum,
+    aes_key_expand:      aes_key_expand_bignum,
+    aes_round:           aes_round_bignum,
+    aes_swap_endian:     aes_swap_endian,
+    aes_first_round:     aes_first_round_bignum,
+    aes_final_round:     aes_final_round_bignum,
+`endif
     rf_we:               rf_we_bignum,
     rf_wdata_sel:        rf_wdata_sel_bignum,
     rf_ren_a:            rf_ren_a_bignum,
@@ -347,6 +380,24 @@ module acc_decoder
     mac_op_b_qw_sel_bignum = insn[28:27];
     mac_zero_acc_bignum    = insn[12];
     mac_shift_out_bignum   = insn[30];
+
+`ifdef GFMACC_BIGNUM
+    mac_gf_en                  = 1'b0;
+    mac_gf_mode                = 1'b0;
+    mac_gf_acc                 = 1'b0;
+    mac_gf_acc_sel             = 1'b0;
+    mac_gf_vxv                 = 1'b0;
+    mac_gf_inc                 = 1'b0;
+`endif
+
+`ifdef AES_BIGNUM
+    aes_en_bignum          = 1'b0;
+    aes_key_expand_bignum  = 1'b0;
+    aes_round_bignum       = 5'b00000;
+    aes_swap_endian        = 1'b0;
+    aes_first_round_bignum = 1'b0;
+    aes_final_round_bignum = 1'b0;
+`endif
 
     rf_a_indirect_bignum   = 1'b0;
     rf_b_indirect_bignum   = 1'b0;
@@ -576,7 +627,34 @@ module acc_decoder
               end
             end
           end
-          3'b110,
+`ifdef GFMACC_BIGNUM
+          3'b110: begin
+            insn_subset      = InsnSubsetBignum;
+            rf_ren_a_bignum  = 1'b1;
+            rf_ren_b_bignum  = 1'b1;
+            rf_wdata_sel_bignum = RfWdSelMac;
+            mac_shift_out_bignum = 1'b0;
+
+            mac_gf_en           = 1'b1;
+            mac_gf_mode         = insn[30];
+
+            mac_zero_acc_bignum = insn[28] | ~insn[29];
+
+            mac_gf_inc          = insn[26];
+            mac_gf_vxv          = insn[27];
+            mac_gf_acc          = insn[29];
+
+            if (!AccPQCEn) begin
+              illegal_insn      = insn[25];  // In non-PQC mode, acc_sel must be zero.
+            end else begin
+              mac_gf_acc_sel    = insn[25];
+            end
+
+            mac_en_bignum       = 1'b1;
+
+            rf_we_bignum        = 1'b1;
+          end
+`endif
           3'b111: illegal_insn = 1'b1;
           default: ;
         endcase
@@ -759,6 +837,37 @@ module acc_decoder
           rf_we_bignum = 1'b1;
         end
       end
+
+
+      /////////////////////////////////////////////////////////////////////
+      // BN.AES128.ENCZ/BN.BN.AES128.ENCM/BN.BN.AES128.ENCF/BN.AES128.KF //
+      /////////////////////////////////////////////////////////////////////
+
+`ifdef AES_BIGNUM
+      InsnOpcodeBignumAES : begin
+        insn_subset         = InsnSubsetBignum;
+        rf_ren_b_bignum     = 1'b1;
+        rf_wdata_sel_bignum = RfWdSelMac;
+
+        rf_we_bignum = 1'b1;
+
+        if (insn[31:30] == 2'b00)
+          aes_first_round_bignum = 1'b1;
+
+        if (insn[31:30] == 2'b10)
+          aes_final_round_bignum = 1'b1;
+
+        if (insn[31:30] == 2'b11)
+          aes_key_expand_bignum = 1'b1;
+        else
+          rf_ren_a_bignum   = 1'b1;
+
+        aes_en_bignum       = 1'b1;
+        aes_round_bignum    = insn[19:15];
+        aes_swap_endian     = insn[29];
+      end
+`endif
+
 
       ///////////////////////////////////////////
       //            BN.MULV/BN.MULV.L          //

@@ -1,0 +1,290 @@
+Execution time
+--------------
+ACC executed 34401154 instructions in 36466233 cycles.
+The execution stalled for 2065079 cycles (6.0 percent).
+The execution would take 364.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction        count
+--------------  --------
+bn.rshi         10755393
+bn.xor           8997890
+bn.and           4838400
+bn.addi          2764923
+bn.sel           2764800
+bn.mov           1426032
+jal               702002
+jalr              702002
+bn.lid            405890
+addi              263737
+lw                124972
+sw                116991
+bn.ld             104450
+bn.sd              98315
+srl                98304
+bn.aes128.encm     97200
+add                51650
+loop               15442
+bn.sid             13266
+bn.aes128.encz     10800
+bn.aes128.encf     10800
+bn.add             10800
+beq                10752
+sub                 7681
+srli                4728
+andi                3096
+lui                  378
+slli                 219
+bn.or                126
+bn.wsrr               97
+bn.aes128.kf          10
+loopi                  3
+csrrw                  2
+or                     1
+bn.wsrw                1
+ecall                  1
+
+
+Function cycle counts
+-----------------------
+function               [instr., stall]
+---------------------  ------------------
+gf16_macc_sw           [28339200, 0]
+$x                     [3620630, 1541468]
+$d                     [2430507, 523605]
+aes128_dual_table      [10800, 0]
+aes128hw_keyschedule   [14, 4]
+_imem_start            [2, 1]
+expandsk_ret_O_pkseed  [1, 1]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+lui            [1, 1]
+addi           [1, 0]
+
+$d
+instruction    [count, stalls]
+-------------  -----------------
+bn.rshi        [1769793, 0]
+bn.lid         [405889, 405889]
+bn.ld          [104450, 104450]
+bn.sd          [98315, 0]
+loop           [15442, 0]
+bn.sid         [13266, 13266]
+bn.xor         [12290, 0]
+bn.add         [10800, 0]
+bn.or          [126, 0]
+bn.addi        [123, 0]
+bn.aes128.kf   [10, 0]
+loopi          [3, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.mov          [1426032, 0]
+jal             [702002, 702002]
+jalr            [702002, 702002]
+addi            [263735, 0]
+lw              [124968, 124968]
+sw              [116983, 0]
+srl             [98304, 0]
+bn.aes128.encm  [97200, 0]
+add             [51650, 0]
+bn.aes128.encf  [10800, 0]
+beq             [10752, 10752]
+sub             [7681, 0]
+srli            [4728, 0]
+andi            [3096, 0]
+lui             [376, 0]
+slli            [219, 0]
+bn.wsrr         [97, 1743]
+csrrw           [2, 0]
+ecall           [1, 1]
+or              [1, 0]
+bn.wsrw         [1, 0]
+
+expandsk_ret_O_pkseed
+instruction    [count, stalls]
+-------------  -----------------
+bn.lid         [1, 1]
+
+aes128hw_keyschedule
+instruction    [count, stalls]
+-------------  -----------------
+sw             [8, 0]
+lw             [4, 4]
+lui            [1, 0]
+addi           [1, 0]
+
+aes128_dual_table
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encz  [10800, 0]
+
+gf16_macc_sw
+instruction    [count, stalls]
+-------------  -----------------
+bn.xor         [8985600, 0]
+bn.rshi        [8985600, 0]
+bn.and         [4838400, 0]
+bn.addi        [2764800, 0]
+bn.sel         [2764800, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1         6639
+            2       298159
+            3       321024
+            4       589792
+            5        24696
+            6         3073
+            7         6167
+            8         6914
+            9        49201
+           10         3001
+           11        49152
+           12        15384
+           14            1
+           27           96
+           28           24
+           37           96
+           38            1
+           42       691200
+           55            1
+          136            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            1         2079
+            2       144511
+            3       147456
+            4         3040
+            5          768
+            9         2976
+           12         1512
+           15         4560
+           19            1
+           23           72
+           24            1
+           26         3095
+           28           24
+           32         3072
+           37           96
+           48       145920
+           49       145920
+           51         3072
+           52         3072
+           55            1
+          383        23064
+          384         1512
+          385        22320
+          386         1488
+          388          768
+         3277            1
+
+Function call statistics
+------------------------
+Function 0xb24 (expandsk_ret_O_pkseed)
+  is called from the following functions
+    * 1 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 1 times from 0x14 ($x+0x8)
+  calls
+    no other function (leaf function).
+
+Function 0xbf0 (aes128hw_keyschedule)
+  is called from the following functions
+    * 1 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 1 times from 0x38 ($x+0x10)
+  calls
+    no other function (leaf function).
+
+Function 0xe10 (aes128_dual_table)
+  is called from the following functions
+    * 10800 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 1200 times from 0x15c ($x)
+    * 1176 times from 0x30c ($x)
+    * 1152 times from 0x4bc ($x)
+    * 1128 times from 0x66c ($x)
+    * 768 times from 0x250 ($x+0x1c)
+    * 768 times from 0x2d0 ($x+0x1c)
+    * 768 times from 0x400 ($x+0x1c)
+    * 768 times from 0x480 ($x+0x1c)
+    * 768 times from 0x5b0 ($x+0x1c)
+    * 768 times from 0x630 ($x+0x1c)
+    * 768 times from 0x760 ($x+0x1c)
+    * 768 times from 0x7e0 ($x+0x1c)
+  calls
+    no other function (leaf function).
+
+Function 0xe40 (gf16_macc_sw)
+  is called from the following functions
+    * 691200 times by function 0x0 (_imem_start)
+  from the following call sites
+    * 38400 times from 0x224 ($x+0x8)
+    * 38400 times from 0x2a8 ($x+0x8)
+    * 37632 times from 0x3d4 ($x+0x8)
+    * 37632 times from 0x458 ($x+0x8)
+    * 36864 times from 0x584 ($x+0x8)
+    * 36864 times from 0x608 ($x+0x8)
+    * 36096 times from 0x734 ($x+0x8)
+    * 36096 times from 0x7b8 ($x+0x8)
+    * 24576 times from 0xa30 ($x+0x8)
+    * 24576 times from 0xa40 ($x+0x8)
+    * 24576 times from 0xa50 ($x+0x8)
+    * 24576 times from 0xa60 ($x+0x8)
+    * 24576 times from 0xa8c ($x+0x8)
+    * 24576 times from 0xa9c ($x+0x8)
+    * 24576 times from 0xaac ($x+0x8)
+    * 24576 times from 0xabc ($x+0x8)
+    * 23808 times from 0x890 ($x+0x8)
+    * 23808 times from 0x8a0 ($x+0x8)
+    * 23808 times from 0x8b0 ($x+0x8)
+    * 23808 times from 0x8c0 ($x+0x8)
+    * 23808 times from 0x8ec ($x+0x8)
+    * 23808 times from 0x8fc ($x+0x8)
+    * 23808 times from 0x90c ($x+0x8)
+    * 23808 times from 0x91c ($x+0x8)
+    * 768 times from 0x95c ($x+0x8)
+    * 768 times from 0x96c ($x+0x8)
+    * 768 times from 0x97c ($x+0x8)
+    * 768 times from 0x98c ($x+0x8)
+    * 768 times from 0x9b8 ($x+0x8)
+    * 768 times from 0x9c8 ($x+0x8)
+    * 768 times from 0x9d8 ($x+0x8)
+    * 768 times from 0x9e8 ($x+0x8)
+  calls
+    no other function (leaf function).
+
+
+Of a total of 702002 function calls, there were
+  2 function calls to a function with only one call site (call/ret can be replaced with static jumps)
+  702000 leaf function calls (no function prologue/epilogue needed)
+Overall, 0 of 702002 (0.00 percent) calls need full function call semantics.
+
+
+Loop statistics
+---------------
+Loops: 15445
+Loop body length (instructions): min: 1, max: 618, avg: 13.64
+Number of iterations: min: 1, max: 2080, avg: 42.08
+
+# elf: sw/acc/crypto/handwritten/uov/dmem_large/keygen_sp/ov-Is-pkc+skc/ov-Is-keygen_sp_bnaesonly.elf

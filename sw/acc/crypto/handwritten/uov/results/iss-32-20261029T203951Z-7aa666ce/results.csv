@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+keygen,Ip3,bngfonly,stream,0,PASS,48289144,49545021
+keygen,Ip3,bngfonly,stream,1,PASS,48289144,49545021
+keygen,Ip3,bngfonly,stream,2,PASS,48289144,49545021
+keygen,Ip3,bngfonly,stream,3,PASS,48289144,49545021
+keygen,Ip3,bngfonly,stream,4,PASS,48289144,49545021
+keygen,Ip3,bngfonly,stream,5,PASS,48289144,49545021
+keygen,Ip3,bngfonly,stream,6,PASS,48289144,49545021
+keygen,Ip3,bngfonly,stream,7,PASS,48289144,49545021
+keygen,Ip3,bngfonly,stream,8,PASS,48289144,49545021
+keygen,Ip3,bngfonly,stream,9,PASS,48289144,49545021
+keygen,Ip3,bngfonly,stream,10,PASS,48289144,49545021
+keygen,Ip3,bngfonly,stream,11,PASS,48289144,49545021

@@ -1,0 +1,10 @@
+op,family,param,tier,contract,protocol,run,acc_insn,exec_wait,host_io_fold,op_total_v2,app_load,whole_test_cycles,wall_s,verdict
+sign,ldirect,ip,bngfaes,2,accept_negative,accept,233912,270381,802,271215,425074,3690507,307.273,PASS
+sign,ldirect,is,bngfaes,2,accept_negative,accept,256577,284865,716,285613,238536,3172363,244.082,PASS
+sign,ldirect,ip3,bngfaes,2,accept_negative,accept,288461,340471,868,341372,412262,3866635,298.248,PASS
+verify,stream,ip,bngfaes,2,accept_reject,accept,150147,157959,61608,220062,54341,2922507,227.969,PASS
+verify,stream,is,bngfaes,2,accept_reject,accept,164342,169206,90989,260930,11784,2998283,235.919,PASS
+verify,stream,ip3,bngfaes,2,accept_reject,accept,187215,198109,66004,264618,163509,3221515,302.278,PASS
+verify,stream_uniform,ip,bngfaes,2,accept_reject,accept,172811,197081,61608,259185,354866,3594251,275.06,PASS
+verify,stream_uniform,is,bngfaes,2,accept_reject,accept,164425,169322,90989,261046,428654,3840011,302.768,PASS
+verify,stream_uniform,ip3,bngfaes,2,accept_reject,accept,213045,242592,66005,309095,408786,3825675,298.956,PASS

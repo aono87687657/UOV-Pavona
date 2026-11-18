@@ -24,6 +24,7 @@ filesets:
       - lowrisc:ip:kmac_pkg
       - lowrisc:ip:acc_pkg
       - lowrisc:prim:onehot_check
+      - aes_bignum ? (lowrisc:ip:aes:1.0)
     files:
       - rtl/acc_controller.sv
       - rtl/acc_decoder.sv
@@ -39,10 +40,13 @@ filesets:
       - rtl/acc_alu_base.sv
       - rtl/acc_digest_mux.sv
       - rtl/acc_alu_bignum.sv
-      - rtl/acc_mac_bignum.sv
       - rtl/bn_vec_core/unified_mul.sv
       - rtl/bn_vec_core/acc_bignum_mul.sv
       - rtl/bn_vec_core/buffer_bit.sv
+      - gfmacc_bignum ? (rtl/gfmacc.sv)
+      - rtl/acc_mac_bignum.sv
+      - aes_bignum ? (rtl/acc_aes_bignum.sv)
+      - aes_bignum ? (rtl/aes/aes_round_keyexpand.sv)
       - rtl/acc_loop_controller.sv
       - rtl/acc_stack.sv
       - rtl/acc_rnd.sv
@@ -86,8 +90,45 @@ filesets:
       - lint/acc.waiver
     file_type: waiver
 
+  files_sta_vivado:
+    files:
+      - sta/vivado_synth.tcl:
+          copyto: vivado_synth.tcl
+          is_include_file: true
+      - sta/vivado_timing.tcl:
+          copyto: vivado_timing.tcl
+          is_include_file: true
+
+  files_sta_genus:
+    files:
+      - sta/genus_synth.tcl:
+          copyto: genus_synth.tcl
+          is_include_file: true
+      - sta/genus_timing.tcl:
+          copyto: genus_timing.tcl
+          is_include_file: true
+
+
 parameters:
   SYNTHESIS:
+    datatype: bool
+    paramtype: vlogdefine
+  SYNTHESIS_MEMORY_BLACK_BOXING:
+    datatype: bool
+    default: false
+    paramtype: vlogdefine
+  AccPQCEn:
+    datatype: int
+    description: Enable the PQC vector ISA extension in the ACC
+    default: 0
+    paramtype: vlogparam
+  GFMACC_BIGNUM:
+    datatype: bool
+    paramtype: vlogdefine
+  MOD_REG_POLY:
+    datatype: bool
+    paramtype: vlogdefine
+  AES_BIGNUM:
     datatype: bool
     paramtype: vlogdefine
 
@@ -99,12 +140,19 @@ targets:
       - files_rtl_core
       - files_rtl_top
     toplevel: acc
+    parameters:
+      - gfmacc_bignum ? (GFMACC_BIGNUM=true)
+      - mod_reg_poly ? (MOD_REG_POLY=true)
+      - aes_bignum ? (AES_BIGNUM=true)
 
   lint:
     <<: *default_target
     default_tool: verilator
     parameters:
       - SYNTHESIS=true
+      - GFMACC_BIGNUM=true
+      - MOD_REG_POLY=true
+      - AES_BIGNUM=true
     tools:
       verilator:
         mode: lint-only
@@ -116,6 +164,9 @@ targets:
     default_tool: verilator
     parameters:
       - SYNTHESIS=true
+      - GFMACC_BIGNUM=true
+      - MOD_REG_POLY=true
+      - AES_BIGNUM=true
     tools:
       verilator:
         mode: lint-only
@@ -128,3 +179,34 @@ targets:
     default_tool: icarus
     parameters:
       - SYNTHESIS=true
+      - gfmacc_bignum ? (GFMACC_BIGNUM=true)
+      - mod_reg_poly ? (MOD_REG_POLY=true)
+      - aes_bignum ? (AES_BIGNUM=true)
+
+  sta:
+    filesets:
+      - tool_verilator ? (files_verilator_waiver)
+      - tool_ascentlint ? (files_ascentlint_waiver)
+      - files_rtl_core
+      - files_rtl_top
+    toplevel: acc
+
+    default_tool: vivado
+    parameters:
+      - SYNTHESIS=true
+#      - SYNTHESIS_MEMORY_BLACK_BOXING=true
+      - "pqc ? (AccPQCEn=1)"
+      - "!pqc ? (AccPQCEn=0)"
+      - gfmacc_bignum ? (GFMACC_BIGNUM=true)
+      - mod_reg_poly ? (MOD_REG_POLY=true)
+      - aes_bignum ? (AES_BIGNUM=true)
+    filesets_append:
+      - tool_vivado ? (files_sta_vivado)
+      - tool_genus  ? (files_sta_genus)
+    tools:
+      vivado:
+        part: "xc7k160tfbg676-1" # CW310 with K410T
+      genus:
+        genus_script: "genus.tcl"
+        jobs: "8"
+

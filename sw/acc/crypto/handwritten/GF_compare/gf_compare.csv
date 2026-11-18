@@ -1,0 +1,6 @@
+field,impl,kind,elements_per_op,op_cycles,setup_cycles,cycles_per_element,commit
+GF16,bn.gfmul.4,HW,64,1,16,0.0156,6382387d78-dirty
+GF16,gf16_mul,SW,64,42,18,0.6562,6382387d78-dirty
+GF256,bn.gfmul.8,HW,32,1,16,0.0312,6382387d78-dirty
+GF256,gf256_mul,SW,32,100,18,3.1250,6382387d78-dirty
+GF256,gf256_mul_pqc,SW,32,79,18,2.4688,6382387d78-dirty

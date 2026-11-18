@@ -9,7 +9,8 @@ from copy import deepcopy
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 
 from .cache import Cache, CacheEntry
-from .constants import ConstantContext, get_op_val_str
+from .constants import (ConstantContext, dmem_word_names, get_op_val_str,
+                        parse_dmem_range)
 from .control_flow import (ControlLoc, ControlGraph, Cycle, Ecall, ImemEnd,
                            LoopStart, Ret)
 from .decode import ACCProgram
@@ -39,13 +40,17 @@ from .insn_yaml import Insn
 #                   the program; the value is a set of PCs of control-flow
 #                   instructions through which the node influences the control
 #                   flow
+#   cycle consts:   for each open cycle, the constants on which all paths that
+#                   return to the cycle start agree (fine-grained DMEM mode
+#                   only)
 #   loop iters:     a dictionary whose keys are the program addresess at which
 #                   a loop instruction (either `loop` or `loopi`) occurs and
 #                   the number of iterations was determined to be a constant,
 #                   and whose values are those exact number of iterations
 IFlowResult = Tuple[Set[str], InformationFlowGraph, InformationFlowGraph,
                     Optional[ConstantContext], Dict[int, InformationFlowGraph],
-                    Dict[InformationFlowNode, Set[int]], Dict[int, Set[int]]]
+                    Dict[InformationFlowNode, Set[int]], Dict[int, Set[int]],
+                    Dict[int, ConstantContext]]
 
 
 class IFlowCacheEntry(CacheEntry[ConstantContext, IFlowResult]):
@@ -108,6 +113,37 @@ SubroutineIFlow = Tuple[InformationFlowGraph, InformationFlowGraph,
 # except with no "return" information flow. Since the call stack is empty
 # at the start, we're not expecting any return paths!
 ProgramIFlow = Tuple[InformationFlowGraph, Dict[InformationFlowNode, Set[int]]]
+
+
+def _node(name: str) -> InformationFlowNode:
+    '''The information-flow node with the given name.'''
+    rng = parse_dmem_range(name)
+    if rng is not None:
+        return DmemInformationFlowNode(*rng)
+    return InformationFlowNode(name)
+
+
+def _sources_for_any(iflow: InformationFlowGraph,
+                     names: Iterable[str]) -> Set[InformationFlowNode]:
+    '''Like iflow.sources_for_any, but resolves DMEM names to ranges.'''
+    out: Set[InformationFlowNode] = set()
+    for name in names:
+        out |= iflow.sources(_node(name))
+    return out
+
+
+def _constant_names(nodes: Iterable[InformationFlowNode]) -> Set[str]:
+    '''Names of the constants a set of nodes may hold.
+
+    A DMEM range stands for the word constants it overlaps.
+    '''
+    out = set()
+    for n in nodes:
+        if isinstance(n, DmemInformationFlowNode):
+            out.update(dmem_word_names(n.start, n.end))
+        else:
+            out.add(n.name)
+    return out
 
 
 def _build_iflow_insn(
@@ -196,14 +232,14 @@ def _build_iflow_straightline(
 
         used_constants, insn_iflow = _build_iflow_insn(insn, op_vals, pc,
                                                        constants, coarse_dmem)
-        constant_dep_nodes = iflow.sources_for_any(used_constants)
-        constant_deps.update([n.name for n in constant_dep_nodes])
+        constant_dep_nodes = _sources_for_any(iflow, used_constants)
+        constant_deps.update(_constant_names(constant_dep_nodes))
 
         # Compose iflow with the information flow from this instruction
         iflow = iflow.seq(insn_iflow)
 
         # Update constants to their values after the instruction
-        constants.update_insn(insn, op_vals)
+        constants.update_insn(insn, op_vals, not coarse_dmem)
 
     return constant_deps, iflow
 
@@ -277,7 +313,8 @@ def _get_iflow_update_state(
         program_end_iflow: InformationFlowGraph, used_constants: Set[str],
         constants: ConstantContext, cycles: Dict[int, InformationFlowGraph],
         control_deps: Dict[InformationFlowNode, Set[int]],
-        loop_iters: Dict[int, Set[int]]) -> InformationFlowGraph:
+        loop_iters: Dict[int, Set[int]],
+        cycle_consts: Dict[int, ConstantContext]) -> InformationFlowGraph:
     '''Update the internal state of _get_iflow after a recursive call.
 
     `iflow` is not modified.
@@ -298,16 +335,19 @@ def _get_iflow_update_state(
     rec_cycles = rec_result[4]
     rec_control_deps = rec_result[5]
     rec_loop_iters = rec_result[6]
+    rec_cycle_consts = rec_result[7]
 
     # Update the used constants and control-flow dependencies
-    used_constant_nodes = iflow.sources_for_any(rec_used_constants)
-    used_constants.update([n.name for n in used_constant_nodes])
+    used_constant_nodes = _sources_for_any(iflow, rec_used_constants)
+    used_constants.update(_constant_names(used_constant_nodes))
     _update_control_deps(control_deps, iflow, rec_control_deps)
 
     # Update the cycles
     for pc, cycle_iflow in rec_cycles.items():
         cycles.setdefault(pc, InformationFlowGraph.nonexistent()).update(
             iflow.seq(cycle_iflow))
+    for pc, consts in rec_cycle_consts.items():
+        _merge_cycle_consts(cycle_consts, pc, consts)
 
     # Update the loop iteration counts
     for pc in rec_loop_iters.keys():
@@ -326,6 +366,15 @@ def _get_iflow_update_state(
     program_end_iflow.update(iflow.seq(rec_end_iflow))
 
     return iflow.seq(rec_return_iflow)
+
+
+def _merge_cycle_consts(cycle_consts: Dict[int, ConstantContext], pc: int,
+                        consts: ConstantContext) -> None:
+    '''Keep only the constants all paths back to cycle start pc agree on.'''
+    if pc in cycle_consts:
+        cycle_consts[pc] = cycle_consts[pc].intersect(consts)
+    else:
+        cycle_consts[pc] = deepcopy(consts)
 
 
 def simplify_control_deps(
@@ -385,6 +434,13 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
     # Cycle starts that are accessible from this PC.
     cycles: Dict[int, InformationFlowGraph] = {}
 
+    # Constants at the paths that return to each open cycle's start.
+    cycle_consts: Dict[int, ConstantContext] = {}
+
+    # True if this PC starts a cycle formed by a loop instruction with a
+    # non-constant count; its back edge is implicit, so no constants for it.
+    loop_cycle = False
+
     # Possible loop iteration counts for loops accessible from this PC.
     loop_iters: Dict[int, Set[int]] = {}
 
@@ -420,8 +476,8 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
         last_insn, last_op_vals, section.end, constants, coarse_dmem)
 
     # Update used constants to include last instruction
-    used_constant_nodes = iflow.sources_for_any(last_insn_used_constants)
-    used_constants.update([n.name for n in used_constant_nodes])
+    used_constant_nodes = _sources_for_any(iflow, last_insn_used_constants)
+    used_constants.update(_constant_names(used_constant_nodes))
 
     used_constants = _filter_constants(used_constants, start_constants)
 
@@ -446,7 +502,7 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
                                                    constants)
 
         # Update the constants to include the loop instruction
-        constants.update_insn(last_insn, last_op_vals)
+        constants.update_insn(last_insn, last_op_vals, not coarse_dmem)
 
         if iterations is not None:
             # If the number of iterations is constant, perform recursive calls
@@ -463,7 +519,7 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
                                                 program_end_iflow,
                                                 used_constants, constants,
                                                 cycles, control_deps,
-                                                loop_iters)
+                                                loop_iters, cycle_consts)
 
             # Set the next edges to the instruction after the loop ends
             edges = [ControlLoc(body_loc.loop_end_pc + 4)]
@@ -471,11 +527,12 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
             # If the number of loop iterations is not constant, fall back to
             # treating this as a cycle.
             cycles[start_pc] = InformationFlowGraph.empty()
+            loop_cycle = True
 
     elif last_insn.mnemonic == 'jal' and last_op_vals['grd'] == 1:
         # Special handling for jumps; recursive call for jump destination, then
         # continue at pc+4
-        constants.update_insn(last_insn, last_op_vals)
+        constants.update_insn(last_insn, last_op_vals, not coarse_dmem)
 
         # Jumps should produce exactly one non-special edge; check that
         # assumption before we rely on it
@@ -485,10 +542,11 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
                                  cache, coarse_dmem)
         iflow = _get_iflow_update_state(jump_result, iflow, program_end_iflow,
                                         used_constants, constants, cycles,
-                                        control_deps, loop_iters)
+                                        control_deps, loop_iters,
+                                        cycle_consts)
 
         # Get information flow for return paths
-        _, jump_return_iflow, _, _, _, _, _ = jump_result
+        _, jump_return_iflow, _, _, _, _, _, _ = jump_result
 
         # Compose current iflow with the flow for the jump's return paths
         iflow = iflow.seq(jump_return_iflow)
@@ -526,11 +584,11 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
             assert len(edges) == 1
 
             # update used_constants to reflect that we read the branch constants
-            used_constant_nodes = iflow.sources_for_any([grs1, grs2])
-            used_constants.update([n.name for n in used_constant_nodes])
+            used_constant_nodes = _sources_for_any(iflow, [grs1, grs2])
+            used_constants.update(_constant_names(used_constant_nodes))
     else:
         # Update the constants to include the last instruction
-        constants.update_insn(last_insn, last_op_vals)
+        constants.update_insn(last_insn, last_op_vals, not coarse_dmem)
 
     # We're only returning constants that are the same in all RET branches
     common_consts = None
@@ -555,6 +613,13 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
             # flow, if any.
             cycles.setdefault(loc.pc,
                               InformationFlowGraph.nonexistent()).update(iflow)
+            if not coarse_dmem:
+                # Record the constants on this path back to the cycle start;
+                # the result then depends on them, so they join the cache key.
+                _merge_cycle_consts(cycle_consts, loc.pc, constants)
+                used_constant_nodes = _sources_for_any(
+                    iflow, constants.values.keys())
+                used_constants.update(_constant_names(used_constant_nodes))
         elif isinstance(loc, LoopStart) or not loc.is_special():
             # Just a normal PC; recurse
             result = _get_iflow(program, graph, loc.pc, constants, loop_end_pc,
@@ -564,7 +629,8 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
             local_constants = deepcopy(constants)
             rec_return_iflow = _get_iflow_update_state(
                 result, iflow, program_end_iflow, used_constants,
-                local_constants, cycles, control_deps, loop_iters)
+                local_constants, cycles, control_deps, loop_iters,
+                cycle_consts)
 
             # If there were any return paths, take values on which existing and
             # recursive constants agree.
@@ -588,19 +654,28 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
         # If there is no return branch, we would expect common_consts to be
         # None.
         assert return_iflow.exists
-        used_constant_nodes = return_iflow.sources_for_any(common_consts.values.keys())
-        used_constants.update([n.name for n in used_constant_nodes])
+        used_constant_nodes = _sources_for_any(return_iflow,
+                                               common_consts.values.keys())
+        used_constants.update(_constant_names(used_constant_nodes))
 
     # If this PC is the start of one of the cycles we're currently processing,
     # see if it can be finalized.
     if start_pc in cycles:
         cycle_iflow = cycles[start_pc]
 
-        # Find which constants are "stable" (unmodified throughout all paths in
-        # the cycle)
+        # Find which constants are "stable": unmodified throughout all paths
+        # in the cycle or, in the fine-grained DMEM mode, back at their start
+        # value on every path that returns to the cycle start (e.g. a stack
+        # pointer that a retry loop moves and restores).
+        back = cycle_consts.get(start_pc)
+        if coarse_dmem or loop_cycle:
+            back = None
         stable_constants = ConstantContext.empty()
         for k, v in start_constants.values.items():
-            if not any([s.name == k for s in cycle_iflow.all_sinks()]):
+            unmodified = not any([s.overlaps(_node(k)) or
+                                  (s.name == 'dmem' and k.startswith('dmem:'))
+                                  for s in cycle_iflow.all_sinks()])
+            if unmodified or (back is not None and back.get(k) == v):
                 stable_constants.set(k, v)
 
         # If any start constants were modified during the cycle; do a recursive
@@ -633,6 +708,7 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
 
         # Remove this cycle from the cycles dict, since it is now resolved.
         del cycles[start_pc]
+        cycle_consts.pop(start_pc, None)
 
     # Strip special register x0 from both sources and sinks of graphs returned.
     return_iflow.remove_source('x0')
@@ -650,7 +726,7 @@ def _get_iflow(program: ACCProgram, graph: ControlGraph, start_pc: int,
     # Update the cache and return
     used_constants = _filter_constants(used_constants, start_constants)
     out = (used_constants, return_iflow, program_end_iflow, common_consts,
-           cycles, control_deps, loop_iters)
+           cycles, control_deps, loop_iters, cycle_consts)
 
     _get_iflow_cache_update(start_pc, start_constants, out, cache)
     return out
@@ -690,7 +766,7 @@ def get_subroutine_iflow(program: ACCProgram, graph: ControlGraph,
     start_constants['x0'] = 0
     constants = ConstantContext(start_constants)
     start_pc = program.get_pc_at_symbol(subroutine_name)
-    _, ret_iflow, end_iflow, _, cycles, control_deps, _ = _get_iflow(
+    _, ret_iflow, end_iflow, _, cycles, control_deps, _, _ = _get_iflow(
         program, graph, start_pc, constants, None, IFlowCache(), coarse_dmem)
     if cycles:
         for pc in cycles:
@@ -716,7 +792,7 @@ def get_program_iflow(program: ACCProgram,
     2. The information-flow nodes whose values at the start of the subroutine
        influence its control flow.
     '''
-    _, ret_iflow, end_iflow, _, cycles, control_deps, _ = _get_iflow(
+    _, ret_iflow, end_iflow, _, cycles, control_deps, _, _ = _get_iflow(
         program, graph, program.min_pc(), ConstantContext.empty(), None,
         IFlowCache(), coarse_dmem)
     if cycles:
@@ -747,7 +823,7 @@ def get_subroutine_loop_iters(
     start_constants['x0'] = 0
     constants = ConstantContext(start_constants)
     start_pc = program.get_pc_at_symbol(subroutine_name)
-    _, ret_iflow, end_iflow, _, cycles, _, loop_iters = _get_iflow(
+    _, ret_iflow, end_iflow, _, cycles, _, loop_iters, _ = _get_iflow(
         program, graph, start_pc, constants, None, IFlowCache(), coarse_dmem)
     if cycles:
         for pc in cycles:

@@ -1,0 +1,3272 @@
+{
+ "campaign_dir": "ct-trace-2026-10-17",
+ "created": "2026-10-18T23:43:45+02:00",
+ "engine": "observe",
+ "kind": "trace",
+ "results_sha256": "4d4a50fd468793ac89d3afd4e1617cd5aa03813788c11d967dd58b08c6a65f23",
+ "rows": 1848,
+ "run": "observe-trace-20261018T214345Z",
+ "schema": 1,
+ "source": {
+  "32": {
+   "commit": "9fe312874c0410b2d40575ef44a3b1a60f925946",
+   "overlay": {}
+  }
+ },
+ "summary": [
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2448039
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    4866290
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2448059
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    4866321
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2448061
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    4866323
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2448111
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 17,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    4866398
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 9,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    7284685
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 1,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 27,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2448119
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    4866410
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2449847
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    4869002
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    264574
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    518019
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    264594
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    518050
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    264596
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    518052
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    264646
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 17,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    518127
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 9,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    771608
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 1,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 27,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    264654
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 15,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    518139
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 9,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    266382
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    520731
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    7096397
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    14181666
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    7096417
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    14181697
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    7096419
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    14181699
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    7096469
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 17,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    14181774
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 9,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    21267079
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 1,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 27,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    7096477
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    14181786
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    7098205
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    14184378
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    19487725
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    38945662
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 8,
+   "distinct_final_bodies": 24,
+   "msg_len": 0,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    19487745
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    38945693
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 8,
+   "distinct_final_bodies": 24,
+   "msg_len": 1,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    19487747
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    38945695
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 8,
+   "distinct_final_bodies": 24,
+   "msg_len": 31,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 17
+   },
+   "distinct_cycles": [
+    19487797
+   ],
+   "distinct_whole_traces": 17,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 17,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 9,
+    "2": 9
+   },
+   "distinct_cycles": [
+    38945770
+   ],
+   "distinct_whole_traces": 9,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 9,
+   "tier": "sw"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    58403743
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 1,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 9,
+   "distinct_final_bodies": 25,
+   "msg_len": 32,
+   "param": "Ip",
+   "runs": 27,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    19487805
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    38945782
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 8,
+   "distinct_final_bodies": 24,
+   "msg_len": 33,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    19489533
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    38948374
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 8,
+   "distinct_final_bodies": 24,
+   "msg_len": 1024,
+   "param": "Ip",
+   "runs": 24,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2631371
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    5231648
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2631391
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    5231679
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2631393
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 15,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    5231681
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 9,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2631443
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 17,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    5231756
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 9,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    7832069
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 1,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 27,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2631451
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    5231768
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    2633179
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    5234360
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    334300
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    656764
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    334320
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    656795
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    334322
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    656797
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    334372
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 17,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    656872
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 9,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    979372
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 1,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 27,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    334380
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    656884
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    336108
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    659476
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    8854008
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    17696181
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    8854028
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    17696212
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    8854030
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    17696214
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    8854080
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 17,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    17696289
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 9,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    26538498
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 1,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 27,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    8854088
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    17696301
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    8855816
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    17698893
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    23999080
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    47967066
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 8,
+   "distinct_final_bodies": 24,
+   "msg_len": 0,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    23999100
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    47967097
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 8,
+   "distinct_final_bodies": 24,
+   "msg_len": 1,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    23999102
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    47967099
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 8,
+   "distinct_final_bodies": 24,
+   "msg_len": 31,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 17
+   },
+   "distinct_cycles": [
+    23999152
+   ],
+   "distinct_whole_traces": 17,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 17,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 9,
+    "2": 9
+   },
+   "distinct_cycles": [
+    47967174
+   ],
+   "distinct_whole_traces": 9,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 9,
+   "tier": "sw"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    71935196
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 1,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 9,
+   "distinct_final_bodies": 25,
+   "msg_len": 32,
+   "param": "Ip3",
+   "runs": 27,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 15
+   },
+   "distinct_cycles": [
+    23999160
+   ],
+   "distinct_whole_traces": 15,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 15,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 9,
+    "2": 9
+   },
+   "distinct_cycles": [
+    47967186
+   ],
+   "distinct_whole_traces": 9,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 9,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 9,
+   "distinct_final_bodies": 24,
+   "msg_len": 33,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    24000888
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    47969778
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 8,
+   "distinct_final_bodies": 24,
+   "msg_len": 1024,
+   "param": "Ip3",
+   "runs": 24,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    1661481
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 15,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    3301892
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 9,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    4942303
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    1661502
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 15,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    3301925
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 9,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    4942348
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    1661506
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 15,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    3301931
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 9,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    4942356
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    1661553
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 15,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    3302000
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 9,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    4942447
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    1661562
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 15,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    3302014
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 9,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    4942466
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    1663289
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 16,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    3304604
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 8,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    4945919
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bnaesonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    283859
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 14,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    557815
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 10,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    831771
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    283880
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 15,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    557848
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 9,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    831816
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    283884
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 14,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    557854
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 10,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    831824
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    283931
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 16,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    557923
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 8,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    831915
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    283940
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 12,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    557937
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 12,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    831934
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    285667
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 15,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    560527
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 9,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    835387
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfaes"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    10242199
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 14,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    20474496
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 9,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    30706793
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 5,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    10242220
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 15,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    20474529
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 9,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    30706838
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    10242224
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 12,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    20474535
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 12,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    30706846
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    10242271
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 13,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    20474604
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 11,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    30706937
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    10242280
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 15,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    20474618
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 9,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    30706956
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 1
+   },
+   "distinct_cycles": [
+    10244007
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 15,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1
+   },
+   "distinct_cycles": [
+    20477208
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 9,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 1,
+    "2": 1,
+    "3": 1
+   },
+   "distinct_cycles": [
+    30710409
+   ],
+   "distinct_whole_traces": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 4,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 1,
+   "distinct_final_bodies": 1,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 28,
+   "tier": "bngfonly"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 14
+   },
+   "distinct_cycles": [
+    26858185
+   ],
+   "distinct_whole_traces": 14,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 14,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 10,
+    "2": 10
+   },
+   "distinct_cycles": [
+    53695300
+   ],
+   "distinct_whole_traces": 10,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 10,
+   "tier": "sw"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   },
+   "distinct_cycles": [
+    80532415
+   ],
+   "distinct_whole_traces": 4,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 4,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 14,
+   "distinct_final_bodies": 28,
+   "msg_len": 0,
+   "param": "Is",
+   "runs": 28,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    26858206
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    53695333
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   },
+   "distinct_cycles": [
+    80532460
+   ],
+   "distinct_whole_traces": 4,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 4,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 12,
+   "distinct_final_bodies": 28,
+   "msg_len": 1,
+   "param": "Is",
+   "runs": 28,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 15
+   },
+   "distinct_cycles": [
+    26858210
+   ],
+   "distinct_whole_traces": 15,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 15,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 9,
+    "2": 9
+   },
+   "distinct_cycles": [
+    53695339
+   ],
+   "distinct_whole_traces": 9,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 9,
+   "tier": "sw"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   },
+   "distinct_cycles": [
+    80532468
+   ],
+   "distinct_whole_traces": 4,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 4,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 13,
+   "distinct_final_bodies": 28,
+   "msg_len": 31,
+   "param": "Is",
+   "runs": 28,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    26858257
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    53695408
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   },
+   "distinct_cycles": [
+    80532559
+   ],
+   "distinct_whole_traces": 4,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 4,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 12,
+   "distinct_final_bodies": 28,
+   "msg_len": 32,
+   "param": "Is",
+   "runs": 28,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    26858266
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    53695422
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   },
+   "distinct_cycles": [
+    80532578
+   ],
+   "distinct_whole_traces": 4,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 4,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 12,
+   "distinct_final_bodies": 28,
+   "msg_len": 33,
+   "param": "Is",
+   "runs": 28,
+   "tier": "sw"
+  },
+  {
+   "attempts": 1,
+   "distinct_attempt_bodies": {
+    "1": 16
+   },
+   "distinct_cycles": [
+    26859993
+   ],
+   "distinct_whole_traces": 16,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 16,
+   "tier": "sw"
+  },
+  {
+   "attempts": 2,
+   "distinct_attempt_bodies": {
+    "1": 8,
+    "2": 8
+   },
+   "distinct_cycles": [
+    53698012
+   ],
+   "distinct_whole_traces": 8,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 8,
+   "tier": "sw"
+  },
+  {
+   "attempts": 3,
+   "distinct_attempt_bodies": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   },
+   "distinct_cycles": [
+    80536031
+   ],
+   "distinct_whole_traces": 4,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 4,
+   "tier": "sw"
+  },
+  {
+   "attempts": "any",
+   "distinct_failed_bodies": 12,
+   "distinct_final_bodies": 28,
+   "msg_len": 1024,
+   "param": "Is",
+   "runs": 28,
+   "tier": "sw"
+  }
+ ],
+ "tool": {
+  "commit": "a15ffbf605a335dd9674f810fba9dfb667be6c93",
+  "inputs_sha256": "9261bc910b1e96d250055425a12580afc8defdb979beed4c3125483e9fa7df5e",
+  "path": "tools/ct_trace.py",
+  "sha256": "69a3ddce0e961b8954608873dcbff4b4c73ec9b4e92cd27d6cec22afc71d6e88"
+ }
+}

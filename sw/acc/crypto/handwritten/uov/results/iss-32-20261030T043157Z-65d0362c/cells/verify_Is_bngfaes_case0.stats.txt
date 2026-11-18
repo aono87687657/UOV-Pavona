@@ -1,0 +1,6 @@
+executed 163473 instructions in 165603 cycles
+# phase INIT: 156879 insn 156890 cyc
+# phase UPD r0: 2950 insn 3912 cyc
+# phase UPD r17: 3013 insn 3980 cyc
+# phase UPD r46: 611 insn 792 cyc
+# phase FINAL: 20 insn 29 cyc

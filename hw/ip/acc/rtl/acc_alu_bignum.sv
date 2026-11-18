@@ -79,7 +79,7 @@ module acc_alu_bignum
   import acc_pkg::*;
 #(
   // Enabling PQC hardware support with vector ISA extension
-  parameter  bit AccPQCEn = 1'b1,
+  parameter  bit AccPQCEn = 1'b0,
   localparam int Share    = 2
 ) (
   input logic clk_i,
@@ -123,6 +123,12 @@ module acc_alu_bignum
 
   input  flags_t                      mac_operation_flags_i,
   input  flags_t                      mac_operation_flags_en_i,
+
+`ifdef GFMACC_BIGNUM
+  output logic [WLEN-1:0]             mod_o,
+  input  logic [WLEN-1:0]             mod_i,
+  input  logic                        gf_mul_wr_mod_en,
+`endif
 
   input  logic [WLEN-1:0]             rnd_data_i,
   input  logic [WLEN-1:0]             urnd_data_i,
@@ -460,6 +466,12 @@ module acc_alu_bignum
           mod_no_intg_d[i_word*32+:32] = ispr_base_wdata_i;
           mod_intg_d[i_word*39+:39] = mod_intg_calc[i_word*39+:39];
         end
+`ifdef GFMACC_BIGNUM
+        gf_mul_wr_mod_en: begin
+          mod_no_intg_d[i_word*32+:32] = mod_i[i_word*32+:32];
+          mod_intg_d[i_word*39+:39] = mod_intg_calc[i_word*39+:39];
+        end
+`endif
         default: ;
       endcase
     end
@@ -472,8 +484,17 @@ module acc_alu_bignum
 
     assign mod_wr_en[i_word] = ispr_init_i            |
                                mod_ispr_wr_en[i_word] |
+`ifdef GFMACC_BIGNUM
+                               sec_wipe_mod_urnd_i    |
+                               gf_mul_wr_mod_en;
+`else
                                sec_wipe_mod_urnd_i;
+`endif
   end
+
+`ifdef GFMACC_BIGNUM
+  assign mod_o = mod_no_intg_q;
+`endif
 
   //////////
   // KMAC //

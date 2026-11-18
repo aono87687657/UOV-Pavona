@@ -15,7 +15,7 @@ module acc_instruction_fetch
 #(
   parameter int ImemSizeByte = 4096,
   // Enabling PQC hardware support with vector ISA extension
-  parameter bit AccPQCEn = 1'b1,
+  parameter bit AccPQCEn = 1'b0,
 
   localparam int ImemAddrWidth = prim_util_pkg::vbits(ImemSizeByte)
 ) (
@@ -45,6 +45,9 @@ module acc_instruction_fetch
   output logic [ImemAddrWidth-1:0] ctrl_flow_target_predec_o,
   output ispr_predec_bignum_t      ispr_predec_bignum_o,
   output mac_predec_bignum_t       mac_predec_bignum_o,
+`ifdef AES_BIGNUM
+  output aes_predec_bignum_t       aes_predec_bignum_o,
+`endif
   output logic                     lsu_addr_en_predec_o,
 
   input logic [NWdr-1:0] rf_bignum_rd_a_indirect_onehot_i,
@@ -96,6 +99,9 @@ module acc_instruction_fetch
   ispr_predec_bignum_t ispr_predec_bignum_q, ispr_predec_bignum_d;
   ispr_predec_bignum_t ispr_predec_bignum;
   mac_predec_bignum_t  mac_predec_bignum, mac_predec_bignum_q, mac_predec_bignum_d;
+`ifdef AES_BIGNUM
+  aes_predec_bignum_t  aes_predec_bignum, aes_predec_bignum_q, aes_predec_bignum_d;
+`endif
   logic                lsu_addr_en_predec_q, lsu_addr_en_predec_d;
   logic                lsu_addr_en_predec_insn;
   logic                insn_addr_err_unbuf;
@@ -148,6 +154,9 @@ module acc_instruction_fetch
     .ctrl_flow_target_predec_o (ctrl_flow_target_predec),
     .ispr_predec_bignum_o      (ispr_predec_bignum),
     .mac_predec_bignum_o       (mac_predec_bignum),
+`ifdef AES_BIGNUM
+    .aes_predec_bignum_o       (aes_predec_bignum),
+`endif
     .lsu_addr_en_predec_o      (lsu_addr_en_predec_insn)
   );
 
@@ -228,6 +237,10 @@ module acc_instruction_fetch
 
   assign mac_predec_bignum_d = insn_fetch_en ? mac_predec_bignum : mac_predec_bignum_q;
 
+`ifdef AES_BIGNUM
+  assign aes_predec_bignum_d = insn_fetch_en ? aes_predec_bignum : aes_predec_bignum_q;
+`endif
+
   assign ctrl_flow_predec_d = insn_fetch_en           ? ctrl_flow_predec   :
                               insn_fetch_resp_clear_i ? '0                 :
                                                         ctrl_flow_predec_q;
@@ -257,6 +270,19 @@ module acc_instruction_fetch
     .d_i(mac_predec_bignum_d),
     .q_o(mac_predec_bignum_q)
   );
+
+`ifdef AES_BIGNUM
+  prim_flop #(
+    .Width($bits(aes_predec_bignum_t)),
+    .ResetValue('0)
+  ) u_aes_predec_bignum_flop (
+    .clk_i,
+    .rst_ni,
+
+    .d_i(aes_predec_bignum_d),
+    .q_o(aes_predec_bignum_q)
+  );
+`endif
 
   prim_flop #(
     .Width($bits(ctrl_flow_predec_t)),
@@ -417,6 +443,9 @@ module acc_instruction_fetch
   assign ctrl_flow_target_predec_o = ctrl_flow_target_predec_q;
   assign ispr_predec_bignum_o      = ispr_predec_bignum_q;
   assign mac_predec_bignum_o       = mac_predec_bignum_q;
+`ifdef AES_BIGNUM
+  assign aes_predec_bignum_o       = aes_predec_bignum_q;
+`endif
   assign lsu_addr_en_predec_o      = lsu_addr_en_predec_q;
 
   `ASSERT(FetchEnOnlyIfValidIMem, insn_fetch_en |-> imem_rvalid_i)

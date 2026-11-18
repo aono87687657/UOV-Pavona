@@ -1,0 +1,57 @@
+Parsing test data from: sw/acc/crypto/handwritten/test_data/testvectors-Is-pkc-skc
+  Case 1: Null message (sm length = signature length)
+  cpk=66576B, sk=32B, msg=0B, sig=96B
+  Case 2: Message length = 1 bytes
+  cpk=66576B, sk=32B, msg=1B, sig=96B
+  Case 3: Message length = 2 bytes
+  cpk=66576B, sk=32B, msg=2B, sig=96B
+  Case 4: Message length = 4 bytes
+  cpk=66576B, sk=32B, msg=4B, sig=96B
+  Case 5: Message length = 8 bytes
+  cpk=66576B, sk=32B, msg=8B, sig=96B
+  Case 6: Message length = 16 bytes
+  cpk=66576B, sk=32B, msg=16B, sig=96B
+  Case 7: Message length = 32 bytes
+  cpk=66576B, sk=32B, msg=32B, sig=96B
+  Case 8: Message length = 64 bytes
+  cpk=66576B, sk=32B, msg=64B, sig=96B
+  Case 9: Message length = 128 bytes
+  cpk=66576B, sk=32B, msg=128B, sig=96B
+  Case 10: Message length = 256 bytes
+  cpk=66576B, sk=32B, msg=256B, sig=96B
+  Case 11: Message length = 512 bytes
+  cpk=66576B, sk=32B, msg=512B, sig=96B
+  Case 12: Message length = 1024 bytes
+  cpk=66576B, sk=32B, msg=1024B, sig=96B
+Successfully parsed 12 test case(s)
+[DMEM profile: 131072 B total, bus 130048, dmem_address 0x80000, layout module hw/ip/acc/util/shared/mem_layout.py]
+[ELF sw/acc/crypto/handwritten/uov/dmem_large/verify_full/ov-Is-pkc/ov-Is-verify_full_bngfonly.elf
+ sha256 609b32c77d018e41715015abd631b9fe9801f08b4c83c0795d3f82cd15e2a2dd
+ tier by fingerprint bngfonly; _dmem_data_end 68000; _dmem_bss_end 68000; cpk@0x510 msg@0x100 sig@0x80]
+[harness sha256 5cea5ec4abca2ece.. options poison=False tier=bngfonly stats=False]
+case 0: msglen 0; sequences 1/1: 5 of 5
+  ok  case 0 accept, reference accepts: result 0 (want 0)
+  ok  case 0 with the resident key corrupted at pk_seed byte 3, reference rejects: result -1 (want -1)
+  ok  case 0 with the resident key corrupted at P3 entry 0 byte 0, reference rejects: result -1 (want -1)
+  ok  case 0 with the resident key corrupted at P3 entry 2077 byte 31, reference rejects: result -1 (want -1)
+  ok  case 0 accept after the key is restored, reference accepts: result 0 (want 0)
+  ok  case 1's signature under case 0's key, reference rejects: result -1 (want -1)
+  ok  case 0's signature under case 1's key, reference rejects: result -1 (want -1)
+  ok  case 1's key accepts its own signature, reference accepts: result 0 (want 0)
+  ok  case 0 accept after its key is restored over case 1's, reference accepts: result 0 (want 0)
+  ok  case 0 sig byte 0 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 0 sig byte 47 ^ 0x10, reference rejects: result -1 (want -1)
+  ok  case 0 sig byte 48 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 0 sig byte 60 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 0 accept after the flips of bytes 0, 47, 48, 60, reference accepts: result 0 (want 0)
+  ok  case 0 sig byte 79 ^ 0x10, reference rejects: result -1 (want -1)
+  ok  case 0 sig byte 80 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 0 sig byte 88 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 0 sig byte 95 ^ 0x01, reference rejects: result -1 (want -1)
+  ok  case 0 accept after the flips of bytes 79, 80, 88, 95, reference accepts: result 0 (want 0)
+  ok  case 0 msg_len 0x401 rejected as a length error (host contract): result -2 (want -2)
+  ok  case 0 msg_len 0x80000000 rejected as a length error (host contract): result -2 (want -2)
+  ok  case 0 msg_len 0xffffffff rejected as a length error (host contract): result -2 (want -2)
+  ok  case 0 accept after the length errors, reference accepts: result 0 (want 0)
+  ok  cpk unchanged after 23 runs on this image
+IS ONESHOT VERIFY PASS: 23 of 23 checks passed

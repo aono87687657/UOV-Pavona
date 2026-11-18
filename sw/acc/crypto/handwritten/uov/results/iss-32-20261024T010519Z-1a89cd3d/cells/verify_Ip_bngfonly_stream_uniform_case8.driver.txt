@@ -1,0 +1,33 @@
+Parsing test data from: sw/acc/crypto/handwritten/test_data/testvectors-Ip-pkc-skc
+  Case 1: Null message (sm length = signature length)
+  cpk=43576B, sk=32B, msg=0B, sig=128B
+  Case 2: Message length = 1 bytes
+  cpk=43576B, sk=32B, msg=1B, sig=128B
+  Case 3: Message length = 2 bytes
+  cpk=43576B, sk=32B, msg=2B, sig=128B
+  Case 4: Message length = 4 bytes
+  cpk=43576B, sk=32B, msg=4B, sig=128B
+  Case 5: Message length = 8 bytes
+  cpk=43576B, sk=32B, msg=8B, sig=128B
+  Case 6: Message length = 16 bytes
+  cpk=43576B, sk=32B, msg=16B, sig=128B
+  Case 7: Message length = 32 bytes
+  cpk=43576B, sk=32B, msg=32B, sig=128B
+  Case 8: Message length = 64 bytes
+  cpk=43576B, sk=32B, msg=64B, sig=128B
+  Case 9: Message length = 128 bytes
+  cpk=43576B, sk=32B, msg=128B, sig=128B
+  Case 10: Message length = 256 bytes
+  cpk=43576B, sk=32B, msg=256B, sig=128B
+  Case 11: Message length = 512 bytes
+  cpk=43576B, sk=32B, msg=512B, sig=128B
+  Case 12: Message length = 1024 bytes
+  cpk=43576B, sk=32B, msg=1024B, sig=128B
+Successfully parsed 12 test case(s)
+
+Ip streamed verify, case 8 (msglen 128): PASS
+   INIT       7,238,579 insn 7,344,833 cyc
+   UPD r0        6,904 insn    9,219 cyc
+   UPD r13       7,030 insn    9,351 cyc
+   FINAL            29 insn       42 cyc
+   TOTAL      7,252,542 insn 7,363,445 cyc

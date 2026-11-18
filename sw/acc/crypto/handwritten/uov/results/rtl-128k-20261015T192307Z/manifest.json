@@ -1,0 +1,149 @@
+{
+ "archive": {
+  "done": "collector_exit=0 postcheck_exit=0 archive_exit=0 finished=20261018T080140Z",
+  "files": 414,
+  "inventory": "49351b3d42e595d497c6e8270802a9f7e71fabcc95012f868b91bf3ed3035c7c"
+ },
+ "campaign": "rtl-2026-10e",
+ "cells": [
+  "acc_uov_keygen_sp_ip_bngfaes_test",
+  "acc_uov_keygen_sp_ip_bngfonly_test",
+  "acc_uov_keygen_sp_ip_bnaesonly_test",
+  "acc_uov_keygen_sp_ip_sw_test",
+  "acc_uov_keygen_sp_ip3_bngfaes_test",
+  "acc_uov_keygen_sp_ip3_bngfonly_test",
+  "acc_uov_keygen_sp_ip3_bnaesonly_test",
+  "acc_uov_keygen_sp_ip3_sw_test",
+  "acc_uov_keygen_sp_is_bngfaes_test",
+  "acc_uov_keygen_sp_is_bngfonly_test",
+  "acc_uov_keygen_sp_is_bnaesonly_test",
+  "acc_uov_keygen_sp_is_sw_test",
+  "acc_uov_keygen_min_ip_bngfaes_test",
+  "acc_uov_keygen_min_ip_bngfonly_test",
+  "acc_uov_keygen_min_ip_bnaesonly_test",
+  "acc_uov_keygen_min_ip_sw_test",
+  "acc_uov_keygen_min_ip3_bngfaes_test",
+  "acc_uov_keygen_min_ip3_bngfonly_test",
+  "acc_uov_keygen_min_ip3_bnaesonly_test",
+  "acc_uov_keygen_min_ip3_sw_test",
+  "acc_uov_keygen_min_is_bngfaes_test",
+  "acc_uov_keygen_min_is_bngfonly_test",
+  "acc_uov_keygen_min_is_bnaesonly_test",
+  "acc_uov_keygen_min_is_sw_test",
+  "acc_uov_verify_full_ip_bngfaes_test",
+  "acc_uov_verify_full_ip_bngfonly_test",
+  "acc_uov_verify_full_ip_bnaesonly_test",
+  "acc_uov_verify_full_ip_sw_test",
+  "acc_uov_verify_full_ip3_bngfaes_test",
+  "acc_uov_verify_full_ip3_bngfonly_test",
+  "acc_uov_verify_full_ip3_bnaesonly_test",
+  "acc_uov_verify_full_ip3_sw_test",
+  "acc_uov_verify_full_is_bngfaes_test",
+  "acc_uov_verify_full_is_bngfonly_test",
+  "acc_uov_verify_full_is_bnaesonly_test",
+  "acc_uov_verify_full_is_sw_test"
+ ],
+ "completion": {
+  "accepted": true,
+  "baseline": null,
+  "cells": 36,
+  "rows": 84
+ },
+ "definition": "863caa872940dddc4a3a42247e275daa8aa5a352aa9e5a2d70f939c63175d6db",
+ "engine": "rtl",
+ "evidence": {
+  "results.csv": "7c73547c3c6cb70cd5339dcb81b1867582db09a2224c22117a70d754a858b4e1"
+ },
+ "execution": {
+  "bazel": "bazel 8.0.1 (from the run's build event log; its manifest recorded no version)",
+  "flags": "--test_timeout=604800 --cache_test_results=no --local_test_jobs=3 --//hw:make_options=-j,8 --//hw:verilator_options=--threads,4 --experimental_convenience_symlinks=ignore --test_arg=--verilator-args=+ibex_tracer_enable=0"
+ },
+ "profile": 128,
+ "run": "rtl-128k-20261015T192307Z",
+ "schema": 2,
+ "source": {
+  "commit": "d7500a3a567e486d06960ea80006d29128761a0a",
+  "config": {
+   ".bazelrc-site": "15d97e8406bbeaa209a2e86d84320f6c1f66b826913c028d0668e8ce3b68268b"
+  },
+  "overlay": {
+   "hw/ip/acc/data/acc.hjson": [
+    "f528f46a606d886cf404730d8df95f4b7394246038d5f0e3a1bb03d7ea81d245",
+    "100644"
+   ],
+   "hw/ip/acc/doc/registers.md": [
+    "3ad7544664040dae42c18973fb04fcda7681f71a7326f77943945e520bcc440e",
+    "100644"
+   ],
+   "hw/ip/acc/dv/memutil/acc_memutil.cc": [
+    "7d1b36a79106576a87f106cf478c959bd595bf3de9a1fcac9825342dad957555",
+    "100644"
+   ],
+   "hw/ip/acc/rtl/acc_reg_pkg.sv": [
+    "104d2c2f1e69a6c149aed08e1286f588d1a8bbe70614044cabfdc687f64e415d",
+    "100644"
+   ],
+   "hw/ip/acc/rtl/acc_reg_top.sv": [
+    "80f233860adfd0447e79e5ea6d55f30203f61e6ffc2a355a6f09c7a453164ae5",
+    "100644"
+   ],
+   "hw/top_egret/data/autogen/top_egret.gen.hjson": [
+    "0c34b5f78ad894e0f43eaeaa266682af8a41d83acb168d485a2acdaa8b1fe288",
+    "100644"
+   ],
+   "hw/top_egret/doc/memory_map.md": [
+    "8ecf56aeb4f664bb3166aa41b49ea6b23ff42bca74e57ac8675da919ad20df33",
+    "100644"
+   ],
+   "hw/top_egret/dv/autogen/xbar_env_pkg__params.sv": [
+    "f8382bd889037eba4219a27c3f43df44f79656fd66fee5b0c14718c2c05948aa",
+    "100644"
+   ],
+   "hw/top_egret/dv/autogen/xbar_tgl_excl.cfg": [
+    "36d91f011cba6cfe398abd486642e24181c9c668c26c9ebe0c0faa63a3ad0e04",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/data/autogen/xbar_main.gen.hjson": [
+    "adbb1046984edeb0f33fe7fd644dfd1329e2baa5f8d8ea7271819d10ba8dd7df",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/dv/autogen/xbar_cover.cfg": [
+    "a5469ab5fe2a26d1932a41ce83c9092ac753e43f3530ac744dd4e8ea1749d4c1",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/dv/autogen/xbar_env_pkg__params.sv": [
+    "fcab2ddfedc420ed20c7d03b1c68118e162f0dfc7b880066af0ec75a4354ec8d",
+    "100644"
+   ],
+   "hw/top_egret/ip/xbar_main/rtl/autogen/tl_main_pkg.sv": [
+    "439bbab439289f9219cab2b34d2f049b7c408a60158d9d49fca6530880c6a9d8",
+    "100644"
+   ],
+   "hw/top_egret/rtl/autogen/top_egret_pkg.sv": [
+    "20fab801a60be4912f3941536cd54c063d365c55adc39ab92d2bb77ad7dcb0b4",
+    "100644"
+   ],
+   "hw/top_egret/sw/autogen/chip/top_egret.rs": [
+    "0c5f71638279904908443a8e98e5822bc5ad705e7241854cc7e2d501554e3e7c",
+    "100644"
+   ],
+   "hw/top_egret/sw/autogen/top_egret.h": [
+    "7210da09aecd3b06410ea84164a8206e234eda69d62dc1543eeb839ae54fb4fe",
+    "100644"
+   ],
+   "hw/top_egret/sw/autogen/top_egret_memory.h": [
+    "3ff2350cec17f1dd053f096aeb727da8e38a70b28bbbe209f3c8172b4903d025",
+    "100644"
+   ]
+  },
+  "snapshot": "ddbc1ffe80efb22b9cccb1a149b1e74320e334534e51279ee2e32912c07fc4bb"
+ },
+ "tools": {
+  "measuring": {
+   "tools/check_firmware_kernels.py": "fce6318e9aceb2facf1cbb97d7aa503c843efdd965b3e44a85c1ae219a122ccc",
+   "tools/gather_chip_matrix.py": "1cc69d5a093135308548076783fc27151b2088ede68a2717e2de0b402bd5ab05",
+   "tools/rtl_campaign.sh": "42dbdcd49c9041325446dbd9ad2183a16079ad4d8bb19e7792bc511cd22cbc28"
+  },
+  "publishing": "e22d57af02196a54a602c57916c035f09b28fa54"
+ }
+}

@@ -1,0 +1,3508 @@
+case 4 accept:
+Execution time
+--------------
+ACC executed 163445 instructions in 165552 cycles.
+The execution stalled for 2107 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+jal                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108218, 5]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+jal             [1, 1]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          161
+            3         2113
+            4            2
+            5           63
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+cpk pk_seed byte 3:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+cpk P3 entry 0 byte 0:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+cpk P3 entry 2079 byte 31:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+key restored:
+Execution time
+--------------
+ACC executed 163445 instructions in 165552 cycles.
+The execution stalled for 2107 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+jal                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108218, 5]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+jal             [1, 1]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          161
+            3         2113
+            4            2
+            5           63
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+other signature:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+signature under the other key:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+other key:
+Execution time
+--------------
+ACC executed 163445 instructions in 165552 cycles.
+The execution stalled for 2107 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+jal                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108218, 5]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+jal             [1, 1]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          161
+            3         2113
+            4            2
+            5           63
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+key restored over the other key:
+Execution time
+--------------
+ACC executed 163445 instructions in 165552 cycles.
+The execution stalled for 2107 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+jal                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108218, 5]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+jal             [1, 1]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          161
+            3         2113
+            4            2
+            5           63
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+flip 0^0x1:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+flip 47^0x10:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+flip 48^0x1:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+flip 60^0x1:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+accept after flips:
+Execution time
+--------------
+ACC executed 163445 instructions in 165552 cycles.
+The execution stalled for 2107 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+jal                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108218, 5]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+jal             [1, 1]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          161
+            3         2113
+            4            2
+            5           63
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+flip 79^0x10:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+flip 80^0x1:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+flip 88^0x1:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+flip 95^0x1:
+Execution time
+--------------
+ACC executed 163444 instructions in 165550 cycles.
+The execution stalled for 2106 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+jal                   1
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108217, 4]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          160
+            3         2113
+            4            1
+            5           64
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           64
+            6            1
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+accept after flips:
+Execution time
+--------------
+ACC executed 163445 instructions in 165552 cycles.
+The execution stalled for 2107 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+jal                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108218, 5]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+jal             [1, 1]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          161
+            3         2113
+            4            2
+            5           63
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72
+
+
+len 0x401:
+Execution time
+--------------
+ACC executed 16 instructions in 22 cycles.
+The execution stalled for 6 cycles (37.5 percent).
+The execution would take 0.00 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+addi                 5
+sw                   2
+srli                 2
+bne                  2
+lw                   1
+sub                  1
+jal                  1
+csrrw                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+_imem_start  [12, 5]
+$x           [4, 1]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [4, 1]
+bne            [2, 2]
+srli           [2, 0]
+lw             [1, 1]
+jal            [1, 1]
+sw             [1, 0]
+sub            [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+ecall          [1, 1]
+addi           [1, 0]
+sw             [1, 0]
+csrrw          [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2            1
+            4            2
+            6            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            4            1
+            6            2
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 0
+
+
+len 0x80000000:
+Execution time
+--------------
+ACC executed 12 instructions in 17 cycles.
+The execution stalled for 5 cycles (41.7 percent).
+The execution would take 0.00 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+addi                 4
+sw                   2
+lw                   1
+srli                 1
+bne                  1
+jal                  1
+csrrw                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+_imem_start  [8, 4]
+$x           [4, 1]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [3, 1]
+lw             [1, 1]
+bne            [1, 1]
+jal            [1, 1]
+sw             [1, 0]
+srli           [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+ecall          [1, 1]
+addi           [1, 0]
+sw             [1, 0]
+csrrw          [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2            1
+            4            1
+            6            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            6            2
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 0
+
+
+len 0xffffffff:
+Execution time
+--------------
+ACC executed 12 instructions in 17 cycles.
+The execution stalled for 5 cycles (41.7 percent).
+The execution would take 0.00 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction      count
+-------------  -------
+addi                 4
+sw                   2
+lw                   1
+srli                 1
+bne                  1
+jal                  1
+csrrw                1
+ecall                1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+_imem_start  [8, 4]
+$x           [4, 1]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [3, 1]
+lw             [1, 1]
+bne            [1, 1]
+jal            [1, 1]
+sw             [1, 0]
+srli           [1, 0]
+
+$x
+instruction    [count, stalls]
+-------------  -----------------
+ecall          [1, 1]
+addi           [1, 0]
+sw             [1, 0]
+csrrw          [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2            1
+            4            1
+            6            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            6            2
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 0
+
+
+accept after length errors:
+Execution time
+--------------
+ACC executed 163445 instructions in 165552 cycles.
+The execution stalled for 2107 cycles (1.3 percent).
+The execution would take 1.66 ms @ 100 MHz.
+
+
+Instruction frequencies
+-----------------------
+instruction       count
+--------------  -------
+bn.aes128.encm    97200
+bn.rshi           17993
+bn.gfmul          13232
+bn.aes128.encz    10800
+bn.add            10800
+bn.aes128.encf    10800
+bn.lid             2085
+addi                195
+loop                161
+loopi                98
+sw                   10
+bn.aes128.kf         10
+csrrw                 8
+bn.ld                 7
+lw                    6
+srli                  4
+bn.wsrw               4
+bn.mov                4
+bn.sd                 4
+beq                   3
+bne                   2
+sub                   2
+lui                   2
+jal                   2
+bn.xor                2
+andi                  2
+bn.addi               2
+slli                  1
+ori                   1
+bn.or                 1
+bn.wsrr               1
+bn.cmp                1
+csrrs                 1
+ecall                 1
+
+
+Function cycle counts
+-----------------------
+function     [instr., stall]
+-----------  -----------------
+$x           [108218, 5]
+$d           [55196, 2092]
+_imem_start  [31, 10]
+
+
+Function Instruction counts
+-----------------------
+
+_imem_start
+instruction    [count, stalls]
+-------------  -----------------
+addi           [9, 1]
+sw             [9, 0]
+lw             [6, 6]
+bne            [2, 2]
+srli           [2, 0]
+jal            [1, 1]
+sub            [1, 0]
+lui            [1, 0]
+
+$d
+instruction     [count, stalls]
+--------------  -----------------
+bn.rshi         [17993, 0]
+bn.gfmul        [13232, 0]
+bn.aes128.encz  [10800, 0]
+bn.add          [10800, 0]
+bn.lid          [2085, 2085]
+loop            [161, 0]
+loopi           [98, 0]
+bn.aes128.kf    [10, 0]
+bn.ld           [7, 7]
+bn.sd           [4, 0]
+bn.xor          [2, 0]
+bn.addi         [2, 0]
+bn.or           [1, 0]
+bn.cmp          [1, 0]
+
+$x
+instruction     [count, stalls]
+--------------  -----------------
+bn.aes128.encm  [97200, 0]
+bn.aes128.encf  [10800, 0]
+addi            [186, 0]
+csrrw           [8, 0]
+bn.wsrw         [4, 0]
+bn.mov          [4, 0]
+beq             [3, 3]
+srli            [2, 0]
+andi            [2, 0]
+jal             [1, 1]
+ecall           [1, 1]
+slli            [1, 0]
+ori             [1, 0]
+bn.wsrr         [1, 0]
+sub             [1, 0]
+lui             [1, 0]
+csrrs           [1, 0]
+sw              [1, 0]
+
+
+Basic block statistics
+----------------------
+
+Number of instructions within a basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2          161
+            3         2113
+            4            2
+            5           63
+            6            1
+           12            1
+           13            1
+           14         6048
+           15         4560
+           16           96
+           18           95
+           22            1
+           34            1
+           56            1
+
+
+Number of instructions within an extended basic block
+
+  # of instr.    frequency
+-------------  -----------
+            2           64
+            3         2017
+            4            1
+            5           63
+            6            2
+           12            1
+           15         4560
+           21           95
+           29            1
+           56            1
+        86443            1
+
+Function call statistics
+------------------------
+No functions were called.
+
+
+Loop statistics
+---------------
+Loops: 259
+Loop body length (instructions): min: 3, max: 21, avg: 11.67
+Number of iterations: min: 1, max: 96, avg: 50.72

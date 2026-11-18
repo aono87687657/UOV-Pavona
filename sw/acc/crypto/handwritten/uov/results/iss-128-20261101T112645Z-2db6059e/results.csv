@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+verify,Is,sw,full,0,PASS,21379946,25998569
+verify,Is,sw,full,1,PASS,21379952,25998577
+verify,Is,sw,full,2,PASS,21379952,25998577
+verify,Is,sw,full,3,PASS,21379952,25998577
+verify,Is,sw,full,4,PASS,21379952,25998577
+verify,Is,sw,full,5,PASS,21379952,25998577
+verify,Is,sw,full,6,PASS,21379978,25998604
+verify,Is,sw,full,7,PASS,21380005,25998632
+verify,Is,sw,full,8,PASS,21380059,25998688
+verify,Is,sw,full,9,PASS,21380167,25998800
+verify,Is,sw,full,10,PASS,21380383,25999024
+verify,Is,sw,full,11,PASS,21380815,25999472

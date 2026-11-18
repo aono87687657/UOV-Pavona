@@ -1,0 +1,13 @@
+op,param,tier,variant,case,kat,instructions,cycles
+sign,Is,sw,ldirect,0,PASS,22172296,26858185
+sign,Is,sw,ldirect,1,PASS,22172311,26858206
+sign,Is,sw,ldirect,2,PASS,22172311,26858206
+sign,Is,sw,ldirect,3,PASS,22172311,26858206
+sign,Is,sw,ldirect,4,PASS,22172311,26858205
+sign,Is,sw,ldirect,5,PASS,22172311,26858205
+sign,Is,sw,ldirect,6,PASS,22172362,26858257
+sign,Is,sw,ldirect,7,PASS,22172416,26858313
+sign,Is,sw,ldirect,8,PASS,22172524,26858425
+sign,Is,sw,ldirect,9,PASS,22172740,26858649
+sign,Is,sw,ldirect,10,PASS,22173172,26859097
+sign,Is,sw,ldirect,11,PASS,44329615,53698012

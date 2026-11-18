@@ -1576,3 +1576,216 @@
       wrd: wrd
       funct3: b110
       type: type
+
+
+- mnemonic: bn.gfmul
+  synopsis: Vectorized Binary-Field Multiply and Accumulate
+  pqc: true
+  operands:
+    - name: wrd
+      doc: Destination WDR for the result (accumulator value with .acc/.acch, plain lane products otherwise)
+    - name: wrs1
+      doc: Source WDR containing multiple GF16 elements
+    - name: wrs2
+      doc: Source WDR containing scalar element(s). Scalar element is selected by mod1 CSR index. With .inc, mod1 is auto-incremented after execution. In .vxv mode, mod1 is ignored.
+    - name: type
+      type: enum(.4, "", .4.inc, "", .4.vv, "", "", "", "", "", "", "", "", "", "", "",
+                 .4.acc, .4.acch, .4.acc.inc, .4.acch.inc, .4.acc.vv, .4.acch.vv, "", "",
+                 .4.acc.z, .4.acch.z, .4.acc.z.inc, .4.acch.z.inc, .4.acc.z.vv, .4.acch.z.vv, "", "",
+                 .8, "", .8.inc, "", .8.vv, "", "", "", "", "", "", "", "", "", "", "",
+                 .8.acc, .8.acch, .8.acc.inc, .8.acch.inc, .8.acc.vv, .8.acch.vv, "", "",
+                 .8.acc.z, .8.acch.z, .8.acc.z.inc, .8.acch.z.inc, .8.acc.z.vv, .8.acch.z.vv, "", "",
+                 .16, "", .16.inc, "", .16.vv, "", "", "", "", "", "", "", "", "", "", "",
+                 .16.acc, .16.acch, .16.acc.inc, .16.acch.inc, .16.acc.vv, .16.acch.vv, "", "",
+                 .16.acc.z, .16.acch.z, .16.acc.z.inc, .16.acch.z.inc, .16.acc.z.vv, .16.acch.z.vv, "", "",
+                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
+                 )
+  glued-ops: true
+  syntax: |
+    <type> <wrd>, <wrs1>, <wrs2>
+  doc: |
+    Performs a vectorized binary-field multiply-accumulate operation
+    and writes the result to a destination register.
+
+    Lane products of <wrs1> (×<wrs2> scalar selected by the mod1 CSR index, or
+    ×<wrs2> pairwise lanes with .vv) are XOR-accumulated. Plain forms (no .acc/.acch)
+    compute the pure product without touching any accumulator WSR. .acc forms
+    accumulate in the ACC WSR; .acch forms accumulate in the ACCH WSR instead —
+    two independent 256-bit accumulators. .z zeroes the selected accumulator
+    before accumulating. .inc auto-increments mod1 after execution.
+    This instruction is part of the PQC extension and requires PQC mode;
+    it raises ILLEGAL_INSN otherwise.
+
+    The GF(2^4) reduction polynomial is read from bits [3:0] of the mod0 CSR.
+    The GF(2^8) reduction polynomial is read from bits [7:0] of the mod0 CSR.
+    The polynomial must be written to mod0 before executing this instruction.
+
+    Example usage:
+    ```
+    li x23, 0x0000011b   # GF(256) polynomial: x^8 + x^4 + x^3 + x + 1
+    csrrw x0, mod0, x23  # Set mod0 CSR
+    bn.gfmul.8.acc  w14, w16, w15   # ACC  ^= w16 * w15 (lanewise)
+    bn.gfmul.8.acch w13, w17, w15   # ACCH ^= w17 * w15 (ACC untouched)
+    ```
+  errs: []
+  # type bits: 0 acch, 1 .inc, 2 .vv, 3 .z, 4 .acc/.acch. mod0 (polynomial) and
+  # mod1 (scalar index) both map to the `mod` node.
+  iflow:
+    - to: [wrd]
+      from: [wrs1, wrs2, mod]
+    - test:
+        - type & 0x10
+        - type !& 0x1
+      to: [acc]
+      from: [wrs1, wrs2, mod]
+    - test:
+        - type & 0x10
+        - type !& 0x9
+      to: [acc, wrd]
+      from: [acc]
+    - test:
+        - type & 0x11
+      to: [acch]
+      from: [wrs1, wrs2, mod]
+    - test:
+        - type & 0x11
+        - type !& 0x8
+      to: [acch, wrd]
+      from: [acch]
+    - test:
+        - type & 0x2
+      to: [mod]
+      from: [mod]
+  encoding:
+    scheme: bngfmul
+    mapping:
+      wrd: wrd
+      wrs1: wrs1
+      wrs2: wrs2
+      type: type
+
+- mnemonic: bn.aes128.encz
+  synopsis: AES-128 Zero Round Encryption with Optional CTR Counter-Field Endian Swap
+  operands:
+    - name: swap_endian
+      abbrev: se
+      type: option(.swap)
+      doc: Enable per-128-bit-lane counter-field byte-swap on `<wrs1>` before AddRoundKey. Only the upper 32 bits (bytes 12-15) of each 128-bit lane are byte-reversed; the lower 96 bits (nonce/prefix) are unchanged.
+    - name: wrd
+      doc: Destination WDR
+    - name: wrs1
+      doc: Source WDR containing two 128-bit plaintext blocks
+    - name: wrs2
+      doc: Source WDR containing the 128-bit key in lower 128 bits
+  glued-ops: true
+  syntax: |
+    [<swap_endian>] <wrd>, <wrs1>, <wrs2>
+  doc: |
+    Performs AES-128 round-0 AddRoundKey on two 128-bit plaintext blocks.
+    `<wrs1>` contains two plaintext blocks (lower and upper 128-bit lanes).
+    `<wrs2>` contains the 128-bit key in the lower 128 bits and the same key is applied to both lanes.
+
+    If `<swap_endian>` is specified, the upper 32 bits (counter field, bytes 12-15) of each
+    128-bit plaintext lane are byte-reversed before XOR with the key. The lower 96 bits
+    (nonce/prefix) and the key are not byte-swapped.
+
+    The result is written to `<wrd>` and can be directly consumed by `bn.aes128.encm`.
+  errs: []
+  iflow:
+    - to: [wrd]
+      from: [wrs1, wrs2]
+  encoding:
+    scheme: bnaes_enc
+    mapping:
+      round_type: b00
+      swap_endian: swap_endian
+      wrd: wrd
+      wrs1: wrs1
+      wrs2: wrs2
+
+- mnemonic: bn.aes128.encm
+  synopsis: AES-128 Middle Round Encryption
+  operands: [wrd, wrs1, wrs2]
+  syntax: |
+    <wrd>, <wrs1>, <wrs2>
+  doc: |
+    Performs AES-128 middle round (SubBytes, ShiftRows, MixColumns, AddRoundKey) on two 128-bit blocks.
+    `<wrs1>` contains two 128-bit states from previous round (lower 128 bits = block 1, upper 128 bits = block 2).
+    `<wrs2>` contains the 128-bit round key (in lower 128 bits of the 256-bit register).
+    The result after the middle round operations is written to `<wrd>` (lower 128 bits = block 1, upper 128 bits = block 2).
+    
+    Note: For the initial AddRoundKey (zero round), use existing instructions:
+    ```
+    bn.or  w10, w10, w10 << 128  # Duplicate lower-128 key to upper half
+    bn.xor w0, w0, w10           # AddRoundKey for first round (w0 holds plaintext)
+
+    Then use `bn.aes128.encm` for subsequent rounds.
+    ```
+  errs: []
+  iflow:
+    - to: [wrd]
+      from: [wrs1, wrs2]
+  encoding:
+    scheme: bnaes_enc
+    mapping:
+      round_type: b01
+      swap_endian: b0
+      wrd: wrd
+      wrs1: wrs1
+      wrs2: wrs2
+
+- mnemonic: bn.aes128.encf
+  synopsis: AES-128 Final Round Encryption
+  operands: [wrd, wrs1, wrs2]
+  syntax: |
+    <wrd>, <wrs1>, <wrs2>
+  doc: |
+    Performs AES-128 final round (SubBytes, ShiftRows, AddRoundKey) on two 128-bit blocks.
+    `<wrs1>` contains two 128-bit states from previous round (lower 128 bits = block 1, upper 128 bits = block 2).
+    `<wrs2>` contains the 128-bit round key (in lower 128 bits of the 256-bit register).
+    The final encrypted result is written to `<wrd>` (lower 128 bits = block 1, upper 128 bits = block 2).
+  errs: []
+  iflow:
+    - to: [wrd]
+      from: [wrs1, wrs2]
+  encoding:
+    scheme: bnaes_enc
+    mapping:
+      round_type: b10
+      swap_endian: b0
+      wrd: wrd
+      wrs1: wrs1
+      wrs2: wrs2
+
+- mnemonic: bn.aes128.kf
+  synopsis: AES-128 Key Schedule Forward
+  operands: [wrd, wrs, imm]
+  syntax: |
+    <wrd>, <wrs>, <imm>
+  doc: |
+    Performs AES-128 key schedule forward operation to generate the next round key.
+    `<wrs>` contains the current round key (in lower 128 bits of the 256-bit register).
+    `<imm>` is the round number (1-10 for AES-128).
+    The next round key is written to `<wrd>` (in lower 128 bits of the 256-bit register).
+    
+    For example:
+    - If `<imm>` = 1, generates round key 1 from the initial key (round 0)
+    - If `<imm>` = 2, generates round key 2 from round key 1
+    - If `<imm>` = 3, generates round key 3 from round key 2
+    - etc.
+    
+    This follows the AES standard where Rcon[1] is used for the first round key expansion,
+    Rcon[2] for the second, and so on.
+  errs: []
+  iflow:
+    - to: [wrd]
+      from: [wrs]
+  encoding:
+    scheme: bnaes_kf
+    mapping:
+      round_type: b11
+      wrd: wrd
+      wrs: wrs
+      imm: imm
+

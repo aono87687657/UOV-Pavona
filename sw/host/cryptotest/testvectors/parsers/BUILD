@@ -232,6 +232,14 @@ py_binary(
 )
 
 py_binary(
+    name = "pqov_kat_parser",
+    srcs = ["pqov_kat_parser.py"],
+    deps = [
+        requirement("jsonschema"),
+    ],
+)
+
+py_binary(
     name = "nist_acvp_mldsa_parser",
     srcs = ["nist_acvp_mldsa_parser.py"],
     deps = [

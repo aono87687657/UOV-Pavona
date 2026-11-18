@@ -1,0 +1,4 @@
+[PASS] Ip/bnaesonly case0: cpk==KAT (43,576B) csk==sk  cycles=37,928,618
+
+=== Ip/bnaesonly: 1 pass, 0 fail ===
+    cycles (case 0): 37,928,618

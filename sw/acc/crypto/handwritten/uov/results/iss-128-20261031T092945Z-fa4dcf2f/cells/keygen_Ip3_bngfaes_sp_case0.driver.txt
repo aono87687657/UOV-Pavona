@@ -1,0 +1,4 @@
+[PASS] Ip3/bngfaes case0: cpk==KAT (46,591B) csk==sk  cycles=2,079,442
+
+=== Ip3/bngfaes: 1 pass, 0 fail ===
+    cycles (case 0): 2,079,442

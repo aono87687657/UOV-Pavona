@@ -31,7 +31,7 @@ module acc_core
   parameter int DmemSizeByte = 4096,
 
   // Enabling PQC hardware support with vector ISA extension
-  parameter bit AccPQCEn = 1'b1,
+  parameter bit AccPQCEn = 1'b0,
 
   // Default seed for URND PRNG
   parameter urnd_prng_seed_t RndCnstUrndPrngSeed = RndCnstUrndPrngSeedDefault,
@@ -135,6 +135,9 @@ module acc_core
   logic [ImemAddrWidth-1:0] ctrl_flow_target_predec;
   ispr_predec_bignum_t      ispr_predec_bignum;
   mac_predec_bignum_t       mac_predec_bignum;
+`ifdef AES_BIGNUM
+  aes_predec_bignum_t       aes_predec_bignum;
+`endif
   logic                     lsu_addr_en_predec;
 
   logic [NWdr-1:0] rf_bignum_rd_a_indirect_onehot;
@@ -218,6 +221,11 @@ module acc_core
   logic                  alu_bignum_selection_flag;
   logic                  alu_bignum_reg_intg_violation_err;
   logic                  alu_bignum_sec_wipe_err;
+`ifdef GFMACC_BIGNUM
+  logic [WLEN-1:0]       alu_bignum_mod_rd;
+  logic [WLEN-1:0]       alu_bignum_mod_wr;
+  logic                  alu_bignum_gf_mul_wr_mod_en;
+`endif
 
   mac_bignum_operation_t mac_bignum_operation;
   logic [WLEN-1:0]       mac_bignum_operation_result;
@@ -227,6 +235,12 @@ module acc_core
   logic                  mac_bignum_commit;
   logic                  mac_bignum_reg_intg_violation_err;
   logic                  mac_bignum_sec_wipe_err;
+
+`ifdef AES_BIGNUM
+  aes_bignum_operation_t aes_bignum_operation;
+  logic [WLEN-1:0]       aes_bignum_operation_result;
+  logic                  aes_bignum_en;
+`endif
 
   ispr_e                       ispr_addr;
   logic [31:0]                 ispr_base_wdata;
@@ -397,6 +411,9 @@ module acc_core
     .ctrl_flow_target_predec_o(ctrl_flow_target_predec),
     .ispr_predec_bignum_o     (ispr_predec_bignum),
     .mac_predec_bignum_o      (mac_predec_bignum),
+`ifdef AES_BIGNUM
+    .aes_predec_bignum_o      (aes_predec_bignum),
+`endif
     .lsu_addr_en_predec_o     (lsu_addr_en_predec),
 
     .rf_bignum_rd_a_indirect_onehot_i(rf_bignum_rd_a_indirect_onehot),
@@ -550,6 +567,13 @@ module acc_core
     .mac_bignum_operation_result_i(mac_bignum_operation_result),
     .mac_bignum_en_o              (mac_bignum_en),
     .mac_bignum_commit_o          (mac_bignum_commit),
+
+    // To/from bignum AES
+`ifdef AES_BIGNUM
+    .aes_bignum_operation_o       (aes_bignum_operation),
+    .aes_bignum_operation_result_i(aes_bignum_operation_result),
+    .aes_bignum_en_o              (aes_bignum_en),
+`endif
 
     // To/from LSU (base and bignum)
     .lsu_load_req_o          (lsu_load_req),
@@ -903,6 +927,12 @@ module acc_core
     .mac_operation_flags_i   (mac_bignum_operation_flags),
     .mac_operation_flags_en_i(mac_bignum_operation_flags_en),
 
+`ifdef GFMACC_BIGNUM
+    .mod_o(alu_bignum_mod_rd),
+    .mod_i(alu_bignum_mod_wr),
+    .gf_mul_wr_mod_en(alu_bignum_gf_mul_wr_mod_en),
+`endif
+
     .rnd_data_i (rnd_data),
     .urnd_data_i(urnd_data),
 
@@ -945,6 +975,12 @@ module acc_core
     .mac_en_i    (mac_bignum_en),
     .mac_commit_i(mac_bignum_commit),
 
+`ifdef GFMACC_BIGNUM
+    .mod_i(alu_bignum_mod_rd),
+    .mod_o(alu_bignum_mod_wr),
+    .gf_mul_wr_mod_en(alu_bignum_gf_mul_wr_mod_en),
+`endif
+
     .ispr_acch_intg_o        (ispr_acch_intg),
     .ispr_acch_wr_data_intg_i(ispr_acch_wr_data_intg),
     .ispr_acch_wr_en_i       (ispr_acch_wr_en),
@@ -953,6 +989,18 @@ module acc_core
     .ispr_acc_wr_data_intg_i(ispr_acc_wr_data_intg),
     .ispr_acc_wr_en_i       (ispr_acc_wr_en)
   );
+
+`ifdef AES_BIGNUM
+  acc_aes_bignum u_acc_aes_bignum (
+    .operation_i(aes_bignum_operation),
+    .operation_result_o(aes_bignum_operation_result),
+
+    .aes_predec_bignum_i(aes_predec_bignum),
+//    .predec_error_o     (aes_bignum_predec_error),
+
+    .aes_en_i(aes_bignum_en)
+  );
+`endif
 
   acc_rnd #(
     .RndCnstUrndPrngSeed(RndCnstUrndPrngSeed)

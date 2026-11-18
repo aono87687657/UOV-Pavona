@@ -1,0 +1,4 @@
+[PASS] Is/bngfaes case0: cpk==KAT (66,576B) csk==sk  cycles=1,733,439
+
+=== Is/bngfaes: 1 pass, 0 fail ===
+    cycles (case 0): 1,733,439

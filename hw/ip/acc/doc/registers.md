@@ -322,8 +322,9 @@ are ignored.
 If ACC is busy, any access additionally triggers an
 ILLEGAL_BUS_ACCESS fatal error.
 
-Note that DMEM is actually 4kiB in size, but only the first 3kiB of
-the memory is visible through this register interface.
+Note that DMEM is actually 32kiB in size, but only the first 31kiB of
+the memory is visible through this register interface. The remaining
+1kiB is ACC-only scratch.
 
 - Word Aligned Offset Range: `0x18000`to`0x1fbfc`
 - Size (words): `7936`

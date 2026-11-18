@@ -1,0 +1,169 @@
+{
+ "campaign_dir": "dmem-span-2026-10-17",
+ "created": "2026-10-18T23:43:59+02:00",
+ "engine": "observe",
+ "kind": "span",
+ "results_sha256": "a042aceb0886db1c2c3e43494c103c8d76dda2e3770dfe1cba4c3fd4f2abc0b5",
+ "rows": 100,
+ "run": "observe-span-20261018T214359Z",
+ "schema": 1,
+ "source": {
+  "128": {
+   "commit": "9fe312874c0410b2d40575ef44a3b1a60f925946",
+   "overlay": {
+    "hw/ip/acc/data/acc.hjson": [
+     "f528f46a606d886cf404730d8df95f4b7394246038d5f0e3a1bb03d7ea81d245",
+     "100644"
+    ],
+    "hw/ip/acc/doc/registers.md": [
+     "3ad7544664040dae42c18973fb04fcda7681f71a7326f77943945e520bcc440e",
+     "100644"
+    ],
+    "hw/ip/acc/dv/memutil/acc_memutil.cc": [
+     "7d1b36a79106576a87f106cf478c959bd595bf3de9a1fcac9825342dad957555",
+     "100644"
+    ],
+    "hw/ip/acc/rtl/acc_reg_pkg.sv": [
+     "104d2c2f1e69a6c149aed08e1286f588d1a8bbe70614044cabfdc687f64e415d",
+     "100644"
+    ],
+    "hw/ip/acc/rtl/acc_reg_top.sv": [
+     "80f233860adfd0447e79e5ea6d55f30203f61e6ffc2a355a6f09c7a453164ae5",
+     "100644"
+    ],
+    "hw/top_egret/data/autogen/top_egret.gen.hjson": [
+     "0c34b5f78ad894e0f43eaeaa266682af8a41d83acb168d485a2acdaa8b1fe288",
+     "100644"
+    ],
+    "hw/top_egret/doc/memory_map.md": [
+     "8ecf56aeb4f664bb3166aa41b49ea6b23ff42bca74e57ac8675da919ad20df33",
+     "100644"
+    ],
+    "hw/top_egret/dv/autogen/xbar_env_pkg__params.sv": [
+     "f8382bd889037eba4219a27c3f43df44f79656fd66fee5b0c14718c2c05948aa",
+     "100644"
+    ],
+    "hw/top_egret/dv/autogen/xbar_tgl_excl.cfg": [
+     "36d91f011cba6cfe398abd486642e24181c9c668c26c9ebe0c0faa63a3ad0e04",
+     "100644"
+    ],
+    "hw/top_egret/ip/xbar_main/data/autogen/xbar_main.gen.hjson": [
+     "adbb1046984edeb0f33fe7fd644dfd1329e2baa5f8d8ea7271819d10ba8dd7df",
+     "100644"
+    ],
+    "hw/top_egret/ip/xbar_main/dv/autogen/xbar_cover.cfg": [
+     "a5469ab5fe2a26d1932a41ce83c9092ac753e43f3530ac744dd4e8ea1749d4c1",
+     "100644"
+    ],
+    "hw/top_egret/ip/xbar_main/dv/autogen/xbar_env_pkg__params.sv": [
+     "fcab2ddfedc420ed20c7d03b1c68118e162f0dfc7b880066af0ec75a4354ec8d",
+     "100644"
+    ],
+    "hw/top_egret/ip/xbar_main/rtl/autogen/tl_main_pkg.sv": [
+     "439bbab439289f9219cab2b34d2f049b7c408a60158d9d49fca6530880c6a9d8",
+     "100644"
+    ],
+    "hw/top_egret/rtl/autogen/top_egret_pkg.sv": [
+     "20fab801a60be4912f3941536cd54c063d365c55adc39ab92d2bb77ad7dcb0b4",
+     "100644"
+    ],
+    "hw/top_egret/sw/autogen/chip/top_egret.rs": [
+     "0c5f71638279904908443a8e98e5822bc5ad705e7241854cc7e2d501554e3e7c",
+     "100644"
+    ],
+    "hw/top_egret/sw/autogen/top_egret.h": [
+     "7210da09aecd3b06410ea84164a8206e234eda69d62dc1543eeb839ae54fb4fe",
+     "100644"
+    ],
+    "hw/top_egret/sw/autogen/top_egret_memory.h": [
+     "3ff2350cec17f1dd053f096aeb727da8e38a70b28bbbe209f3c8172b4903d025",
+     "100644"
+    ]
+   }
+  },
+  "32": {
+   "commit": "9fe312874c0410b2d40575ef44a3b1a60f925946",
+   "overlay": {}
+  },
+  "512": {
+   "commit": "9fe312874c0410b2d40575ef44a3b1a60f925946",
+   "overlay": {
+    "hw/ip/acc/data/acc.hjson": [
+     "6d6ffbb4c09a35ecd9f8b5ab72d77fedf41a134d122fd797d69aca384a14f4bd",
+     "100644"
+    ],
+    "hw/ip/acc/doc/registers.md": [
+     "40f5e421365f6b5e6740eec9c8479aee72791a56c8f1803679ddfb617f1ad1e2",
+     "100644"
+    ],
+    "hw/ip/acc/dv/memutil/acc_memutil.cc": [
+     "a819b31445eb7d4a5b083f03d11f940fbd81b9c96c1a3317d0f68efafe59fd53",
+     "100644"
+    ],
+    "hw/ip/acc/rtl/acc_reg_pkg.sv": [
+     "54288bb4c6f617837fd54fdf3453d3cca40bdb3cb1fe6254d475615e5ce753a2",
+     "100644"
+    ],
+    "hw/ip/acc/rtl/acc_reg_top.sv": [
+     "c9398baf645854da2e3687ffa3c9582ccaa25a15a3801dc18925bc362d9a0ba5",
+     "100644"
+    ],
+    "hw/top_egret/data/autogen/top_egret.gen.hjson": [
+     "0c34b5f78ad894e0f43eaeaa266682af8a41d83acb168d485a2acdaa8b1fe288",
+     "100644"
+    ],
+    "hw/top_egret/doc/memory_map.md": [
+     "8ecf56aeb4f664bb3166aa41b49ea6b23ff42bca74e57ac8675da919ad20df33",
+     "100644"
+    ],
+    "hw/top_egret/dv/autogen/xbar_env_pkg__params.sv": [
+     "f8382bd889037eba4219a27c3f43df44f79656fd66fee5b0c14718c2c05948aa",
+     "100644"
+    ],
+    "hw/top_egret/dv/autogen/xbar_tgl_excl.cfg": [
+     "36d91f011cba6cfe398abd486642e24181c9c668c26c9ebe0c0faa63a3ad0e04",
+     "100644"
+    ],
+    "hw/top_egret/ip/xbar_main/data/autogen/xbar_main.gen.hjson": [
+     "adbb1046984edeb0f33fe7fd644dfd1329e2baa5f8d8ea7271819d10ba8dd7df",
+     "100644"
+    ],
+    "hw/top_egret/ip/xbar_main/dv/autogen/xbar_cover.cfg": [
+     "a5469ab5fe2a26d1932a41ce83c9092ac753e43f3530ac744dd4e8ea1749d4c1",
+     "100644"
+    ],
+    "hw/top_egret/ip/xbar_main/dv/autogen/xbar_env_pkg__params.sv": [
+     "fcab2ddfedc420ed20c7d03b1c68118e162f0dfc7b880066af0ec75a4354ec8d",
+     "100644"
+    ],
+    "hw/top_egret/ip/xbar_main/rtl/autogen/tl_main_pkg.sv": [
+     "439bbab439289f9219cab2b34d2f049b7c408a60158d9d49fca6530880c6a9d8",
+     "100644"
+    ],
+    "hw/top_egret/rtl/autogen/top_egret_pkg.sv": [
+     "20fab801a60be4912f3941536cd54c063d365c55adc39ab92d2bb77ad7dcb0b4",
+     "100644"
+    ],
+    "hw/top_egret/sw/autogen/chip/top_egret.rs": [
+     "0c5f71638279904908443a8e98e5822bc5ad705e7241854cc7e2d501554e3e7c",
+     "100644"
+    ],
+    "hw/top_egret/sw/autogen/top_egret.h": [
+     "7210da09aecd3b06410ea84164a8206e234eda69d62dc1543eeb839ae54fb4fe",
+     "100644"
+    ],
+    "hw/top_egret/sw/autogen/top_egret_memory.h": [
+     "3ff2350cec17f1dd053f096aeb727da8e38a70b28bbbe209f3c8172b4903d025",
+     "100644"
+    ]
+   }
+  }
+ },
+ "summary": null,
+ "tool": {
+  "commit": "a15ffbf605a335dd9674f810fba9dfb667be6c93",
+  "inputs_sha256": "5e175fea08e8b1d06b7ebf5ec8602b1ac6ac576d5044435f954b43931bc5c976",
+  "path": "tools/dmem_span.py",
+  "sha256": "330d27d98620a56119452fde6b691eaf9f8b30bbb4303abfcc00d3a8e4d4d208"
+ }
+}

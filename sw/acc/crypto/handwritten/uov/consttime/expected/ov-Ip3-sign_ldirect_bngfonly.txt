@@ -1,0 +1,2 @@
+# Branches check_const_time.py may report for ov-Ip3-sign_ldirect_bngfonly: the retry when L is singular.
+0x01a0  # beq x4, x5 in the sign loop

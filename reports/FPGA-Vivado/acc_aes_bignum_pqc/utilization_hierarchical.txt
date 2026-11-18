@@ -1,0 +1,62 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1.1 (lin64) Build 2960000 Wed Aug  5 22:57:21 MDT 2020
+| Date         : Fri Nov  6 07:04:31 2026
+| Host         : anonymous running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_utilization -hierarchical -hierarchical_depth 6 -file ../../../reports/FPGA-Vivado/acc_aes_bignum_pqc/utilization_hierarchical.txt
+| Design       : acc_aes_bignum
+| Device       : 7k160tfbg676-1
+| Design State : Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++---------------------------------+-----------------------+------------+------------+---------+------+-----+--------+--------+------------+
+|             Instance            |         Module        | Total LUTs | Logic LUTs | LUTRAMs | SRLs | FFs | RAMB36 | RAMB18 | DSP Blocks |
++---------------------------------+-----------------------+------------+------------+---------+------+-----+--------+--------+------------+
+| acc_aes_bignum                  |                 (top) |       2473 |       2473 |       0 |    0 |   0 |      0 |      0 |          0 |
+|   (acc_aes_bignum)              |                 (top) |        520 |        520 |       0 |    0 |   0 |      0 |      0 |          0 |
+|   u_aes_round_keyexpand_hi      |   aes_round_keyexpand |        967 |        967 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[0].sbox_inst  |       aes_sbox_lut_16 |         61 |         61 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[10].sbox_inst |       aes_sbox_lut_17 |         61 |         61 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[11].sbox_inst |       aes_sbox_lut_18 |         62 |         62 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[12].sbox_inst |       aes_sbox_lut_19 |         60 |         60 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[13].sbox_inst |       aes_sbox_lut_20 |         61 |         61 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[14].sbox_inst |       aes_sbox_lut_21 |         61 |         61 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[15].sbox_inst |       aes_sbox_lut_22 |         61 |         61 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[1].sbox_inst  |       aes_sbox_lut_23 |         62 |         62 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[2].sbox_inst  |       aes_sbox_lut_24 |         61 |         61 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[3].sbox_inst  |       aes_sbox_lut_25 |         61 |         61 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[4].sbox_inst  |       aes_sbox_lut_26 |         62 |         62 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[5].sbox_inst  |       aes_sbox_lut_27 |         62 |         62 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[6].sbox_inst  |       aes_sbox_lut_28 |         61 |         61 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[7].sbox_inst  |       aes_sbox_lut_29 |         62 |         62 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[8].sbox_inst  |       aes_sbox_lut_30 |         61 |         61 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[9].sbox_inst  |       aes_sbox_lut_31 |         62 |         62 |       0 |    0 |   0 |      0 |      0 |          0 |
+|   u_aes_round_keyexpand_lo      | aes_round_keyexpand_0 |        988 |        988 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[0].sbox_inst  |          aes_sbox_lut |         96 |         96 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[10].sbox_inst |        aes_sbox_lut_1 |         39 |         39 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[11].sbox_inst |        aes_sbox_lut_2 |         70 |         70 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[12].sbox_inst |        aes_sbox_lut_3 |         55 |         55 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[13].sbox_inst |        aes_sbox_lut_4 |         42 |         42 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[14].sbox_inst |        aes_sbox_lut_5 |         49 |         49 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[15].sbox_inst |        aes_sbox_lut_6 |         59 |         59 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[1].sbox_inst  |        aes_sbox_lut_7 |        102 |        102 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[2].sbox_inst  |        aes_sbox_lut_8 |         89 |         89 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[3].sbox_inst  |        aes_sbox_lut_9 |         99 |         99 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[4].sbox_inst  |       aes_sbox_lut_10 |         66 |         66 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[5].sbox_inst  |       aes_sbox_lut_11 |         50 |         50 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[6].sbox_inst  |       aes_sbox_lut_12 |         42 |         42 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[7].sbox_inst  |       aes_sbox_lut_13 |         42 |         42 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[8].sbox_inst  |       aes_sbox_lut_14 |         64 |         64 |       0 |    0 |   0 |      0 |      0 |          0 |
+|     gen_sub_bytes[9].sbox_inst  |       aes_sbox_lut_15 |         55 |         55 |       0 |    0 |   0 |      0 |      0 |          0 |
++---------------------------------+-----------------------+------------+------------+---------+------+-----+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

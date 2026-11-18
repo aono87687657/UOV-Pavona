@@ -1,0 +1,3 @@
+[PASS] Ip/bngfonly case8: cpk==KAT (43,576B) csk==sk  cycles=9,695,178
+
+=== Ip/bngfonly: 1 pass, 0 fail ===

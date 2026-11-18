@@ -132,7 +132,7 @@ def call_rv32_ar(args: List[str]):
     run_cmd([rv32_tool_ar] + args)
 
 
-def get_app_checksum(elf_path: str) -> int:
+def get_app_checksum(elf_path: str) -> Optional[int]:
     '''Get the CRC32 checksum of an ACC app.
 
     The checksum is computed over first the `.text` (IMEM) section, then the
@@ -140,7 +140,9 @@ def get_app_checksum(elf_path: str) -> int:
     48-bit value: {imem, addr, value}, where `imem` is 1 or 0 depending on if
     the value is for IMEM or DMEM, `addr` is the word-offset within ACC's
     memory zero-extended to 15 bits. The checksum is computed over this value
-    in little-endian order.
+    in little-endian order. Returns None when a `.data` word lies past that
+    index (DMEM profiles above 128 KiB, ISS only): such an app has no hardware
+    load checksum.
     '''
     with open(elf_path, 'rb') as elf:
         elf_file = ELFFile(elf)
@@ -173,6 +175,8 @@ def get_app_checksum(elf_path: str) -> int:
         for i in range(0, len(data), 4):
             checksum = binascii.crc32(data[i:i + 4], checksum)
             location = ((data_start_offset + i) // 4)
+            if location >= 1 << 15:
+                return None
             location_bytes = int.to_bytes(location, length=2, byteorder='little')
             checksum = binascii.crc32(location_bytes, checksum)
 
@@ -334,7 +338,11 @@ def main() -> int:
         # this with the LOAD_CHECKSUM register to ensure the app was loaded
         # correctly.
         checksum = get_app_checksum(out_elf)
-        args += ['--add-symbol', f'{acc_side_pfx}_checksum={checksum:#x}']
+        if checksum is None:
+            log.warning(f'{out_elf}: .data past the 15-bit load-checksum index (ISS only), '
+                        f'no {acc_side_pfx}_checksum symbol')
+        else:
+            args += ['--add-symbol', f'{acc_side_pfx}_checksum={checksum:#x}']
 
         call_rv32_objcopy(args + [out_elf, out_embedded_obj])
 
